@@ -1,0 +1,19 @@
+user,
+follower,
+following,
+
+chats,
+ -text msg
+ -docs,image,video, voice, links, other posts
+ -calls
+   -video
+   -audio
+groups,
+
+->posts,
+ -comments
+  -likes
+  -text
+  -image
+  
+ -likes

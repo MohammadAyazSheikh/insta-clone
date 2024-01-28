@@ -1,0 +1,22 @@
+[
+    {
+        "name": "name",
+        "label": "Name",
+        "required": true,
+        "placeHolder": "Enter name"
+    },
+    {
+        "name": "email",
+        "label": "Email",
+        "required": true,
+        "placeHolder": "Enter email",
+        "keyboardType": "email-address"
+    },
+    {
+        "name": "phone",
+        "label": "Phone",
+        "required": true,
+        "placeHolder": "Enter number",
+        "keyboardType": "decimal-pad"
+    }
+]
