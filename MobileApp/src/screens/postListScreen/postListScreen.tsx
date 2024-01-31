@@ -9,7 +9,7 @@ import Loader from '../../components/general/loader/loader';
 import colors from '../../theme/colors';
 import { AnimatedFAB } from 'react-native-paper';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootNavigation';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { useNavigation } from '@react-navigation/core'
 import { fontFamily } from '../../theme/fonts';
 

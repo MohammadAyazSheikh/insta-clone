@@ -4,12 +4,13 @@ import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils'
 import responsiveStyles from './styles/styles';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootNavigation';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import Form from '../../components/general/form/renderForm';
 import CustomButton from '../../components/general/customButton/customButton';
 import Toast from 'react-native-toast-message';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addData } from '../../redux/features/dynamicFormSlice/dynamicFormSlice';
+import { changeTheme } from '../../redux/features/theme/themeSlice';
 export type DynamicFormType = {
     name?: string,
     email?: string,
@@ -23,6 +24,7 @@ export default function DynamicForm() {
     const [err, setErr] = useState<DynamicFormType>({});
     const dispatch = useAppDispatch();
 
+  
     const showAlert = (msg: string) => {
         Toast.show({
             type: 'warningMsg',

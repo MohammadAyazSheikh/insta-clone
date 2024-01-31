@@ -1,37 +1,44 @@
 export const darkColors = {
-  primary1: '#442445',
-  primary2: '#f4e3f4',
+  primary1: '#000000',
+  primary2: '#999999',
+  primary3: '#363636',
+  primary4: '#282828',
 
-  secondary1: '#111315',
-  secondary2: '#292C2D',
-  secondary3: '#676767',
-  secondary4: '#ABABAB',
+  secondary1: '#ffffff',
 
-  ternary1: '#FFF',
+
+  ternary1: '#3797ef',
+  ternary2: '#1b4b77',
+
+  lightYellow: '#feda75',
+  orange: '#fa7e1e',
+  pink: '#d62976',
+  purple: '#962fbf',
+  blue: '#4f5bd5',
 };
 
 export const lightColors = {
-  primary1: '#442445',
-  primary2: '#f4e3f4',
+  primary1: '#ffffff',
+  primary2: '#999999',
+  primary3: '#f5f5f5',
+  primary4: '#EBEBEB',
 
-  secondary1: 'white',
-  secondary2: '#F5F5F5',
-  secondary3: '#B0C7D4',
-  secondary4: '#2F4858',
+  secondary1: '#000000',
 
-  ternary1: '#000',
+  ternary1: '#3797ef',
+  ternary2: '#9bcbf7',
+
+  lightYellow: '#feda75',
+  orange: '#fa7e1e',
+  pink: '#d62976',
+  purple: '#962fbf',
+  blue: '#4f5bd5',
 };
 
 const colors = {
-  primary1: '#442445',
-  primary2: '#f4e3f4',
 
-  secondary1: 'white',
-  secondary2: '#F5F5F5',
-  secondary3: '#B0C7D4',
-  secondary4: '#2F4858',
+  ...lightColors,
 
-  ternary1: '#FFF',
   yellow1: '#FEBB1B',
   yellow2: '#EF9400',
 
@@ -55,5 +62,5 @@ const colors = {
   blue1: '#006DE5',
   blue2: '#069bcf',
 };
-export type colorObjectType = typeof colors;
+export type colorObjectType = typeof colors & typeof lightColors & typeof darkColors;
 export default colors;

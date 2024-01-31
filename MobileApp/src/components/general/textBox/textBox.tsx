@@ -50,7 +50,7 @@ const TextBox = ({
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           placeholder="Enter Value"
-          placeholderTextColor={colors.secondary4}
+          placeholderTextColor={colors.primary2}
           {...inputProps}
           style={[styles.inputStyle, inputProps.style]}
         />

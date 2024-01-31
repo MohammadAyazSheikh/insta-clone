@@ -8,7 +8,7 @@ import Toast from 'react-native-toast-message';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootNavigation';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { postType } from '../../constants/types/sharedTypes';
 import { addPost } from '../../redux/features/postSlice/postSlice';
 import Loader from '../../components/general/loader/loader';

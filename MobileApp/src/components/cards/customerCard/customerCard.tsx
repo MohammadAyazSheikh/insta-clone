@@ -3,7 +3,7 @@ import { View, Text, Image, ViewStyle } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import { useNavigation } from '@react-navigation/core';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../../routes/rootNavigation';
+import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 // import responsiveStyles from './styles/styles';
 import debitCreditCardStyles from '../debitCreditCard/styles/styles';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';

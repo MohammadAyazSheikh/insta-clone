@@ -5,11 +5,14 @@ import {
   TouchableOpacityProps,
   TextProps,
   ActivityIndicatorProps,
+  ViewStyle,
+  StyleSheetProperties,
 } from 'react-native';
-import {useFunctionalOrientation} from '../../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import {TouchableRipple} from 'react-native-paper';
-import {useAppThemeColors} from '../../../utils/functions/responsiveUtils';
+import { TouchableRipple } from 'react-native-paper';
+import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
+
 
 type btnProps = TouchableOpacityProps;
 
@@ -19,6 +22,7 @@ type buttonProps = {
   buttonText?: string;
   isLoading?: boolean;
   loaderPops?: ActivityIndicatorProps;
+  disableStyles?: ViewStyle,
   icon?: React.ComponentType;
 } & btnProps; // merging touchableOpacity props with my own props using &  operator
 
@@ -29,18 +33,23 @@ const CustomButton = ({
   iconPosition = 'right',
   isLoading = false,
   loaderPops,
+  disableStyles = {},
   ...touchProps
 }: buttonProps) => {
-  const {styles} = useFunctionalOrientation(responsiveStyles);
+  const { styles } = useFunctionalOrientation(responsiveStyles);
   const colors = useAppThemeColors();
 
   return (
     <TouchableRipple
       onPress={() => ''}
       {...touchProps}
-      style={[styles.btnView, touchProps.style]}
+      style={[styles.btnView, touchProps.style,
+      touchProps.disabled ? { ...styles.disableStyle, ...disableStyles } : {}
+      ]}
       rippleColor={'rgb(255, 114, 94,0.5)'}
-      borderless>
+      borderless
+
+    >
       <>
         {Icon && iconPosition == 'left' && <Icon />}
         <Text
@@ -54,7 +63,7 @@ const CustomButton = ({
           <ActivityIndicator
             color={colors.secondary1}
             size={'small'}
-            style={{marginLeft: 5}}
+            style={{ marginLeft: 5 }}
             {...loaderPops}
           />
         )}
