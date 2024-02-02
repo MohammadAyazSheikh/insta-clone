@@ -16,6 +16,26 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             width: w(100),
             alignItems: 'center',
         },
+        containerChild: {
+            width: w(100),
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingTop: 50
+        },
+        txtChildTitle: {
+            fontSize: 30,
+            color: colors.secondary1,
+        },
+
+        txtChildSubTitle: {
+            fontSize: 14,
+            color: colors.grey1,
+            marginVertical:20
+        },
+
+
+
+
         logoStyles: {
             width: w(55),
             resizeMode: 'contain',
@@ -36,7 +56,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         line: {
             flex: 1,
             paddingVertical: 0.7,
-            opacity:0.2,
+            opacity: 0.2,
             backgroundColor: colors.grey1,
         }
     });

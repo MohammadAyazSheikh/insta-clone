@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Image, Alert, Touchable } from 'react-native';
+import { View, ScrollView, Image, Alert, Text } from 'react-native';
 import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import CustomButton from '../../components/general/customButton/customButton';
@@ -12,9 +12,12 @@ import Loader from '../../components/general/loader/loader';
 import TextBox from '../../components/general/textBox/textBox';
 import IconFe from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextBold, TextRegular } from '../../components/general/text/text';
+import { ShowDismissAlert } from '../../components/general/dailogs/dismissAlert';
+import { ShowConfirmAlert } from '../../components/general/dailogs/confirmAlert';
 type loginProps = {
-    username: string,
-    password: string,
+    username?: string,
+    password?: string,
 }
 
 type loginPropsErr = {
@@ -34,13 +37,7 @@ export default function Login() {
     const dispatch = useAppDispatch();
     const { isLoadingAdd } = useAppSelector(state => state.posts);
 
-    const showAlert = (msg: string) => {
-        Toast.show({
-            type: 'warningMsg',
-            text1: 'Stop!',
-            text2: msg,
-        })
-    }
+
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
@@ -85,20 +82,60 @@ export default function Login() {
                             onPress={() => setHidePass(hide => !hide)}
                         >
                             <IconFe size={20}
-                                color={colors.primary2}
+                                color={colors.grey1}
                                 name={hidePass ? 'eye-off' : 'eye'}
                             />
                         </TouchableOpacity>
                     }
                 />
+
                 {/* ---button--- */}
                 <CustomButton
                     disabled={!data.password || !data.username}
                     buttonText='Log in'
                     onPress={() => {
-                        Alert.alert(JSON.stringify(data, null, 2))
+                        ShowDismissAlert({
+                            title: 'Stop!',
+                            description: 'API developing is in progress'
+                        })
                     }}
                 />
+                {/* --forget password button ---- */}
+                <TextRegular
+                    style={styles.txtForgetPss}
+                >
+                    Forgot your login details?
+                    <TextBold
+                        style={[styles.txtForgetPss]}
+                    >
+                        {' Get help logging in.'}
+                    </TextBold>
+                </TextRegular>
+                {/* ------Or line ----- */}
+                <View style={styles.row}>
+                    <View style={styles.line} />
+                    <TextBold style={{
+                        color: colors.secondary1,
+                        marginHorizontal: 5
+                    }}>
+                        OR
+                    </TextBold>
+                    <View style={styles.line} />
+                </View>
+                {/* ------btn don't have account */}
+                <TextRegular
+                    style={styles.txtForgetPss}
+                    onPress={() => {
+                        navigation.navigate("Signup");
+                    }}
+                >
+                    Don't have an account?
+                    <TextBold
+                        style={[styles.txtForgetPss, { color: colors.ternary1 }]}
+                    >
+                        {' Sign up.'}
+                    </TextBold>
+                </TextRegular>
                 {/* loader */}
                 <Loader
                     showLoader={isLoadingAdd}

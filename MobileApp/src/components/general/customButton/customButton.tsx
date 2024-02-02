@@ -48,7 +48,6 @@ const CustomButton = ({
       ]}
       rippleColor={'rgb(255, 114, 94,0.5)'}
       borderless
-
     >
       <>
         {Icon && iconPosition == 'left' && <Icon />}

@@ -37,9 +37,9 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         //error and label
         txtErr: {
-            color: colors.tomato,
+            color: "tomato",
             fontFamily: fontFamily.regular,
-            fontSize: 14
+            fontSize: 12
         },
         txtLabel: {
             color: colors.primary1,

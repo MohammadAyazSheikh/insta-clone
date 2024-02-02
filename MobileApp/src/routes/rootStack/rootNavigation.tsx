@@ -3,7 +3,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { fontFamily } from '../../theme/fonts';
-import { useAppDispatch } from '../../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeTheme } from '../../redux/features/theme/themeSlice';
 import { ProtectedRoutes } from './protectedRoutes';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
@@ -12,6 +12,7 @@ import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 export type RootStackProps = {
   Login: undefined;
+  Signup:undefined;
 };
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -24,6 +25,7 @@ function RootNav() {
 
   //change color scheme when mobile scheme changes
   const scheme = useColorScheme();
+  const {theme} = useAppSelector(state => state.theme);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -35,10 +37,10 @@ function RootNav() {
   return (
     <NavigationContainer
       theme={{
-        dark: true,
+        dark: theme == "dark",
         colors: {
           ...DefaultTheme.colors,
-          background: colors.grey1,
+          background:colors.primary1,
         },
       }}>
       <StatusBar

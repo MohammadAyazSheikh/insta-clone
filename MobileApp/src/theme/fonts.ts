@@ -12,3 +12,9 @@ export const fontFamily = {
     thin: "ProductSans-Thin",
     thinItalic: "ProductSans-ThinItalic",
 }
+
+
+
+export const fontConfig = {
+    allowScaling: false,
+}

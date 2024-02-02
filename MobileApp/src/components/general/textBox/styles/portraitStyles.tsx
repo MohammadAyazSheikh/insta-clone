@@ -28,6 +28,10 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             borderWidth: 1,
             borderColor: colors.primary4,
         },
+        inputViewErrStyle: {
+            borderWidth: 1,
+            borderColor: 'tomato',
+        },
         inputStyle: {
             color: colors.secondary1,
             flex: 1,
@@ -36,15 +40,15 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         //error and label
         txtErr: {
-            color: colors.tomato,
+            color: "tomato",
             fontFamily: fontFamily.regular,
-            fontSize: 14
+            fontSize: 12
         },
         txtLabel: {
             color: colors.primary1,
             fontFamily: fontFamily.regular,
             fontSize: 16,
-            alignSelf:"flex-start"
+            alignSelf: "flex-start"
         },
     });
 }
