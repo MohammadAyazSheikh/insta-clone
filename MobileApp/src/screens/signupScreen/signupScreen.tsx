@@ -1,53 +1,83 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Image, Alert, Text } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import CustomButton from '../../components/general/customButton/customButton';
-import Toast from 'react-native-toast-message';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import Loader from '../../components/general/loader/loader';
-import TextBox from '../../components/general/textBox/textBox';
-import IconFe from 'react-native-vector-icons/Feather'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TextBold, TextRegular } from '../../components/general/text/text';
-import { ShowDismissAlert } from '../../components/general/dailogs/dismissAlert';
-import { ShowConfirmAlert } from '../../components/general/dailogs/confirmAlert';
 import SelectUserName from './selectUserName';
+import SelectPassword from './selectPassword';
+import SelectPhoneEmail from './selectPhoneEmail';
+import VerifyPhone from './verifyPhone';
+
+
+export type childScreenProps = {
+    setData: React.Dispatch<React.SetStateAction<signUpProps>>;
+    data: signUpProps;
+    setErr: React.Dispatch<React.SetStateAction<signUpPropsErr>>;
+    err: signUpPropsErr,
+    setActiveScreen?: React.Dispatch<React.SetStateAction<signUpTabProps>>;
+    activeScreen?: signUpTabProps
+}
+
+export type signUpTabProps = 'username' | 'password' | 'phoneEmail' | 'verifyPhone' | 'verifyEmail';
+
 export type signUpProps = {
     username?: string,
     password?: string,
+    phone?: string,
+    countryCode?: string,
+    email?: string,
 }
 
 export type signUpPropsErr = {
     username?: string,
     password?: string,
+    phone?: string,
+    email?: string,
 }
 
 export default function Signup() {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
     const [data, setData] = useState<signUpProps>({});
     const [err, setErr] = useState<signUpPropsErr>({});
-    const dispatch = useAppDispatch();
+    const [activeScreen, setActiveScreen] = useState<signUpTabProps>('username');
 
+    if (activeScreen == 'username')
+        return (
+            <SelectUserName
+                setData={setData}
+                data={data}
+                setErr={setErr}
+                err={err}
+                setActiveScreen={setActiveScreen}
+                activeScreen={activeScreen}
+            />
+        );
 
-    return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scroll}>
-                <SelectUserName
-                    setData={setData}
-                    data={data}
-                    setErr={setErr}
-                    err={err}
-                />
-            </ScrollView>
-        </View>
-    );
+    if (activeScreen == 'password')
+        return (
+            <SelectPassword
+                setData={setData}
+                data={data}
+                setErr={setErr}
+                err={err}
+                setActiveScreen={setActiveScreen}
+                activeScreen={activeScreen}
+            />
+        );
+    if (activeScreen == 'phoneEmail')
+        return (
+            <SelectPhoneEmail
+                setData={setData}
+                data={data}
+                setErr={setErr}
+                err={err}
+                setActiveScreen={setActiveScreen}
+                activeScreen={activeScreen}
+            />
+        );
+
 }
 

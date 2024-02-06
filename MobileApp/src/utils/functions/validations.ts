@@ -4,6 +4,12 @@ export const minLength = (len: number) => (val: string) => val && (val.length >=
 export const isNumber = (val: any) => !isNaN(Number(val));
 export const validEmail = (val: string) => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
+export function isValidUsername(username:string) {
+    const pattern = /^[a-zA-Z0-9_.]+$/;
+    return pattern.test(username);
+  }
+
+
 export function isValidFloat(input:string) {
     // Regular expression to match a float number
     const floatRegex = /^[-+]?(\d*\.\d+|\d+\.?)([eE][-+]?\d+)?$/;
@@ -19,6 +25,16 @@ export function validatePhoneNumber(input_str: string) {
 
     return re.test(input_str);
 }
+
+//for international numbers
+export function isValidPhoneNo(phoneNumber:string) {
+    // Define the regex pattern
+    const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+
+    const isValid = phoneRegex.test(phoneNumber);
+  
+    return isValid;
+  }
 
 export function numberWithCommas(num: string | number) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

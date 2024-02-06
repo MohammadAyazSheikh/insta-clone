@@ -13,8 +13,8 @@ import TextBox from '../../components/general/textBox/textBox';
 import IconFe from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
-import { ShowDismissAlert } from '../../components/general/dailogs/dismissAlert';
-import { ShowConfirmAlert } from '../../components/general/dailogs/confirmAlert';
+import { ShowDismissAlert } from '../../components/general/alerts/dismissAlert';
+import { ShowConfirmAlert } from '../../components/general/alerts/confirmAlert';
 type loginProps = {
     username?: string,
     password?: string,
@@ -76,8 +76,7 @@ export default function Login() {
                         })
                     }}
                     error={err.password}
-                    iconPosition='right'
-                    icon={() =>
+                    iconRight={
                         <TouchableOpacity
                             onPress={() => setHidePass(hide => !hide)}
                         >

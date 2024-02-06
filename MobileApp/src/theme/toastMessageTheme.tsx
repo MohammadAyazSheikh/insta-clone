@@ -1,21 +1,20 @@
 import Toast, { ToastConfig, ToastConfigParams } from 'react-native-toast-message';
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import IconOct from 'react-native-vector-icons/Octicons';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-
 import { fontFamily } from './fonts';
 import { heightToDp, useAppThemeColors } from '../utils/functions/responsiveUtils';
 import { TextBold, TextRegular } from '../components/general/text/text';
 import { useAppSelector } from '../redux/hooks';
 import { getShadow } from './platformSpecificStyles';
 import { TouchableRipple } from 'react-native-paper';
+import { ConfirmAlert } from '../components/general/alerts/confirmAlert';
+import { DismissAlert } from '../components/general/alerts/dismissAlert';
 
 interface ToastConfigProps {
-  text1: string;
-  text2: string;
-  props: any;
+  // MyText:string,
 }
 
 const toastConfig: ToastConfig = {
@@ -80,118 +79,10 @@ const toastConfig: ToastConfig = {
   ),
 
   // Dismiss alert
-  dismissAlert: ({ text1, text2, onPress, props }: ToastConfigParams<ToastConfigProps>) => {
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
-    const isDark = theme == "dark";
-    return (
-      <View style={styles.alertContainer}>
-        <View style={[styles.alertView, {
-          backgroundColor:
-            isDark ? colors.primary4 : "#FFF"
-        }]}>
-          <View style={styles.alertTextView}>
-            <TextBold style={[
-              styles.txtAlertTitle,
-              { color: colors.secondary1 }
-            ]}
-              numberOfLines={1}
-            >
-              {text1}
-            </TextBold>
-            <TextRegular style={[
-              styles.txtAlertSubTitle,
-              { color: colors.grey1 }
-            ]}
-              numberOfLines={3}
-            >
-              {text2}
-            </TextRegular>
-          </View>
-          {/* dismiss button */}
-          <TouchableRipple
-            rippleColor={
-              isDark ?
-                'rgba(255,255,255,0.2)'
-                :
-                'rgba(000,000,000,0.2)'
-            }
-            borderless
-            onPress={onPress}
-            style={[styles.alertBtn, { borderTopColor: colors.primary3 }]}>
-            <TextBold style={[{ color: colors.ternary1, fontSize: 16 }]}>
-              Dismiss
-            </TextBold>
-          </TouchableRipple>
-        </View>
-      </View>
-    )
-  },
+  dismissAlert: DismissAlert,
 
   // Confirm alert
-  confirmAlert: ({ text1, text2, onPress, props }: ToastConfigParams<ToastConfigProps>) => {
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
-    const isDark = theme == "dark";
-    return (
-      <View style={styles.alertContainer}>
-        <View style={[styles.alertView, {
-          height: 225,
-          backgroundColor:
-            isDark ? colors.primary4 : "#FFF"
-        }]}>
-          <View style={[styles.alertTextView, { height: '60%' }]}>
-            <TextBold style={[
-              styles.txtAlertTitle,
-              { color: colors.secondary1 }
-            ]}
-              numberOfLines={1}
-            >
-              {text1}
-            </TextBold>
-            <TextRegular style={[
-              styles.txtAlertSubTitle,
-              { color: colors.grey1 }
-            ]}
-              numberOfLines={3}
-            >
-              {text2}
-            </TextRegular>
-          </View>
-          {/* dismiss button */}
-          <TouchableRipple
-            rippleColor={
-              isDark ?
-                'rgba(255,255,255,0.2)'
-                :
-                'rgba(000,000,000,0.2)'
-            }
-            borderless
-            onPress={onPress}
-            style={[styles.alertBtn, { borderTopColor: colors.primary3, height: '20%' }]}>
-            <TextBold style={[{ color: colors.ternary1, fontSize: 16 }]}>
-              {props?.confirmText}
-            </TextBold>
-          </TouchableRipple>
-          {/* dismiss button */}
-          <TouchableRipple
-            rippleColor={
-              isDark ?
-                'rgba(255,255,255,0.2)'
-                :
-                'rgba(000,000,000,0.2)'
-            }
-            borderless
-            onPress={onPress}
-            style={[styles.alertBtn, { borderTopColor: colors.primary3, height: '20%' }]}>
-            <TextRegular style={[{ color: colors.grey1, fontSize: 16 }]}>
-              {props?.dismissText}
-            </TextRegular>
-          </TouchableRipple>
-        </View>
-      </View>
-    )
-  },
+  confirmAlert: ConfirmAlert,
 };
 
 

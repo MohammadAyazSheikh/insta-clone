@@ -8,19 +8,19 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 type inputProps = TextInputProps;
 
 type textBoxProp = {
-  iconPosition?: 'left' | 'right';
   inputViewStyle?: ViewStyle;
   inputViewFocusStyle?: ViewStyle;
   inputViewErrStyle?: ViewStyle;
   containerStyle?: ViewStyle;
-  icon?: React.ComponentType;
+  iconLeft?: React.ReactNode;
+  iconRight?: React.ReactNode //React.ComponentType;
   error?: string | null;
   label?: string | null;
 } & inputProps; // merging textInput props with my own props using &  "and"
 
 const TextBox = ({
-  icon: Icon,
-  iconPosition = 'left',
+  iconLeft: IconLeft,
+  iconRight: IconRight,
   inputViewStyle = {},
   inputViewFocusStyle = {},
   inputViewErrStyle = {},
@@ -49,7 +49,7 @@ const TextBox = ({
           error && styles.inputViewErrStyle,
           error && inputViewErrStyle
         ]}>
-        {iconPosition == 'left' && Icon && <Icon />}
+        {IconLeft && IconLeft}
         <TextInput
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
@@ -58,7 +58,7 @@ const TextBox = ({
           {...inputProps}
           style={[styles.inputStyle, inputProps.style]}
         />
-        {iconPosition == 'right' && Icon && <Icon />}
+        {IconRight && IconRight}
       </View>
       {error && (
         <Text allowFontScaling={false} style={styles.txtErr}>

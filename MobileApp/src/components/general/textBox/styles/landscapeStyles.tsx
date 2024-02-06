@@ -12,6 +12,7 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         container: {
             justifyContent: 'center',
             alignItems: 'center',
+            width: w(85),
         },
         //text input
         inputView: {

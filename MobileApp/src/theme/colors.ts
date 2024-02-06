@@ -18,6 +18,8 @@ export const darkColors = {
 
   ternary1: '#3797ef',
   ternary2: '#1b4b77',
+  ternary3: '#B1BEC8',
+
 
   ...commonColors,
 };
@@ -31,6 +33,7 @@ export const lightColors = {
 
   ternary1: '#3797ef',
   ternary2: '#9bcbf7',
+  ternary3: '#063F6E',
 
   ...commonColors
 };

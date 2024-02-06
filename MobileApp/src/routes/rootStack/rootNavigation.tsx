@@ -10,9 +10,10 @@ import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 
 
+
 export type RootStackProps = {
   Login: undefined;
-  Signup:undefined;
+  Signup: undefined;
 };
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -21,11 +22,13 @@ const Stack = createStackNavigator<RootStackProps>();
 
 function RootNav() {
 
+
+
   const colors = useAppThemeColors();
 
   //change color scheme when mobile scheme changes
   const scheme = useColorScheme();
-  const {theme} = useAppSelector(state => state.theme);
+  const { theme } = useAppSelector(state => state.theme);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -40,7 +43,7 @@ function RootNav() {
         dark: theme == "dark",
         colors: {
           ...DefaultTheme.colors,
-          background:colors.primary1,
+          background: colors.primary1,
         },
       }}>
       <StatusBar

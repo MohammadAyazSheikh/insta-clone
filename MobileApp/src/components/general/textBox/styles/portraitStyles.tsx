@@ -11,6 +11,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         container: {
             justifyContent: 'center',
             alignItems: 'center',
+            width: w(85),
         },
         //text input
         inputView: {
@@ -36,7 +37,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             color: colors.secondary1,
             flex: 1,
             fontFamily: fontFamily.regular,
-            fontSize: 14
+            fontSize: 14,
         },
         //error and label
         txtErr: {

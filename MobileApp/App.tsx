@@ -12,6 +12,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { useEffect } from 'react';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import colors from './src/theme/colors';
+import { useAppExit } from './src/hooks/backHandlerHooks';
 
 
 
@@ -27,10 +28,14 @@ const theme = {
 
 const App = () => {
 
+  //exit listener
+  useAppExit();
 
+  //hiding native splash
   useEffect(() => {
     SplashScreen.hide();
-  }, [])
+  }, []);
+
   return (
     <PaperProvider theme={theme}>
       <Provider store={store}>

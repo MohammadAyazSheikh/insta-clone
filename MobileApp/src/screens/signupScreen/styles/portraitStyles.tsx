@@ -25,40 +25,49 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         txtChildTitle: {
             fontSize: 30,
             color: colors.secondary1,
+            textAlign:'center',
         },
 
         txtChildSubTitle: {
             fontSize: 14,
             color: colors.grey1,
-            marginVertical:20
+            marginVertical: 20,
+            textAlign: 'center',
         },
 
-
-
-
-        logoStyles: {
-            width: w(55),
-            resizeMode: 'contain',
-            marginTop: '40%',
-            marginBottom: '10%'
-        },
-        txtForgetPss: {
-            fontSize: 12,
-            color: colors.grey1,
-            marginVertical: 10
-        },
         row: {
-            width: '85%',
             flexDirection: 'row',
+            width: w(85),
+            justifyContent: 'center',
             alignItems: 'center',
-            justifyContent: 'space-between',
         },
-        line: {
-            flex: 1,
-            paddingVertical: 0.7,
-            opacity: 0.2,
-            backgroundColor: colors.grey1,
-        }
+        // ---tab styles--
+        btnTab: {
+            height: 50,
+            width: "50%",
+            marginTop: 20,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        btnTabActive: {
+            borderBottomWidth: 1,
+            borderBlockColor: colors.secondary1,
+        },
+        btnTabTxt: {
+            fontSize: 16,
+            color: colors.grey1,
+        },
+        // resend text
+        texView:{
+            width:w(85),
+            justifyContent:'center',
+            alignItems:'center',
+        },
+        txtResend: {
+            color: colors.ternary3,
+            fontSize: 14,
+            marginVertical:20,
+        },
     });
 }
 
