@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { BackHandler } from 'react-native';
-import { ShowConfirmAlert } from '../components/general/alerts/confirmAlert';
+import { showConfirmAlert } from '../components/general/alerts/confirmAlert';
 
 
 export const useBackHandler = (onBack: () => boolean) => (
@@ -21,7 +21,7 @@ export const useAppExit = (onBack?: () => void, stopGoBack = true) => (
 
             onBack && onBack();
             
-            ShowConfirmAlert({
+            showConfirmAlert({
                 title: "We'll miss you 😥",
                 description: 'Are your sure want to exit?',
                 confirmText: 'Fuck you!',

@@ -1,6 +1,6 @@
 
 
-import React, { } from 'react';
+import React, { useState } from 'react';
 import 'react-native-gesture-handler';
 import RootNavigation from './src/routes/rootStack/rootNavigation';
 import { Provider } from 'react-redux';
@@ -13,6 +13,9 @@ import { useEffect } from 'react';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import colors from './src/theme/colors';
 import { useAppExit } from './src/hooks/backHandlerHooks';
+import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert';
+import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
+
 
 
 
@@ -42,6 +45,9 @@ const App = () => {
         <PersistGate loading={null} persistor={persistor}>
           <RootNavigation />
           <Toast config={toastConfig} />
+          {/* alerts */}
+          <RenderConfirmAlert/>
+          <RenderDismissAlert/>
         </PersistGate>
       </Provider>
     </PaperProvider>

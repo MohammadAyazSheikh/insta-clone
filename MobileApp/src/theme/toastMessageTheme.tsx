@@ -9,9 +9,7 @@ import { heightToDp, useAppThemeColors } from '../utils/functions/responsiveUtil
 import { TextBold, TextRegular } from '../components/general/text/text';
 import { useAppSelector } from '../redux/hooks';
 import { getShadow } from './platformSpecificStyles';
-import { TouchableRipple } from 'react-native-paper';
-import { ConfirmAlert } from '../components/general/alerts/confirmAlert';
-import { DismissAlert } from '../components/general/alerts/dismissAlert';
+
 
 interface ToastConfigProps {
   // MyText:string,
@@ -78,11 +76,6 @@ const toastConfig: ToastConfig = {
     </View>
   ),
 
-  // Dismiss alert
-  dismissAlert: DismissAlert,
-
-  // Confirm alert
-  confirmAlert: ConfirmAlert,
 };
 
 

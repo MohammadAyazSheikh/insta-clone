@@ -13,8 +13,8 @@ import TextBox from '../../components/general/textBox/textBox';
 import IconFe from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
-import { ShowDismissAlert } from '../../components/general/alerts/dismissAlert';
-import { ShowConfirmAlert } from '../../components/general/alerts/confirmAlert';
+import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
+
 type loginProps = {
     username?: string,
     password?: string,
@@ -93,7 +93,7 @@ export default function Login() {
                     disabled={!data.password || !data.username}
                     buttonText='Log in'
                     onPress={() => {
-                        ShowDismissAlert({
+                        showDismissAlert({
                             title: 'Stop!',
                             description: 'API developing is in progress'
                         })

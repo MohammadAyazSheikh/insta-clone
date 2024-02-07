@@ -12,7 +12,7 @@ import { TextBold, TextRegular } from '../../components/general/text/text';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { phoneEmailTabsProps } from './selectPhoneEmail';
-import { ShowDismissAlert } from '../../components/general/alerts/dismissAlert';
+import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { signUpProps } from './signupScreen';
 type VerifyScreenProps = { data: signUpProps } & phoneEmailTabsProps;
 export default function VerifyPassword({
@@ -62,7 +62,7 @@ export default function VerifyPassword({
                         <TextBold
                             style={[styles.txtResend,]}
                             onPress={() => {
-                                ShowDismissAlert({
+                                showDismissAlert({
                                     title: 'Wait a moment',
                                     description: 'We can only send you a new login code every 30 seconds.'
                                 })

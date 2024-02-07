@@ -7,7 +7,7 @@ import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import SelectUserName from './selectUserName';
 import SelectPassword from './selectPassword';
 import SelectPhoneEmail from './selectPhoneEmail';
-import VerifyPhone from './verifyPhone';
+
 
 
 export type childScreenProps = {
