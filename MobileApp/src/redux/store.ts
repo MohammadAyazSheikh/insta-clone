@@ -3,8 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 // import { mmkvStorage } from '../utils/functions/asyncStorage';
 import storage from '@react-native-async-storage/async-storage'
 import themeSlice from './features/theme/themeSlice';
-import dynamicFormSlice from './features/dynamicFormSlice/dynamicFormSlice';
-import postSlice from './features/postSlice/postSlice';
+import userSlice from './features/user/userSlice';
 
 
 const persistConfig = {
@@ -18,8 +17,7 @@ const persistConfig = {
 
 const appReducer = combineReducers({
   theme: themeSlice,
-  dynamicFormData: dynamicFormSlice,
-  posts:postSlice,
+  user: userSlice,
 });
 
 

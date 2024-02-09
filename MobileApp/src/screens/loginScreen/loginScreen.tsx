@@ -14,6 +14,7 @@ import IconFe from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
+import { authSuccess, logoutSuccess } from '../../redux/features/user/userSlice';
 
 type loginProps = {
     username?: string,
@@ -35,7 +36,7 @@ export default function Login() {
     const [err, setErr] = useState<loginPropsErr>({});
     const [hidePass, setHidePass] = useState(true);
     const dispatch = useAppDispatch();
-    const { isLoadingAdd } = useAppSelector(state => state.posts);
+
 
 
     return (
@@ -93,10 +94,14 @@ export default function Login() {
                     disabled={!data.password || !data.username}
                     buttonText='Log in'
                     onPress={() => {
-                        showDismissAlert({
-                            title: 'Stop!',
-                            description: 'API developing is in progress'
-                        })
+                        dispatch(authSuccess({
+                            id:'1',
+                            firstName:'John',
+                            lastName:'Doe',
+                            userName:'john_123',
+                            email:'john@email.com',
+                            dob:new Date(),
+                        }))
                     }}
                 />
                 {/* --forget password button ---- */}
@@ -121,7 +126,7 @@ export default function Login() {
                     </TextBold>
                     <View style={styles.line} />
                 </View>
-                {/* ------btn don't have account */}
+                {/* ------btn don't have account---- */}
                 <TextRegular
                     style={styles.txtForgetPss}
                     onPress={() => {
@@ -135,10 +140,7 @@ export default function Login() {
                         {' Sign up.'}
                     </TextBold>
                 </TextRegular>
-                {/* loader */}
-                <Loader
-                    showLoader={isLoadingAdd}
-                />
+               
             </ScrollView>
         </View>
     );

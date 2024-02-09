@@ -8,7 +8,7 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { TouchableRipple } from 'react-native-paper';
 import { useAppSelector } from "../../../redux/hooks";
 import { TextRegular, TextBold } from "../text/text";
-
+import Animated, { ZoomIn } from 'react-native-reanimated';
 
 
 type confirmAlertPropsType = {
@@ -58,7 +58,7 @@ const ConfirmModal = React.forwardRef(({
 
         <Modal
             visible={visible}
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             onRequestClose={() => {
                 setVisible(false)
@@ -68,11 +68,13 @@ const ConfirmModal = React.forwardRef(({
                 style={styles.backDrop}
             />
             <View style={styles.centeredView}>
-                <View style={[styles.alertView, {
-                    height: 225,
-                    backgroundColor:
-                        isDark ? colors.primary4 : "#FFF"
-                }]}>
+                <Animated.View
+                    entering={ZoomIn}
+                    style={[styles.alertView, {
+                        height: 225,
+                        backgroundColor:
+                            isDark ? colors.primary4 : "#FFF"
+                    }]}>
                     <View style={[styles.alertTextView, { height: '60%' }]}>
                         <TextBold style={[
                             styles.txtAlertTitle,
@@ -100,7 +102,7 @@ const ConfirmModal = React.forwardRef(({
                                 'rgba(000,000,000,0.2)'
                         }
                         borderless
-                        onPress={()=>{
+                        onPress={() => {
                             props?.onConfirm && props?.onConfirm();
                             setVisible(false);
                         }}
@@ -118,7 +120,7 @@ const ConfirmModal = React.forwardRef(({
                                 'rgba(000,000,000,0.2)'
                         }
                         borderless
-                        onPress={()=>{
+                        onPress={() => {
                             props?.onDismiss && props?.onDismiss();
                             setVisible(false);
                         }}
@@ -127,7 +129,7 @@ const ConfirmModal = React.forwardRef(({
                             {props?.dismissText}
                         </TextRegular>
                     </TouchableRipple>
-                </View>
+                </Animated.View>
             </View>
         </Modal >
 

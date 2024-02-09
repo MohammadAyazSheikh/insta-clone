@@ -8,10 +8,10 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { TouchableRipple } from 'react-native-paper';
 import { useAppSelector } from "../../../redux/hooks";
 import { TextRegular, TextBold } from "../text/text";
+import Animated, { ZoomIn } from 'react-native-reanimated';
 
 
-
-type confirmAlertPropsType = {
+type dismissAlertPropsType = {
     onDismiss?: () => void,
     dismissText?: string,
     confirmText?: string,
@@ -19,8 +19,8 @@ type confirmAlertPropsType = {
     description?: string,
 }
 
-type confirmAlertType = {
-    show?: (props: confirmAlertPropsType) => void,
+type dismissAlertType = {
+    show?: (props: dismissAlertPropsType) => void,
     hide?: () => void,
 }
 
@@ -28,25 +28,25 @@ type confirmAlertType = {
 
 
 //ref to the component
-const modalRef = React.createRef<confirmAlertType>();
+const modalRef = React.createRef<dismissAlertType>();
 
 
 const ConfirmModal = React.forwardRef(({
 
-}: confirmAlertType, ref) => {
+}: dismissAlertType, ref) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
     const [visible, setVisible] = useState(false);
-    const [props, setProps] = useState<confirmAlertPropsType>({});
+    const [props, setProps] = useState<dismissAlertPropsType>({});
 
 
     //below function allows us to set internal stats using ref
     useImperativeHandle(ref, () => {
         return ({
-            show: (values: confirmAlertPropsType) => {
+            show: (values: dismissAlertPropsType) => {
                 setProps({ ...values });
                 setVisible(true);
             },
@@ -57,7 +57,7 @@ const ConfirmModal = React.forwardRef(({
 
         <Modal
             visible={visible}
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             onRequestClose={() => {
                 setVisible(false)
@@ -67,10 +67,12 @@ const ConfirmModal = React.forwardRef(({
                 style={styles.backDrop}
             />
             <View style={styles.centeredView}>
-                <View style={[styles.alertView, {
-                    backgroundColor:
-                        isDark ? colors.primary4 : "#FFF"
-                }]}>
+                <Animated.View
+                    entering={ZoomIn}
+                    style={[styles.alertView, {
+                        backgroundColor:
+                            isDark ? colors.primary4 : "#FFF"
+                    }]}>
                     <View style={styles.alertTextView}>
                         <TextBold style={[
                             styles.txtAlertTitle,
@@ -107,7 +109,7 @@ const ConfirmModal = React.forwardRef(({
                             {props?.dismissText}
                         </TextBold>
                     </TouchableRipple>
-                </View>
+                </Animated.View>
             </View>
         </Modal >
 
@@ -134,7 +136,7 @@ export const showDismissAlert = ({
     onDismiss = () => { },
 }) => {
 
-    // //setting props
+    //setting props
     modalRef.current?.show
         &&
         modalRef.current?.show({

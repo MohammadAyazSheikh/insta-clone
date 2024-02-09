@@ -1,31 +1,35 @@
 import React from 'react';
+import { View,Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../../screens/loginScreen/loginScreen';
 import { RootStackProps } from './rootNavigation';
-import Signup from '../../screens/signupScreen/signupScreen';
+import RootTab from '../rootTab/rootTab';
+
 
 const Stack = createStackNavigator<RootStackProps>();
 
+const Screen = () =>
+(
+    <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }}>
+        <Text>
+          Hello from dev 👋  👩‍💻
+        </Text>
+    </View>
+)
 
-
-export const ProtectedRoutes = () => {
+export const protectedRoutes = () => {
     return (
         <>
             <Stack.Screen
-                name="Login"
-                component={Login}
+                name="RootTab"
+                component={RootTab}
                 options={{
                     headerShown: false,
                 }}
             />
-             <Stack.Screen
-                name="Signup"
-                component={Signup}
-                options={{
-                    headerShown: false,
-                }}
-            />
-
         </>
     );
 };

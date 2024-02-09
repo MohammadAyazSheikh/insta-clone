@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../redux/hooks';
 import TextBox from '../../components/general/textBox/textBox';
 import IconAnt from 'react-native-vector-icons/AntDesign'
 import { TextRegular } from '../../components/general/text/text';
-import { childScreenProps, signUpProps, signUpPropsErr, signUpTabProps } from './signupScreen';
+import { childScreenProps} from './signupScreen';
 import { isValidUsername } from '../../utils/functions/validations';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 

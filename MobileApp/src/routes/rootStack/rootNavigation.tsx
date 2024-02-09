@@ -5,13 +5,15 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { fontFamily } from '../../theme/fonts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeTheme } from '../../redux/features/theme/themeSlice';
-import { ProtectedRoutes } from './protectedRoutes';
+import { authRoutes } from './authRoutes';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+import { protectedRoutes } from './protectedRoutes';
 
 
 
 
 export type RootStackProps = {
+  RootTab: undefined;
   Login: undefined;
   Signup: undefined;
 };
@@ -22,17 +24,17 @@ const Stack = createStackNavigator<RootStackProps>();
 
 function RootNav() {
 
-
+  const { user } = useAppSelector(state => state.user);
 
   const colors = useAppThemeColors();
 
-  //change color scheme when mobile scheme changes
+  //change theme when ever mobile scheme changes
   const scheme = useColorScheme();
-  const { theme } = useAppSelector(state => state.theme);
+  const { theme, isDefault } = useAppSelector(state => state.theme);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(changeTheme({
+    isDefault && dispatch(changeTheme({
       theme: scheme == "dark" ? "dark" : "light",
     }))
   }, [scheme]);
@@ -63,7 +65,13 @@ function RootNav() {
           },
           // animationEnabled: false
         }}>
-        {ProtectedRoutes()}
+        {
+          // user ?
+          //   protectedRoutes()
+          //   :
+          //   authRoutes()
+          protectedRoutes()
+        }
       </Stack.Navigator>
     </NavigationContainer>
   );

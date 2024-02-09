@@ -1,5 +1,6 @@
 export const commonColors = {
   lightYellow: '#feda75',
+  yellow: '#fccc63',
   orange: '#fa7e1e',
   pink: '#d62976',
   purple: '#962fbf',

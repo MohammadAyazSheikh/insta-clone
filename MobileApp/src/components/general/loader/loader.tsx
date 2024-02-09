@@ -35,40 +35,37 @@ const Loader = ({
     const colors = useAppThemeColors();
 
     return (
-        <View style={styles.centeredView}>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={showLoader}
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={showLoader}
+        >
+            <View
+                style={styles.backDrop}
+                {...backDropProps}
+            />
+            <View
+                style={styles.centeredView}
+                {...centerViewProps}
             >
                 <View
-                    style={styles.backDrop}
-                    {...backDropProps}
-                />
-                <View
-                    style={styles.centeredView}
-                    {...centerViewProps}
+                    style={styles.modalView}
+                    {...modalViewProps}
                 >
-                    <View
-                        style={styles.modalView}
-                        {...modalViewProps}
+                    <ActivityIndicator
+                        color={colors.secondary1}
+                        size={"large"}
+                        {...loaderProps}
+                    />
+                    {loadingText && < Text
+                        style={styles.txtLoading}
+                        allowFontScaling={false}
                     >
-                        <ActivityIndicator
-                            color={colors.secondary1}
-                            size={"large"}
-                            {...loaderProps}
-                        />
-                        {loadingText && < Text
-                            style={styles.txtLoading}
-                            allowFontScaling={false}
-                        >
-                            {loadingText}
-                        </Text>}
-                    </View>
+                        {loadingText}
+                    </Text>}
                 </View>
-            </Modal >
-
-        </View >
+            </View>
+        </Modal >
     );
 };
 export default Loader;
