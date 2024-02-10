@@ -10,6 +10,7 @@ import Loader from '../../components/general/loader/loader';
 
 import HomeHeader from './header';
 import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
+import StoryModal from '../../components/story/storyModal/storyModal';
 
 type loginProps = {
     username?: string,
@@ -39,6 +40,7 @@ export default function Home() {
             <ScrollView contentContainerStyle={styles.scroll}>
                 <HomeHeader />
                 <StoryAvatar />
+                <StoryModal/>
             </ScrollView>
         </View>
     );
