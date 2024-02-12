@@ -107,7 +107,8 @@ export const usePlayStory = (
     //pause current story
     const pauseStory = () => {
         paused.current = true;
-        pauseBar(animValuesBar[currentBarIndex.current]);
+        resetAnimation(animValuesBar[currentBarIndex.current]);
+        // pauseBar(animValuesBar[currentBarIndex.current]);
     }
 
     //this hooks runs every time whenever 
@@ -119,24 +120,28 @@ export const usePlayStory = (
             (width * storyIndex).toFixed(0);
 
 
+        //pause story when it is not visible on the screen
+        //if user scrolls or scroll to the other screen 
+        if (!isVisible && isPlaying.current) {
+            isPlaying.current = false;
+            runOnJS(pauseStory)();
+            return;
+        }
+  
         //play story when it is visible on the screen 
         if (isVisible && !isPlaying.current) {
             isPlaying.current = true;
             runOnJS(playStory)();
         }
 
-        //pause story when it is not visible on the screen
-        //if user scrolls or scroll to the other screen 
-        if (!isVisible && isPlaying.current) {
-            isPlaying.current = false;
-            runOnJS(pauseStory)();
-        }
+
     });
 
     return {
         playStory,
         pauseStory,
         playNext,
-        playPrev
+        playPrev,
+        currentBarIndex,
     };
 } 

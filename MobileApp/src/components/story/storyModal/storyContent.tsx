@@ -37,7 +37,7 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title })
 
     const animValuesBar = data.map(item => useSharedValue(0));
 
-    const { playNext, playPrev, pauseStory, playStory } = usePlayStory(index,scrollX,scrollRef,animValuesBar);
+    const { playNext, playPrev, pauseStory, playStory,currentBarIndex } = usePlayStory(index,scrollX,scrollRef,animValuesBar);
 
 
 
