@@ -9,14 +9,16 @@ import responsiveStyles from './styles/styles';
 import { Text } from 'react-native-paper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Animated, {
+    ScrollHandler,
+    ScrollHandlers,
     useAnimatedScrollHandler,
     useSharedValue,
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
 
 
-const WORDS = ["What's", 
-'up', 'mobile', 'devs?'
+const WORDS = ["What's",
+    'up', 'mobile', 'devs?'
 ];
 const StoryModal = ({
 
@@ -25,6 +27,8 @@ const StoryModal = ({
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
+    //scroll ref
+    const scrollRef = useRef(null);
 
     //holds scroll animated value
     const translateX = useSharedValue(0);
@@ -45,6 +49,7 @@ const StoryModal = ({
                 style={styles.centeredView}
             >
                 <Animated.ScrollView
+                    ref={scrollRef}
                     onScroll={scrollHandler}
                     style={styles.scroll}
                     pagingEnabled
@@ -57,6 +62,7 @@ const StoryModal = ({
                                 key={index.toString()}
                                 title={title}
                                 scrollX={translateX}
+                                scrollRef={scrollRef }
                                 index={index}
                             />
                         );

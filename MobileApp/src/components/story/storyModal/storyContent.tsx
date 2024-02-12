@@ -16,6 +16,8 @@ import { TextBold } from '../../general/text/text';
 import colors from '../../../theme/colors';
 import ProgressBar, { animateBar, pauseBar, resetAnimation } from './progressBar';
 import ButtonRipple from '../../general/customButton/buttonRipple';
+import { usePlayStory } from '../progressBar/playStoryHooks';
+import { RenderStoryBars } from '../progressBar/progressBar';
 const { height, width } = Dimensions.get('window');
 
 const data = [1, 2, 3, 4];
@@ -24,79 +26,21 @@ const data = [1, 2, 3, 4];
 interface PageProps {
     index: number;
     scrollX: SharedValue<number>;
+    scrollRef: React.MutableRefObject<ScrollView>;
     title: string;
-
 }
 
-const StoryContent: React.FC<PageProps> = ({ index, scrollX, title }) => {
+const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title }) => {
 
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
 
-    //animated values for progress bars
-    const animValues = data.map(item => useSharedValue(0));
+    const animValuesBar = data.map(item => useSharedValue(0));
 
-    //holds index of bars
-    const currentBarIndex = useRef(0);
-    //flag for paused auto play
-    const paused = useRef(false);
+    const { playNext, playPrev, pauseStory, playStory } = usePlayStory(index,scrollX,scrollRef,animValuesBar);
 
-    const playStory = (index?: number) => {
-        const i = index || currentBarIndex.current;
-        animateBar(
-            {
-                toValue: 100,
-                animatedValue: animValues[i]
-            },
-            () => {
-                //if paused true return and don't play next bar
-                if (paused.current) {
-                    paused.current = false;
-                    return;
-                }
-                //else play next story and inc index
-                if (currentBarIndex.current < animValues.length - 1) {
-                    playStory(currentBarIndex.current + 1);
-                    currentBarIndex.current += 1;
-                }
-            }
-        );
-    }
 
-    const playNext = () => {
-        //if current is not the last bar
-        if (currentBarIndex.current < animValues.length - 1) {
-            //paused the auto play
-            paused.current = true;
-            //set current bar to 100 %
-            animValues[currentBarIndex.current].value = 100;
-            currentBarIndex.current += 1;
-            //again auto play from next index
-            playStory(currentBarIndex.current);
-        }
-    }
 
-    const playPrev = () => {
-        //if current is not the 1st bar
-        if (currentBarIndex.current > 0) {
-            //paused the auto play
-            paused.current = true;
-            //set current and prev bar to zero %
-            resetAnimation(animValues[currentBarIndex.current]);
-            resetAnimation(animValues[currentBarIndex.current - 1]);
-            currentBarIndex.current -= 1;
-            //again auto play from prev index
-            playStory(currentBarIndex.current);
-        }
-    }
-    const pauseStory = () => {
-        paused.current = true;
-        pauseBar(animValues[currentBarIndex.current]);
-    }
-
-    useEffect(() => {
-        playStory();
-    }, [])
 
 
     //input range for scroll animation
@@ -139,8 +83,8 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, title }) => {
     });
 
 
-   
-   
+
+
     return (
         <Animated.View
             style={[
@@ -149,17 +93,7 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, title }) => {
             ]}
         >
             {/* progress bars */}
-
-            <View style={styles.row}>
-                {
-                    animValues.map((val, index) => (
-                        <ProgressBar
-                            key={index}
-                            animatedValue={val}
-                        />
-                    ))
-                }
-            </View>
+            <RenderStoryBars animatedValuesBar={animValuesBar} />
 
 
             <TextBold style={{ color: colors.ternary1, fontSize: 24 }}>
@@ -193,7 +127,7 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, title }) => {
                 <ButtonRipple
                     style={{ padding: 30 }}
                     onPress={() => {
-                        playNext()
+                        playNext();
                     }}
                 >
                     <TextBold>
