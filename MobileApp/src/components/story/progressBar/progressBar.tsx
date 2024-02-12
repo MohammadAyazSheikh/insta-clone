@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
-    Easing, withSpring, useSharedValue, useAnimatedStyle, SharedValue, withTiming,
+    useAnimatedStyle, SharedValue, withTiming,
     runOnJS,
     cancelAnimation
 } from 'react-native-reanimated';

@@ -6,15 +6,11 @@ import Animated, {
     useAnimatedStyle,
     SharedValue,
     useSharedValue,
-    cancelAnimation,
-    useDerivedValue,
-    runOnJS
 } from 'react-native-reanimated';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { TextBold } from '../../general/text/text';
 import colors from '../../../theme/colors';
-import ProgressBar, { animateBar, pauseBar, resetAnimation } from './progressBar';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { usePlayStory } from '../progressBar/playStoryHooks';
 import { RenderStoryBars } from '../progressBar/progressBar';

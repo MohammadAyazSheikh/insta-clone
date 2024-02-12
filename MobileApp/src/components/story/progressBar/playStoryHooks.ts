@@ -107,10 +107,15 @@ export const usePlayStory = (
     //pause current story
     const pauseStory = () => {
         paused.current = true;
-        resetAnimation(animValuesBar[currentBarIndex.current]);
-        // pauseBar(animValuesBar[currentBarIndex.current]);
+        pauseBar(animValuesBar[currentBarIndex.current]);
     }
 
+        //pause and reset current story
+        const pauseAndResetStory = () => {
+            paused.current = true;
+            resetAnimation(animValuesBar[currentBarIndex.current]);
+        }
+    
     //this hooks runs every time whenever 
     //at least one of the shared values or 
     //state used in the function body changes
@@ -124,7 +129,7 @@ export const usePlayStory = (
         //if user scrolls or scroll to the other screen 
         if (!isVisible && isPlaying.current) {
             isPlaying.current = false;
-            runOnJS(pauseStory)();
+            runOnJS(pauseAndResetStory)();
             return;
         }
   
