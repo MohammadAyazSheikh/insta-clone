@@ -82,7 +82,9 @@ export const usePlayStory = (
             playStory(currentBarIndex.current);
         }
         //if last bar switch to next user's story
-        if (currentBarIndex.current == animValuesBar.length - 1) {
+        if ((currentBarIndex.current == animValuesBar.length - 1) &&
+            animValuesBar[currentBarIndex.current].value > 1
+        ) {
             scrollToNextUserStory();
         }
     }
@@ -99,8 +101,9 @@ export const usePlayStory = (
             //again auto play from prev index
             playStory(currentBarIndex.current);
         }
-        //if last bar switch to prev user's story
-        if (currentBarIndex.current == 0) {
+        //if 1st bar switch to prev user's story
+        if (currentBarIndex.current == 0 &&
+            animValuesBar[0].value < 99) {
             scrollToPrevUserStory();
         }
     }
@@ -110,12 +113,12 @@ export const usePlayStory = (
         pauseBar(animValuesBar[currentBarIndex.current]);
     }
 
-        //pause and reset current story
-        const pauseAndResetStory = () => {
-            paused.current = true;
-            resetAnimation(animValuesBar[currentBarIndex.current]);
-        }
-    
+    //pause and reset current story
+    const pauseAndResetStory = () => {
+        paused.current = true;
+        resetAnimation(animValuesBar[currentBarIndex.current]);
+    }
+
     //this hooks runs every time whenever 
     //at least one of the shared values or 
     //state used in the function body changes
@@ -132,7 +135,7 @@ export const usePlayStory = (
             runOnJS(pauseAndResetStory)();
             return;
         }
-  
+
         //play story when it is visible on the screen 
         if (isVisible && !isPlaying.current) {
             isPlaying.current = true;
