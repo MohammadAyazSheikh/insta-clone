@@ -1,6 +1,7 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import {
     Dimensions,
+    ScrollView,
 } from 'react-native';
 import {
     SharedValue,
@@ -8,7 +9,6 @@ import {
     useDerivedValue,
 } from 'react-native-reanimated';
 import { animateBar, pauseBar, resetAnimation } from './progressBar';
-import { ScrollView } from 'react-native-gesture-handler';
 const { width } = Dimensions.get('window');
 
 
@@ -18,6 +18,13 @@ export const usePlayStory = (
     scrollRef: React.MutableRefObject<ScrollView>,
     animValuesBar: SharedValue<number>[],
 ) => {
+
+    //since currentBarIndex ref can't update the UI and we want to switch next story of a user
+    //so toggling rerender state in order to get new updated currentBarIndex value
+    //I know it is very bad approach but I could;nt found a better solution 
+    //so please don't yell at me 😬 
+
+    const [_, setRerender] = useState(false);
 
     //holds index of bars
     const currentBarIndex = useRef(0);
@@ -65,6 +72,7 @@ export const usePlayStory = (
                 if (currentBarIndex.current < animValuesBar.length - 1) {
                     playStory(currentBarIndex.current + 1);
                     currentBarIndex.current += 1;
+                    setRerender(prev => !prev);
                 }
             }
         );
@@ -78,6 +86,7 @@ export const usePlayStory = (
             //set current bar to 100 %
             animValuesBar[currentBarIndex.current].value = 100;
             currentBarIndex.current += 1;
+            setRerender(prev => !prev);
             //again auto play from next index
             playStory(currentBarIndex.current);
         }
@@ -98,6 +107,7 @@ export const usePlayStory = (
             resetAnimation(animValuesBar[currentBarIndex.current]);
             resetAnimation(animValuesBar[currentBarIndex.current - 1]);
             currentBarIndex.current -= 1;
+            setRerender(prev => !prev);
             //again auto play from prev index
             playStory(currentBarIndex.current);
         }
@@ -142,8 +152,7 @@ export const usePlayStory = (
             runOnJS(playStory)();
         }
 
-
-    });
+    }, []);
 
     return {
         playStory,

@@ -12,16 +12,15 @@ import ButtonRipple from '../../general/customButton/buttonRipple';
 
 type storyProps = {
     size?: number,
+    image?: any,
     onPress?: () => void,
 }
 
-export default function StoryAvatar({ size }: storyProps) {
+export default function StoryAvatar({ size, image }: storyProps) {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
-    const dispatch = useAppDispatch();
+   
 
     const rotation = useSharedValue(0);
 
@@ -71,10 +70,18 @@ export default function StoryAvatar({ size }: storyProps) {
                     startRotation()
                 }}
             >
-                <Image
-                    source={require('../../../.././assets/images/people/students.jpg')}
-                    style={styles.imgStory}
-                />
+                {
+                    image ?
+                        <Image
+                            source={image}
+                            style={styles.imgStory}
+                        />
+                        :
+                        <Image
+                            source={require('../../../.././assets/images/user.png')}
+                            style={styles.imgStory}
+                        />
+                }
             </ButtonRipple>
         </View>
     );

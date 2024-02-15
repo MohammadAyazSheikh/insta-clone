@@ -9,8 +9,6 @@ import responsiveStyles from './styles/styles';
 import { Text } from 'react-native-paper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Animated, {
-    ScrollHandler,
-    ScrollHandlers,
     useAnimatedScrollHandler,
     useSharedValue,
 } from 'react-native-reanimated';

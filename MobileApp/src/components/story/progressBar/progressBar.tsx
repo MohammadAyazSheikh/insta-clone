@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
-    useAnimatedStyle, SharedValue, withTiming,
+    useAnimatedStyle,
+    SharedValue,
+    withTiming,
     runOnJS,
     cancelAnimation
 } from 'react-native-reanimated';
 import colors from '../../../theme/colors';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
+import { useAppThemeColors }
+    from '../../../utils/functions/responsiveUtils';
 
 type progressBarProps = {
     animatedValue: SharedValue<number>
@@ -41,6 +45,8 @@ export const animateBar = (options: animateBarOptionType, callBack?: () => void)
 export default function ProgressBar({ animatedValue }: progressBarProps) {
 
 
+    const colors = useAppThemeColors();
+
     const animatedStyle = useAnimatedStyle(() => {
         return {
             width: `${animatedValue.value}%`,
@@ -48,9 +54,9 @@ export default function ProgressBar({ animatedValue }: progressBarProps) {
     });
 
     return (
-        <View style={[styles.container,]}>
+        <View style={[styles.container]}>
             <Animated.View
-                style={[styles.strip, animatedStyle]}
+                style={[styles.strip, animatedStyle, { backgroundColor: colors.secondary1 }]}
             />
         </View>
     );
@@ -78,7 +84,7 @@ export const RenderStoryBars = ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 10,
+        height: 3,
         marginHorizontal: 3,
         backgroundColor: colors.grey1,
         justifyContent: 'center',
@@ -87,12 +93,13 @@ const styles = StyleSheet.create({
     strip: {
         width: '30%',
         height: '100%',
-        backgroundColor: colors.ternary1,
+        backgroundColor: "white",
     },
     row: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         width: widthToDp(100),
+        paddingHorizontal: 5,
     }
 })

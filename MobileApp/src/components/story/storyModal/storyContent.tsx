@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, View, StyleSheet, Text, ScrollView } from 'react-native';
+import { Dimensions, View, StyleSheet, Image, ScrollView } from 'react-native';
 import Animated, {
     Extrapolation,
     interpolate,
@@ -14,6 +14,7 @@ import colors from '../../../theme/colors';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { usePlayStory } from '../progressBar/playStoryHooks';
 import { RenderStoryBars } from '../progressBar/progressBar';
+import ContentHeader from '../../cards/contentHeader/contentHeader';
 const { height, width } = Dimensions.get('window');
 
 const data = [1, 2, 3, 4];
@@ -33,7 +34,8 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title })
 
     const animValuesBar = data.map(item => useSharedValue(0));
 
-    const { playNext, playPrev, pauseStory, playStory,currentBarIndex } = usePlayStory(index,scrollX,scrollRef,animValuesBar);
+    const { playNext, playPrev, pauseStory, playStory, currentBarIndex } =
+        usePlayStory(index, scrollX, scrollRef, animValuesBar);
 
 
 
@@ -88,49 +90,20 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title })
                 containerStyle
             ]}
         >
-            {/* progress bars */}
-            <RenderStoryBars animatedValuesBar={animValuesBar} />
-
-
-            <TextBold style={{ color: colors.ternary1, fontSize: 24 }}>
-                {title + " " + index}
-            </TextBold>
-            <View style={[styles.row]}>
-                <ButtonRipple
-                    style={{ padding: 30 }}
-                    onPress={() => {
-                        playPrev()
-                    }}
-                >
-                    <TextBold>
-                        Prev
-                    </TextBold>
-                </ButtonRipple>
-                <ButtonRipple
-                    style={{ padding: 30 }}
-                    onTouchStart={() => {
-                        pauseStory()
-                    }}
-                    onTouchEnd={() => {
-                        playStory()
-                    }}
-
-                >
-                    <TextBold>
-                        pause
-                    </TextBold>
-                </ButtonRipple>
-                <ButtonRipple
-                    style={{ padding: 30 }}
-                    onPress={() => {
-                        playNext();
-                    }}
-                >
-                    <TextBold>
-                        Next
-                    </TextBold>
-                </ButtonRipple>
+            <View style={styles.col}>
+                {/* progress bars */}
+                <RenderStoryBars animatedValuesBar={animValuesBar} />
+                {/* header */}
+                <ContentHeader />
             </View>
+            {/* content */}
+            <View style={styles.contentContainer}>
+                <Image
+                    style={styles.imgContent}
+                    source={require('../.././../../assets/images/people/students.jpg')}
+                />
+            </View>
+
         </Animated.View>
     );
 };

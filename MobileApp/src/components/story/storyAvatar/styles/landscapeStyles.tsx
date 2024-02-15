@@ -1,7 +1,6 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
-import { fontFamily, } from '../../../../theme/fonts';
 
 
 type p = (number: number) => number;
@@ -9,29 +8,27 @@ type p = (number: number) => number;
 const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
 
     return StyleSheet.create({
-        centeredView: {
-            flex: 1,
+        storyView: {
+            width: w(25),
+            aspectRatio: 1,
+            borderRadius: w(30),
             justifyContent: 'center',
             alignItems: 'center',
+            padding:2,
         },
-        modalView: {
+        storyImageView: {
+            width: '100%',
+            aspectRatio: 1,
+            borderRadius: w(30),
             backgroundColor: colors.primary1,
-            borderRadius: 10,
-            padding: 10,
-            alignItems: 'center',
-            justifyContent: 'center',
-            elevation:5,
-            // ...getShadow({ elevation: 5, shadowOpacity: 5 })
+            borderWidth: 0.5,
+            borderColor: colors.primary1,
         },
-        backDrop: {
-            ...StyleSheet.absoluteFill,
-            backgroundColor: "black",
-            opacity: 0.8
-        },
-        txtLoading: {
-            color: colors.secondary1,
-            fontSize: 14,
-            fontFamily:fontFamily.bold
+        imgStory:{
+            width:'100%',
+            height:'100%',
+            borderRadius: w(30),
+            resizeMode:'cover',
         },
     });
 }
