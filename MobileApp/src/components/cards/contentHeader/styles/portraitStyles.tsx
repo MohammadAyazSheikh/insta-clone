@@ -28,7 +28,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         txtSubtitle:{
             color: colors.grey1,
             fontSize: 12,
-            marginLeft:10,
+            marginLeft:5,
         },
         row:{
             flexDirection:'row',

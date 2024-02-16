@@ -1,39 +1,61 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, View, StyleSheet, Image, ScrollView } from 'react-native';
+import React from 'react';
+import { Dimensions, ScrollView, TextInput, } from 'react-native';
 import Animated, {
     Extrapolation,
     interpolate,
     useAnimatedStyle,
     SharedValue,
     useSharedValue,
+    withTiming,
 } from 'react-native-reanimated';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import { TextBold } from '../../general/text/text';
 import colors from '../../../theme/colors';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { usePlayStory } from '../progressBar/playStoryHooks';
 import { RenderStoryBars } from '../progressBar/progressBar';
 import ContentHeader from '../../cards/contentHeader/contentHeader';
-const { height, width } = Dimensions.get('window');
+import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconFe from 'react-native-vector-icons/Feather';
+import { StoryMedia } from './storyMedia';
+import { storyDataType } from '../../../constants/data/storyData';
 
-const data = [1, 2, 3, 4];
+const {  width } = Dimensions.get('window');
 
 
-interface PageProps {
+
+type storyContentProps = {
     index: number;
     scrollX: SharedValue<number>;
     scrollRef: React.MutableRefObject<ScrollView>;
-    title: string;
+    contentData: storyDataType,
 }
 
-const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title }) => {
+const StoryContent = ({
+    index,
+    scrollX,
+    scrollRef,
+    contentData,
+}: storyContentProps) => {
 
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
 
-    const animValuesBar = data.map(item => useSharedValue(0));
 
+    //opacity animation for header and footer
+    const opacity = useSharedValue(1);
+    const hide = (duration = 300) => {
+        opacity.value = withTiming(0, { duration });
+    }
+    const show = (duration = 300) => {
+        opacity.value = withTiming(1, { duration });
+    }
+
+
+
+    // animated values for story bars
+    const animValuesBar = contentData.content.map(item => useSharedValue(0));
+    //animations hooks for bars
     const { playNext, playPrev, pauseStory, playStory, currentBarIndex } =
         usePlayStory(index, scrollX, scrollRef, animValuesBar);
 
@@ -90,23 +112,73 @@ const StoryContent: React.FC<PageProps> = ({ index, scrollX, scrollRef, title })
                 containerStyle
             ]}
         >
-            <View style={styles.col}>
+            {/* header */}
+            <Animated.View style={[
+                styles.col,
+                { opacity }
+            ]}>
                 {/* progress bars */}
                 <RenderStoryBars animatedValuesBar={animValuesBar} />
                 {/* header */}
-                <ContentHeader />
-            </View>
-            {/* content */}
-            <View style={styles.contentContainer}>
-                <Image
-                    style={styles.imgContent}
-                    source={require('../.././../../assets/images/people/students.jpg')}
+                <ContentHeader
+                image={contentData.image}
+                    title={contentData.userName}
+                    time={contentData.timeStamp}
+                    subtile=''
                 />
-            </View>
+            </Animated.View>
+            {/* content */}
+            <StoryMedia
+                mediaSource={contentData.content[currentBarIndex.current].image}
+                onPause={() => {
+                    pauseStory();
+                    hide();
+                }}
+                onPlay={() => {
+                    playStory();
+                    show();
+                }}
+                onPrev={playPrev}
+                onNext={playNext}
+            />
 
+            {/* Input and Send button */}
+            <Animated.View style={[
+                styles.row,
+                { opacity }
+            ]}>
+                <TextInput
+                    placeholderTextColor={colors.grey1}
+                    style={styles.txtInput}
+                    placeholder='Reply story'
+                />
+                {/* favorite */}
+                <ButtonRipple
+                    style={styles.btnStyles}
+                >
+                    <IconAnt
+                        name='hearto'
+                        color={"red"}
+                        size={20}
+                    />
+                </ButtonRipple>
+                {/* send button */}
+                <ButtonRipple
+                    style={styles.btnStyles}
+                >
+                    <IconFe
+                        name='send'
+                        color={colors.grey1}
+                        size={20}
+                    />
+                </ButtonRipple>
+            </Animated.View>
         </Animated.View>
     );
 };
+
+
+
 
 
 export { StoryContent };

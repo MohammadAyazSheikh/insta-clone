@@ -1,30 +1,25 @@
 import React, { useRef } from 'react';
 import {
-    Modal, ActivityIndicator, TextProps,
-    ActivityIndicatorProps, ViewProps, View,
-    ScrollView
+    Modal,  View,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import { Text } from 'react-native-paper';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Animated, {
     useAnimatedScrollHandler,
     useSharedValue,
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
+import { storyData } from '../../../constants/data/storyData';
 
 
-const WORDS = ["What's",
-    'up', 'mobile', 'devs?'
-];
+
 const StoryModal = ({
 
 
 }) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+
     //scroll ref
     const scrollRef = useRef(null);
 
@@ -54,14 +49,14 @@ const StoryModal = ({
                     horizontal
                     scrollEventThrottle={16}
                 >
-                    {WORDS.map((title, index) => {
+                    {storyData.map((data, index) => {
                         return (
                             <StoryContent
                                 key={index.toString()}
-                                title={title}
                                 scrollX={translateX}
-                                scrollRef={scrollRef }
+                                scrollRef={scrollRef}
                                 index={index}
+                                contentData={data}
                             />
                         );
                     })}

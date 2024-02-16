@@ -17,6 +17,7 @@ import { TextBold, TextRegular } from '../../general/text/text';
 
 
 type bannerProps = {
+  image?: any,
   title?: string,
   subtile?: string,
   time?: string,
@@ -26,6 +27,7 @@ type bannerProps = {
 }
 
 const ContentHeader = ({
+  image,
   title = 'Title',
   subtile = 'Hey You',
   subtitleIcon,
@@ -45,6 +47,7 @@ const ContentHeader = ({
   return (
     <View style={styles.container}>
       <StoryAvatar
+        image={image}
         size={50}
       />
       {/* -----center view ---- */}

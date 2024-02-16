@@ -7,10 +7,9 @@ import Animated, {
     runOnJS,
     cancelAnimation
 } from 'react-native-reanimated';
-import colors from '../../../theme/colors';
+import colors, { lightColors } from '../../../theme/colors';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
-import { useAppThemeColors }
-    from '../../../utils/functions/responsiveUtils';
+
 
 type progressBarProps = {
     animatedValue: SharedValue<number>
@@ -45,8 +44,6 @@ export const animateBar = (options: animateBarOptionType, callBack?: () => void)
 export default function ProgressBar({ animatedValue }: progressBarProps) {
 
 
-    const colors = useAppThemeColors();
-
     const animatedStyle = useAnimatedStyle(() => {
         return {
             width: `${animatedValue.value}%`,
@@ -56,7 +53,9 @@ export default function ProgressBar({ animatedValue }: progressBarProps) {
     return (
         <View style={[styles.container]}>
             <Animated.View
-                style={[styles.strip, animatedStyle, { backgroundColor: colors.secondary1 }]}
+                style={[styles.strip, animatedStyle,
+                    // { backgroundColor: colors.secondary1 }
+                ]}
             />
         </View>
     );
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     strip: {
         width: '30%',
         height: '100%',
-        backgroundColor: "white",
+        backgroundColor: lightColors.ternary1,
     },
     row: {
         flexDirection: 'row',

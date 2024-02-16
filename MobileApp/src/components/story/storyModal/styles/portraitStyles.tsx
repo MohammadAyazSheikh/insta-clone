@@ -32,8 +32,8 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             alignItems: 'center',
             backgroundColor: colors.primary1,
             paddingVertical: 5,
-            borderWidth: 1,
-            borderColor: 'red',
+            // borderWidth: 1,
+            // borderColor: 'red',
             transformOrigin: "center"
         },
         row: {
@@ -41,12 +41,14 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             justifyContent: 'center',
             alignItems: 'center',
             width: w(100),
+            paddingHorizontal: 10,
         },
         col: {
             width: '100%',
             justifyContent: 'center',
             alignItems: 'center'
         },
+        // content
         contentContainer: {
             flex: 1,
             width: '100%',
@@ -55,6 +57,34 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             flex: 1,
             width: '100%',
             resizeMode: 'contain',
+        },
+        btnStory: {
+            height: '100%',
+            width: '50%',
+            position: 'absolute',
+        },
+        btnStoryLeft: {
+            top: 0,
+            left: 0
+        },
+        btnStoryRight: {
+            top: 0,
+            right: 0,
+        
+        },
+        // footer
+        txtInput: {
+            flex: 1,
+            borderColor: colors.grey1,
+            borderWidth: 1,
+            borderRadius: 100,
+            paddingHorizontal: 10,
+            color: colors.secondary1
+        },
+        btnStyles: {
+            borderRadius: 1000,
+            padding: 2,
+            marginLeft: 10,
         },
     });
 }
