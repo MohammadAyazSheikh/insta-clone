@@ -16,11 +16,11 @@ type storyProps = {
     onPress?: () => void,
 }
 
-export default function StoryAvatar({ size, image }: storyProps) {
+export default function StoryAvatar({ size, image, onPress }: storyProps) {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
-   
+
 
     const rotation = useSharedValue(0);
 
@@ -67,7 +67,8 @@ export default function StoryAvatar({ size, image }: storyProps) {
             {/* image view and button */}
             <ButtonRipple style={styles.storyImageView}
                 onPress={() => {
-                    startRotation()
+                    startRotation();
+                    onPress && onPress()
                 }}
             >
                 {

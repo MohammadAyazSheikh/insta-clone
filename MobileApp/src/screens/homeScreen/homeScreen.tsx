@@ -28,9 +28,7 @@ export default function Home() {
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);
-    const [data, setData] = useState<loginProps>({});
-    const [err, setErr] = useState<loginPropsErr>({});
-    const [hidePass, setHidePass] = useState(true);
+    const [showStory, setShowStory] = useState(false);
     const dispatch = useAppDispatch();
 
 
@@ -39,8 +37,15 @@ export default function Home() {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 <HomeHeader />
-                <StoryAvatar />
-                <StoryModal/>
+                <StoryAvatar
+                    onPress={() => {
+                        setShowStory(true)
+                    }}
+                />
+                <StoryModal
+                    show={showStory}
+                    onClose={() => setShowStory(false)}
+                />
             </ScrollView>
         </View>
     );

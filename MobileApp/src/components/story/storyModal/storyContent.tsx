@@ -20,22 +20,26 @@ import IconFe from 'react-native-vector-icons/Feather';
 import { StoryMedia } from './storyMedia';
 import { storyDataType } from '../../../constants/data/storyData';
 
-const {  width } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 
 
 type storyContentProps = {
-    index: number;
+    scrollIndex: number;
     scrollX: SharedValue<number>;
     scrollRef: React.MutableRefObject<ScrollView>;
     contentData: storyDataType,
+    numberOfUsers: number,
+    onClose?: () => void,
 }
 
 const StoryContent = ({
-    index,
+    scrollIndex,
     scrollX,
     scrollRef,
     contentData,
+    numberOfUsers,
+    onClose,
 }: storyContentProps) => {
 
 
@@ -57,7 +61,16 @@ const StoryContent = ({
     const animValuesBar = contentData.content.map(item => useSharedValue(0));
     //animations hooks for bars
     const { playNext, playPrev, pauseStory, playStory, currentBarIndex } =
-        usePlayStory(index, scrollX, scrollRef, animValuesBar);
+        usePlayStory(
+            numberOfUsers,
+            scrollIndex,
+            scrollX,
+            scrollRef,
+            animValuesBar,
+            () => {
+                onClose && onClose()
+            }
+        );
 
 
 
@@ -65,9 +78,9 @@ const StoryContent = ({
 
     //input range for scroll animation
     const inputRange = [
-        (index - 1) * width,    //prev page
-        index * width,          //current page
-        (index + 1) * width     //next page
+        (scrollIndex - 1) * width,    //prev page
+        scrollIndex * width,          //current page
+        (scrollIndex + 1) * width     //next page
     ];
 
     // styles for story container when user scrolls
@@ -121,7 +134,7 @@ const StoryContent = ({
                 <RenderStoryBars animatedValuesBar={animValuesBar} />
                 {/* header */}
                 <ContentHeader
-                image={contentData.image}
+                    image={contentData.image}
                     title={contentData.userName}
                     time={contentData.timeStamp}
                     subtile=''

@@ -13,15 +13,17 @@ const { width } = Dimensions.get('window');
 
 
 export const usePlayStory = (
+    numberOfUsers: number,
     storyIndex: number,
     scrollX: SharedValue<number>,
     scrollRef: React.MutableRefObject<ScrollView>,
     animValuesBar: SharedValue<number>[],
+    onEnd: () => void,
 ) => {
 
     //since currentBarIndex ref can't update the UI and we want to switch next story of a user
     //so toggling rerender state in order to get new updated currentBarIndex value
-    //I know it is very bad approach but I could;nt found a better solution 
+    //I know it is very bad approach but I could'nt found a better solution 
     //so please don't yell at me 😬 
 
     const [_, setRerender] = useState(false);
@@ -33,6 +35,14 @@ export const usePlayStory = (
     //we  toggles this flag when story visible or shown when user scrolls
     const isPlaying = useRef(false);
 
+
+    //scrollTo specified  index
+    const scrollToUserStory = (index: number) => {
+        scrollRef?.current?.scrollTo({
+            y: 0,
+            x: (index) * width,
+        })
+    }
 
     //scrollTo  next
     const scrollToNextUserStory = () => {
@@ -59,6 +69,15 @@ export const usePlayStory = (
                 animatedValue: animValuesBar[i]
             },
             () => {
+              
+
+                //if last user's last story close modal
+                if (numberOfUsers - 1 == storyIndex &&
+                    currentBarIndex.current == animValuesBar.length - 1) {
+                    onEnd && onEnd();
+                    return;
+                }
+
                 //if paused true return and don't play next bar
                 if (paused.current) {
                     paused.current = false;
@@ -68,6 +87,8 @@ export const usePlayStory = (
                 if (currentBarIndex.current == animValuesBar.length - 1) {
                     scrollToNextUserStory();
                 }
+
+
                 //else play next story and inc index
                 if (currentBarIndex.current < animValuesBar.length - 1) {
                     playStory(currentBarIndex.current + 1);

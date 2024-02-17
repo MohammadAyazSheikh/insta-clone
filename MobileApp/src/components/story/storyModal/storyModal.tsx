@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import {
-    Modal,  View,
+    Modal, View,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
@@ -11,14 +11,19 @@ import Animated, {
 import { StoryContent } from './storyContent';
 import { storyData } from '../../../constants/data/storyData';
 
-
+type storyModalProps = {
+    show: boolean,
+    onClose?: () => void,
+    scrollToIndex?: number
+}
 
 const StoryModal = ({
+    show,
+    onClose,
+    scrollToIndex = 0,
+}: storyModalProps) => {
 
-
-}) => {
-
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, width } = useFunctionalOrientation(responsiveStyles);
 
     //scroll ref
     const scrollRef = useRef(null);
@@ -29,11 +34,22 @@ const StoryModal = ({
         translateX.value = event.contentOffset.x;
     });
 
+
+    //scrollTo specified  index
+    const scrollToUserStory = (index: number) => {
+        translateX.value = width * index;
+    }
+
+
     return (
         <Modal
             animationType="slide"
             transparent={true}
-            visible={true}
+            visible={show}
+            onRequestClose={onClose}
+            onShow={() => {
+                scrollToUserStory(scrollToIndex);
+            }}
         >
             <View
                 style={styles.backDrop}
@@ -55,8 +71,10 @@ const StoryModal = ({
                                 key={index.toString()}
                                 scrollX={translateX}
                                 scrollRef={scrollRef}
-                                index={index}
+                                scrollIndex={index}
                                 contentData={data}
+                                onClose={onClose}
+                                numberOfUsers={storyData.length}
                             />
                         );
                     })}
