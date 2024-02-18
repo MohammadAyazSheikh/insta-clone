@@ -1,8 +1,8 @@
 
-import React from 'react';
-import { View, Image, ViewStyle } from "react-native";
+import React, { useEffect, useRef } from 'react';
+import { View, Animated, Image, ViewStyle } from "react-native";
 import Svg, { G, Circle, } from "react-native-svg";
-import { getBackDash, getDash } from './utils';
+import { getBackDash, getPercentage } from './utils';
 import { Gradient, gradientColorProps } from './strokeGradient';
 import { lightColors } from '../../../theme/colors';
 
@@ -25,14 +25,15 @@ const colorFront = [
     }
 ]
 
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export type avatarProps = {
-    unViewedIndexes?: number[],
+type avatarProps = {
     strokeWidth?: number,
     spaceSize?: number,
     radius?: number,
     duration?: number,
     colorBackRing?: string,
+    delay?: number,
     numberOfArch?: number,
     opacityBackRing?: number,
     colorsFrontRing?: gradientColorProps[],
@@ -40,12 +41,13 @@ export type avatarProps = {
     image?: { uri: string } | any
 }
 
-export default function StoryAvatar({
-    unViewedIndexes = [0, 1, 2, 3, 4],
+export default function LoadingRing({
     numberOfArch = 5,
     spaceSize = 2,
     strokeWidth = 2,
     radius = 40,
+    duration = 2000,
+    delay = 0,
     opacityBackRing = 0.2,
     colorBackRing = 'tomato',
     colorsFrontRing = colorFront,
@@ -53,14 +55,56 @@ export default function StoryAvatar({
     image
 }: avatarProps) {
 
+    const circleRef = useRef<Circle>();
 
     const halfCircle = radius + strokeWidth;
     const circleCircumference = 2 * Math.PI * radius;
-
     const strokeDasharrayBack = getBackDash(circleCircumference, numberOfArch, spaceSize);
-    const strokeDasharrayFront = getDash(circleCircumference, numberOfArch, spaceSize, unViewedIndexes)
-    const strokeDashoffsetFront = unViewedIndexes.length < 1 ? circleCircumference : 0;
 
+
+
+    const from = getPercentage(circleCircumference, 2);
+    const to = getPercentage(circleCircumference, 7);
+    const animatedValue = useRef(new Animated.Value(from)).current;
+
+
+    const startAnimation = (duration: number) => {
+
+        return (
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(animatedValue, {
+                        toValue: to,
+                        duration: duration,
+                        useNativeDriver: true,
+                        delay
+                    }),
+                    Animated.timing(animatedValue, {
+                        toValue: from,
+                        duration: duration,
+                        useNativeDriver: true,
+                        delay
+                    }),
+                ]),
+            ).start()
+        )
+    }
+
+    useEffect(() => {
+        animatedValue.addListener((v) => {
+            if (circleRef?.current) {
+                circleRef.current.setNativeProps({
+                    strokeDasharray: `${v.value},${v.value * 2},${v.value}`,
+                })
+            }
+        })
+
+        startAnimation(duration);
+
+        return () => {
+            animatedValue.removeAllListeners();
+        }
+    }, [])
 
     const iconWidth = (halfCircle * 2) - strokeWidth * 3;
     const iconStyles: ViewStyle = {
@@ -99,7 +143,8 @@ export default function StoryAvatar({
                         strokeDasharray={strokeDasharrayBack}
                     />
                     {/* front ring */}
-                    <Circle
+                    <AnimatedCircle
+                        ref={circleRef}
                         cx='50%'
                         cy='50%'
                         stroke="url(#gradient)"
@@ -107,14 +152,13 @@ export default function StoryAvatar({
                         fill='transparent'
                         strokeWidth={strokeWidth}
                         strokeLinecap='round'
-                        strokeDasharray={strokeDasharrayFront}
-                        strokeDashoffset={strokeDashoffsetFront}
                     />
                     <Gradient
                         colors={colorsFrontRing}
                     />
                 </G>
             </Svg>
+
         </View >
     )
 }

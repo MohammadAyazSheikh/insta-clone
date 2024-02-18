@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -9,8 +9,10 @@ import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import Loader from '../../components/general/loader/loader';
 
 import HomeHeader from './header';
-import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
+
 import StoryModal from '../../components/story/storyModal/storyModal';
+import RenderAvatar from '../../components/story/storyAvatar/renderAvatar';
+import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
 
 type loginProps = {
     username?: string,
@@ -37,7 +39,19 @@ export default function Home() {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
                 <HomeHeader />
-                <StoryAvatar
+
+                <RenderAvatar
+                    onPress={() =>''}
+                    isLoading={false}
+                    colorBackRing={colors.grey1}
+                    opacityBackRing={1}
+                    numberOfArch={5}
+                    unViewedIndexes={[0, 1, 2]}
+                />
+
+
+
+                {/* <StoryAvatar
                     onPress={() => {
                         setShowStory(true)
                     }}
@@ -45,7 +59,7 @@ export default function Home() {
                 <StoryModal
                     show={showStory}
                     onClose={() => setShowStory(false)}
-                />
+                /> */}
             </ScrollView>
         </View>
     );

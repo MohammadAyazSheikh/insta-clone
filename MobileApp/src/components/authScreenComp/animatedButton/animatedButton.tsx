@@ -1,6 +1,6 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { View, Text, Animated, TextInput, StyleSheet, TouchableOpacity, } from "react-native";
+import { Animated ,TouchableOpacity, } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from '../startupModal/styles/styles';

@@ -10,7 +10,7 @@ import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import StoryAvatar from '../../story/storyAvatar/storyAvatar';
+import StoryAvatar from '../../story/storyAvatar/storyAvatarLoader';
 import { TextBold, TextRegular } from '../../general/text/text';
 
 
