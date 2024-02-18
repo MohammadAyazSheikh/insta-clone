@@ -41,12 +41,12 @@ export default function Home() {
                 <HomeHeader />
 
                 <RenderAvatar
-                    onPress={() =>''}
+                    onPress={() => ''}
                     isLoading={false}
                     colorBackRing={colors.grey1}
                     opacityBackRing={1}
-                    numberOfArch={5}
-                    unViewedIndexes={[0, 1, 2]}
+                    numberOfArch={4}
+                    showNumberOfArch={1}
                 />
 
 

@@ -27,13 +27,14 @@ const colorFront = [
 
 
 export type avatarProps = {
-    unViewedIndexes?: number[],
+
     strokeWidth?: number,
     spaceSize?: number,
     radius?: number,
     duration?: number,
     colorBackRing?: string,
     numberOfArch?: number,
+    showNumberOfArch?: number,
     opacityBackRing?: number,
     colorsFrontRing?: gradientColorProps[],
     icon?: React.ReactNode,
@@ -41,8 +42,9 @@ export type avatarProps = {
 }
 
 export default function StoryAvatar({
-    unViewedIndexes = [0, 1, 2, 3, 4],
+
     numberOfArch = 5,
+    showNumberOfArch = 3,
     spaceSize = 2,
     strokeWidth = 2,
     radius = 40,
@@ -58,8 +60,10 @@ export default function StoryAvatar({
     const circleCircumference = 2 * Math.PI * radius;
 
     const strokeDasharrayBack = getBackDash(circleCircumference, numberOfArch, spaceSize);
-    const strokeDasharrayFront = getDash(circleCircumference, numberOfArch, spaceSize, unViewedIndexes)
-    const strokeDashoffsetFront = unViewedIndexes.length < 1 ? circleCircumference : 0;
+    const strokeDasharrayFront = getDash(circleCircumference, numberOfArch, spaceSize, showNumberOfArch);
+    //if no we want to render zero arch (every story is viewed) 
+    //assign offset equal to circumference to hide front circle stroke
+    const strokeDashoffsetFront = showNumberOfArch == 0 ? circleCircumference : 0;
 
 
     const iconWidth = (halfCircle * 2) - strokeWidth * 3;
@@ -81,7 +85,7 @@ export default function StoryAvatar({
                         :
                         <Image
                             source={image || require('../../../../assets/images/placeholder.png')}
-                            style={{ width: '100%', height: '100%' ,borderRadius:100}}
+                            style={{ width: '100%', height: '100%', borderRadius: 100 }}
                         />}
             </View>
             {/* ----------------SVG--------------- */}
