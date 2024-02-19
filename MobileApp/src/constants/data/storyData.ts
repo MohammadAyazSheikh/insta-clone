@@ -5,6 +5,7 @@ export type storyDataType = {
     userId: string,
     userName: string,
     timeStamp: string,
+    totalUnseen:number
     content: { image: any }[]
 }
 export const storyData: storyDataType[] = [
@@ -13,6 +14,7 @@ export const storyData: storyDataType[] = [
         image: require('../../../assets/images/cities/karachi1.jpg'),
         userName: 'Karachi',
         timeStamp: '1h',
+        totalUnseen:5,
         content: [
             {
                 image: require('../../../assets/images/cities/karachi1.jpg')
@@ -36,6 +38,7 @@ export const storyData: storyDataType[] = [
         image: require('../../../assets/images/cities/lahore1.jpg'),
         userName: 'Lahore',
         timeStamp: '2h',
+        totalUnseen:5,
         content: [
             {
                 image: require('../../../assets/images/cities/lahore1.jpg')
@@ -59,6 +62,7 @@ export const storyData: storyDataType[] = [
         image: require('../../../assets/images/cities/islamabad1.jpg'),
         userName: 'Islamabad',
         timeStamp: '4h',
+        totalUnseen:7,
         content: [
             {
                 image: require('../../../assets/images/cities/islamabad1.jpg')
@@ -88,6 +92,7 @@ export const storyData: storyDataType[] = [
         image: require('../../../assets/images/cities/skardu1.jpg'),
         userName: 'Skardu',
         timeStamp: '9h',
+        totalUnseen:5,
         content: [
             {
                 image: require('../../../assets/images/cities/skardu1.jpg')

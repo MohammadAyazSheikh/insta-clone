@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
-    Modal, View,
+    Modal, View, ScrollView
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
@@ -14,7 +14,7 @@ import { storyData } from '../../../constants/data/storyData';
 type storyModalProps = {
     show: boolean,
     onClose?: () => void,
-    scrollToIndex?: number
+    scrollToIndex?: number,
 }
 
 const StoryModal = ({
@@ -24,6 +24,9 @@ const StoryModal = ({
 }: storyModalProps) => {
 
     const { styles, width } = useFunctionalOrientation(responsiveStyles);
+    //this ref is for making sure that story does'nt scrolls 
+    //to next user's story when modal is closed 
+    const isModalOpen = useRef(false);
 
     //scroll ref
     const scrollRef = useRef(null);
@@ -35,11 +38,22 @@ const StoryModal = ({
     });
 
 
+
     //scrollTo specified  index
     const scrollToUserStory = (index: number) => {
         translateX.value = width * index;
+        scrollRef?.current?.scrollTo({
+            y: 0,
+            x: (index) * width,
+            animated: false,
+        })
     }
 
+
+    //setting value when modal close or open
+    useEffect(() => {
+        isModalOpen.current = show;
+    }, [show]);
 
     return (
         <Modal
@@ -68,6 +82,7 @@ const StoryModal = ({
                     {storyData.map((data, index) => {
                         return (
                             <StoryContent
+                                isModalOpen={isModalOpen}
                                 key={index.toString()}
                                 scrollX={translateX}
                                 scrollRef={scrollRef}

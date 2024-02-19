@@ -48,8 +48,8 @@ export default function LoadingRing({
     radius = 40,
     duration = 2000,
     delay = 0,
-    opacityBackRing = 0.2,
-    colorBackRing = 'tomato',
+    opacityBackRing = 0.8,
+    colorBackRing = lightColors.grey1,
     colorsFrontRing = colorFront,
     icon,
     image
@@ -106,7 +106,7 @@ export default function LoadingRing({
         }
     }, [])
 
-    const iconWidth = (halfCircle * 2) - strokeWidth * 3;
+    const iconWidth = (halfCircle * 2) - strokeWidth * 8;
     const iconStyles: ViewStyle = {
         width: iconWidth,
         height: iconWidth,

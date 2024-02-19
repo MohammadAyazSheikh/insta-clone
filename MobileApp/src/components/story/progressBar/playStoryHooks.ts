@@ -13,10 +13,11 @@ const { width } = Dimensions.get('window');
 
 
 export const usePlayStory = (
+    isModalOpen: React.MutableRefObject<boolean>,
     numberOfUsers: number,
     storyIndex: number,
     scrollX: SharedValue<number>,
-    scrollRef: React.MutableRefObject<ScrollView>,
+    scrollRef: React.MutableRefObject<ScrollView | null>,
     animValuesBar: SharedValue<number>[],
     onEnd: () => void,
 ) => {
@@ -69,7 +70,10 @@ export const usePlayStory = (
                 animatedValue: animValuesBar[i]
             },
             () => {
-              
+                //if modal is not opened
+                if (!isModalOpen.current) {
+                    return;
+                }
 
                 //if last user's last story close modal
                 if (numberOfUsers - 1 == storyIndex &&

@@ -48,8 +48,8 @@ export default function StoryAvatar({
     spaceSize = 2,
     strokeWidth = 2,
     radius = 40,
-    opacityBackRing = 0.2,
-    colorBackRing = 'tomato',
+    opacityBackRing = 0.8,
+    colorBackRing = lightColors.grey1,
     colorsFrontRing = colorFront,
     icon,
     image
@@ -66,7 +66,7 @@ export default function StoryAvatar({
     const strokeDashoffsetFront = showNumberOfArch == 0 ? circleCircumference : 0;
 
 
-    const iconWidth = (halfCircle * 2) - strokeWidth * 3;
+    const iconWidth = (halfCircle * 2) - strokeWidth * 8;
     const iconStyles: ViewStyle = {
         width: iconWidth,
         height: iconWidth,

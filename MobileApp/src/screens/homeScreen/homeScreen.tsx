@@ -13,6 +13,7 @@ import HomeHeader from './header';
 import StoryModal from '../../components/story/storyModal/storyModal';
 import RenderAvatar from '../../components/story/storyAvatar/renderAvatar';
 import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
+import RenderStory from '../../components/story/renderStory';
 
 type loginProps = {
     username?: string,
@@ -30,7 +31,6 @@ export default function Home() {
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);
-    const [showStory, setShowStory] = useState(false);
     const dispatch = useAppDispatch();
 
 
@@ -38,28 +38,12 @@ export default function Home() {
     return (
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.scroll}>
+                {/* Header */}
                 <HomeHeader />
+                {/* stories */}
+                <RenderStory
 
-                <RenderAvatar
-                    onPress={() => ''}
-                    isLoading={false}
-                    colorBackRing={colors.grey1}
-                    opacityBackRing={1}
-                    numberOfArch={4}
-                    showNumberOfArch={1}
                 />
-
-
-
-                {/* <StoryAvatar
-                    onPress={() => {
-                        setShowStory(true)
-                    }}
-                />
-                <StoryModal
-                    show={showStory}
-                    onClose={() => setShowStory(false)}
-                /> */}
             </ScrollView>
         </View>
     );

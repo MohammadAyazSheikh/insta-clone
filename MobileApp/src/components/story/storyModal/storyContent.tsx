@@ -27,10 +27,12 @@ const { width } = Dimensions.get('window');
 type storyContentProps = {
     scrollIndex: number;
     scrollX: SharedValue<number>;
-    scrollRef: React.MutableRefObject<ScrollView>;
-    contentData: storyDataType,
-    numberOfUsers: number,
-    onClose?: () => void,
+    scrollRef: React.MutableRefObject<ScrollView | null>;
+    isModalOpen: React.MutableRefObject<boolean>;
+    contentData: storyDataType;
+    numberOfUsers: number;
+    onClose?: () => void;
+
 }
 
 const StoryContent = ({
@@ -39,6 +41,7 @@ const StoryContent = ({
     scrollRef,
     contentData,
     numberOfUsers,
+    isModalOpen,
     onClose,
 }: storyContentProps) => {
 
@@ -62,6 +65,7 @@ const StoryContent = ({
     //animations hooks for bars
     const { playNext, playPrev, pauseStory, playStory, currentBarIndex } =
         usePlayStory(
+            isModalOpen,
             numberOfUsers,
             scrollIndex,
             scrollX,
