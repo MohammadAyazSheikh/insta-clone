@@ -20,6 +20,7 @@ export const usePlayStory = (
     scrollRef: React.MutableRefObject<ScrollView | null>,
     animValuesBar: SharedValue<number>[],
     onEnd: () => void,
+    onNextStory: (barIndex: number, storyIndex: number) => void,
 ) => {
 
     //since currentBarIndex ref can't update the UI and we want to switch next story of a user
@@ -64,6 +65,7 @@ export const usePlayStory = (
 
     const playStory = (index?: number) => {
         const i = index || currentBarIndex.current;
+        onNextStory(i, storyIndex)
         animateBar(
             {
                 toValue: 100,

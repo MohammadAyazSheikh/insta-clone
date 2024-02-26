@@ -32,7 +32,7 @@ type storyContentProps = {
     contentData: storyDataType;
     numberOfUsers: number;
     onClose?: () => void;
-
+    onNextStory: (barIndex: number, storyIndex: number) => void,
 }
 
 const StoryContent = ({
@@ -43,6 +43,7 @@ const StoryContent = ({
     numberOfUsers,
     isModalOpen,
     onClose,
+    onNextStory
 }: storyContentProps) => {
 
 
@@ -73,7 +74,8 @@ const StoryContent = ({
             animValuesBar,
             () => {
                 onClose && onClose()
-            }
+            },
+            onNextStory,
         );
 
 

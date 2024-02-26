@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-    Modal, View, ScrollView
+    Modal, View
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
@@ -9,7 +9,7 @@ import Animated, {
     useSharedValue,
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
-import { storyData } from '../../../constants/data/storyData';
+import { storyData, storyDataType } from '../../../constants/data/storyData';
 
 type storyModalProps = {
     show: boolean,
@@ -24,6 +24,9 @@ const StoryModal = ({
 }: storyModalProps) => {
 
     const { styles, width } = useFunctionalOrientation(responsiveStyles);
+
+    const [data, setData] = useState<storyDataType[]>(storyData);
+
     //this ref is for making sure that story does'nt scrolls 
     //to next user's story when modal is closed 
     const isModalOpen = useRef(false);
@@ -79,7 +82,7 @@ const StoryModal = ({
                     horizontal
                     scrollEventThrottle={16}
                 >
-                    {storyData.map((data, index) => {
+                    {data.map((item, index) => {
                         return (
                             <StoryContent
                                 isModalOpen={isModalOpen}
@@ -87,9 +90,18 @@ const StoryModal = ({
                                 scrollX={translateX}
                                 scrollRef={scrollRef}
                                 scrollIndex={index}
-                                contentData={data}
-                                onClose={onClose}
+                                contentData={item}
                                 numberOfUsers={storyData.length}
+                                onClose={onClose}
+                                onNextStory={(barIndex, userStoryIdex) => {
+                                    const userStroy = data[userStoryIdex];
+                                    if (userStroy.totalUnseen >= 1) {
+                                        userStroy.totalUnseen -= 1;
+                                        const updatedData = [...data];
+                                        updatedData[userStoryIdex] = userStroy;
+                                        setData(updatedData);
+                                    }
+                                }}
                             />
                         );
                     })}
