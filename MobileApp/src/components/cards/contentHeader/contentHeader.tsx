@@ -10,8 +10,8 @@ import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import StoryAvatar from '../../story/storyAvatar/storyAvatarLoader';
 import { TextBold, TextRegular } from '../../general/text/text';
+import UserAvatar from '../../general/avatar/avatar';
 
 
 
@@ -46,9 +46,10 @@ const ContentHeader = ({
   />
   return (
     <View style={styles.container}>
-      <StoryAvatar
+      <UserAvatar
         image={image}
         size={50}
+        name={title}
       />
       {/* -----center view ---- */}
       <View style={styles.centerView}>

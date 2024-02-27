@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, FlatList } from 'react-native';
 import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -14,6 +14,9 @@ import StoryModal from '../../components/story/storyModal/storyModal';
 import RenderAvatar from '../../components/story/storyAvatar/renderAvatar';
 import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
 import RenderStory from '../../components/story/renderStory';
+import UserAvatar from '../../components/general/avatar/avatar';
+import ContentCard from '../../components/cards/contentCard/contentCard';
+import { homeData } from '../../constants/data/homeData';
 
 type loginProps = {
     username?: string,
@@ -37,14 +40,26 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scroll}>
-                {/* Header */}
-                <HomeHeader />
-                {/* stories */}
-                <RenderStory
 
-                />
-            </ScrollView>
+            {/* posts */}
+            <FlatList
+                contentContainerStyle={styles.scroll}
+                data={homeData}
+                keyExtractor={(item) => item.userId}
+                renderItem={({ index, item }) => (
+                    <ContentCard
+                        data={item}
+                    />
+                )}
+                ListHeaderComponent={() => (<>
+                    {/* Header */}
+                    <HomeHeader />
+                    {/* stories */}
+                    <RenderStory
+
+                    />
+                </>)}
+            />
         </View>
     );
 }

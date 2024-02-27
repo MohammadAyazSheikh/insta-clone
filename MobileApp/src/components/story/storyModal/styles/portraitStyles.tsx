@@ -1,7 +1,7 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
-import { fontFamily } from '../../../../theme/fonts';
+
 
 
 type p = (number: number) => number;
