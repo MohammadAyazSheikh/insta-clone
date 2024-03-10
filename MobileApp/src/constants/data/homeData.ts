@@ -5,8 +5,8 @@ export type homeDataType = {
     userId: string,
     userName: string,
     timeStamp: string,
-    totalUnseen:number,
-    content: { id: string, uri: any, type: "uri" | 'video' }[]
+    totalUnseen: number,
+    content: { id: string, uri: any, type: "image" | 'video' }[]
 }
 export const homeData: homeDataType[] = [
     {
@@ -18,27 +18,27 @@ export const homeData: homeDataType[] = [
         content: [
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/karachi1.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
-                uri: require('../../../assets/images/cities/karachi2.jpg')
+                type: 'video',
+                uri: require('../../../assets/videos/bunny.mp4')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/karachi3.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/karachi4.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/karachi5.jpg')
             },
         ]
@@ -52,27 +52,27 @@ export const homeData: homeDataType[] = [
         content: [
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/lahore1.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/lahore2.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/lahore3.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/lahore4.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/lahore5.jpg')
             },
         ]
@@ -86,37 +86,42 @@ export const homeData: homeDataType[] = [
         content: [
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad1.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad2.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad3.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'video',
+                uri: require('../../../assets/videos/bunny.mp4')
+            },
+            {
+                id: uuid.v4().toString(),
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad4.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad5.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad6.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/islamabad7.jpg')
             },
         ]
@@ -130,27 +135,27 @@ export const homeData: homeDataType[] = [
         content: [
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/skardu1.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/skardu2.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/skardu3.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/skardu4.jpg')
             },
             {
                 id: uuid.v4().toString(),
-                type: 'uri',
+                type: 'image',
                 uri: require('../../../assets/images/cities/skardu5.jpg')
             },
         ]

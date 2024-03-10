@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Image,
+  ViewStyle,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -12,7 +13,7 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextBold, TextRegular } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
-
+import LinearGradient from 'react-native-linear-gradient';
 
 
 
@@ -22,6 +23,7 @@ type bannerProps = {
   subtile?: string,
   time?: string,
   subtitleIcon?: React.ReactNode,
+  containerStyles?: ViewStyle
   onMenuPress?: () => void,
   onTitlePress?: () => void,
 }
@@ -32,6 +34,7 @@ const ContentHeader = ({
   subtile = 'Hey You',
   subtitleIcon,
   time = '12h',
+  containerStyles,
   onMenuPress = () => '',
   onTitlePress = () => '',
 }: bannerProps) => {
@@ -45,7 +48,16 @@ const ContentHeader = ({
     size={14}
   />
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyles]}>
+      {/* gradient for back faded view*/}
+      {/* <LinearGradient
+        colors={[
+          "rgba(0,0,0,0.8)",
+          "rgba(0,0,0,0.5)",
+          "rgba(0,0,0,0.0)",
+        ]}
+        style={[styles.gradientView]}
+      /> */}
       <UserAvatar
         image={image}
         size={50}
@@ -93,6 +105,7 @@ const ContentHeader = ({
           size={14}
         />
       </ButtonRipple>
+
     </View>
   );
 };

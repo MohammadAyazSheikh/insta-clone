@@ -5,6 +5,7 @@ import { useAppThemeColors } from "../../utils/functions/responsiveUtils";
 import { TouchableRipple } from "react-native-paper";
 import { showDismissAlert } from "../../components/general/alerts/dismissAlert";
 import ButtonRipple from "../../components/general/customButton/buttonRipple";
+import { showConfirmAlert } from "../../components/general/alerts/confirmAlert";
 
 export const AddContentButton = () => {
     const colors = useAppThemeColors();
@@ -12,10 +13,10 @@ export const AddContentButton = () => {
         <ButtonRipple
             onPress={() => {
                 showDismissAlert({
-                    title: 'Feature is on hold!',
-                    description:''
+                    title: 'Inprogress!',
+                    description:'We are working on it\nIt will be develop soon'
                 })
-            }}
+            }} 
             style={{
                 flex: 1,
                 justifyContent: 'center',

@@ -8,21 +8,17 @@ type p = (number: number) => number;
 const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
 
     return StyleSheet.create({
-        container: {
-            width: "100%",
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingVertical: 5,
-        },
-        row: {
-            flex: 1,
+        menuContainer: {
             flexDirection: 'row',
-            justifyContent: 'flex-start',
+            width: '100%',
             alignItems: 'center',
-            alignSelf: 'flex-start'
+            justifyContent: 'flex-start',
+            paddingHorizontal:10,
+            paddingVertical:15,
         },
-        btnStyle: {
-            marginHorizontal: 5
+        txtMenu:{
+            fontSize:16,
+            color:colors.secondary1,
         }
     });
 }

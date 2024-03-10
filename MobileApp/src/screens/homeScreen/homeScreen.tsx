@@ -1,46 +1,32 @@
-import React, { useState } from 'react';
-import { View, ScrollView, Text, FlatList } from 'react-native';
+import React, { useRef } from 'react';
 import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useNavigation } from '@react-navigation/core'
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import Loader from '../../components/general/loader/loader';
-
+import { useAppDispatch } from '../../redux/hooks';
+import { FlatList } from 'react-native-gesture-handler';
 import HomeHeader from './header';
-
-import StoryModal from '../../components/story/storyModal/storyModal';
-import RenderAvatar from '../../components/story/storyAvatar/renderAvatar';
-import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
 import RenderStory from '../../components/story/renderStory';
-import UserAvatar from '../../components/general/avatar/avatar';
 import ContentCard from '../../components/cards/contentCard/contentCard';
 import { homeData } from '../../constants/data/homeData';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
+import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
+import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 
-type loginProps = {
-    username?: string,
-    password?: string,
-}
 
-type loginPropsErr = {
-    username?: string,
-    password?: string,
-}
 
 export default function Home() {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
+    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    // const colors = useAppThemeColors();
+    // const { theme } = useAppSelector(state => state.theme);
     const dispatch = useAppDispatch();
 
-
+    const refOption = useRef<BottomSheet>(null);
+    const refComment = useRef<BottomSheet>(null);
 
     return (
-        <View style={styles.container}>
-
+        <GestureHandlerRootView style={styles.container}>
             {/* posts */}
             <FlatList
                 contentContainerStyle={styles.scroll}
@@ -49,18 +35,44 @@ export default function Home() {
                 renderItem={({ index, item }) => (
                     <ContentCard
                         data={item}
+                        onMenu={() => {
+                            refOption.current?.collapse()
+                        }}
+                        onComment={() => {
+                            refComment.current?.expand();
+                        }}
                     />
                 )}
                 ListHeaderComponent={() => (<>
                     {/* Header */}
                     <HomeHeader />
                     {/* stories */}
-                    <RenderStory
-
-                    />
+                    <RenderStory />
                 </>)}
             />
-        </View>
+            {/*--- menu sheet ----*/}
+            <MenuSheet
+                ref={refOption}
+                snapPoints={['35%','35%','40%']}
+                onFollow={() => {
+                    refOption.current?.close();
+                }}
+                onReport={() => {
+                    refOption.current?.close();
+                }}
+                onHide={() => {
+                    refOption.current?.close();
+                }}
+                onStar={() => {
+                    refOption.current?.close();
+                }}
+            />
+            {/*--- menu sheet ----*/}
+            <CommentSheet
+                ref={refComment}
+                snapPoints={["100%"]}
+            />
+        </GestureHandlerRootView>
     );
 }
 

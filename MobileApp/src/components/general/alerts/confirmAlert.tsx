@@ -55,7 +55,6 @@ const ConfirmModal = React.forwardRef(({
     })
 
     return (
-
         <Modal
             visible={visible}
             animationType="fade"
@@ -71,27 +70,38 @@ const ConfirmModal = React.forwardRef(({
                 <Animated.View
                     entering={ZoomIn}
                     style={[styles.alertView, {
-                        height: 225,
                         backgroundColor:
                             isDark ? colors.primary4 : "#FFF"
                     }]}>
-                    <View style={[styles.alertTextView, { height: '60%' }]}>
-                        <TextBold style={[
-                            styles.txtAlertTitle,
-                            { color: colors.secondary1 }
-                        ]}
-                            numberOfLines={1}
-                        >
-                            {props.title}
-                        </TextBold>
-                        <TextRegular style={[
-                            styles.txtAlertSubTitle,
-                            { color: colors.grey1 }
-                        ]}
-                            numberOfLines={3}
-                        >
-                            {props.description}
-                        </TextRegular>
+                    <View style={[styles.alertTextView]}>
+                        {
+                            // ----title----
+                            props.title ?
+                                <TextBold style={[
+                                    styles.txtAlertTitle,
+                                    { color: colors.secondary1 }
+                                ]}
+                                    numberOfLines={1}
+                                >
+                                    {props.title}
+                                </TextBold>
+                                :
+                                null
+                        }
+                        {
+                            props.description ?
+                                // ---- description ----
+                                <TextRegular style={[
+                                    styles.txtAlertSubTitle,
+                                    { color: colors.grey1 }
+                                ]}
+                                    numberOfLines={3}
+                                >
+                                    {props.description}
+                                </TextRegular>
+                                :
+                                null
+                        }
                     </View>
                     {/* dismiss button */}
                     <TouchableRipple
@@ -106,7 +116,7 @@ const ConfirmModal = React.forwardRef(({
                             props?.onConfirm && props?.onConfirm();
                             setVisible(false);
                         }}
-                        style={[styles.alertBtn, { borderTopColor: colors.primary3, height: '20%' }]}>
+                        style={[styles.alertBtn, { borderTopColor: colors.primary3 }]}>
                         <TextBold style={[{ color: colors.ternary1, fontSize: 16 }]}>
                             {props?.confirmText}
                         </TextBold>
@@ -124,7 +134,7 @@ const ConfirmModal = React.forwardRef(({
                             props?.onDismiss && props?.onDismiss();
                             setVisible(false);
                         }}
-                        style={[styles.alertBtn, { borderTopColor: colors.primary3, height: '20%' }]}>
+                        style={[styles.alertBtn, { borderTopColor: colors.primary3 }]}>
                         <TextRegular style={[{ color: colors.grey1, fontSize: 16 }]}>
                             {props?.dismissText}
                         </TextRegular>
@@ -132,7 +142,6 @@ const ConfirmModal = React.forwardRef(({
                 </Animated.View>
             </View>
         </Modal >
-
     );
 });
 

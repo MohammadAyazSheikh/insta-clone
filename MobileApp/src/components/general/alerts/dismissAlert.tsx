@@ -74,22 +74,34 @@ const ConfirmModal = React.forwardRef(({
                             isDark ? colors.primary4 : "#FFF"
                     }]}>
                     <View style={styles.alertTextView}>
-                        <TextBold style={[
-                            styles.txtAlertTitle,
-                            { color: colors.secondary1 }
-                        ]}
-                            numberOfLines={1}
-                        >
-                            {props.title}
-                        </TextBold>
-                        <TextRegular style={[
-                            styles.txtAlertSubTitle,
-                            { color: colors.grey1 }
-                        ]}
-                            numberOfLines={3}
-                        >
-                            {props.description}
-                        </TextRegular>
+                        {
+                            // ----title----
+                            props.title ?
+                                <TextBold style={[
+                                    styles.txtAlertTitle,
+                                    { color: colors.secondary1 }
+                                ]}
+                                    numberOfLines={1}
+                                >
+                                    {props.title}
+                                </TextBold>
+                                :
+                                null
+                        }
+                        {
+                            props.description ?
+                                // ---- description ----
+                                <TextRegular style={[
+                                    styles.txtAlertSubTitle,
+                                    { color: colors.grey1 }
+                                ]}
+                                    numberOfLines={3}
+                                >
+                                    {props.description}
+                                </TextRegular>
+                                :
+                                null
+                        }
                     </View>
                     {/* dismiss button */}
                     <TouchableRipple

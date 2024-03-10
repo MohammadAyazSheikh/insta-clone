@@ -33,6 +33,19 @@ export const TextBold = ({
     </Text>
 );
 
+export const TextSemiBold = ({
+    children,
+    ...rest
+}: textProps) => (
+    <Text
+        allowFontScaling={fontConfig.allowScaling}
+        {...rest}
+        style={[style.semiBold, style.common, rest.style,]}
+    >
+        {children || ''}
+    </Text>
+);
+
 export const TextItalic = ({
     children,
     ...rest
@@ -66,6 +79,9 @@ const style = StyleSheet.create({
     },
     bold: {
         fontFamily: fontFamily.bold,
+    },
+    semiBold: {
+        fontFamily: fontFamily.semiBold,
     },
     boldItalic: {
         fontFamily: fontFamily.boldItalic,

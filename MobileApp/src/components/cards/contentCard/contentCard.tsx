@@ -1,48 +1,45 @@
 import React from 'react';
 import {
-    Image,
-    TouchableOpacity,
     View,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconEnt from 'react-native-vector-icons/Entypo';
-import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import { TextBold, TextRegular } from '../../general/text/text';
-import UserAvatar from '../../general/avatar/avatar';
 import ContentHeader from '../contentHeader/contentHeader';
-import { Slider } from '../../general/imageSlider/imageSlider';
-import { storyData } from '../../../constants/data/storyData';
 import { homeDataType } from '../../../constants/data/homeData';
+import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
 
 
 
 type contentCardProps = {
     data: homeDataType,
     subtitleIcon?: React.ReactNode,
-    onMenuPress?: () => void,
-    onTitlePress?: () => void,
+    onMenu?: () => void,
+    onTitle?: () => void,
+    onComment?: () => void,
+    onLike?: () => void,
+    onShare?: () => void,
+    onSave?: () => void,
 }
 
 const ContentCard = ({
     data,
     subtitleIcon,
-    onMenuPress = () => '',
-    onTitlePress = () => '',
+    onMenu = () => '',
+    onTitle = () => '',
+    onComment = () => '',
+    onLike = () => '',
+    onShare = () => '',
+    onSave = () => '',
 }: contentCardProps) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
 
-    const icon = <IconMtc
-        name={"movie-play"}
-        color={colors.secondary1}
-        size={14}
-    />
+
     return (
         <View style={styles.container}>
             {/* header */}
@@ -50,15 +47,15 @@ const ContentCard = ({
                 time={data?.timeStamp}
                 title={data.userName}
                 // subtile={data.}
-                onMenuPress={onMenuPress}
-                onTitlePress={onTitlePress}
+                onMenuPress={onMenu}
+                onTitlePress={onTitle}
                 subtitleIcon={subtitleIcon}
                 image={data.uri}
                 subtile=''
             />
             {/* ---- body---- */}
-            <Slider
-                imageList={data.content}
+            <MediaSlider
+                mediaList={data.content}
                 indicatorSize={5}
                 indicatorSpacing={3}
                 indicatorColor={colors.ternary1}
@@ -69,7 +66,7 @@ const ContentCard = ({
 
                         {/* like */}
                         <ButtonRipple
-                            onPress={() => ''}
+                            onPress={onLike}
                             style={styles.btnStyle}
                         >
                             <IconIo
@@ -80,7 +77,7 @@ const ContentCard = ({
                         </ButtonRipple>
                         {/* comment */}
                         <ButtonRipple
-                            onPress={() => ''}
+                            onPress={onComment}
                             style={styles.btnStyle}
                         >
                             <IconIo
@@ -91,7 +88,7 @@ const ContentCard = ({
                         </ButtonRipple>
                         {/* share */}
                         <ButtonRipple
-                            onPress={() => ''}
+                            onPress={onShare}
                             style={styles.btnStyle}
                         >
                             <IconIo
@@ -106,7 +103,7 @@ const ContentCard = ({
                     <View style={[styles.row,
                     { justifyContent: 'flex-end' }]}>
                         <ButtonRipple
-                            onPress={() => ''}
+                            onPress={onSave}
                             style={styles.btnStyle}
                         >
                             <IconIo

@@ -14,6 +14,13 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
             alignItems: 'center',
             paddingHorizontal: 10,
             paddingVertical: 5,
+            // position: 'absolute',
+            // top: 0,
+            // left: 0
+        },
+        gradientView: {
+            ...StyleSheet.absoluteFillObject,
+            opacity: 1
         },
         centerView: {
             flex: 1,

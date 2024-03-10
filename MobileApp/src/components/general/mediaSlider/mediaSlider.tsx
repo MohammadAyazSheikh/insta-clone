@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Animated,
   View,
@@ -7,23 +7,21 @@ import {
   ViewStyle,
   ImageStyle,
 } from 'react-native';
-
 import { SliderIndicator } from './sliderIndicator';
-import uuid from 'react-native-uuid';
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import { Image as ImageType } from 'react-native-image-crop-picker';
 import ZoomAbleView from '../../animatedComponent/zoomableView';
+import VideoPlayerContent from '../video/videoPlayerContent';
 
 export type imageListType =
-  { id: string, uri: any | { uri: string }, type: "uri" | 'video' }
+  { id: string, uri: any | { uri: string }, type: "image" | 'video' }
 
-type sliderType = {
+type mediaType = {
   autoSlide?: boolean;
-  imageList: imageListType[];
+  mediaList: imageListType[];
   indicatorType?: 'image' | 'dot';
   containerStyle?: ViewStyle;
-  imageContainerStyle?: ViewStyle;
+  mediaContainer?: ViewStyle;
   imageStyle?: ImageStyle;
   //indicatorPops
   indicatorRowContainerStyle?: ViewStyle;
@@ -37,12 +35,13 @@ type sliderType = {
   indicatorRightIcon?: React.ComponentType;
 };
 
-export const Slider = ({
+const remoteVideo = { uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }
+export const MediaSlider = ({
   autoSlide = false,
-  imageList = [],
+  mediaList = [],
   indicatorType = 'dot',
   containerStyle,
-  imageContainerStyle,
+  mediaContainer,
   imageStyle,
   scrollIndex = 0,
   //indicator props
@@ -54,13 +53,16 @@ export const Slider = ({
   indicatorRowContainerStyle,
   indicatorLeftIcon: IndLeftIcon,
   indicatorRightIcon: IndRightIcon,
-}: sliderType) => {
+}: mediaType) => {
 
 
   const { styles, widthToDp: w, heightToDp: h } = useFunctionalOrientation(responsiveStyles);
 
   const scrollX = useRef(new Animated.Value(1)).current;
   const scrollRef = useRef<ScrollView>(null);
+
+  //hold value if visible in screen or not
+  const [isOnScreen, setIsOnScreen] = useState(false);
 
   useEffect(() => {
     //if user pass scroll index
@@ -76,7 +78,7 @@ export const Slider = ({
       return setInterval(() => {
         scrollRef?.current?.scrollTo({ x: w(100) * index, y: 0, animated: true });
         index++;
-        if (index == imageList.length) {
+        if (index == mediaList.length) {
           index = 0;
         }
       }, 1500);
@@ -89,7 +91,7 @@ export const Slider = ({
 
   return (
     <View style={[styles.sliderContainer, containerStyle]}>
-      {/* ----- images ------ */}
+      {/* ----- media list ------ */}
       <Animated.ScrollView
         horizontal
         pagingEnabled
@@ -100,20 +102,30 @@ export const Slider = ({
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: true },
         )}>
-        {imageList.map((item, index) => (
+        {mediaList.map((item, index) => (
           <ZoomAbleView
-            containerStyle={{ ...styles.sliderImageView, ...imageContainerStyle }}
-            key={item.id}>
-            <Image
-              source={item.uri}
-              style={[styles.sliderImage, imageStyle]}
-            
-            />
+            containerStyle={{ ...styles.mediaView, ...mediaContainer }}
+            key={item.id}
+          >
+            {
+              item.type == "video" ?
+                <VideoPlayerContent
+                  source={item.uri}
+                  style={[styles.videoStyle]}
+                  resizeMode='contain'
+                />
+                :
+                <Image
+                  source={item.uri}
+                  style={[styles.sliderImage, imageStyle]}
+
+                />
+            }
           </ZoomAbleView>
         ))}
       </Animated.ScrollView>
       {/*  -------- indicator ------*/}
-      {imageList.length > 1 ? (
+      {mediaList.length > 1 ? (
         <View style={[styles.row, indicatorRowContainerStyle]}>
           {
             // left icon
@@ -126,8 +138,8 @@ export const Slider = ({
               size={indicatorSize}
               spacing={indicatorSpacing}
               containerWidth={indicatorContainerWidth}
-              length={imageList.length}
-              imageList={indicatorType == 'image' ? imageList : []}
+              length={mediaList.length}
+              imageList={indicatorType == 'image' ? mediaList : []}
               scrollX={scrollX}
               scrollRef={scrollRef}
             />
