@@ -5,6 +5,7 @@ import Svg, { G, Circle, } from "react-native-svg";
 import { getBackDash, getDash } from './utils';
 import { Gradient, gradientColorProps } from './strokeGradient';
 import { lightColors } from '../../../theme/colors';
+import UserAvatar from '../../general/avatar/avatar';
 
 const colorFront = [
     {
@@ -42,7 +43,6 @@ export type avatarProps = {
 }
 
 export default function StoryAvatar({
-
     numberOfArch = 5,
     showNumberOfArch = 3,
     spaceSize = 2,
@@ -73,7 +73,8 @@ export default function StoryAvatar({
         borderRadius: 100,
         position: 'absolute',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding:0
     };
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center', width: halfCircle * 2, height: halfCircle * 2 }}>
@@ -83,10 +84,11 @@ export default function StoryAvatar({
                     icon ?
                         icon
                         :
-                        <Image
-                            source={image || require('../../../../assets/images/placeholder.png')}
-                            style={{ width: '100%', height: '100%', borderRadius: 100 }}
-                        />}
+                        <UserAvatar
+                            avatarContainerStyle={iconStyles}
+                            image={image || require('../../../../assets/images/placeholder.png')}
+                        />
+                }
             </View>
             {/* ----------------SVG--------------- */}
             <Svg width={radius * 2} height={radius * 2} viewBox={`0 0 ${halfCircle * 2}  ${halfCircle * 2} `}>

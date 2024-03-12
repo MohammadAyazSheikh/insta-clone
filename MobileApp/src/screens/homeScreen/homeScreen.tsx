@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { useAppDispatch } from '../../redux/hooks';
 import { FlatList } from 'react-native-gesture-handler';
@@ -11,6 +11,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
+import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 
 
 
@@ -24,6 +25,7 @@ export default function Home() {
 
     const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
+    const refShare = useRef<BottomSheet>(null);
 
     return (
         <GestureHandlerRootView style={styles.container}>
@@ -41,6 +43,9 @@ export default function Home() {
                         onComment={() => {
                             refComment.current?.expand();
                         }}
+                        onShare={() => {
+                            refShare?.current?.collapse();
+                        }}
                     />
                 )}
                 ListHeaderComponent={() => (<>
@@ -53,7 +58,7 @@ export default function Home() {
             {/*--- menu sheet ----*/}
             <MenuSheet
                 ref={refOption}
-                snapPoints={['35%','35%','40%']}
+                snapPoints={['35%', '35%', '40%']}
                 onFollow={() => {
                     refOption.current?.close();
                 }}
@@ -71,6 +76,11 @@ export default function Home() {
             <CommentSheet
                 ref={refComment}
                 snapPoints={["100%"]}
+            />
+            {/*--- menu sheet ----*/}
+            <ShareSheet
+                ref={refShare}
+                snapPoints={["60%", "100%"]}
             />
         </GestureHandlerRootView>
     );

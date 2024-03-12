@@ -33,11 +33,25 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         // ---------Footer-------
         footerView: {
+            justifyContent:'center',
+            alignItems: 'center',
+            width: "100%",
+            paddingVertical: 5, 
+        },
+        replyRow:{
             flexDirection: 'row',
+            justifyContent:'space-between',
             alignItems: 'center',
             width: "100%",
             paddingHorizontal: 10,
-            paddingVertical: 5,
+            paddingVertical:10,
+            backgroundColor:colors?.primary4
+        },
+        inputRow:{
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: "100%",
+            paddingHorizontal: 10, 
         },
         txtInput: {
             flex: 1,
