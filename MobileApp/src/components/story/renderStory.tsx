@@ -23,9 +23,9 @@ export default function RenderStory() {
                 data={storyData}
                 keyExtractor={(item => item.userId)}
                 // your story
-                ListHeaderComponent={() => (
-                    <RenderYourStory />
-                )}
+                // ListHeaderComponent={() => (
+                //     <RenderYourStory />
+                // )}
                 //other user's stories
                 renderItem={({ item, index }) => (
                     <RenderAvatar

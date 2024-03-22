@@ -9,7 +9,7 @@ import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } fr
 import LinearGradient from 'react-native-linear-gradient';
 import ButtonRipple from '../customButton/buttonRipple';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-
+import { colorsList } from '../../../theme/colors';
 type avatarProps = {
     name?: string
     image?: { uri: string } | any,
@@ -28,7 +28,7 @@ type avatarProps = {
     onPress?: () => void,
 };
 
-const colorsList = ['#C861FA', '#FE2E74', '#F96633', '#7f66ff', '#EDC113', '#009DE0'];
+
 export default function UserAvatar({
     image,
     name = 'User',

@@ -3,6 +3,7 @@ import { View,Text } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackProps } from './rootNavigation';
 import RootTab from '../rootTab/rootTab';
+import Conversation from '../../screens/conversationScreen/conversationScreen';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -23,9 +24,16 @@ const Screen = () =>
 export const protectedRoutes = () => {
     return (
         <>
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="RootTab"
                 component={RootTab}
+                options={{
+                    headerShown: false,
+                }}
+            /> */}
+            <Stack.Screen
+                name="Conversation"
+                component={Conversation}
                 options={{
                     headerShown: false,
                 }}

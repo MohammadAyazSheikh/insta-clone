@@ -45,5 +45,7 @@ const colors = {
   ...commonColors
 
 };
+
+export const colorsList = ['#C861FA', '#FE2E74', '#F96633', '#7f66ff', '#EDC113', '#009DE0'];
 export type colorObjectType = typeof colors & typeof lightColors & typeof darkColors;
 export default colors;

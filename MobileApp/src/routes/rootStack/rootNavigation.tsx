@@ -16,6 +16,9 @@ export type RootStackProps = {
   RootTab: undefined;
   Login: undefined;
   Signup: undefined;
+  Conversation: {
+    messageId?: string | number
+  };
 };
 
 const Stack = createStackNavigator<RootStackProps>();

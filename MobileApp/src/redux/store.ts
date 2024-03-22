@@ -4,6 +4,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from '@react-native-async-storage/async-storage'
 import themeSlice from './features/theme/themeSlice';
 import userSlice from './features/user/userSlice';
+import chatSlice from './features/chat/chatSlice';
+import uiSlice from './features/ui/uiSlice';
 
 
 const persistConfig = {
@@ -18,6 +20,8 @@ const persistConfig = {
 const appReducer = combineReducers({
   theme: themeSlice,
   user: userSlice,
+  chat: chatSlice,
+  ui: uiSlice,
 });
 
 
