@@ -24,7 +24,8 @@ export const homeData: homeDataType[] = [
             {
                 id: uuid.v4().toString(),
                 type: 'video',
-                uri: require('../../../assets/videos/bunny.mp4')
+                uri: {uri:'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' 
+}
             },
             {
                 id: uuid.v4().toString(),
@@ -102,7 +103,8 @@ export const homeData: homeDataType[] = [
             {
                 id: uuid.v4().toString(),
                 type: 'video',
-                uri: require('../../../assets/videos/bunny.mp4')
+                uri: {uri:'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' 
+}
             },
             {
                 id: uuid.v4().toString(),

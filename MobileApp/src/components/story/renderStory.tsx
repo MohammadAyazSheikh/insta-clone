@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { storyData } from '../../constants/data/storyData';
-import RenderAvatar, { RenderYourStory } from './storyAvatar/renderAvatar';
+import RenderAvatar
+// , { RenderYourStory }
+ from './storyAvatar/renderAvatar';
 import StoryModal from './storyModal/storyModal';
 
 
