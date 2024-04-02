@@ -100,10 +100,13 @@ export const RenderYourStory = () => {
     )
 }
 
+const width  = RADIUS_STORY_AVATAR * 2 + STROKE_STORY_AVATAR;
+const height = RADIUS_STORY_AVATAR * 2 + STROKE_STORY_AVATAR + 20;
 const styles = StyleSheet.create({
     container: {
-        width: RADIUS_STORY_AVATAR * 2 + STROKE_STORY_AVATAR,
-        height: RADIUS_STORY_AVATAR * 2 + STROKE_STORY_AVATAR + 20,
+        //setting width and height causing app crash
+        // width,
+        // height,
         justifyContent: 'space-between',
         alignItems: 'center',
     },

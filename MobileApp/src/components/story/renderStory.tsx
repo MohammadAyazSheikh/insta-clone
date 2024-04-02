@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { storyData } from '../../constants/data/storyData';
 import RenderAvatar
-// , { RenderYourStory }
+, { RenderYourStory }
  from './storyAvatar/renderAvatar';
 import StoryModal from './storyModal/storyModal';
 
@@ -25,9 +25,9 @@ export default function RenderStory() {
                 data={storyData}
                 keyExtractor={(item => item.userId)}
                 // your story
-                // ListHeaderComponent={() => (
-                //     <RenderYourStory />
-                // )}
+                ListHeaderComponent={() => (
+                    <RenderYourStory />
+                )}
                 //other user's stories
                 renderItem={({ item, index }) => (
                     <RenderAvatar
