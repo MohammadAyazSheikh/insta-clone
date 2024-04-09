@@ -15,6 +15,8 @@ import colors from './src/theme/colors';
 import { useAppExit } from './src/hooks/backHandlerHooks';
 import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert';
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
+import Recorder from './src/components/sound/recorder';
+import { View } from 'react-native';
 
 
 
@@ -40,18 +42,23 @@ const App = () => {
   }, []);
 
   return (
-    <PaperProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <RootNavigation />
-          <Toast config={toastConfig} />
-          {/* alerts */}
-          <RenderConfirmAlert/>
-          <RenderDismissAlert/>
-        </PersistGate>
-      </Provider>
-    </PaperProvider>
+    // <PaperProvider theme={theme}>
+    //   <Provider store={store}>
+    //     <PersistGate loading={null} persistor={persistor}>
+    //       <RootNavigation />
+    //       <Toast config={toastConfig} />
+    //       {/* alerts */}
+    //       <RenderConfirmAlert/>
+    //       <RenderDismissAlert/>
+    //     </PersistGate>
+    //   </Provider>
+    // </PaperProvider>
+    <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
+      <Recorder />
+    </View>
   )
 }
 
 export default App;
+
+
