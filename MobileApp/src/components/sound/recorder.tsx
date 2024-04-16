@@ -9,10 +9,10 @@ import Animated, {
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
-import useSoundRecorderHooks from "./hooks";
+import useSoundRecorderHooks from "./hooks/soundhooks";
 import { TouchableRipple } from "react-native-paper";
 import { RecordBackType } from "react-native-audio-recorder-player";
-
+import Slider from "./slider";
 
 //-160 - slowest sound
 //0 - loudest sound
@@ -21,7 +21,7 @@ const Recorder = () => {
 
   const [data, setData] = useState<number[]>([]);
 
-  const { onStartRecord, onStopRecord } = useSoundRecorderHooks();
+  const { onStartRecord, onStopRecord ,onStartPlay,onPausePlay} = useSoundRecorderHooks();
 
   // animated value to move wave towards right side
   const translate = useSharedValue(width);
@@ -38,18 +38,18 @@ const Recorder = () => {
         <Animated.View style={[styles.barContainer, rStyles]}>
           {
             data.map((metering, index) => {
-              
-              return(
-              <View
-                key={index}
-                style={[
-                  styles.bar,{
-                  //setting height of the bars according the loudness of the sound
-                  height:interpolate(metering,[-50,0],[0,100],Extrapolation.CLAMP)
-                }]}
-              />
-            );
-          })
+
+              return (
+                <View
+                  key={index}
+                  style={[
+                    styles.bar, {
+                      //setting height of the bars according the loudness of the sound
+                      height: interpolate(metering, [-50, -40, -20, 0], [2, 2, 40, 80], Extrapolation.CLAMP)
+                    }]}
+                />
+              );
+            })
           }
         </Animated.View>
       </View>
@@ -58,6 +58,13 @@ const Recorder = () => {
       <TouchableRipple
         onPress={() => {
           onStartRecord((e) => {
+            // if (data.length > 10) {
+            //   console.log("--------------")
+            //   setData([e.currentMetering || 0])
+            // }
+            // else { 
+            //   setData(prev => [...prev, e.currentMetering || 0])
+            // }
             setData(prev => [...prev, e.currentMetering || 0])
             translate.value = withTiming(translate.value - 2, { duration: 100 })
           })
@@ -80,6 +87,10 @@ const Recorder = () => {
           Stop
         </Text>
       </TouchableRipple>
+
+
+
+
     </View>
   )
 
@@ -104,7 +115,7 @@ const styles = StyleSheet.create({
   barContainer: {
     height: '100%',
     flexDirection: 'row',
-    alignItems:'center',
+    alignItems: 'center',
     gap: 2,
     backgroundColor: 'grey',
     position: 'absolute',
@@ -112,6 +123,7 @@ const styles = StyleSheet.create({
   bar: {
     height: '100%',
     width: 3,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    borderRadius: 3,
   }
 })

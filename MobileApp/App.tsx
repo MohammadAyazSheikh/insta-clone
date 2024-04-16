@@ -17,6 +17,8 @@ import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import Recorder from './src/components/sound/recorder';
 import { View } from 'react-native';
+import Slider from './src/components/sound/slider';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 
@@ -53,9 +55,15 @@ const App = () => {
     //     </PersistGate>
     //   </Provider>
     // </PaperProvider>
-    <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
-      <Recorder />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        {/*  Recorder */}
+        {/* <Recorder/> */}
+
+        {/* player */}
+
+        <Slider/>
+
+    </GestureHandlerRootView>
   )
 }
 
