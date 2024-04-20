@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
-const { width } = Dimensions.get("screen");
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -9,7 +8,7 @@ import Animated, {
     interpolate,
     Extrapolation,
 } from 'react-native-reanimated';
-import useSoundRecorderHooks from "./hooks/soundhooks";
+import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
 import { PlayBackType, RecordBackType } from "react-native-audio-recorder-player";
 import IconEnt from 'react-native-vector-icons/Entypo';
@@ -22,41 +21,100 @@ const { width: deviceWidth } = Dimensions.get("window");
 
 type sliderProps = {
     width?: number,
-    percentage?: number,
 }
 const Slider = ({
     width = deviceWidth,
-    percentage = 0,
 }: sliderProps) => {
 
-    const [progressWidth, setProgressWidth] = useState<number>(0)
+    //holds width of the view of progress line view
+    const [progressViewWidth, setProgressViewWidth] = useState<number>(0);
 
-    const { onStartPlay, onPausePlay, onSeek, onResumePlay ,onStopPlay} = useSoundRecorderHooks();
+    //stats for sound info and progress
     const [isPlaying, setIsPlaying] = useState(false);
     const [time, setTime] = useState<PlayBackType>({
         duration: 0,
         currentPosition: 0,
     });
 
-    // animated value to move thumb towards right side
-    const translate = useSharedValue(0);
+    const isThumbPressed = useRef(false);
+
+    //sound hook
+    const { onStartPlay, onPausePlay, onSeek, onResumePlay, onStopPlay } = useSoundRecorderHooks();
+
+
+    // animated value to move thumb towards right side when sound is playing
+    const translateX = useSharedValue(0);
 
     const playingStyleAnimated = useAnimatedStyle(() => ({
-        left: `${translate.value}%`
+        // left: `${translate.value}%`
+        transform: [{
+            translateX: translateX.value
+        }]
     }));
 
     // gesture animation hook
     const { animatedStyle, panGestureEvent } = useGestureAnimation({
-        width: progressWidth,
-        onStart:()=>{
-            onStopPlay(()=>{})
+        translateX,
+        width: progressViewWidth,
+        onStart: () => {
+            isThumbPressed.current = true;
         },
         onEnd: (percentage) => {
-            console.log(percentage, time.currentPosition);
+
+            isThumbPressed.current = false;
+
             const millis = (time.duration / 100) * percentage;
-            onSeek(millis)
+
+             onSeek(millis, () => {
+                onStartPlay(onPlayHandler);
+            })
+        
         }
     });
+
+    //onPlay listener 
+    const onPlayHandler = (e: PlayBackType) => {
+        setTime(e);
+        const progress = (e.currentPosition / e.duration) * 100;
+        const position = progressViewWidth / 100 * progress;
+
+        if (progress < 100 && isThumbPressed.current == false) {
+            translateX.value = position// withTiming(position, { duration: 50 });
+        }
+        else if (progress > 99 && isThumbPressed.current == false ) {
+            setIsPlaying(false);
+            translateX.value = 0;
+            setTime({
+                duration: 0,
+                currentPosition: 0,
+            });
+        } 
+    }
+
+
+    // play/pause button handler
+    const onButtonPress = () => {
+        const progress = (time.currentPosition / time.duration) * 100;
+        // resume
+        if (progress > 0 && progress < 99 && !isPlaying) {
+            setIsPlaying(true);
+            onResumePlay();
+            return;
+        }
+
+        // play from start
+        if (!isPlaying) {
+            setIsPlaying(true)
+            onStartPlay(onPlayHandler);
+        }
+        // pause
+        else {
+            onPausePlay(() => {
+                setIsPlaying(false)
+            })
+        }
+    }
+
     return (
         <View style={[styles.container,
         {
@@ -64,42 +122,7 @@ const Slider = ({
         }]}>
             {/* play button */}
             <TouchableRipple
-                onPress={() => {
-                    // resume
-                    if (translate.value > 0 && translate.value < 95 && !isPlaying) {
-                        setIsPlaying(true);
-                        onResumePlay();
-                        return;
-                    }
-
-                    // play from start
-                    if (!isPlaying) {
-                        // translate.value = 0;
-                        setIsPlaying(true)
-                        onStartPlay((e) => {
-                            setTime(e);
-                            const progress = (e.currentPosition / e.duration) * 100;
-                            if (progress < 95) {
-                                translate.value = withTiming(progress, { duration: 50 })
-                            }
-                            else {
-                                setIsPlaying(false);
-                                translate.value = 0;
-                                setTime({
-                                    duration: 0,
-                                    currentPosition: 0,
-                                });
-                            }
-                        })
-                    }
-                    // pause
-                    else {
-                        onPausePlay(() => {
-                            setIsPlaying(false)
-                        })
-                    }
-
-                }}
+                onPress={onButtonPress}
             >
                 <IconEnt
                     color={"white"}
@@ -111,15 +134,16 @@ const Slider = ({
             <View style={styles.progressView}
                 onLayout={(e) => {
                     console.log(e.nativeEvent.layout.width)
-                    setProgressWidth(e.nativeEvent.layout.width)
+                    setProgressViewWidth(e.nativeEvent.layout.width)
                 }}
             >
+                {/* thumb */}
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[
                         styles.thumb,
                         animatedStyle,
                         playingStyleAnimated,
-                        { left: `${percentage}%` }
+                        // { left: `${percentage}%` }
                     ]}
                     />
                 </GestureDetector>

@@ -17,7 +17,7 @@ import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import Recorder from './src/components/sound/recorder';
 import { View } from 'react-native';
-import Slider from './src/components/sound/slider';
+import Slider from './src/components/sound/player';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 

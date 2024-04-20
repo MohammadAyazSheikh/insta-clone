@@ -79,7 +79,7 @@ export default function useSoundRecorderHooks() {
         callback && callback()
     };
 
-    const onStopPlay = async (callback: () => void) => {
+    const onStopPlay = async (callback?: () => void) => {
         console.log('onStopPlay');
         await audioRecorderPlayer.stopPlayer();
         await audioRecorderPlayer.removePlayBackListener();

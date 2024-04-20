@@ -2,8 +2,7 @@ import {
     useAnimatedStyle,
     useSharedValue,
     runOnJS,
-    withSpring,
-    withTiming
+    SharedValue,
 } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 import { Gesture, GestureStateChangeEvent, PanGestureHandlerEventPayload } from 'react-native-gesture-handler';
@@ -17,33 +16,30 @@ type hookProps = {
     onEnd?: (percentage: number) => void,
     onStart?: () => void,
     width?: number,
+    translateX: SharedValue<number>,
 }
 export const useGestureAnimation = ({
     onEnd = () => '',
     onStart,
     width = deviceWidth,
+    translateX
 }: hookProps) => {
 
-
-    const translateX = useSharedValue(0);
     const touchStart = useSharedValue({ x: 0, y: 0, time: 0 });
 
     const panGestureEvent = Gesture
         .Pan()
         .manualActivation(true)
         .onTouchesDown((e) => {
-        onStart && runOnJS(onStart)();
+            onStart && runOnJS(onStart)();
             touchStart.value = {
                 x: e.changedTouches[0].x,
                 y: e.changedTouches[0].y,
                 time: Date.now(),
             };
         })
-        .onBegin(()=>{
-           
-        })
         .onTouchesMove((e, state) => {
-       
+
             if (Date.now() - touchStart.value.time > TIME_TO_ACTIVATE_PAN) {
                 state.activate();
             } else if (
@@ -53,18 +49,21 @@ export const useGestureAnimation = ({
                 state.fail();
             }
         })
+        .onTouchesUp(() => {
+            //passing progress in percentage when gesture ends
+            const percentage = Math.round(translateX.value / width * 100);
+            onEnd && runOnJS(onEnd)(percentage);
+        })
         .onChange((event) => {
             const offset = event.changeX + translateX.value;
 
-            if (offset <= width  && offset > 0)
+            if (offset <= width && offset > 0)
                 translateX.value = offset
 
         })
-        .onEnd((e) => {
-            //passing progress in percentage when gesture ends
-           const percentage = Math.round(translateX.value/width *100);
-            onEnd && runOnJS(onEnd)(percentage);
-        })
+        // .onEnd((e) => {
+
+        // })
 
     // ---- animated styles ----
     const animatedStyle = useAnimatedStyle(() => {
