@@ -3,9 +3,10 @@ import {
     useSharedValue,
     runOnJS,
     SharedValue,
+    withTiming,
 } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
-import { Gesture, GestureStateChangeEvent, PanGestureHandlerEventPayload } from 'react-native-gesture-handler';
+import { Gesture } from 'react-native-gesture-handler';
 const { width: deviceWidth } = Dimensions.get("window");
 
 
@@ -26,11 +27,13 @@ export const useGestureAnimation = ({
 }: hookProps) => {
 
     const touchStart = useSharedValue({ x: 0, y: 0, time: 0 });
+    const scale = useSharedValue(1);
 
     const panGestureEvent = Gesture
         .Pan()
         .manualActivation(true)
         .onTouchesDown((e) => {
+            scale.value = withTiming(1.2,{duration:300})
             onStart && runOnJS(onStart)();
             touchStart.value = {
                 x: e.changedTouches[0].x,
@@ -50,6 +53,7 @@ export const useGestureAnimation = ({
             }
         })
         .onTouchesUp(() => {
+            scale.value = withTiming(1,{duration:300})
             //passing progress in percentage when gesture ends
             const percentage = Math.round(translateX.value / width * 100);
             onEnd && runOnJS(onEnd)(percentage);
@@ -61,23 +65,26 @@ export const useGestureAnimation = ({
                 translateX.value = offset
 
         })
-        // .onEnd((e) => {
+    // .onEnd((e) => {
 
-        // })
+    // })
 
     // ---- animated styles ----
-    const animatedStyle = useAnimatedStyle(() => {
+    const animatedGestureStyle = useAnimatedStyle(() => {
         return {
             transform: [
                 {
                     translateX: translateX.value,
+                },
+                {
+                    scale:scale.value
                 },
             ],
         };
     });
 
     return {
-        animatedStyle,
+        animatedGestureStyle,
         panGestureEvent
     };
 }

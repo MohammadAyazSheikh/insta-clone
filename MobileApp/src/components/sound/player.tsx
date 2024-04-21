@@ -1,23 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Easing, Alert } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, StyleSheet, Dimensions} from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming,
-    withRepeat,
-    interpolate,
-    Extrapolation,
 } from 'react-native-reanimated';
-import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
-import { PlayBackType, RecordBackType } from "react-native-audio-recorder-player";
 import IconEnt from 'react-native-vector-icons/Entypo';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
 import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../general/text/text";
-import { useSoundPlayer } from "./hooks/soundPayerHooks";
+import { timeProp, useSoundPlayer } from "./hooks/soundPayerHooks";
 import moment from "moment";
 const { width: deviceWidth } = Dimensions.get("window");
 
@@ -25,11 +19,6 @@ type sliderProps = {
     width?: number,
 }
 
-type timeProp = {
-    isPlaying: boolean,
-    duration: number,
-    currentPosition: number,
-}
 const Slider = ({
     width = deviceWidth,
 }: sliderProps) => {
@@ -46,17 +35,19 @@ const Slider = ({
     //sound hook
     const { play, pause, seek, stop, setTime, time, error, isLoaded } = useSoundPlayer();
 
+
     // animated value to move thumb towards right side when sound is playing
     const translateX = useSharedValue(0);
 
-    const playingStyleAnimated = useAnimatedStyle(() => ({
+    const playingStyleAnimated = useAnimatedStyle(() => ( {
         transform: [{
             translateX: translateX.value
         }]
     }));
 
+
     // gesture animation hook
-    const { animatedStyle, panGestureEvent } = useGestureAnimation({
+    const { animatedGestureStyle, panGestureEvent } = useGestureAnimation({
         translateX,
         width: progressViewWidth,
         onStart: () => {
@@ -126,6 +117,7 @@ const Slider = ({
             {/* play button */}
             <TouchableRipple
                 onPress={onButtonPress}
+                disabled = {!isLoaded}
             >
                 <IconEnt
                     color={"white"}
@@ -144,9 +136,8 @@ const Slider = ({
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[
                         styles.thumb,
-                        animatedStyle,
+                       animatedGestureStyle,
                         playingStyleAnimated,
-                        // { left: `${percentage}%` }
                     ]}
                     />
                 </GestureDetector>
