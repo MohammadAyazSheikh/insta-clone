@@ -10,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
 import { storyData, storyDataType } from '../../../constants/data/storyData';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type storyModalProps = {
     show: boolean,
@@ -26,7 +27,7 @@ const StoryModal = ({
     const { styles, width } = useFunctionalOrientation(responsiveStyles);
 
     const [data, setData] = useState<storyDataType[]>(storyData);
-
+  
     //this ref is for making sure that story does'nt scrolls 
     //to next user's story when modal is closed 
     const isModalOpen = useRef(false);
@@ -71,42 +72,44 @@ const StoryModal = ({
             <View
                 style={styles.backDrop}
             />
-            <View
-                style={styles.centeredView}
-            >
-                <Animated.ScrollView
-                    ref={scrollRef}
-                    onScroll={scrollHandler}
-                    style={styles.scroll}
-                    pagingEnabled
-                    horizontal
-                    scrollEventThrottle={16}
+            <SafeAreaProvider>
+                <SafeAreaView
+                    style={styles.centeredView}
                 >
-                    {data.map((item, index) => {
-                        return (
-                            <StoryContent
-                                isModalOpen={isModalOpen}
-                                key={index.toString()}
-                                scrollX={translateX}
-                                scrollRef={scrollRef}
-                                scrollIndex={index}
-                                contentData={item}
-                                numberOfUsers={storyData.length}
-                                onClose={onClose}
-                                onNextStory={(barIndex, userStoryIdex) => {
-                                    const userStroy = data[userStoryIdex];
-                                    if (userStroy.totalUnseen >= 1) {
-                                        userStroy.totalUnseen -= 1;
-                                        const updatedData = [...data];
-                                        updatedData[userStoryIdex] = userStroy;
-                                        setData(updatedData);
-                                    }
-                                }}
-                            />
-                        );
-                    })}
-                </Animated.ScrollView>
-            </View>
+                    <Animated.ScrollView
+                        ref={scrollRef}
+                        onScroll={scrollHandler}
+                        style={styles.scroll}
+                        pagingEnabled
+                        horizontal
+                        scrollEventThrottle={16}
+                    >
+                        {data.map((item, index) => {
+                            return (
+                                <StoryContent
+                                    isModalOpen={isModalOpen}
+                                    key={index.toString()}
+                                    scrollX={translateX}
+                                    scrollRef={scrollRef}
+                                    scrollIndex={index}
+                                    contentData={item}
+                                    numberOfUsers={storyData.length}
+                                    onClose={onClose}
+                                    onNextStory={(barIndex, userStoryIdex) => {
+                                        const userStroy = data[userStoryIdex];
+                                        if (userStroy.totalUnseen >= 1) {
+                                            userStroy.totalUnseen -= 1;
+                                            const updatedData = [...data];
+                                            updatedData[userStoryIdex] = userStroy;
+                                            setData(updatedData);
+                                        }
+                                    }}
+                                />
+                            );
+                        })}
+                    </Animated.ScrollView>
+                </SafeAreaView>
+            </SafeAreaProvider>
         </Modal >
     );
 };

@@ -12,8 +12,9 @@ import { TextBold, TextRegular } from '../../components/general/text/text';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { phoneEmailTabsProps } from './selectPhoneEmail';
-import { ShowDismissAlert } from '../../components/general/alerts/dismissAlert';
+import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { signUpProps } from './signupScreen';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 type VerifyScreenProps = { data: signUpProps } & phoneEmailTabsProps;
 export default function VerifyEmail({
     data,
@@ -32,64 +33,66 @@ export default function VerifyEmail({
     });
 
     return (
-        <ScrollView contentContainerStyle={styles.scroll}>
-            <Animated.View
-                style={styles.containerChild}
-                entering={FadeInRight}
-                exiting={FadeOutLeft}
-            >
-                <View style={styles.texView}>
-                    <TextRegular
-                        style={[styles.txtChildTitle, { fontSize: 18 }]}
-                    >
-                        Enter the Confirmation Code We Sent to {data.email}
-                    </TextRegular>
-                    {/* change number */}
-                    <View style={styles.row}>
-                        <TextBold
-                            style={[styles.txtResend,]}
-                            onPress={() => {
-                                setActiveTopTab && setActiveTopTab("email");
-                            }}
-                        >
-                            Change email
-                        </TextBold>
+        <SafeAreaProvider >
+            <SafeAreaView style={styles.scroll}>
+                <Animated.View
+                    style={styles.containerChild}
+                    entering={FadeInRight}
+                    exiting={FadeOutLeft}
+                >
+                    <View style={styles.texView}>
                         <TextRegular
-                            style={{ fontSize: 12, color: colors.grey1 }}
+                            style={[styles.txtChildTitle, { fontSize: 18 }]}
                         >
-                            {'  OR  '}
+                            Enter the Confirmation Code We Sent to {data.email}
                         </TextRegular>
-                        <TextBold
-                            style={[styles.txtResend,]}
-                            onPress={() => {
-                                ShowDismissAlert({
-                                    title: 'Wait a moment',
-                                    description: 'We can only send you a new login code every 30 seconds.'
-                                })
-                            }}
-                        >
-                            Resend message
-                        </TextBold>
+                        {/* change number */}
+                        <View style={styles.row}>
+                            <TextBold
+                                style={[styles.txtResend,]}
+                                onPress={() => {
+                                    setActiveTopTab && setActiveTopTab("email");
+                                }}
+                            >
+                                Change email
+                            </TextBold>
+                            <TextRegular
+                                style={{ fontSize: 12, color: colors.grey1 }}
+                            >
+                                {'  OR  '}
+                            </TextRegular>
+                            <TextBold
+                                style={[styles.txtResend,]}
+                                onPress={() => {
+                                    showDismissAlert({
+                                        title: 'Wait a moment',
+                                        description: 'We can only send you a new login code every 30 seconds.'
+                                    })
+                                }}
+                            >
+                                Resend message
+                            </TextBold>
+                        </View>
+
                     </View>
+                    {/* ----Text input---- */}
+                    <TextBox
+                        placeholder='Enter Otp'
+                        value={otp}
+                        onChangeText={(value) => {
+                            setOtp(value)
+                        }}
 
-                </View>
-                {/* ----Text input---- */}
-                <TextBox
-                    placeholder='Enter Otp'
-                    value={otp}
-                    onChangeText={(value) => {
-                        setOtp(value)
-                    }}
-
-                />
-                {/* Next button */}
-                <CustomButton
-                    disabled={otp?.length < 4}
-                    buttonText='Next'
-                    onPress={() => ''}
-                />
-            </Animated.View>
-        </ScrollView>
+                    />
+                    {/* Next button */}
+                    <CustomButton
+                        disabled={otp?.length < 4}
+                        buttonText='Next'
+                        onPress={() => ''}
+                    />
+                </Animated.View>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }
 

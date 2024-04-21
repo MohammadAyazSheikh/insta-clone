@@ -15,6 +15,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { authSuccess, logoutSuccess } from '../../redux/features/user/userSlice';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 type loginProps = {
     username?: string,
@@ -40,109 +41,111 @@ export default function Login() {
 
 
     return (
-        <View style={styles.container}>
-            <ScrollView contentContainerStyle={styles.scroll}>
-                {/* logo */}
-                <Image
-                    source={
-                        theme == "dark" ?
-                            require('../../../assets/images/logo-light.png')
-                            :
-                            require('../../../assets/images/logo-dark.png')
-                    }
-                    style={styles.logoStyles}
-                />
-                {/*----- user name -----*/}
-                <TextBox
-                    placeholder='Phone number, email or username'
-                    keyboardType='email-address'
-                    value={data.username}
-                    onChangeText={(value) => {
-                        setData({
-                            ...data,
-                            username: value
-                        })
-                    }}
-                    error={err.username}
-                />
-                {/* Password */}
-                <TextBox
-                    placeholder='Password'
-                    secureTextEntry={hidePass}
-                    value={data.password}
-                    onChangeText={(value) => {
-                        setData({
-                            ...data,
-                            password: value
-                        })
-                    }}
-                    error={err.password}
-                    iconRight={
-                        <TouchableOpacity
-                            onPress={() => setHidePass(hide => !hide)}
-                        >
-                            <IconFe size={20}
-                                color={colors.grey1}
-                                name={hidePass ? 'eye-off' : 'eye'}
-                            />
-                        </TouchableOpacity>
-                    }
-                />
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                <ScrollView contentContainerStyle={styles.scroll}>
+                    {/* logo */}
+                    <Image
+                        source={
+                            theme == "dark" ?
+                                require('../../../assets/images/logo-light.png')
+                                :
+                                require('../../../assets/images/logo-dark.png')
+                        }
+                        style={styles.logoStyles}
+                    />
+                    {/*----- user name -----*/}
+                    <TextBox
+                        placeholder='Phone number, email or username'
+                        keyboardType='email-address'
+                        value={data.username}
+                        onChangeText={(value) => {
+                            setData({
+                                ...data,
+                                username: value
+                            })
+                        }}
+                        error={err.username}
+                    />
+                    {/* Password */}
+                    <TextBox
+                        placeholder='Password'
+                        secureTextEntry={hidePass}
+                        value={data.password}
+                        onChangeText={(value) => {
+                            setData({
+                                ...data,
+                                password: value
+                            })
+                        }}
+                        error={err.password}
+                        iconRight={
+                            <TouchableOpacity
+                                onPress={() => setHidePass(hide => !hide)}
+                            >
+                                <IconFe size={20}
+                                    color={colors.grey1}
+                                    name={hidePass ? 'eye-off' : 'eye'}
+                                />
+                            </TouchableOpacity>
+                        }
+                    />
 
-                {/* ---button--- */}
-                <CustomButton
-                    disabled={!data.password || !data.username}
-                    buttonText='Log in'
-                    onPress={() => {
-                        dispatch(authSuccess({
-                            id:'1',
-                            firstName:'John',
-                            lastName:'Doe',
-                            userName:'john_123',
-                            email:'john@email.com',
-                            dob:new Date(),
-                        }))
-                    }}
-                />
-                {/* --forget password button ---- */}
-                <TextRegular
-                    style={styles.txtForgetPss}
-                >
-                    Forgot your login details?
-                    <TextBold
-                        style={[styles.txtForgetPss]}
+                    {/* ---button--- */}
+                    <CustomButton
+                        disabled={!data.password || !data.username}
+                        buttonText='Log in'
+                        onPress={() => {
+                            dispatch(authSuccess({
+                                id: '1',
+                                firstName: 'John',
+                                lastName: 'Doe',
+                                userName: 'john_123',
+                                email: 'john@email.com',
+                                dob: new Date(),
+                            }))
+                        }}
+                    />
+                    {/* --forget password button ---- */}
+                    <TextRegular
+                        style={styles.txtForgetPss}
                     >
-                        {' Get help logging in.'}
-                    </TextBold>
-                </TextRegular>
-                {/* ------Or line ----- */}
-                <View style={styles.row}>
-                    <View style={styles.line} />
-                    <TextBold style={{
-                        color: colors.secondary1,
-                        marginHorizontal: 5
-                    }}>
-                        OR
-                    </TextBold>
-                    <View style={styles.line} />
-                </View>
-                {/* ------btn don't have account---- */}
-                <TextRegular
-                    style={styles.txtForgetPss}
-                    onPress={() => {
-                        navigation.navigate("Signup");
-                    }}
-                >
-                    Don't have an account?
-                    <TextBold
-                        style={[styles.txtForgetPss, { color: colors.ternary1 }]}
+                        Forgot your login details?
+                        <TextBold
+                            style={[styles.txtForgetPss]}
+                        >
+                            {' Get help logging in.'}
+                        </TextBold>
+                    </TextRegular>
+                    {/* ------Or line ----- */}
+                    <View style={styles.row}>
+                        <View style={styles.line} />
+                        <TextBold style={{
+                            color: colors.secondary1,
+                            marginHorizontal: 5
+                        }}>
+                            OR
+                        </TextBold>
+                        <View style={styles.line} />
+                    </View>
+                    {/* ------btn don't have account---- */}
+                    <TextRegular
+                        style={styles.txtForgetPss}
+                        onPress={() => {
+                            navigation.navigate("Signup");
+                        }}
                     >
-                        {' Sign up.'}
-                    </TextBold>
-                </TextRegular>
-               
-            </ScrollView>
-        </View>
+                        Don't have an account?
+                        <TextBold
+                            style={[styles.txtForgetPss, { color: colors.ternary1 }]}
+                        >
+                            {' Sign up.'}
+                        </TextBold>
+                    </TextRegular>
+
+                </ScrollView>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }
 

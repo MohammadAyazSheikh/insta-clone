@@ -14,7 +14,7 @@ const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
             alignItems: 'center',
             backgroundColor: 'black',
             width: h(100),
-            height: w(100),
+            height: '100%',
             transform: [
                 { perspective: 1000 },
             ],
@@ -22,11 +22,10 @@ const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
         },
         scroll: {
             width: w(100),
-            height: h(100),
         },
         container: {
             width: w(100),
-            height: h(100),
+            height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.primary1,
@@ -74,6 +73,7 @@ const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
         // footer
         txtInput: {
             flex: 1,
+            height:w(5),
             borderColor: colors.grey1,
             borderWidth: 1,
             borderRadius: 100,

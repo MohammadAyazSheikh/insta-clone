@@ -15,7 +15,8 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             alignItems: 'center',
             backgroundColor: 'black',
             width: w(100),
-            height: h(100),
+            height: "100%",
+            flex:1,
             transform: [
                 { perspective: 1000 },
             ],
@@ -23,11 +24,10 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         scroll: {
             width: w(100),
-            height: h(100),
         },
         container: {
             width: w(100),
-            height: h(100),
+            height: '100%',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.primary1,
@@ -75,11 +75,12 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         // footer
         txtInput: {
             flex: 1,
+            height:h(5),
             borderColor: colors.grey1,
             borderWidth: 1,
             borderRadius: 100,
             paddingHorizontal: 10,
-            color: colors.secondary1
+            color: colors.secondary1,
         },
         btnStyles: {
             borderRadius: 1000,

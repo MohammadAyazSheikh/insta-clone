@@ -16,7 +16,7 @@ import { useAppExit } from './src/hooks/backHandlerHooks';
 import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert';
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import Recorder from './src/components/sound/recorder';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import Slider from './src/components/sound/player';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
@@ -44,26 +44,26 @@ const App = () => {
   }, []);
 
   return (
-    // <PaperProvider theme={theme}>
-    //   <Provider store={store}>
-    //     <PersistGate loading={null} persistor={persistor}>
-    //       <RootNavigation />
-    //       <Toast config={toastConfig} />
-    //       {/* alerts */}
-    //       <RenderConfirmAlert/>
-    //       <RenderDismissAlert/>
-    //     </PersistGate>
-    //   </Provider>
-    // </PaperProvider>
-    <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        {/*  Recorder */}
-        {/* <Recorder/> */}
+    <PaperProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <RootNavigation />
+          <Toast config={toastConfig} />
+          {/* alerts */}
+          <RenderConfirmAlert/>
+          <RenderDismissAlert/>
+        </PersistGate>
+      </Provider>
+    </PaperProvider>
+    // <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //     {/*  Recorder */}
+    //     {/* <Recorder/> */}
 
-        {/* player */}
+    //     {/* player */}
 
-        <Slider/>
+    //     <Slider/>
 
-    </GestureHandlerRootView>
+    // </GestureHandlerRootView>
   )
 }
 

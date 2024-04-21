@@ -18,6 +18,7 @@ import SelectEmail from './selectEmail';
 import SelectPhone from './selectPhone';
 import VerifyPassword from './verifyPhone';
 import VerifyEmail from './verifyEmail';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export type phoneEmailScreenType = 'phone' | 'email' | 'verifyPhone' | 'verifyEmail';
@@ -48,43 +49,45 @@ export default function SelectPhoneEmail({
     // --------------------------if user selecting phone or email-------------------
     if (activeTopTab == 'email' || activeTopTab == 'phone')
         return (
-            <ScrollView contentContainerStyle={styles.scroll}>
-                <Animated.View
-                    style={styles.containerChild}
-                    entering={FadeInRight}
-                    exiting={FadeOutLeft}
-                >
-                    {/* title */}
-                    <TextRegular
-                        style={styles.txtChildTitle}
+            <SafeAreaProvider>
+                <SafeAreaView style={styles.scroll}>
+                    <Animated.View
+                        style={styles.containerChild}
+                        entering={FadeInRight}
+                        exiting={FadeOutLeft}
                     >
-                        Add phone or email
-                    </TextRegular>
-                    {/* tabs */}
-                    <Tabs
-                        activeTopTab={activeTopTab}
-                        setActiveTopTab={setActiveTopTab}
-                    />
-                    {
-                        activeTopTab == 'email' ?
-                            < SelectEmail
-                                setData={setData}
-                                setErr={setErr}
-                                data={data}
-                                err={err}
-                                setActiveTopTab={setActiveTopTab}
-                            />
-                            :
-                            < SelectPhone
-                                setData={setData}
-                                setErr={setErr}
-                                data={data}
-                                err={err}
-                                setActiveTopTab={setActiveTopTab}
-                            />
-                    }
-                </Animated.View>
-            </ScrollView>
+                        {/* title */}
+                        <TextRegular
+                            style={styles.txtChildTitle}
+                        >
+                            Add phone or email
+                        </TextRegular>
+                        {/* tabs */}
+                        <Tabs
+                            activeTopTab={activeTopTab}
+                            setActiveTopTab={setActiveTopTab}
+                        />
+                        {
+                            activeTopTab == 'email' ?
+                                < SelectEmail
+                                    setData={setData}
+                                    setErr={setErr}
+                                    data={data}
+                                    err={err}
+                                    setActiveTopTab={setActiveTopTab}
+                                />
+                                :
+                                < SelectPhone
+                                    setData={setData}
+                                    setErr={setErr}
+                                    data={data}
+                                    err={err}
+                                    setActiveTopTab={setActiveTopTab}
+                                />
+                        }
+                    </Animated.View>
+                </SafeAreaView>
+            </SafeAreaProvider>
         );
     // --------------------------if user entering otp from mobile-------------------
     if (activeTopTab == 'verifyPhone')

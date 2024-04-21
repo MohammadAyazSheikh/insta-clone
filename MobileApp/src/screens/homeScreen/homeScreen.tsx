@@ -12,6 +12,7 @@ import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -28,61 +29,65 @@ export default function Home() {
     const refShare = useRef<BottomSheet>(null);
 
     return (
-        <GestureHandlerRootView style={styles.container}>
-            {/* posts */}
-            <FlatList
-                contentContainerStyle={styles.scroll}
-                data={homeData}
-                keyExtractor={(item) => item.userId}
-                renderItem={({ index, item }) => (
-                    <ContentCard
-                        data={item}
-                        onMenu={() => {
-                            refOption.current?.collapse()
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                <GestureHandlerRootView style={styles.container}>
+                    {/* posts */}
+                    <FlatList
+                        contentContainerStyle={styles.scroll}
+                        data={homeData}
+                        keyExtractor={(item) => item.userId}
+                        renderItem={({ index, item }) => (
+                            <ContentCard
+                                data={item}
+                                onMenu={() => {
+                                    refOption.current?.collapse()
+                                }}
+                                onComment={() => {
+                                    refComment.current?.expand();
+                                }}
+                                onShare={() => {
+                                    refShare?.current?.collapse();
+                                }}
+                            />
+                        )}
+                        ListHeaderComponent={() => (<>
+                            {/* Header */}
+                            <HomeHeader />
+                            {/* stories */}
+                            <RenderStory />
+                        </>)}
+                    />
+                    {/*--- menu sheet ----*/}
+                    <MenuSheet
+                        ref={refOption}
+                        snapPoints={['35%', '35%', '40%']}
+                        onFollow={() => {
+                            refOption.current?.close();
                         }}
-                        onComment={() => {
-                            refComment.current?.expand();
+                        onReport={() => {
+                            refOption.current?.close();
                         }}
-                        onShare={() => {
-                            refShare?.current?.collapse();
+                        onHide={() => {
+                            refOption.current?.close();
+                        }}
+                        onStar={() => {
+                            refOption.current?.close();
                         }}
                     />
-                )}
-                ListHeaderComponent={() => (<>
-                    {/* Header */}
-                    <HomeHeader />
-                    {/* stories */}
-                    <RenderStory />
-                </>)}
-            />
-            {/*--- menu sheet ----*/}
-            <MenuSheet
-                ref={refOption}
-                snapPoints={['35%', '35%', '40%']}
-                onFollow={() => {
-                    refOption.current?.close();
-                }}
-                onReport={() => {
-                    refOption.current?.close();
-                }}
-                onHide={() => {
-                    refOption.current?.close();
-                }}
-                onStar={() => {
-                    refOption.current?.close();
-                }}
-            />
-            {/*--- menu sheet ----*/}
-            <CommentSheet
-                ref={refComment}
-                snapPoints={["100%"]}
-            />
-            {/*--- menu sheet ----*/}
-            <ShareSheet
-                ref={refShare}
-                snapPoints={["60%", "100%"]}
-            />
-        </GestureHandlerRootView>
+                    {/*--- menu sheet ----*/}
+                    <CommentSheet
+                        ref={refComment}
+                        snapPoints={["100%"]}
+                    />
+                    {/*--- menu sheet ----*/}
+                    <ShareSheet
+                        ref={refShare}
+                        snapPoints={["60%", "100%"]}
+                    />
+                </GestureHandlerRootView>
+            </SafeAreaView >
+        </SafeAreaProvider>
     );
 }
 

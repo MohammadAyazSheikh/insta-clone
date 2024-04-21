@@ -7,9 +7,10 @@ import { useAppDispatch } from '../../redux/hooks';
 import TextBox from '../../components/general/textBox/textBox';
 import IconAnt from 'react-native-vector-icons/AntDesign'
 import { TextRegular } from '../../components/general/text/text';
-import { childScreenProps} from './signupScreen';
+import { childScreenProps } from './signupScreen';
 import { isValidUsername } from '../../utils/functions/validations';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -28,61 +29,63 @@ export default function SelectUserName({
 
 
     return (
-        <ScrollView contentContainerStyle={styles.scroll}>
-            <Animated.View
-                style={styles.containerChild}
-                entering={FadeInRight}
-                exiting={FadeOutLeft}
-            >
-                <TextRegular
-                    style={styles.txtChildTitle}
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.scroll}>
+                <Animated.View
+                    style={styles.containerChild}
+                    entering={FadeInRight}
+                    exiting={FadeOutLeft}
                 >
-                    Choose username
-                </TextRegular>
+                    <TextRegular
+                        style={styles.txtChildTitle}
+                    >
+                        Choose username
+                    </TextRegular>
 
-                <TextRegular
-                    style={styles.txtChildSubTitle}
-                >
-                    You can always change it later.
-                </TextRegular>
-                {/* ----Text input---- */}
-                <TextBox
-                    placeholder='Ex: john123'
-                    value={data?.username}
-                    onChangeText={(value) => {
-                        setData({
-                            ...data,
-                            username: value
-                        });
-                        if (!isValidUsername(value)) {
-                            setErr({
-                                ...err,
-                                username: 'Username can only be use letters, numbers, underscores and periods.'
+                    <TextRegular
+                        style={styles.txtChildSubTitle}
+                    >
+                        You can always change it later.
+                    </TextRegular>
+                    {/* ----Text input---- */}
+                    <TextBox
+                        placeholder='Ex: john123'
+                        value={data?.username}
+                        onChangeText={(value) => {
+                            setData({
+                                ...data,
+                                username: value
                             });
-                        } else {
-                            setErr({
-                                ...err,
-                                username: '',
-                            })
+                            if (!isValidUsername(value)) {
+                                setErr({
+                                    ...err,
+                                    username: 'Username can only be use letters, numbers, underscores and periods.'
+                                });
+                            } else {
+                                setErr({
+                                    ...err,
+                                    username: '',
+                                })
+                            }
+                        }}
+                        error={err.username}
+                        iconRight={<RenderIcon
+                            setData={setData}
+                            setErr={setErr}
+                            err={err}
+                            data={data}
+                        />
                         }
-                    }}
-                    error={err.username}
-                    iconRight={ <RenderIcon
-                        setData={setData}
-                        setErr={setErr}
-                        err={err}
-                        data={data}
                     />
-                    }
-                />
-                {/* Next button */}
-                <CustomButton
-                    disabled={Boolean(!data?.username || err?.username)}
-                    buttonText='Next'
-                    onPress={() => setActiveScreen && setActiveScreen('password')}
-                />
-            </Animated.View>
-        </ScrollView>
+                    {/* Next button */}
+                    <CustomButton
+                        disabled={Boolean(!data?.username || err?.username)}
+                        buttonText='Next'
+                        onPress={() => setActiveScreen && setActiveScreen('password')}
+                    />
+                </Animated.View>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 }
 
