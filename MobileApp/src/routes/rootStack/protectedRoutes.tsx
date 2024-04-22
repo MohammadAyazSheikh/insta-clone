@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackProps } from './rootNavigation';
 import RootTab from '../rootTab/rootTab';
 import Conversation from '../../screens/conversationScreen/conversationScreen';
+import Inbox from '../../screens/inboxScreen/inboxScreen';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -24,20 +25,21 @@ const Screen = () =>
 export const protectedRoutes = () => {
     return (
         <>
-            <Stack.Screen
-                name="RootTab"
-                component={RootTab}
+        <Stack.Screen
+                name="Inbox"
+                component={Inbox}
                 options={{
                     headerShown: false,
                 }}
             />
             {/* <Stack.Screen
-                name="Conversation"
-                component={Conversation}
+                name="RootTab"
+                component={RootTab}
                 options={{
                     headerShown: false,
                 }}
             /> */}
+            
         </>
     );
 };

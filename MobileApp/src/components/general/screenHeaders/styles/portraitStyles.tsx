@@ -2,7 +2,6 @@
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
 import { fontFamily } from '../../../../theme/fonts';
-import { getShadow } from '../../../../theme/platformSpecificStyles';
 
 type p = (number: number) => number;
 
@@ -23,7 +22,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             alignItems: 'center',
         },
         txtHeader: {
-            color: "white",
+            color: colors.secondary1,
             fontSize: 20,
             fontFamily: fontFamily.bold
         },

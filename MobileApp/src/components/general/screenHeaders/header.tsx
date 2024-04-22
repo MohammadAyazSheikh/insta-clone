@@ -77,7 +77,7 @@ const Header = ({
               <IconAnt
                 name="left"
                 size={26}
-                color={iconLeftColor ?? "white"}
+                color={iconLeftColor ?? colors.secondary1}
               />
             )
           ) : null}
@@ -115,7 +115,7 @@ const Header = ({
               <IconAnt
                 name="right"
                 size={26}
-                color={iconRightColor ?? "white"}
+                color={iconRightColor ?? colors.secondary1}
               />
             )
           ) : null}

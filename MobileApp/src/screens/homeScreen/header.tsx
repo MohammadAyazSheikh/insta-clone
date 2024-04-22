@@ -43,7 +43,7 @@ export default function HomeHeader() {
                     />
                 </ButtonRipple>
                 <ButtonRipple
-                    onPress={() => ''}
+                    onPress={() => navigation.navigate('Inbox')}
                     style={{ borderRadius: 100, }}
                 >
                     <IconMtc
