@@ -15,17 +15,17 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         messageView: {
             borderRadius: 15,
             padding: 10,
-            backgroundColor: colors.secondary2,
+            backgroundColor: colors.primary4,
         },
         messageViewSender: {
-            backgroundColor: colors.primary1,
+            backgroundColor: colors.ternary1,
         },
         msgText: {
             fontSize: 12,
-            color: colors.ternary1,
+            color: colors.secondary1,
         },
         msgTextSenderLight: {
-            color: colors.secondary1,
+            color: colors.primary1,
         },
         row: {
             flexDirection: 'row',
@@ -35,7 +35,7 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         txtTime: {
             fontSize: 11,
-            color: colors.grey1,
+            color: colors.ternary3,
             marginRight:5,
         },
     });

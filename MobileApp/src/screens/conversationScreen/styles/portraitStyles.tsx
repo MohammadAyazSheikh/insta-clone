@@ -7,7 +7,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType,) => {
 
     return StyleSheet.create({
         container: {
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary1,
             flex: 1
         },
         scrollContainer:{

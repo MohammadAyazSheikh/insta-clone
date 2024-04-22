@@ -21,6 +21,8 @@ const ReplyMessageFooter = ({
     onClose,
 }: replyFooterProps) => {
     const { user } = useAppSelector(state => state.user);
+    const { theme } = useAppSelector(state => state.theme);
+    const isDark = theme == "dark";
     const { user: userInfo, type, text } = message;
     const you = user?.id == userInfo.id;
     const { styles } = useFunctionalOrientation(responsiveStyles);
@@ -30,18 +32,21 @@ const ReplyMessageFooter = ({
     const messageIcon = getMessageIcon(type!, colors.ternary1);
     return (
 
-        <View style={styles.msgContainer}>
+        <View style={[
+            styles.msgContainer,
+            //  {backgroundColor: isDark? colors.primary3}
+            ]}>
             {/* side strip */}
             <View style={[
                 styles.leftStrip,
-                { backgroundColor: stripColor }
+                stripColor && { backgroundColor: stripColor }
             ]} />
             <View style={styles.msgView}>
                 {/* ---- user name ---- */}
                 <View style={styles.wrapper}>
                     <TextBold
                         numberOfLines={1}
-                        style={[styles.txtName, { color: stripColor }]}
+                        style={[styles.txtName,stripColor && { color: stripColor }]}
                     >
                         {
                             you ?

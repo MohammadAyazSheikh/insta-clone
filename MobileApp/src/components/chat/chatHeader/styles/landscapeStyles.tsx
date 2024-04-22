@@ -11,7 +11,7 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
 
     return StyleSheet.create({
         container: {
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary1,
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',

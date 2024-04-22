@@ -15,13 +15,14 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             justifyContent: 'flex-start',
             alignItems: "center",
             overflow: 'hidden',
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary3,
             borderRadius: 10,
             marginVertical: 5,
         },
         leftStrip: {
             width: 10,
             height: '100%',
+            backgroundColor:colors.ternary1
         },
         msgView: {
             flex: 1,
@@ -44,7 +45,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         txtMsg: {
             fontSize: 12,
-            color: colors.ternary1
+            color: colors.secondary1
         },
         btnClose: {
             padding: 2,

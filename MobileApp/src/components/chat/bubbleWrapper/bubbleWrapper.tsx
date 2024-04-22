@@ -87,9 +87,9 @@ export default function BubbleWrapper({
     //reaction handler
     const onReaction = (selected: string) => {
 
-       
+
         let updatedReacts: any = [];
-    
+
         //if user react message with new reaction 
         if (userReaction && userReaction?.values != selected) {
             updatedReacts = msgReacts?.map(r => {
@@ -186,13 +186,16 @@ export default function BubbleWrapper({
                     {starred ? <IconAnt
                         name='star'
                         size={10}
-                        color={"white"}
+                        color={you && !isDark ? "white" : colors.ternary1}
                         style={{ marginHorizontal: 5 }}
                     /> :
                         null
                     }
                     {/* sent time */}
-                    <TextRegular style={styles.txtTime}>
+                    <TextRegular style={[
+                        styles.txtTime,
+                        (you && !isDark) && styles.msgTextSenderLight,
+                    ]}>
                         1h ago
                     </TextRegular>
                     {/* status icon */}

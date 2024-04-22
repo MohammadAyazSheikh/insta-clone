@@ -1,9 +1,6 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
-import { fontFamily } from '../../../../theme/fonts';
-import { getShadow } from '../../../../theme/platformSpecificStyles';
-
 
 
 type p = (number: number) => number;
@@ -17,9 +14,10 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         containerRow: {
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary1,
             paddingHorizontal: 8,
-            minHeight: h(10),
+            paddingVertical:10,
+            maxHeight: h(20),
             width: "100%",
         },
         txtInput: {
@@ -28,11 +26,14 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             borderWidth: 1,
             borderColor: 'gray',
             paddingHorizontal: 10,
+            paddingTop:10,
+            paddingBottom:10,
+            color:colors.secondary1,
         },
         btnStyle: {
             padding: 10,
             borderRadius: 100,
-            backgroundColor: colors.primary2,
+            backgroundColor: colors.ternary1,
             marginLeft: 10,
         },
         //---------------------------Attachment Sheet-----------------

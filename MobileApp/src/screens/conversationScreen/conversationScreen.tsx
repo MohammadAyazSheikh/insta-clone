@@ -16,6 +16,7 @@ import { RenderMsgAlert } from '../../components/general/alerts/messageOptionsAl
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import { RenderReaction } from '../../components/chat/reactions/reactions';
 import ReactionSheet from '../../components/chat/reactions/reactionSheet';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 export const chatScrollRef = createRef<FlatList>();
@@ -102,49 +103,51 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            {/* header */}
-            <ChatHeader
-               showOptions={selectedMessages.length > 0}
-            />
-            {/* list messages */}
-            <GestureHandlerRootView style={styles.container}>
-                <FlatList
-                    ref={chatScrollRef}
-                    style={styles.scrollContainer}
-                    inverted
-                    data={messages}
-                    keyExtractor={(item => item.id.toString())}
-                    renderItem={({ item, index }) => (
-                        <RenderBubble
-                            message={item}
-                            setReplyMessage={setReplyMessage}
-                        />
-                    )}
-
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                {/* header */}
+                <ChatHeader
+                    showOptions={selectedMessages.length > 0}
                 />
+                {/* list messages */}
+                <GestureHandlerRootView style={styles.container}>
+                    <FlatList
+                        ref={chatScrollRef}
+                        style={styles.scrollContainer}
+                        inverted
+                        data={messages}
+                        keyExtractor={(item => item.id.toString())}
+                        renderItem={({ item, index }) => (
+                            <RenderBubble
+                                message={item}
+                                setReplyMessage={setReplyMessage}
+                            />
+                        )}
 
-            </GestureHandlerRootView>
-            {/* Footer */}
-            <SenderFooter
-                {
-                ...{
-                    onSend,
-                    replyMessage,
-                    setReplyMessage,
-                }
-                }
-            />
-            {/* message option for delete */}
-            <RenderMsgAlert />
-            {/* modal for reacting in messages */}
-            <RenderReaction />
-            {/* sheet for showing reaction in a message */}
-            <ReactionSheet
-                ref={refReactionSheet}
-                snapPoints={["50%"]}
-            />
-        </SafeAreaView >
+                    />
+
+                </GestureHandlerRootView>
+                {/* Footer */}
+                <SenderFooter
+                    {
+                    ...{
+                        onSend,
+                        replyMessage,
+                        setReplyMessage,
+                    }
+                    }
+                />
+                {/* message option for delete */}
+                <RenderMsgAlert />
+                {/* modal for reacting in messages */}
+                <RenderReaction />
+                {/* sheet for showing reaction in a message */}
+                <ReactionSheet
+                    ref={refReactionSheet}
+                    snapPoints={["50%"]}
+                />
+            </SafeAreaView >
+        </SafeAreaProvider>
     );
 
 }
