@@ -34,14 +34,11 @@ type loginPropsErr = {
 
 export default function Inbox() {
 
-    const { styles, widthToDp } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useFunctionalOrientation(responsiveStyles);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
-    const [data, setData] = useState<loginProps>({});
-    const [err, setErr] = useState<loginPropsErr>({});
-    const [hidePass, setHidePass] = useState(true);
-    const dispatch = useAppDispatch();
+    // const colors = useAppThemeColors();
+    // const { theme } = useAppSelector(state => state.theme);
+    // const dispatch = useAppDispatch();
 
 
     return (
@@ -62,6 +59,7 @@ export default function Inbox() {
                         subTitle={item.subject}
                         time={item.timestamp}
                         badge={item.badge!}
+                        onPress={()=>navigation.navigate("Conversation",{messageId:1})}
                     />)}
                 />
             </SafeAreaView>

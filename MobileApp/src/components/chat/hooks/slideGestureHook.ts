@@ -9,31 +9,32 @@ import { Gesture } from 'react-native-gesture-handler';
 const { width } = Dimensions.get("window");
 
 
-const TOUCH_SLOP =  1000;//5;
-const TIME_TO_ACTIVATE_PAN = 100;
 export const useSlideGesture = (onEnd?: () => void) => {
 
 
     const translateX = useSharedValue(0);
-    const touchStart = useSharedValue({ x: 0, y: 0, time: 0 });
-
+    const initialTouchLocation = useSharedValue<{ x: number, y: number } | null>(null);
     const panGestureEvent = Gesture
         .Pan()
         .manualActivation(true)
-        .onTouchesDown((e) => {
-            touchStart.value = {
-                x: e.changedTouches[0].x,
-                y: e.changedTouches[0].y,
-                time: Date.now(),
-            };
+        .manualActivation(true)
+        .onBegin((evt) => {
+            initialTouchLocation.value = { x: evt.x, y: evt.y };
         })
-        .onTouchesMove((e, state) => {
-            if (Date.now() - touchStart.value.time > TIME_TO_ACTIVATE_PAN) {
+        .onTouchesMove((evt, state) => {
+            // Sanity checks
+            if (!initialTouchLocation.value || !evt.changedTouches.length) {
+                state.fail();
+                return;
+            }
+
+            const xDiff = Math.abs(evt.changedTouches[0].x - initialTouchLocation.value.x);
+            const yDiff = Math.abs(evt.changedTouches[0].y - initialTouchLocation.value.y);
+            const isHorizontalPanning = xDiff > yDiff;
+
+            if (isHorizontalPanning) {
                 state.activate();
-            } else if (
-                Math.abs(touchStart.value.x - e.changedTouches[0].x) > TOUCH_SLOP ||
-                Math.abs(touchStart.value.y - e.changedTouches[0].y) > TOUCH_SLOP
-            ) {
+            } else {
                 state.fail();
             }
         })

@@ -36,7 +36,9 @@ const InboxCard = ({
 
 
     return (
-        <ButtonRipple style={styles.container}>
+        <ButtonRipple style={styles.container}
+            onPress={onPress && onPress}
+        >
             {/* avatar */}
             <UserAvatar
                 name={title}

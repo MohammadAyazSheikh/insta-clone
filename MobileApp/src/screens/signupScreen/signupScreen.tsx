@@ -56,7 +56,7 @@ export default function Signup() {
             />
         );
 
-    if (activeScreen == 'password')
+   else if (activeScreen == 'password')
         return (
             <SelectPassword
                 setData={setData}
@@ -67,7 +67,8 @@ export default function Signup() {
                 activeScreen={activeScreen}
             />
         );
-    if (activeScreen == 'phoneEmail')
+   else 
+   //(activeScreen == 'phoneEmail')
         return (
             <SelectPhoneEmail
                 setData={setData}

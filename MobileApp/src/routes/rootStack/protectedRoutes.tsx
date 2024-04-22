@@ -25,21 +25,27 @@ const Screen = () =>
 export const protectedRoutes = () => {
     return (
         <>
-        <Stack.Screen
+            <Stack.Screen
+                name="RootTab"
+                component={RootTab}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
                 name="Inbox"
                 component={Inbox}
                 options={{
                     headerShown: false,
                 }}
             />
-            {/* <Stack.Screen
-                name="RootTab"
-                component={RootTab}
+            <Stack.Screen
+                name="Conversation"
+                component={Conversation}
                 options={{
                     headerShown: false,
                 }}
-            /> */}
-            
+            />
         </>
     );
 };
