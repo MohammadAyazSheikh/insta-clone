@@ -14,7 +14,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         containerRow: {
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: "red",
+            backgroundColor: colors.primary1,
             paddingHorizontal: 8,
             paddingVertical:10,
             maxHeight: h(20),
