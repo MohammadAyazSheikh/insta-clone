@@ -19,6 +19,7 @@ import DocumentPickerFooter from '../documentPickerFooter/documentPickerFooter';
 import ReplyMessageFooter from '../replyFooter/replyMessageFooter';
 import Animated, {  FadeInDown } from 'react-native-reanimated';
 import LocationMapSelector from '../../general/locationSelector/locationMapSelector';
+import AnimatedRecorder from '../../sound/animatedRecorder';
 
 export type conversationStatProps = {
 
@@ -173,7 +174,7 @@ export const SenderFooter = ({
 
         </ButtonRipple>
         {/* send button */}
-        <ButtonRipple
+        {/* <ButtonRipple
           style={styles.btnStyle}
           onPress={() => {
             setReplyMessage && setReplyMessage(undefined);
@@ -214,7 +215,9 @@ export const SenderFooter = ({
             size={20}
             color={"white"}
           />
-        </ButtonRipple>
+        </ButtonRipple> */}
+        <AnimatedRecorder/>
+
       </View>
 
 

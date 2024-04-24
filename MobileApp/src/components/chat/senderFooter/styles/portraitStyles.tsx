@@ -9,12 +9,12 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
     return StyleSheet.create({
         containerCol: {
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
         },
         containerRow: {
             flexDirection: 'row',
             alignItems: 'center',
-            backgroundColor: colors.primary1,
+            backgroundColor: "red",
             paddingHorizontal: 8,
             paddingVertical:10,
             maxHeight: h(20),
