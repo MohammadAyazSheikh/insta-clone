@@ -23,6 +23,7 @@ import ButtonRipple from '../general/customButton/buttonRipple';
 import IconFa from 'react-native-vector-icons/FontAwesome';
 import IconFd from 'react-native-vector-icons/Foundation';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
+import RecorderQuick from "./recorderQuick";
 
 export const BUTTON_SIZE = 10;
 
@@ -36,7 +37,13 @@ const AnimatedRecorder = ({
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
 
-    const { animatedStyle, animatedLockIconStyle, panGestureEvent, hideIcons } = useSoundBtnGesture();
+    const {
+        animatedStyle,
+        animatedRecorderStyle,
+        animatedLockIconStyle,
+        panGestureEvent,
+        hideIcons
+    } = useSoundBtnGesture();
 
 
 
@@ -49,10 +56,15 @@ const AnimatedRecorder = ({
                     styles.iconLockContainer,
                     animatedLockIconStyle
                 ]}>
-                    <View style = {styles.iconLock}>
-                    <IconFa name='lock' size={22} color={"white"} />
+                    <View style={styles.iconLock}>
+                        <IconFa name='lock' size={22} color={"white"} />
                     </View>
                 </Animated.View>
+                {/* Quick Recorder */}
+                <RecorderQuick
+                    animatedStyles={animatedRecorderStyle}
+                />
+
                 {/* sound button */}
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[
@@ -68,7 +80,7 @@ const AnimatedRecorder = ({
             <View style={styles.recorderView}>
 
                 <Animated.View style={styles.recorderContainer}
-                    // entering={FadeInDown}
+                // entering={FadeInDown}
                 >
 
                 </Animated.View>
