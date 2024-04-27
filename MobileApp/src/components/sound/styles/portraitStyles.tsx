@@ -21,6 +21,13 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       backgroundColor: colors.ternary1,
       marginLeft: 10,
     },
+    iconLottie:{
+      width: w(BUTTON_SIZE),
+      aspectRatio: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 100,
+    },
     //lock icon
     iconLockContainer: {
       width: w(BUTTON_SIZE),
@@ -31,25 +38,31 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       position: 'absolute',
       bottom: 0,
       right: 0,
-      overflow: 'hidden'
+      overflow: 'hidden',
     },
     iconLock: {
       width: "100%",
       aspectRatio: 1,
+      padding:3,
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 100,
+
     },
     // quick recorder
     quickRecorderView: {
+      // width: w(100)-20,
       height: w(BUTTON_SIZE),
-      width: w(100)-20,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'flex-start',
       borderRadius: 100,
-      backgroundColor: 'red',
+      backgroundColor: colors.primary4,
       position: 'absolute',
       bottom: 0,
-      left:-w(100-BUTTON_SIZE)+20,
-      transformOrigin: "left center"
+      left: -w(100 - BUTTON_SIZE) + 20,
+      overflow:'hidden',
+      // transformOrigin: "left center"
     },
     // recorder
     recorderView: {

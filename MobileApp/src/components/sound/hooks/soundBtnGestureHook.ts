@@ -5,7 +5,8 @@ import {
     withSpring,
     withTiming,
     interpolate,
-    Extrapolation,   
+    Extrapolation,
+    runOnUI,
 } from 'react-native-reanimated';
 import { Alert, Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
@@ -18,7 +19,7 @@ const w = width / 3;
 const DRAG_LIMIT_X = width / 3;
 const LOCK_BUTTON_MAX_HEIGHT = 130;
 const LOCK_BTN_MIN_HEIGHT = widthToDp(BUTTON_SIZE);
-
+const QUICK_RECORDER_WIDTH = widthToDp(100) - 20
 
 export const useSoundBtnGesture = (onEnd?: () => void) => {
 
@@ -30,37 +31,61 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
     // lock icon
     const translateYLockIcon = useSharedValue(0);
     const lockHeight = useSharedValue(0);
+    const lockIconProgress = useSharedValue(0.5);
     //quick recorder
     const scaleXQuickRec = useSharedValue(0);
+    const trashIconProgress = useSharedValue(0);
     //for hiding lock icon
-    const [hideIcons, setHideIcons] = useState(false)
+    const [hideIcons, setHideIcons] = useState(false);
 
+    const dragEnabled = useSharedValue(true);
 
+    //reset all the animations values
+    const resetAnimations = () => {
+
+        "worklet";
+
+        scale.value = withTiming(1, { duration: 200 });
+        lockHeight.value = 0;
+        translateYLockIcon.value = 0;
+        scaleXQuickRec.value = 0;
+        translateX.value = withSpring(0, { duration: 1000 });
+        translateY.value = withSpring(0, { duration: 1000 });
+        trashIconProgress.value = 0;
+        lockIconProgress.value = 0.5;
+    }
 
     const panGestureEvent = Gesture
         .Pan()
         .onTouchesDown((e) => {
-            scale.value = withTiming(1.5, { duration: 100 });
 
+            dragEnabled.value = true;
+            scale.value = withTiming(1.7, { duration: 100 });
             lockHeight.value = withTiming(LOCK_BUTTON_MAX_HEIGHT, { duration: 200 });
             translateYLockIcon.value = -LOCK_BTN_MIN_HEIGHT / 2;
-            scaleXQuickRec.value =  withTiming(1, { duration: 150 });
+            scaleXQuickRec.value = withTiming(QUICK_RECORDER_WIDTH, { duration: 150 });
 
         })
         .onTouchesUp(() => {
-            scale.value = withTiming(1, { duration: 200 });
-            lockHeight.value = 0;
-            translateYLockIcon.value = 0;
-            scaleXQuickRec.value = 0;
 
+            resetAnimations();
+            // scale.value = withTiming(1, { duration: 200 });
+            // lockHeight.value = 0;
+            // translateYLockIcon.value = 0;
+            // scaleXQuickRec.value = 0;
         })
         .onChange((event) => {
+
             // note
-            // Maths.abs makes value positive 
+            // Maths.abs makes value positive
+
+            // if drag is not enabled  return & don't move the sound button
+            if (!dragEnabled.value)
+                return;
 
             //translateX
             const offsetX = event.changeX + translateX.value;
-            const clampX = Math.max(-100, offsetX);
+            // const clampX = Math.max(-100, offsetX);
 
             // translate Y
             const offsetY = event.changeY + translateY.value;
@@ -103,9 +128,13 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
 
                     translateYLockIcon.value = Y;
 
-                    //for scaling Quick Recorder when user drags left
+                    //for decreasing Quick Recorder width when user drags left
                     const inputRangeQuickRec = [DRAG_LIMIT_X / 10, DRAG_LIMIT_X / 5, DRAG_LIMIT_X];
-                    const outputRangeQuickRec = [1, 0.9, 0.7];
+                    const outputRangeQuickRec = [
+                        QUICK_RECORDER_WIDTH,
+                        QUICK_RECORDER_WIDTH * 0.9,
+                        QUICK_RECORDER_WIDTH * 0.7
+                    ];
 
                     const scaleXQuick = interpolate(
                         absOffsetX,
@@ -115,9 +144,21 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
                     );
 
                     scaleXQuickRec.value = scaleXQuick;
+
+                    // for animating trash icon
+                    trashIconProgress.value = interpolate(
+                        absOffsetX,
+                        [0, DRAG_LIMIT_X / 2, DRAG_LIMIT_X],
+                        [0, 0.5, 1],
+                        Extrapolation.CLAMP
+                    );
                 }
-                else
-                    translateX.value = withSpring(clampX);
+                else {
+                    //  translateX.value = withSpring(clampX);
+                    dragEnabled.value = false;
+                    resetAnimations();
+                }
+
             }
 
 
@@ -162,32 +203,28 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
                     translateYLockIcon.value = Y;
 
                     //fot scaling sound button when drag up
-
                     scale.value = interpolate(
                         absOffsetY,
                         inputRange,
                         [1.5, 1, 0],
                         Extrapolation.CLAMP
-                    )
-
+                    );
+                    // for animating trash icon
+                    lockIconProgress.value = interpolate(
+                        absOffsetY,
+                        inputRange,
+                        [0.5, 0.75, 1],
+                        Extrapolation.CLAMP
+                    );
+                    console.log(lockIconProgress.value)
                 }
                 else {
                     translateY.value = withSpring(clampY);
                     runOnJS(setHideIcons)(true);
-                    if (offsetX < 0) {
-                        console.log("cancel")
-                    }
                 }
             }
         })
         .onEnd((e) => {
-            translateX.value = withSpring(0, {
-                duration: 1000,
-            },);
-
-            translateY.value = withSpring(0, {
-                duration: 1000,
-            },);
             onEnd && runOnJS(onEnd)();
         })
 
@@ -245,9 +282,7 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
     const animatedRecorderStyle = useAnimatedStyle(() => {
 
         return {
-            transform: [
-                { scaleX: scaleXQuickRec.value }
-            ],
+            width: scaleXQuickRec.value,
         };
     });
 
@@ -257,5 +292,7 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
         animatedLockIconStyle,
         panGestureEvent,
         hideIcons,
+        trashIconProgress,
+        lockIconProgress,
     };
 }

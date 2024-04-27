@@ -11,7 +11,7 @@ import {
 } from 'react-native-gesture-handler';
 import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../general/text/text";
-import { timeProp, useSoundPlayer } from "./hooks/soundPayerHooks";
+import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 const { width: deviceWidth } = Dimensions.get("window");
 

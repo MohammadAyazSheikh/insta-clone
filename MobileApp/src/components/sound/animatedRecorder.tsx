@@ -14,18 +14,20 @@ import {
 } from 'react-native-gesture-handler';
 import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../general/text/text";
-import { timeProp, useSoundPlayer } from "./hooks/soundPayerHooks";
+import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 const { width: deviceWidth } = Dimensions.get("window");
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
 import ButtonRipple from '../general/customButton/buttonRipple';
 import IconFa from 'react-native-vector-icons/FontAwesome';
+import LottieView from 'lottie-react-native';
 import IconFd from 'react-native-vector-icons/Foundation';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 
 export const BUTTON_SIZE = 10;
+const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
 type props = {
 
@@ -42,6 +44,8 @@ const AnimatedRecorder = ({
         animatedRecorderStyle,
         animatedLockIconStyle,
         panGestureEvent,
+        trashIconProgress,
+        lockIconProgress,
         hideIcons
     } = useSoundBtnGesture();
 
@@ -57,12 +61,18 @@ const AnimatedRecorder = ({
                     animatedLockIconStyle
                 ]}>
                     <View style={styles.iconLock}>
-                        <IconFa name='lock' size={22} color={"white"} />
+                        <AnimatedLottieView
+                            progress={lockIconProgress}
+                            style={[styles.iconLottie,{width:'100%'}]}
+                            source={require('../../../assets/lottieFiles/lock.json')}
+                        />
+                        {/* <IconFa name='lock' size={22} color={"white"} /> */}
                     </View>
                 </Animated.View>
                 {/* Quick Recorder */}
                 <RecorderQuick
                     animatedStyles={animatedRecorderStyle}
+                    iconProgress={trashIconProgress}
                 />
 
                 {/* sound button */}
