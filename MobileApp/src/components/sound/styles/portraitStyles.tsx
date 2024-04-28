@@ -55,7 +55,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       height: w(BUTTON_SIZE),
       flexDirection: 'row',
       justifyContent: 'flex-start',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       borderRadius: 100,
       backgroundColor: colors.primary4,
       position: 'absolute',
@@ -63,6 +63,9 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       left: -w(100 - BUTTON_SIZE) + 20,
       overflow:'hidden',
       // transformOrigin: "left center"
+    },
+    txtTime:{
+      color:colors.secondary1
     },
     // recorder
     recorderView: {

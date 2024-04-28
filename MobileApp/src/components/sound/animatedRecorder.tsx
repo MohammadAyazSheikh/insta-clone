@@ -1,11 +1,14 @@
 import React, { useRef, useState } from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, Alert } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
     Easing,
     FadeInUp,
     FadeInDown,
+    interpolate,
+    runOnJS,
+    withTiming,
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
 import IconEnt from 'react-native-vector-icons/Entypo';
@@ -25,6 +28,8 @@ import LottieView from 'lottie-react-native';
 import IconFd from 'react-native-vector-icons/Foundation';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
+import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
+import { convertMillisToTime } from "./utils/timeConverion";
 
 export const BUTTON_SIZE = 10;
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
@@ -38,7 +43,14 @@ const AnimatedRecorder = ({
 }: props) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
+    //animated value for  wave
+    const metering = useSharedValue(0);
 
+    //sound hook
+    const time = useSharedValue<number>(0);
+    const { onStartRecord, onStopRecord } = useSoundRecorderHooks();
+
+    //animation hook
     const {
         animatedStyle,
         animatedRecorderStyle,
@@ -46,8 +58,35 @@ const AnimatedRecorder = ({
         panGestureEvent,
         trashIconProgress,
         lockIconProgress,
-        hideIcons
-    } = useSoundBtnGesture();
+        hideIcons,
+    } = useSoundBtnGesture({
+        onHold() {
+            metering.value = 0;
+            time.value = 0;
+            setTimeout(() => {
+                onStartRecord((e) => {
+                    metering.value = withTiming(interpolate(
+                        e.currentMetering!,
+                        [-30, -10, 0],
+                        [0, 0, 1]
+                    ), { duration: 200 });
+                  time.value
+                    console.log(time)
+                })
+            }, 1000);
+        },
+        onRelease() {
+            onStopRecord();
+        },
+        onDelete() {
+
+        },
+        onLock() {
+            Alert.alert("Locked")
+        }
+    });
+
+
 
 
 
@@ -63,18 +102,18 @@ const AnimatedRecorder = ({
                     <View style={styles.iconLock}>
                         <AnimatedLottieView
                             progress={lockIconProgress}
-                            style={[styles.iconLottie,{width:'100%'}]}
+                            style={[styles.iconLottie, { width: '100%' }]}
                             source={require('../../../assets/lottieFiles/lock.json')}
                         />
-                        {/* <IconFa name='lock' size={22} color={"white"} /> */}
                     </View>
                 </Animated.View>
                 {/* Quick Recorder */}
                 <RecorderQuick
                     animatedStyles={animatedRecorderStyle}
                     iconProgress={trashIconProgress}
+                    waveProgress={metering}
+                    time={convertMillisToTime(time.value)}
                 />
-
                 {/* sound button */}
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[

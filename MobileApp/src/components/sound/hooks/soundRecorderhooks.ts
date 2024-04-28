@@ -12,7 +12,7 @@ import AudioRecorderPlayer,
 
 type recordType = (e: RecordBackType) => void
 const audioRecorderPlayer = new AudioRecorderPlayer();
-export default function useSoundRecorderHooks() {
+export default function useSoundRecorderHooks(listenerTime:number = 0.1) {
 
 
 
@@ -29,7 +29,7 @@ export default function useSoundRecorderHooks() {
         const meteringEnabled = true;
         const path = undefined;
         const result = await audioRecorderPlayer.startRecorder(path, audioSet, meteringEnabled);
-        await audioRecorderPlayer.setSubscriptionDuration(0.1)
+        await audioRecorderPlayer.setSubscriptionDuration(listenerTime)
         audioRecorderPlayer.addRecordBackListener((e) => {
             onRecordListener(e)
             // console.log({

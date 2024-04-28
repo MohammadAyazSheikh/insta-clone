@@ -6,22 +6,36 @@ import {
     withTiming,
     interpolate,
     Extrapolation,
-    runOnUI,
 } from 'react-native-reanimated';
-import { Alert, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
 import { BUTTON_SIZE } from '../animatedRecorder';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+
 const { width } = Dimensions.get("window");
-const w = width / 3;
+
 
 const DRAG_LIMIT_X = width / 3;
 const LOCK_BUTTON_MAX_HEIGHT = 130;
 const LOCK_BTN_MIN_HEIGHT = widthToDp(BUTTON_SIZE);
 const QUICK_RECORDER_WIDTH = widthToDp(100) - 20
 
-export const useSoundBtnGesture = (onEnd?: () => void) => {
+
+type props = {
+    onHold?: () => void,
+    onRelease?: () => void,
+    onDelete?: () => void,
+    onLock?: () => void,
+    onEnd?:()=>void
+}
+export const useSoundBtnGesture = ({
+    onHold,
+    onRelease,
+    onDelete,
+    onLock,
+    onEnd,
+}: props) => {
 
 
     //sound button
@@ -64,15 +78,11 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
             lockHeight.value = withTiming(LOCK_BUTTON_MAX_HEIGHT, { duration: 200 });
             translateYLockIcon.value = -LOCK_BTN_MIN_HEIGHT / 2;
             scaleXQuickRec.value = withTiming(QUICK_RECORDER_WIDTH, { duration: 150 });
-
+            onHold && runOnJS(onHold)();
         })
         .onTouchesUp(() => {
-
             resetAnimations();
-            // scale.value = withTiming(1, { duration: 200 });
-            // lockHeight.value = 0;
-            // translateYLockIcon.value = 0;
-            // scaleXQuickRec.value = 0;
+            onRelease && runOnJS(onRelease)();
         })
         .onChange((event) => {
 
@@ -157,6 +167,7 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
                     //  translateX.value = withSpring(clampX);
                     dragEnabled.value = false;
                     resetAnimations();
+                    onDelete && runOnJS(onDelete)();
                 }
 
             }
@@ -216,11 +227,12 @@ export const useSoundBtnGesture = (onEnd?: () => void) => {
                         [0.5, 0.75, 1],
                         Extrapolation.CLAMP
                     );
-                    console.log(lockIconProgress.value)
                 }
                 else {
                     translateY.value = withSpring(clampY);
                     runOnJS(setHideIcons)(true);
+                    onLock && runOnJS(onLock)();
+                    dragEnabled.value = false;
                 }
             }
         })

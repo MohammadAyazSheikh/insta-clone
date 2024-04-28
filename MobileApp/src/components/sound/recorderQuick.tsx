@@ -27,27 +27,43 @@ const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 type props = {
     animatedStyles: any,
     iconProgress: SharedValue<number>,
+    waveProgress: SharedValue<number>,
+    time:string,
 }
 
 
 const RecorderQuick = ({
     animatedStyles,
-    iconProgress
+    iconProgress,
+    waveProgress,
+    time,
 }: props) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
-  
+
 
     return (
         <Animated.View style={[
             styles.quickRecorderView,
             animatedStyles
         ]}>
+            {/* trash icon */}
             <AnimatedLottieView
                 progress={iconProgress}
                 style={[styles.iconLottie]}
                 source={require('../../../assets/lottieFiles/trash.json')}
             />
+            <TextRegular style = {styles.txtTime}>
+               {time}
+            </TextRegular>
+            {/* wave animation */}
+            <View style = {{flex:1,height:'100%', justifyContent:'center',alignItems:'center'}}>
+                <AnimatedLottieView
+                    progress={waveProgress}
+                    style={{ height: '80%', width: '100%' }}
+                    source={require('../../../assets/lottieFiles/waveLong.json')}
+                />
+            </View>
         </Animated.View>
     )
 
