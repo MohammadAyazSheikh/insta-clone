@@ -53,7 +53,7 @@ const Slider = ({
     }));
 
     // gesture animation hook
-    const { animatedStyle, panGestureEvent } = useGestureAnimation({
+    const { animatedGestureStyle, panGestureEvent } = useGestureAnimation({
         translateX,
         width: progressViewWidth,
         onStart: () => {
@@ -141,7 +141,7 @@ const Slider = ({
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[
                         styles.thumb,
-                        animatedStyle,
+                        animatedGestureStyle,
                         playingStyleAnimated,
                         // { left: `${percentage}%` }
                     ]}

@@ -12,7 +12,7 @@ import AudioRecorderPlayer,
 
 type recordType = (e: RecordBackType) => void
 const audioRecorderPlayer = new AudioRecorderPlayer();
-export default function useSoundRecorderHooks(listenerTime:number = 0.1) {
+export default function useSoundRecorderHooks(listenerTime: number = 0.1) {
 
 
 
@@ -70,6 +70,7 @@ export default function useSoundRecorderHooks(listenerTime:number = 0.1) {
     const onPausePlay = async (callback?: () => void) => {
         console.log('onPausePlay');
         await audioRecorderPlayer.pausePlayer();
+        // audioRecorderPlayer.removeRecordBackListener();
         callback && callback()
     };
 
@@ -82,7 +83,7 @@ export default function useSoundRecorderHooks(listenerTime:number = 0.1) {
     const onStopPlay = async (callback?: () => void) => {
         console.log('onStopPlay');
         await audioRecorderPlayer.stopPlayer();
-        await audioRecorderPlayer.removePlayBackListener();
+        audioRecorderPlayer.removePlayBackListener();
         callback && callback()
     };
 
@@ -101,6 +102,7 @@ export default function useSoundRecorderHooks(listenerTime:number = 0.1) {
         onResumePlay,
         onStopPlay,
         onSeek,
+        formateTime: audioRecorderPlayer.mmssss
     }
 
 }

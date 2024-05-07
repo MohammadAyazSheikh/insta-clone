@@ -4,6 +4,8 @@ import SoundSlider from '../../general/audioSheet/soundSlider';
 import colors from '../../../theme/colors';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
+import SoundPlayer from '../../sound/soundPlayer';
+import { widthToDp } from '../../../utils/functions/responsiveUtils';
 
 
 type propsType = {
@@ -32,7 +34,7 @@ export default function SoundBubble(props: propsType) {
             onPress={props?.onPress}
             onLongPress={props?.onLongPress}
         >
-            <SoundSlider
+            {/* <SoundSlider
                 containerStyle={{ width: '100%' }}
                 iconColor={colorBtn}
                 thumbTintColor={colorBtn}
@@ -40,6 +42,10 @@ export default function SoundBubble(props: propsType) {
                 minimumTrackTintColor={maxTrackColor}
                 textStyle={{ color: maxTrackColor, fontSize: 10 }}
                 path={voice}
+            /> */}
+            <SoundPlayer
+                url={voice!}
+                containerStyles={{ backgroundColor: 'transparent', width: widthToDp(80) }}
             />
         </BubbleWrapper>
     );

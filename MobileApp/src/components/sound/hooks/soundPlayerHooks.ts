@@ -10,7 +10,7 @@ export type timeProp = {
 Sound.setCategory('Playback');
 
 const path_ = 
-// "file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/C853291C-39EA-4480-903F-4595A58E91BC/Library/Caches/sound.m4a"
+
 'https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3';
 
 export const useSoundPlayer = (uri: string = path_) => {

@@ -12,7 +12,7 @@ import Animated, {
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
 import { RecordBackType } from "react-native-audio-recorder-player";
-import Slider from "./player";
+import Slider from "./soundPlayer";
 
 //-160 - slowest sound
 //0 - loudest sound

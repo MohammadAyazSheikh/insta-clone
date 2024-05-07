@@ -17,7 +17,6 @@ export const useSlideGesture = (onEnd?: () => void) => {
     const panGestureEvent = Gesture
         .Pan()
         .manualActivation(true)
-        .manualActivation(true)
         .onBegin((evt) => {
             initialTouchLocation.value = { x: evt.x, y: evt.y };
         })

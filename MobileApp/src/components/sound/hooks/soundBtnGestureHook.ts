@@ -6,8 +6,10 @@ import {
     withTiming,
     interpolate,
     Extrapolation,
+    SharedValue,
+    runOnUI,
 } from 'react-native-reanimated';
-import { Dimensions } from 'react-native';
+import { Alert, Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
 import { BUTTON_SIZE } from '../animatedRecorder';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
@@ -27,7 +29,7 @@ type props = {
     onRelease?: () => void,
     onDelete?: () => void,
     onLock?: () => void,
-    onEnd?:()=>void
+    onEnd?: () => void
 }
 export const useSoundBtnGesture = ({
     onHold,
@@ -49,16 +51,24 @@ export const useSoundBtnGesture = ({
     //quick recorder
     const scaleXQuickRec = useSharedValue(0);
     const trashIconProgress = useSharedValue(0);
-    //for hiding lock icon
-    const [hideIcons, setHideIcons] = useState(false);
+    //for locking recorder
+    const [locked, setLocked] = useState(false);
 
     const dragEnabled = useSharedValue(true);
+
+    const onHoldDelay = () => {
+        setTimeout(() => {
+            if (dragEnabled.value)
+                onHold && (onHold)();
+        }, 1500)
+    }
+
 
     //reset all the animations values
     const resetAnimations = () => {
 
         "worklet";
-
+        dragEnabled.value = false;
         scale.value = withTiming(1, { duration: 200 });
         lockHeight.value = 0;
         translateYLockIcon.value = 0;
@@ -78,7 +88,9 @@ export const useSoundBtnGesture = ({
             lockHeight.value = withTiming(LOCK_BUTTON_MAX_HEIGHT, { duration: 200 });
             translateYLockIcon.value = -LOCK_BTN_MIN_HEIGHT / 2;
             scaleXQuickRec.value = withTiming(QUICK_RECORDER_WIDTH, { duration: 150 });
-            onHold && runOnJS(onHold)();
+
+            runOnJS(onHoldDelay)();
+
         })
         .onTouchesUp(() => {
             resetAnimations();
@@ -165,7 +177,6 @@ export const useSoundBtnGesture = ({
                 }
                 else {
                     //  translateX.value = withSpring(clampX);
-                    dragEnabled.value = false;
                     resetAnimations();
                     onDelete && runOnJS(onDelete)();
                 }
@@ -229,10 +240,10 @@ export const useSoundBtnGesture = ({
                     );
                 }
                 else {
-                    translateY.value = withSpring(clampY);
-                    runOnJS(setHideIcons)(true);
+                    // translateY.value = withSpring(clampY);
+                    runOnJS(setLocked)(true);
+                    resetAnimations();
                     onLock && runOnJS(onLock)();
-                    dragEnabled.value = false;
                 }
             }
         })
@@ -241,7 +252,7 @@ export const useSoundBtnGesture = ({
         })
 
     // ---- animated sound button styles ----
-    const animatedStyle = useAnimatedStyle(() => {
+    const animatedBtnSendStyle = useAnimatedStyle(() => {
 
         return {
             transform: [
@@ -299,11 +310,11 @@ export const useSoundBtnGesture = ({
     });
 
     return {
-        animatedStyle,
+        animatedBtnSendStyle,
         animatedRecorderStyle,
         animatedLockIconStyle,
         panGestureEvent,
-        hideIcons,
+        locked,
         trashIconProgress,
         lockIconProgress,
     };

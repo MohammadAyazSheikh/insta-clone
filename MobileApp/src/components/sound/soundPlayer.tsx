@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import { View, StyleSheet, Dimensions} from "react-native";
+import { View, StyleSheet, Dimensions, ViewStyle, TextStyle } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
 } from 'react-native-reanimated';
-import { TouchableRipple } from "react-native-paper";
+import { ActivityIndicator, TouchableRipple } from "react-native-paper";
 import IconEnt from 'react-native-vector-icons/Entypo';
 import {
     GestureDetector
@@ -13,33 +13,50 @@ import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../general/text/text";
 import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
+import responsiveStyles from "./styles/styles";
+import { useFunctionalOrientation } from "../../utils/functions/responsiveUtils";
+import colors from "../../theme/colors";
 const { width: deviceWidth } = Dimensions.get("window");
 
 type sliderProps = {
-    width?: number,
+    // width?: number,
+    url: string,
+    containerStyles?: ViewStyle,
+    progressStyles?: ViewStyle,
+    thumbStyles?: ViewStyle,
+    iconColor?: string,
+    timeStyles?: TextStyle,
 }
 
-const Slider = ({
-    width = deviceWidth,
+const SoundPlayer = ({
+    // width = deviceWidth,
+    url = 'https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3',
+    thumbStyles,
+    progressStyles,
+    containerStyles,
+    iconColor,
+    timeStyles,
 }: sliderProps) => {
+
+    const { styles } = useFunctionalOrientation(responsiveStyles);
 
     //holds width of the view of progress line view
     const [progressViewWidth, setProgressViewWidth] = useState<number>(0);
 
     const [isPlaying, setIsPlaying] = useState(false);
 
-    //if user press thumb we want to stop is movement when sound is plying
-    //and have move thumb on the basis of gesture value
+    //if user press thumb we want to stop its movement when sound is playing
+    //and have to move thumb on the basis of gesture value
     const isThumbPressed = useRef(false);
 
     //sound hook
-    const { play, pause, seek, stop, setTime, time, error, isLoaded } = useSoundPlayer();
+    const { play, pause, seek, setTime, time, isLoaded, error } = useSoundPlayer(url);
 
 
     // animated value to move thumb towards right side when sound is playing
     const translateX = useSharedValue(0);
 
-    const playingStyleAnimated = useAnimatedStyle(() => ( {
+    const playingStyleAnimated = useAnimatedStyle(() => ({
         transform: [{
             translateX: translateX.value
         }]
@@ -110,23 +127,26 @@ const Slider = ({
     }
 
     return (
-        <View style={[styles.container,
-        {
-            width: width
-        }]}>
+        <View style={[
+            styles.playerContainer,
+            containerStyles,
+            // {
+            //     width: width
+            // },
+        ]}>
             {/* play button */}
             <TouchableRipple
                 onPress={onButtonPress}
-                disabled = {!isLoaded}
+                disabled={!isLoaded}
             >
                 <IconEnt
-                    color={"white"}
+                    color={iconColor || "white"}
                     size={30}
                     name={isPlaying ? 'controller-paus' : 'controller-play'}
                 />
             </TouchableRipple>
             {/* progress */}
-            <View style={styles.progressView}
+            <View style={[styles.playerProgressView, progressStyles]}
                 onLayout={(e) => {
                     console.log(e.nativeEvent.layout.width)
                     setProgressViewWidth(e.nativeEvent.layout.width)
@@ -136,82 +156,62 @@ const Slider = ({
                 <GestureDetector gesture={panGestureEvent}>
                     <Animated.View style={[
                         styles.thumb,
-                       animatedGestureStyle,
+                        thumbStyles,
+                        animatedGestureStyle,
                         playingStyleAnimated,
                     ]}
                     />
                 </GestureDetector>
             </View>
             {/* time */}
-            <TextRegular style={styles.txtTime}>
-                {formateTime(time.currentPosition, time.duration)}
-                {`  ${isLoaded}  `}
-            </TextRegular>
+            {
+                <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                    {
+                        isLoaded ?
+                            <TextRegular
+                                adjustsFontSizeToFit
+                                style={[styles.txtQuickTime, timeStyles]}>
+                                {formateTime(time.currentPosition, time.duration, isPlaying)}
+                            </TextRegular>
+                            :
+                            <ActivityIndicator
+                                size={"small"}
+                                color={'grey'}
+                            />
+                    }
+                </View>
+            }
 
         </View>
     )
 
 }
 
-export default Slider;
+export default SoundPlayer;
 
 
-const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-        height: 60,
-        backgroundColor: 'tomato',
-        justifyContent: 'center',
-        paddingHorizontal: 50,
-    },
-    progressView: {
-        flex: 1,
-        justifyContent: 'center',
-        position: 'relative',
-        height: 3,
-        backgroundColor: 'black'
-    },
-    thumb: {
-        width: 20,
-        aspectRatio: 1,
-        borderRadius: 10,
-        backgroundColor: 'white',
-        position: 'absolute',
-    },
+// const styles = StyleSheet.create({
 
-    txtTime: {
-        color: 'green',
-        position: 'absolute',
-        bottom: 2,
-        right: 5,
-        fontSize: 16
-    },
-})
+// })
 
 
 
-function convertMillisecondsToTime(milliseconds: number) {
-    // Convert milliseconds to seconds
-    var totalSeconds = Math.floor(milliseconds / 1000);
-
-    // Calculate minutes and seconds
-    var minutes = Math.floor(totalSeconds / 60);
-    var seconds = totalSeconds % 60;
-
-    // Format minutes and seconds with leading zeros if necessary
-    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-    var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
-
-    // Return the formatted time
-    return formattedMinutes + " : " + formattedSeconds;
-}
 
 
 
-function formateTime(currentTime: number, duration: number) {
-    return `${moment.utc(currentTime * 1000).format('mm:ss')} / ${moment
-        .utc(duration * 1000)
-        .format('mm:ss')}`;
+
+function formateTime(currentTime: number, duration: number, isPlaying: boolean) {
+
+
+    return (
+        currentTime > 0 ?
+            `${moment.utc(currentTime * 1000).format('mm:ss')}`
+            :
+            `${moment.utc(duration * 1000).format('mm:ss')}`
+    )
+
+
+    // return `${moment.utc(currentTime * 1000).format('mm:ss')} / ${moment
+    //     .utc(duration * 1000)
+    //     .format('mm:ss')}`;
 }

@@ -17,7 +17,7 @@ import uuid from 'react-native-uuid';
 import ImageListFooter from '../imageListFooter/imageListFooter';
 import DocumentPickerFooter from '../documentPickerFooter/documentPickerFooter';
 import ReplyMessageFooter from '../replyFooter/replyMessageFooter';
-import Animated, {  FadeInDown } from 'react-native-reanimated';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import LocationMapSelector from '../../general/locationSelector/locationMapSelector';
 import AnimatedRecorder from '../../sound/animatedRecorder';
 
@@ -216,7 +216,18 @@ export const SenderFooter = ({
             color={"white"}
           />
         </ButtonRipple> */}
-        <AnimatedRecorder/>
+        <AnimatedRecorder
+          onSend={(uri) => {
+            onSend && onSend({
+              ...defaultMsg,
+              voice: uri!,
+              type: 'voice'
+            });
+            setIsVoiceVisible(false);
+            setText('');
+            setReplyMessage && setReplyMessage(undefined);
+          }}
+        />
 
       </View>
 
