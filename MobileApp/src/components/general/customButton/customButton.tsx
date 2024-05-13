@@ -12,6 +12,7 @@ import { useFunctionalOrientation } from '../../../utils/functions/responsiveUti
 import responsiveStyles from './styles/styles';
 import { TouchableRipple } from 'react-native-paper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
+import { useAppSelector } from '../../../redux/hooks';
 
 
 type btnProps = TouchableOpacityProps;
@@ -38,6 +39,8 @@ const CustomButton = ({
 }: buttonProps) => {
   const { styles } = useFunctionalOrientation(responsiveStyles);
   const colors = useAppThemeColors();
+  const { theme } = useAppSelector(state => state.theme);
+  const isDark = theme == "dark";
 
   return (
     <TouchableRipple
@@ -46,7 +49,7 @@ const CustomButton = ({
       style={[styles.btnView, touchProps.style,
       touchProps.disabled ? { ...styles.disableStyle, ...disableStyles } : {}
       ]}
-      rippleColor={'rgb(255, 114, 94,0.5)'}
+      rippleColor={isDark ? 'rgba(255,255,255,0.2)' : 'rgba(000,000,000,0.2)'}
       borderless
     >
       <>

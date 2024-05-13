@@ -1,7 +1,7 @@
 
 import { StyleSheet } from 'react-native';
-import { colorObjectType } from '../../../theme/colors';
-import { getShadow } from '../../../theme/platformSpecificStyles';
+import { colorObjectType } from '../../../../theme/colors';
+import { getShadow } from '../../../../theme/platformSpecificStyles';
 import { BUTTON_SIZE } from '../animatedRecorder';
 import { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from '../recorderLocked';
 

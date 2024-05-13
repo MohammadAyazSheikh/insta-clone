@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, StyleSheet, Dimensions, ViewStyle, TextStyle } from "react-native";
+import { View, ViewStyle, TextStyle } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -10,13 +10,13 @@ import {
     GestureDetector
 } from 'react-native-gesture-handler';
 import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
-import { TextRegular } from "../general/text/text";
+import { TextRegular } from "../../general/text/text";
 import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 import responsiveStyles from "./styles/styles";
-import { useFunctionalOrientation } from "../../utils/functions/responsiveUtils";
-import colors from "../../theme/colors";
-const { width: deviceWidth } = Dimensions.get("window");
+import { useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
+// import colors from "../../../theme/colors";
+// const { width: deviceWidth } = Dimensions.get("window");
 
 type sliderProps = {
     // width?: number,
@@ -176,7 +176,7 @@ const SoundPlayer = ({
                             :
                             <ActivityIndicator
                                 size={"small"}
-                                color={'grey'}
+                                color={'white'}
                             />
                     }
                 </View>

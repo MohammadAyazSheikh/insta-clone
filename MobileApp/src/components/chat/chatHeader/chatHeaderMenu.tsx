@@ -4,11 +4,12 @@ import {
 } from 'react-native';
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import Animated, { Extrapolate, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
+import Animated, { Extrapolate, Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import CustomButton from '../../general/customButton/customButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 type attachSheetProps = {
   showMenu: boolean,
@@ -41,7 +42,7 @@ const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
       animValue.value,
       inputRange,
       [0, 0.5, 1],
-      Extrapolate.CLAMP
+      Extrapolation.CLAMP
     );
 
 
@@ -61,7 +62,7 @@ const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
 
   return (
     <Modal
-      animationType="fade"
+      animationType="none"
       transparent={true}
       visible={showMenu}
       onRequestClose={onClose}
@@ -71,36 +72,41 @@ const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
       <View
         style={styles.backDrop}
       />
-      {/* container */}
-      <Pressable
-        style={styles.containerMenu}
-        onPress={() => onClose()}
-      >
-        <Animated.View style={[styles.menuBox, stylesAnim]}>
-          <CustomButton
-            style={styles.btnMenu}
-            buttonText='View contact'
-            onPress={() => {
-              navigation.navigate('UserProfile')
-              onClose();
-            }}
-          />
-          <CustomButton
-            style={styles.btnMenu}
-            buttonText='Media, links and docs'
+      <SafeAreaProvider>
+        {/* container */}
+        <SafeAreaView style={{ flex: 1 }}>
+          <Pressable
+            style={styles.containerMenu}
             onPress={() => onClose()}
-          />
-          <CustomButton
-            style={styles.btnMenu}
-            buttonText='Search'
-            onPress={() => {
-              onSearch && onSearch()
-              onClose();
-            }}
-          />
-        </Animated.View >
-      </Pressable>
+          >
+            <Animated.View style={[styles.menuBox, stylesAnim]}>
+              <CustomButton
+                style={styles.btnMenu}
+                buttonText='View contact'
+                onPress={() => {
+                  navigation.navigate('UserProfile')
+                  onClose();
+                }}
+              />
+              <CustomButton
+                style={styles.btnMenu}
+                buttonText='Media, links and docs'
+                onPress={() => onClose()}
+              />
+              <CustomButton
+                style={styles.btnMenu}
+                buttonText='Search'
+                onPress={() => {
+                  onSearch && onSearch()
+                  onClose();
+                }}
+              />
+            </Animated.View >
+          </Pressable>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </Modal >
+
   );
 };
 

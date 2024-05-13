@@ -5,9 +5,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import LottieView from 'lottie-react-native';
-import { TextRegular } from "../general/text/text";
+import { TextRegular } from "../../general/text/text";
 import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
@@ -38,7 +38,7 @@ const RecorderQuick = ({
             <AnimatedLottieView
                 progress={iconProgress}
                 style={[styles.iconLottie]}
-                source={require('../../../assets/lottieFiles/trash.json')}
+                source={require('../../../../assets/lottieFiles/trash.json')}
             />
             {/* wave animation */}
             <View style={{ flex: 1, height: '100%',flexDirection:'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -49,7 +49,7 @@ const RecorderQuick = ({
                 <AnimatedLottieView
                     progress={waveProgress}
                     style={{ height: '80%', width: '100%' }}
-                    source={require('../../../assets/lottieFiles/waveLong.json')}
+                    source={require('../../../../assets/lottieFiles/waveLong.json')}
                 />
             </View>
         </Animated.View>

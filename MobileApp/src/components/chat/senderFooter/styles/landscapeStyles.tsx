@@ -50,13 +50,15 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
         attachBox: {
             width: h(90),
             // aspectRatio: 1,
-            backgroundColor: colors.secondary2,
+            backgroundColor: colors.primary3,
             position: 'absolute',
             borderRadius: 20,
             bottom: w(10),
             // left: w(2.5),
             alignItems: 'center',
             flexWrap: 'wrap',
+            transformOrigin: "bottom right",
+            overflow: 'hidden',
         },
         row: {
             width: '100%',

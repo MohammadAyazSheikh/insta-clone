@@ -19,7 +19,7 @@ import DocumentPickerFooter from '../documentPickerFooter/documentPickerFooter';
 import ReplyMessageFooter from '../replyFooter/replyMessageFooter';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import LocationMapSelector from '../../general/locationSelector/locationMapSelector';
-import AnimatedRecorder from '../../sound/animatedRecorder';
+import AnimatedRecorder from '../sound/animatedRecorder';
 
 export type conversationStatProps = {
 
@@ -61,12 +61,11 @@ export const SenderFooter = ({
   // video
   const [showVideo, setShowVideo] = useState(false);
   const [video, setVideo] = useState<string>('');
-  // voice
-  const [isVoiceVisible, setIsVoiceVisible] = useState(false);
-  //always assign default path otherwise it will through error 
-  const [voicePath, setVoicePath] =
-    useState<string | null>('file:////data/user/0/com.fugenchat/cache/sound.mp4');
-  const [isRecording, setIsRecording] = useState(true);
+
+  // //always assign default path otherwise it will through error 
+  // const [voicePath, setVoicePath] =
+  //   useState<string | null>('file:////data/user/0/com.fugenchat/cache/sound.mp4');
+
 
 
   const defaultMsg: messageObjType = {
@@ -147,7 +146,7 @@ export const SenderFooter = ({
             onTextChange && onTextChange(value);
           }}
         />
-        {/* attachment sheet */}
+        {/* attachment sheet button */}
         <ButtonRipple
           style={styles.btnStyle}
           onPress={() => {
@@ -173,62 +172,68 @@ export const SenderFooter = ({
           }
 
         </ButtonRipple>
-        {/* send button */}
-        {/* <ButtonRipple
-          style={styles.btnStyle}
-          onPress={() => {
-            setReplyMessage && setReplyMessage(undefined);
-            // if image
-            if (imageList.length > 0) {
-              onSend && onSend({
-                ...defaultMsg,
-                type: "image",
-                imageList: imageList,
-              });
-              setText('');
-              return;
-            }
+        {/* -----------send button  and recorder-------*/}
 
-            // if image
-            if (document) {
-              onSend && onSend({
-                ...defaultMsg,
-                type: "document",
-                document: document.name!,
-              });
-              setText('');
+        {
+          //send button
+          text ?
+            <ButtonRipple
+              style={styles.btnStyle}
+              onPress={() => {
+                setReplyMessage && setReplyMessage(undefined);
+                // if image
+                if (imageList.length > 0) {
+                  onSend && onSend({
+                    ...defaultMsg,
+                    type: "image",
+                    imageList: imageList,
+                  });
+                  setText('');
+                  return;
+                }
 
-              return;
-            }
+                // if image
+                if (document) {
+                  onSend && onSend({
+                    ...defaultMsg,
+                    type: "document",
+                    document: document.name!,
+                  });
+                  setText('');
 
-            if (!text)
-              return;
-            
-            //if text
-            onSend && onSend(defaultMsg);
-            setText('');
+                  return;
+                }
 
-          }}
-        >
-          <IconFe
-            name='send'
-            size={20}
-            color={"white"}
-          />
-        </ButtonRipple> */}
-        <AnimatedRecorder
-          onSend={(uri) => {
-            onSend && onSend({
-              ...defaultMsg,
-              voice: uri!,
-              type: 'voice'
-            });
-            setIsVoiceVisible(false);
-            setText('');
-            setReplyMessage && setReplyMessage(undefined);
-          }}
-        />
+                if (!text)
+                  return;
 
+                //if text
+                onSend && onSend(defaultMsg);
+                setText('');
+
+              }}
+            >
+              <IconFe
+                name='send'
+                size={20}
+                color={"white"}
+              />
+            </ButtonRipple>
+            :
+            // recorder
+            <AnimatedRecorder
+              onSend={(uri) => {
+                onSend && onSend({
+                  ...defaultMsg,
+                  voice: uri!,
+                  type: 'voice'
+                });
+                // setIsVoiceVisible(false);
+                setText('');
+                setReplyMessage && setReplyMessage(undefined);
+              }}
+            />
+        }
       </View>
 
 
@@ -267,30 +272,8 @@ export const SenderFooter = ({
           setIsAttachVisible(false)
         }}
       />
-      {/* ---- Voice Note Sheet ---- */}
-      <VoiceNoteSheet
-        onPressSend={() => {
-          onSend && onSend({
-            ...defaultMsg,
-            voice: voicePath!,
-            type: 'voice'
-          });
-          setIsVoiceVisible(false);
-          setText('');
-          setReplyMessage && setReplyMessage(undefined);
-
-        }}
-        onPressClose={() => {
-          setIsVoiceVisible(false);
-        }}
-        isOpen={isVoiceVisible}
-        setVoicePath={setVoicePath}
-        voicePath={voicePath}
-        isRecording={isRecording}
-        setIsRecording={(isRecording: boolean) =>
-          setIsRecording(isRecording)
-        }
-      />
+     
+      
       {/* ----------Video modal----- */}
       <VideoPlayerModal
         videoList={[video]}

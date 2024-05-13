@@ -9,9 +9,9 @@ import Animated, {
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
 import Slider from "./soundPlayer";
-import { heightToDp, useAppThemeColors, useFunctionalOrientation, widthToDp } from "../../utils/functions/responsiveUtils";
+import { heightToDp, useAppThemeColors, useFunctionalOrientation, widthToDp } from "../../../utils/functions/responsiveUtils";
 import responsiveStyles from "./styles/styles";
-import { TextRegular } from "../general/text/text";
+import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 //-160 - slowest sound
@@ -87,7 +87,7 @@ const RecorderLocked = ({
             :
             // player
             <SoundPlayer
-              url="file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FBC86A0E-355D-4A3D-92C8-CB495802641A/Library/Caches/sound.m4a"
+              url="file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a"
             />
         }
         {/* recorder control view */}

@@ -35,11 +35,10 @@
 	<string>$(PRODUCT_NAME) needs open camera...</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>$(PRODUCT_NAME) needs to access your gallery...</string>
-	<!-- required by sound recorder -->
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Give $(PRODUCT_NAME) permission to use your microphone. Your record wont be shared without your permission.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs to access your gallery...</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ProductSans-Black.ttf</string>

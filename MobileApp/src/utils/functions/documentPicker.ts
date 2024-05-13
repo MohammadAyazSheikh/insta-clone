@@ -6,6 +6,6 @@ export const pickSingleDocument = () => {
         presentationStyle: 'any'
     },)
         .catch(err => {
-            console.error("Doc Picker error: ", err)
+            console.log("Doc Picker error: ", err)
         })
 }

@@ -1,32 +1,19 @@
-import React, { useRef, useState } from "react";
-import { View, StyleSheet, Dimensions, Alert } from "react-native";
+import React, { useState } from "react";
+import { View, Dimensions } from "react-native";
 import Animated, {
     useSharedValue,
-    useAnimatedStyle,
-    Easing,
-    FadeInUp,
-    FadeInDown,
     interpolate,
-    runOnJS,
     withTiming,
 } from 'react-native-reanimated';
-import { TouchableRipple } from "react-native-paper";
-import IconEnt from 'react-native-vector-icons/Entypo';
-import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
-import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
-import { TextRegular } from "../general/text/text";
-import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 const { width: deviceWidth } = Dimensions.get("window");
 import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
-import ButtonRipple from '../general/customButton/buttonRipple';
+import { useFunctionalOrientation, widthToDp } from '../../../utils/functions/responsiveUtils';
 import IconFa from 'react-native-vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
-import IconFd from 'react-native-vector-icons/Foundation';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
@@ -37,11 +24,11 @@ export const BUTTON_SIZE = 10;
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 
 type props = {
-    onSend: (uri:string) => void
+    onSend: (uri: string) => void
 }
 
 const AnimatedRecorder = ({
-onSend,
+    onSend,
 }: props) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
@@ -117,12 +104,16 @@ onSend,
         onHold() {
             startRecording();
         },
-        onRelease() {
+        onRelease(isDeleted) {
+
             stopRecording();
             setIsRecording(false);
-            if(time > 0){
+            if (!isDeleted && time > 1) {
                 onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
             }
+            // if (time > 0) {
+            //     onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
+            // }
         },
         onDelete() {
             setIsRecording(false);
@@ -149,7 +140,7 @@ onSend,
                         <AnimatedLottieView
                             progress={lockIconProgress}
                             style={[styles.iconLottie, { width: '100%' }]}
-                            source={require('../../../assets/lottieFiles/lock.json')}
+                            source={require('../../../../assets/lottieFiles/lock.json')}
                         />
                     </View>
                 </Animated.View>
@@ -179,6 +170,7 @@ onSend,
                 time={moment.utc(time).format('mm:ss')}
                 isRecording={isRecording}
                 onSend={() => {
+                    setIsLocked(false);
                     onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
                 }}
                 onDelete={() => {

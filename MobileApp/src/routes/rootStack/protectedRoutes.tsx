@@ -25,7 +25,7 @@ const Screen = () =>
 export const protectedRoutes = () => {
     return (
         <>
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="RootTab"
                 component={RootTab}
                 options={{
@@ -38,7 +38,7 @@ export const protectedRoutes = () => {
                 options={{
                     headerShown: false,
                 }}
-            /> */}
+            />
             <Stack.Screen
                 name="Conversation"
                 component={Conversation}

@@ -16,7 +16,7 @@ import {
     GestureDetector
 } from 'react-native-gesture-handler';
 import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
-import { TextRegular } from "../general/text/text";
+import { TextRegular } from "../../general/text/text";
 const { width: deviceWidth } = Dimensions.get("window");
 
 type sliderProps = {

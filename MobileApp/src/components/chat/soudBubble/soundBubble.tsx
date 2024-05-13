@@ -4,7 +4,7 @@ import SoundSlider from '../../general/audioSheet/soundSlider';
 import colors from '../../../theme/colors';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
-import SoundPlayer from '../../sound/soundPlayer';
+import SoundPlayer from '../sound/soundPlayer';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
 
 

@@ -57,14 +57,15 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             top: '5%',
             borderRadius: 10,
             overflow:'hidden',
-            backgroundColor: "transparent",
-            ...getShadow({elevation:20})
+            ...getShadow({elevation:20}),
+            transformOrigin:'top'
         },
         btnMenu: {
             width: '100%',
             marginVertical:0,
             borderRadius:0,
-            justifyContent:'flex-start'
+            justifyContent:'flex-start',
+            backgroundColor:colors.primary4,
         }
     });
 }

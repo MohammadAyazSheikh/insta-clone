@@ -65,7 +65,8 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
             width: '100%',
             marginVertical:0,
             borderRadius:0,
-            justifyContent:'flex-start'
+            justifyContent:'flex-start',
+            backgroundColor:colors.primary4
         }
     });
 }

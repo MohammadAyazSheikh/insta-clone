@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ColorValue, View } from 'react-native';
 import responsiveStyles from './styles/styles';
 import { TextRegular } from '../../../components/general/text/text';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
@@ -17,27 +17,32 @@ import { setSelectedMsgs, setSelectedReaction } from '../../../redux/features/ui
 import { showReaction } from '../reactions/reactions';
 import { Text } from 'react-native';
 
-const msgStatusIcon = {
-    sent: <IconIo
-        name="checkmark-sharp"
-        color={colors.grey1}
-        size={18}
-    />,
-    delivered: <IconIo
-        name="checkmark-done-sharp"
-        color={colors.grey1}
-        size={18}
-    />,
-    seen: <IconIo
-        name="checkmark-done-sharp"
-        color={"#7DB0D4"}
-        size={18}
-    />,
-    sending: <IconMtc
-        name="clock-time-four-outline"
-        color={colors.grey1}
-        size={14}
-    />,
+const getMsgStatusIcon = (name: 'sent' | 'delivered' | 'seen' | 'sending',
+    color?: number | ColorValue | undefined) => {
+    const _color = color || colors.grey1
+    const icons = {
+        sent: <IconIo
+            name="checkmark-sharp"
+            color={_color}
+            size={18}
+        />,
+        delivered: <IconIo
+            name="checkmark-done-sharp"
+            color={_color}
+            size={18}
+        />,
+        seen: <IconIo
+            name="checkmark-done-sharp"
+            color={"#7DB0D4"}
+            size={18}
+        />,
+        sending: <IconMtc
+            name="clock-time-four-outline"
+            color={_color}
+            size={14}
+        />
+    }
+    return (icons[name])
 }
 
 type bubbleWrapperType = {
@@ -186,7 +191,7 @@ export default function BubbleWrapper({
                     {starred ? <IconAnt
                         name='star'
                         size={10}
-                        color={you && !isDark ? "white" : colors.ternary1}
+                        color={colors.primary4}
                         style={{ marginHorizontal: 5 }}
                     /> :
                         null
@@ -200,7 +205,7 @@ export default function BubbleWrapper({
                     </TextRegular>
                     {/* status icon */}
                     {
-                        you ? msgStatusIcon[props.status] : null
+                        you ? getMsgStatusIcon(props.status,colors.primary4) : null
                     }
                 </View>
             </ButtonRipple>

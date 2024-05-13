@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import responsiveStyles from './styles/styles';
 import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
+import Animated, { Extrapolate, Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 import { useNavigation } from '@react-navigation/native';
@@ -42,7 +42,7 @@ const AttachmentSheet = ({
 }: attachSheetProps) => {
 
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles ,width} = useFunctionalOrientation(responsiveStyles);
     // const colors = useAppThemeColors();
 
 
@@ -64,24 +64,30 @@ const AttachmentSheet = ({
 
     const stylesAnim = useAnimatedStyle(() => {
 
-        const scaleY = interpolate(
+   
+        const scale = interpolate(
             animValue.value,
             inputRange,
             [0, 0.5, 1],
-            Extrapolate.CLAMP
+            Extrapolation.CLAMP
         );
 
-        const translateY = interpolate(
+        const borderRadius = interpolate(
             animValue.value,
             inputRange,
-            [500, 250, 0],
-            Extrapolate.CLAMP
+            [width, width/2, 20],
+            Extrapolation.CLAMP
         );
 
 
         return {
+            borderTopLeftRadius:borderRadius,
+            borderTopRightRadius:borderRadius,
+            borderBottomLeftRadius:borderRadius,
             transform: [
-                { scaleY },
+                {scale}
+                // { scaleY },
+                // {scaleX}
                 // {translateY}
             ],
         };
@@ -92,7 +98,7 @@ const AttachmentSheet = ({
 
     return (
         <Modal
-            animationType="fade"
+            animationType="none"
             transparent={true}
             visible={show}
             onRequestClose={closeSheet}
@@ -175,8 +181,7 @@ const AttachmentSheet = ({
                                         res && setDocument(res);
                                     }).finally(() => {
                                         closeSheet();
-                                    })
-
+                                })    
                             }}
                         />
                         {/* locations */}
