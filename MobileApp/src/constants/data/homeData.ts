@@ -5,7 +5,6 @@ export type homeDataType = {
     userId: string,
     userName: string,
     timeStamp: string,
-    totalUnseen: number,
     content: { id: string, uri: any, type: "image" | 'video' }[]
 }
 export const homeData: homeDataType[] = [
@@ -14,7 +13,6 @@ export const homeData: homeDataType[] = [
         uri: require('../../../assets/images/cities/karachi1.jpg'),
         userName: 'Karachi',
         timeStamp: '1h',
-        totalUnseen: 5,
         content: [
             {
                 id: uuid.v4().toString(),
@@ -49,7 +47,6 @@ export const homeData: homeDataType[] = [
         uri: require('../../../assets/images/cities/lahore1.jpg'),
         userName: 'Lahore',
         timeStamp: '2h',
-        totalUnseen: 5,
         content: [
             {
                 id: uuid.v4().toString(),
@@ -83,7 +80,6 @@ export const homeData: homeDataType[] = [
         uri: require('../../../assets/images/cities/islamabad1.jpg'),
         userName: 'Islamabad',
         timeStamp: '4h',
-        totalUnseen: 7,
         content: [
             {
                 id: uuid.v4().toString(),
@@ -133,7 +129,6 @@ export const homeData: homeDataType[] = [
         uri: require('../../../assets/images/cities/skardu1.jpg'),
         userName: 'Skardu',
         timeStamp: '9h',
-        totalUnseen: 5,
         content: [
             {
                 id: uuid.v4().toString(),

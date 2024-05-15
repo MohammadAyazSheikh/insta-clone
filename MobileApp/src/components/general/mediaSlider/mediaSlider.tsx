@@ -118,7 +118,6 @@ export const MediaSlider = ({
                 <Image
                   source={item.uri}
                   style={[styles.sliderImage, imageStyle]}
-
                 />
             }
           </ZoomAbleView>

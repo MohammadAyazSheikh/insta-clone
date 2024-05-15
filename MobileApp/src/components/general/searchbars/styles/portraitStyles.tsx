@@ -25,7 +25,8 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             paddingHorizontal:0,
             marginHorizontal:10,
             fontFamily:fontFamily.regular,
-            fontSize:14
+            fontSize:14,
+            color:colors.secondary1
         },
     });
 }

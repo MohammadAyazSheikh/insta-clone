@@ -7,6 +7,7 @@ import IconFa5 from 'react-native-vector-icons/FontAwesome5';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { AddContentButton } from './addContentButton';
 import Home from '../../screens/homeScreen/homeScreen';
+import Discover from '../../screens/discoverScreen/discoverScreen';
 
 
 const Screen = () => {
@@ -19,7 +20,7 @@ const Screen = () => {
 
 export type RootTabProps = {
     Home: undefined;
-    Search: undefined;
+    Discover: undefined;
     AddContent: undefined;
     Reels: undefined;
     Profile: undefined;
@@ -54,8 +55,8 @@ const RootTab = () => {
                 }}
             />
             <Tab.Screen
-                name="Search"
-                component={Screen}
+                name="Discover"
+                component={Discover}
                 options={{
                     tabBarIcon: ({ color, focused }) => (
                         <IconIon

@@ -12,9 +12,11 @@ import ButtonRipple from '../customButton/buttonRipple';
 
 type vidProps = {
     showVolumeIcon?: boolean,
+    mute?: boolean,
 } & VideoProperties
 export default function VideoPlayerContent({
     showVolumeIcon = true,
+    mute = true,
     ...props
 }: vidProps) {
 
@@ -23,14 +25,14 @@ export default function VideoPlayerContent({
     //holds value if visible in screen or not
     const [isOnScreen, setIsOnScreen] = useState(false);
     //for volume
-    const [muted, setMuted] = useState(false);
+    const [muted, setMuted] = useState(mute);
 
 
     const onChange = useCallback((isVisible: boolean) => {
         setIsOnScreen(isVisible);
     }, []);
 
-    
+
     return (
 
         <View style={props?.style}>
@@ -39,8 +41,8 @@ export default function VideoPlayerContent({
                 <Video
                     {...props}
                     paused={!isOnScreen}
-                    muted = {muted}
-                    style = {[props.style]}
+                    muted={muted}
+                    style={[props.style]}
                 />
             </VisibilitySensor>
             {/* volume icon */}
@@ -48,10 +50,10 @@ export default function VideoPlayerContent({
                 showVolumeIcon ?
                     <ButtonRipple
                         onPress={() => setMuted(prev => !prev)}
-                        style = {{
-                            position:'absolute',
-                            bottom:10,
-                            right:10
+                        style={{
+                            position: 'absolute',
+                            bottom: 10,
+                            right: 10
                         }}
                     >
                         {
