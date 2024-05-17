@@ -5,6 +5,7 @@ import { RootStackProps } from './rootNavigation';
 import RootTab from '../rootTab/rootTab';
 import Conversation from '../../screens/conversationScreen/conversationScreen';
 import Inbox from '../../screens/inboxScreen/inboxScreen';
+import Explore from '../../screens/exploreScreen/exploreScreen';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -42,6 +43,13 @@ export const protectedRoutes = () => {
             <Stack.Screen
                 name="Conversation"
                 component={Conversation}
+                options={{
+                    headerShown: false,
+                }}
+            />
+             <Stack.Screen
+                name="Explore"
+                component={Explore}
                 options={{
                     headerShown: false,
                 }}

@@ -1,7 +1,7 @@
 export const fontFamily = {
     black: "ProductSans-Black",
     blackItalic: 'ProductSans-BlackItalic',
-    bold: "SF-Pro-Text-Bold",
+    bold: "ProductSans-Bold",
     semiBold: "SF-Pro-Text-Semibold",
     boldItalic: "SF-Pro-Text-BoldItalic",
     italic: "SF-Pro-Text-RegularItalic",

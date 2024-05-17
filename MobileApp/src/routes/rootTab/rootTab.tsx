@@ -4,10 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import IconIon from 'react-native-vector-icons/Ionicons';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFa5 from 'react-native-vector-icons/FontAwesome5';
-import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+import { heightToDp, useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { AddContentButton } from './addContentButton';
 import Home from '../../screens/homeScreen/homeScreen';
 import Discover from '../../screens/discoverScreen/discoverScreen';
+import Reels from '../../screens/reelsScreen/reelsScreen';
 
 
 const Screen = () => {
@@ -78,7 +79,7 @@ const RootTab = () => {
             />
             <Tab.Screen
                 name="Reels"
-                component={Screen}
+                component={Reels}
                 options={{
                     tabBarLabel: "Items",
                     tabBarIcon: ({ color, size, focused }) => (

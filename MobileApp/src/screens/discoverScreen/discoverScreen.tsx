@@ -25,10 +25,7 @@ export default function Discover() {
 
     const { styles, width, height } = useFunctionalOrientation(responsiveStyles);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
-    const { theme } = useAppSelector(state => state.theme);
-
-    const dispatch = useAppDispatch();
+  
 
 
 
@@ -46,9 +43,10 @@ export default function Discover() {
                         numColumns={3}
                         estimatedItemSize={20}
                         renderItem={({ item }) =>
-                            <ContentItemCard data={item} />
+                            <ContentItemCard data={item} 
+                            onPress={()=> navigation.navigate('Explore')}
+                            />
                         }
-
                     />
                 </View>
             </SafeAreaView>

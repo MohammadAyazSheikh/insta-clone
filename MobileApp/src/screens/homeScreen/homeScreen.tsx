@@ -23,7 +23,7 @@ export default function Home() {
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
@@ -32,7 +32,6 @@ export default function Home() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
-                <GestureHandlerRootView style={styles.container}>
                     {/* posts */}
                     <FlashList
                         estimatedItemSize={height / 2}
@@ -88,7 +87,6 @@ export default function Home() {
                         ref={refShare}
                         snapPoints={["60%", "100%"]}
                     />
-                </GestureHandlerRootView>
             </SafeAreaView >
         </SafeAreaProvider>
     );

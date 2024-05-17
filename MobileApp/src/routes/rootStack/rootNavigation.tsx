@@ -5,9 +5,9 @@ import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { fontFamily } from '../../theme/fonts';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { changeTheme } from '../../redux/features/theme/themeSlice';
-import { authRoutes } from './authRoutes';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { protectedRoutes } from './protectedRoutes';
+import { authRoutes } from './authRoutes';
 
 
 
@@ -17,6 +17,8 @@ export type RootStackProps = {
   Login: undefined;
   Signup: undefined;
   Inbox:undefined,
+  Explore:undefined,
+  Reels:undefined,
   Conversation: {
     messageId?: string | number
   };
@@ -71,9 +73,9 @@ function RootNav() {
         }}>
         {
           // user ?
-            // protectedRoutes()
-            // :
-            // authRoutes()
+          //   protectedRoutes()
+          //   :
+          //   authRoutes()
           protectedRoutes()
         }
       </Stack.Navigator>

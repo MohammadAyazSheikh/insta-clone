@@ -7,6 +7,7 @@ import Video, { VideoProperties } from 'react-native-video';
 import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 import IconIo from 'react-native-vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
+import { TouchHold } from '../customButton/touchHoldButton';
 
 
 
@@ -34,11 +35,14 @@ export default function VideoPlayerContent({
 
 
     return (
-
-        <View style={props?.style}>
+        <TouchHold styles={props?.style}
+            onHold={() => setIsOnScreen(false)}
+            onRelease={() => setIsOnScreen(true)}
+        >
             {/* video */}
             <VisibilitySensor onChange={onChange}>
                 <Video
+                // controls
                     {...props}
                     paused={!isOnScreen}
                     muted={muted}
@@ -73,7 +77,7 @@ export default function VideoPlayerContent({
                     </ButtonRipple>
                     : null
             }
-        </View>
+        </TouchHold>
 
     )
 }

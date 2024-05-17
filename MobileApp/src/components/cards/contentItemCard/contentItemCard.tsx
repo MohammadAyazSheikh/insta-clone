@@ -21,24 +21,12 @@ import VideoPlayerContent from '../../general/video/videoPlayerContent';
 
 type contentCardProps = {
     data: discoverDataType,
-    // subtitleIcon?: React.ReactNode,
-    // onMenu?: () => void,
-    // onTitle?: () => void,
-    // onComment?: () => void,
-    // onLike?: () => void,
-    // onShare?: () => void,
-    // onSave?: () => void,
+    onPress?: () => void,
 }
 
 const ContentItemCard = ({
     data,
-    // subtitleIcon,
-    // onMenu = () => '',
-    // onTitle = () => '',
-    // onComment = () => '',
-    // onLike = () => '',
-    // onShare = () => '',
-    // onSave = () => '',
+    onPress,
 }: contentCardProps) => {
 
     const { styles } = useFunctionalOrientation(responsiveStyles);
@@ -51,7 +39,10 @@ const ContentItemCard = ({
     const isMany = data.numberOfItems > 0;
 
     return (
-        <View style={[styles.container, isReel ? styles.reelContainer : {}]}>
+        <ButtonRipple
+            onPress={onPress}
+            style={[styles.container, isReel ? styles.reelContainer : {}]}
+        >
             {
                 isImage ?
                     <Image
@@ -78,7 +69,7 @@ const ContentItemCard = ({
                     :
                     null
             }
-        </View>
+        </ButtonRipple>
     );
 };
 

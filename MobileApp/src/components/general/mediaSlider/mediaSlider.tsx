@@ -61,8 +61,8 @@ export const MediaSlider = ({
   const scrollX = useRef(new Animated.Value(1)).current;
   const scrollRef = useRef<ScrollView>(null);
 
-  //hold value if visible in screen or not
-  const [isOnScreen, setIsOnScreen] = useState(false);
+  // //hold value if visible in screen or not
+  // const [isOnScreen, setIsOnScreen] = useState(false);
 
   useEffect(() => {
     //if user pass scroll index
