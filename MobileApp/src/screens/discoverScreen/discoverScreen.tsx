@@ -25,7 +25,7 @@ export default function Discover() {
 
     const { styles, width, height } = useFunctionalOrientation(responsiveStyles);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-  
+
 
 
 
@@ -43,8 +43,10 @@ export default function Discover() {
                         numColumns={3}
                         estimatedItemSize={20}
                         renderItem={({ item }) =>
-                            <ContentItemCard data={item} 
-                            onPress={()=> navigation.navigate('Explore')}
+                            <ContentItemCard data={item}
+                                onPress={() => 
+                                    navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
+                                }
                             />
                         }
                     />

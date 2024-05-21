@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import {
     Pressable,
     View,
+    ViewStyle,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIo from 'react-native-vector-icons/Ionicons';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import ContentHeader from '../contentHeader/contentHeader';
-import { homeDataType } from '../../../constants/data/homeData';
-import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
 import UserAvatar from '../../general/avatar/avatar';
-import { TextBold, TextItalic, TextRegular } from '../../general/text/text';
+import { TextBold, TextRegular } from '../../general/text/text';
 import CustomButton from '../../general/customButton/customButton';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';
 import { remoteVideos } from '../../../constants/data/remoteVideo';
@@ -21,7 +17,8 @@ import { remoteVideos } from '../../../constants/data/remoteVideo';
 
 type dataProp = typeof remoteVideos[0]
 type reelCardProps = {
-    data:dataProp,
+    data: dataProp,
+    containerStyles?: ViewStyle,
     onMenu?: () => void,
     onTitle?: () => void,
     onComment?: () => void,
@@ -32,6 +29,7 @@ type reelCardProps = {
 
 const ReelCard = ({
     data,
+    containerStyles,
     onMenu = () => '',
     onTitle = () => '',
     onComment = () => '',
@@ -44,14 +42,17 @@ const ReelCard = ({
     // const colors = useAppThemeColors();
     const [numOfLine, setNumOfLine] = useState<number | undefined>(1);
     const [liked, setLiked] = useState(false);
+    const [followed, setFollowed] = useState(false);
+
+    
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, containerStyles]}>
             {/* video player */}
             <VideoPlayerContent
-                source={{ uri: data.uri}}
+                source={{ uri: data.uri }}
                 style={styles.video}
-                showVolumeIcon = {false}
+                showVolumeIcon={false}
                 resizeMode='cover'
             />
             {/* camera */}
@@ -71,7 +72,7 @@ const ReelCard = ({
                         <UserAvatar
                             // image={image}
                             size={50}
-                        // name={title}
+                            name={data.title}
                         />
                         <View style={{ maxWidth: width / 2.5 }}>
                             <TextBold style={styles.txtName} numberOfLines={1}>
@@ -79,9 +80,10 @@ const ReelCard = ({
                             </TextBold>
                         </View>
                         <CustomButton
+                            onPress={() => setFollowed(prev => !prev)}
                             textProps={{ style: styles.txtName }}
                             style={styles.btnFollow}
-                            buttonText='Follow'
+                            buttonText={followed ? 'Unfollow' : 'Follow'}
                         />
                     </View>
                     {/* description */}
@@ -89,7 +91,7 @@ const ReelCard = ({
                         onPress={() => setNumOfLine(numOfLine == 1 ? undefined : 1)}
                         style={styles.descView} >
                         <TextRegular style={styles.txtDescription} numberOfLines={numOfLine}>
-                        {data.description}
+                            {data.description}
                         </TextRegular>
                     </Pressable>
                 </View>

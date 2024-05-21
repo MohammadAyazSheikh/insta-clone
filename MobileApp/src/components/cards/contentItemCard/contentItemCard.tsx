@@ -1,20 +1,13 @@
 import React from 'react';
 import {
-    View,
-    Image
+    Image, StyleSheet, View
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconIo from 'react-native-vector-icons/Ionicons';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import ContentHeader from '../contentHeader/contentHeader';
-import { homeDataType } from '../../../constants/data/homeData';
-import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
-import { TextRegular } from '../../general/text/text';
 import { discoverDataType } from '../../../constants/data/discoverData';
-import { userType } from '../../../constants/types/sharedTypes';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';
 
 
@@ -43,6 +36,7 @@ const ContentItemCard = ({
             onPress={onPress}
             style={[styles.container, isReel ? styles.reelContainer : {}]}
         >
+
             {
                 isImage ?
                     <Image
@@ -68,6 +62,13 @@ const ContentItemCard = ({
                     />
                     :
                     null
+            }
+            {
+                //added this view because video blocking click event
+                <View
+                    style={{ ...StyleSheet.absoluteFillObject }}
+                />
+
             }
         </ButtonRipple>
     );

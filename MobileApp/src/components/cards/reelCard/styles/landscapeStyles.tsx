@@ -10,7 +10,7 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
     return StyleSheet.create({
         container: {
             width: "100%",
-            height: h(84),
+            height: h(100),
             backgroundColor: colors.primary1,
             alignItems: 'center',
             justifyContent: 'flex-end',

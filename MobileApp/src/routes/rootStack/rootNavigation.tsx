@@ -17,7 +17,8 @@ export type RootStackProps = {
   Login: undefined;
   Signup: undefined;
   Inbox:undefined,
-  Explore:undefined,
+  ExplorePost:undefined,
+  ExploreReel:undefined,
   Reels:undefined,
   Conversation: {
     messageId?: string | number

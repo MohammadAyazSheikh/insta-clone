@@ -10,10 +10,11 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlashList } from '@shopify/flash-list';
 import ReelCard from '../../components/cards/reelCard/reelCard';
 import { remoteVideos } from '../../constants/data/remoteVideo';
+import Header from '../../components/general/screenHeaders/header';
 
 
 
-export default function Reels() {
+export default function ReelsExplore() {
 
     const { styles, } = useFunctionalOrientation(responsiveStyles);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
@@ -25,10 +26,12 @@ export default function Reels() {
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
     const [containerHeight, setContainerHeight] = useState(0);
-   
+
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
+                {/* header */}
+                <Header title='Explore' />
                 {/* posts */}
                 <FlatList
                     onLayout={(e) => {

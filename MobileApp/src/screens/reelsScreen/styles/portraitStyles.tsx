@@ -15,7 +15,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         scroll: {
             width: w(100),
-            // height:'100%'
+            height:'100%'
         },
         
     });

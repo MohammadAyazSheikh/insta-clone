@@ -6,6 +6,7 @@ import { useFunctionalOrientation } from '../../../utils/functions/responsiveUti
 import responsiveStyles from './styles/styles';
 // import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 export type sheetWrapperProps = {
@@ -51,9 +52,13 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
       enablePanDownToClose
       index={-1}
     >
-        {
-          children
-        }
+      <SafeAreaProvider>
+        <SafeAreaView style={{ flex: 1 }}>
+          {
+            children
+          }
+        </SafeAreaView>
+      </SafeAreaProvider>
     </BottomSheet>
   );
 });
