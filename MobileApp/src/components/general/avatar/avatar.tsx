@@ -8,6 +8,7 @@ import { TextRegular } from '../text/text';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } from 'react-native-reanimated';
 import LinearGradient from 'react-native-linear-gradient';
 import ButtonRipple from '../customButton/buttonRipple';
+import IconEn from 'react-native-vector-icons/Entypo';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { colorsList } from '../../../theme/colors';
 type avatarProps = {
@@ -25,6 +26,7 @@ type avatarProps = {
     showRing?: boolean,
     showName?: boolean,
     selected?: boolean,
+    showAddIcon?: boolean,
     onPress?: () => void,
 };
 
@@ -43,6 +45,7 @@ export default function UserAvatar({
     isLoading = false,
     showRing = false,
     selected,
+    showAddIcon,
     showName,
     onPress
 }: avatarProps) {
@@ -146,16 +149,31 @@ export default function UserAvatar({
 
 
                 </TouchableRipple>
-                {/* Icon */}
+                {/* Select Icon */}
                 {
-                    selected && !edgeIcon ?
+                    selected && !edgeIcon && !showAddIcon ?
                         <ButtonRipple
                             style={styles.iconSelect}
                         >
                             <IconAnt
                                 name='check'
                                 size={15}
-                                color={colors.secondary1}
+                                color={"white"}
+                            />
+                        </ButtonRipple>
+                        :
+                        null
+                }
+                {
+                    // Add Icon
+                    showAddIcon && !edgeIcon && !selected ?
+                        <ButtonRipple
+                            style={styles.iconSelect}
+                        >
+                            <IconEn
+                                size={18}
+                                name='plus'
+                                color={'white'}
                             />
                         </ButtonRipple>
                         :

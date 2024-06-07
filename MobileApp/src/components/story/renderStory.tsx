@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
 import { storyData } from '../../constants/data/storyData';
-import RenderAvatar
-, { RenderYourStory }
- from './storyAvatar/renderAvatar';
 import StoryModal from './storyModal/storyModal';
-
+import StoryAvatar from './storyAvatar/storyAvatar';
+import IconEn from 'react-native-vector-icons/Entypo';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 export const RADIUS_STORY_AVATAR = 40;
 export const STROKE_STORY_AVATAR = 2;
@@ -16,27 +15,37 @@ export default function RenderStory() {
 
     const [scrollIndex, setScrollIndex] = useState(0);
 
+    const colors = useAppThemeColors();
+
+
 
     return (
         <View style={{ width: '100%', paddingVertical: 5 }}>
             {/* story avatars */}
             <FlatList
+                showsHorizontalScrollIndicator={false}
                 horizontal
                 data={storyData}
                 keyExtractor={(item => item.userId)}
                 // your story
                 ListHeaderComponent={() => (
-                    <RenderYourStory />
+                    <StoryAvatar
+                        numberOfArch={1}
+                        showNumberOfArch={1}
+                        name={"Your Story"}
+                        showAddIcon={true}
+                        onPress={() => {
+
+                        }}
+                    />
                 )}
                 //other user's stories
                 renderItem={({ item, index }) => (
-                    <RenderAvatar
+                    <StoryAvatar
                         image={item.image}
                         numberOfArch={item.content.length}
                         showNumberOfArch={item.totalUnseen}
-                        title={item?.userName}
-                        strokeWidth={STROKE_STORY_AVATAR}
-                        radius={RADIUS_STORY_AVATAR}
+                        name={item?.userName}
                         onPress={() => {
                             setScrollIndex(index);
                             setShowStory(true);

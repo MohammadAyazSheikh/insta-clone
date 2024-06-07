@@ -9,6 +9,8 @@ import { AddContentButton } from './addContentButton';
 import Home from '../../screens/homeScreen/homeScreen';
 import Discover from '../../screens/discoverScreen/discoverScreen';
 import Reels from '../../screens/reelsScreen/reelsScreen';
+import Profile from '../../screens/profileScreen/profileScreen';
+
 
 
 const Screen = () => {
@@ -93,7 +95,7 @@ const RootTab = () => {
             />
             <Tab.Screen
                 name="Profile"
-                component={Screen}
+                component={Profile}
                 options={{
                     tabBarIcon: ({ color, size, focused }) => (
                         <IconFa5 name={!focused ? "user" : "user-alt"} color={color} size={20} />
