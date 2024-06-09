@@ -1,7 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import {
-    View,
-} from 'react-native';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Video, { VideoProperties } from 'react-native-video';
 import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
@@ -15,6 +12,7 @@ type vidProps = {
     showVolumeIcon?: boolean,
     mute?: boolean,
 } & VideoProperties
+
 export default function VideoPlayerContent({
     showVolumeIcon = true,
     mute = true,
@@ -30,19 +28,19 @@ export default function VideoPlayerContent({
 
 
     const onChange = useCallback((isVisible: boolean) => {
-        setIsOnScreen(isVisible);
+        props?.paused ? null : setIsOnScreen(isVisible);
     }, []);
 
 
     return (
-        <TouchHold styles={props?.style}
+        <TouchHold styles={props?.style!}
             onHold={() => setIsOnScreen(false)}
             onRelease={() => setIsOnScreen(true)}
         >
             {/* video */}
             <VisibilitySensor onChange={onChange}>
                 <Video
-                // controls
+                    // controls
                     {...props}
                     paused={!isOnScreen}
                     muted={muted}

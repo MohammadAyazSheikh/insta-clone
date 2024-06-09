@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Image, StyleSheet, View
+    Image, StyleSheet, View, ViewStyle
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
@@ -14,11 +14,17 @@ import VideoPlayerContent from '../../general/video/videoPlayerContent';
 
 type contentCardProps = {
     data: discoverDataType,
+    isAllSquare?: boolean,
+    pauseAll: boolean,
+    containerStyles?: ViewStyle,
     onPress?: () => void,
 }
 
 const ContentItemCard = ({
     data,
+    isAllSquare,
+    pauseAll,
+    containerStyles,
     onPress,
 }: contentCardProps) => {
 
@@ -34,7 +40,10 @@ const ContentItemCard = ({
     return (
         <ButtonRipple
             onPress={onPress}
-            style={[styles.container, isReel ? styles.reelContainer : {}]}
+            style={[styles.container,
+            isReel && !isAllSquare ? styles.reelContainer : {},
+                containerStyles
+            ]}
         >
 
             {
@@ -50,6 +59,7 @@ const ContentItemCard = ({
                         source={media}
                         style={[styles.imgStyles]}
                         resizeMode='cover'
+                        paused={pauseAll}
                     />
             }
             {

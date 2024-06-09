@@ -19,7 +19,7 @@ export default function ProfileHeader() {
     // const { user } = useAppSelector(state => state.user);
     // const dispatch = useAppDispatch();
 
-    const renderHighlight = () => (
+    const renderHighlights = () => (
         <FlatList
             showsHorizontalScrollIndicator={false}
             style={{ width: '100%', paddingVertical: 10 }}
@@ -103,7 +103,7 @@ export default function ProfileHeader() {
                 </TextBold>
             </ButtonRipple>
             {/* ----Highlight---- */}
-            {renderHighlight()}
+            {renderHighlights()}
         </View>
     );
 }
@@ -125,6 +125,11 @@ const heightData = [
     {
         id: 3,
         title: "My birthdays",
+        image: null,
+    },
+    {
+        id: 344,
+        title: "Treat 🍔",
         image: null,
     },
     {

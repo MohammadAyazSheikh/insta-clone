@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
-import { View, ScrollView, Image, Alert, Text, Dimensions } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
+import React from 'react';
+import { View, } from 'react-native';
+import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import CustomButton from '../../components/general/customButton/customButton';
-import Toast from 'react-native-toast-message';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import Loader from '../../components/general/loader/loader';
-import TextBox from '../../components/general/textBox/textBox';
-import IconFe from 'react-native-vector-icons/Feather'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { TextBold, TextRegular } from '../../components/general/text/text';
-import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import SearchBar from '../../components/general/searchbars/searchbar';
 import ContentItemCard from '../../components/cards/contentItemCard/contentItemCard';
@@ -33,9 +25,9 @@ export default function Discover() {
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
                 {/* added this view because of flashList */}
-                <View style={{ width, height }}>
+                <View style={{ width, height, alignItems: 'center' }}>
                     {/* search bar */}
-                    <SearchBar />
+                    <SearchBar containerStyles={{ width: '95%' }} />
                     {/* list */}
                     <MasonryFlashList
                         contentContainerStyle={styles.scroll}
@@ -43,8 +35,11 @@ export default function Discover() {
                         numColumns={3}
                         estimatedItemSize={20}
                         renderItem={({ item }) =>
-                            <ContentItemCard data={item}
-                                onPress={() => 
+                            <ContentItemCard
+                                data={item}
+                                pauseAll
+                                isAllSquare
+                                onPress={() =>
                                     navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
                                 }
                             />

@@ -7,7 +7,7 @@ type touchHold = {
     onPress?: () => void,
     holdDelay?: number,
     children?: React.ReactNode,
-    styles?: ViewStyle | ViewStyle[],
+    styles?: ViewStyle | ViewStyle[] ,
     activeOpacity?: number
 }
 

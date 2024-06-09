@@ -14,7 +14,6 @@ import { commonStyles } from '../../theme/common';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { formatNumber } from '../../utils/formaters/numbers';
 import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
-import ProfileTab from './profileTab';
 import CollapsibleTabViewHeader from "react-native-tab-view-header";
 import Animated from 'react-native-reanimated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -22,6 +21,8 @@ import ProfileHeader from './header';
 import { TabBar } from 'react-native-tab-view';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFa5 from 'react-native-vector-icons/FontAwesome5';
+import { discoverData } from '../../constants/data/discoverData';
+import {renderUserPosts} from './renderUserItems';
 
 const getTabIcon = (name: string, color: string) => {
     return ({
@@ -61,15 +62,10 @@ export default function Profile() {
         Wrapper: Animated.FlatList,
         WrapperProps: {
             showsVerticalScrollIndicator: false,
-            data: Array(20).fill(1),
-            renderItem: ({ item, index }: any) => (
-                <View style={{ backgroundColor: index % 2 ? 'lightgray' : 'gray', height: height / 2, justifyContent: 'center', alignItems: 'center' }}>
-                    <TextRegular>
-                        {`Index: ${index}`}
-                    </TextRegular>
-                </View>
-            ),
-            keyExtractor: (_item: any, index: any) => index
+            numColumns: 3,
+            data: discoverData,
+            renderItem: renderUserPosts,
+            keyExtractor: (_item: any, index: any) => _item?.id
         }
     }, {
         key: 'videos',
@@ -77,15 +73,10 @@ export default function Profile() {
         Wrapper: Animated.FlatList,
         WrapperProps: {
             showsVerticalScrollIndicator: false,
-            data: Array(10).fill(1),
-            renderItem: ({ item, index }: any) => (
-                <View style={{ backgroundColor: index % 2 ? 'lightgray' : 'gray', height: height / 2, justifyContent: 'center', alignItems: 'center' }}>
-                    <TextRegular>
-                        {`Index: ${index}`}
-                    </TextRegular>
-                </View>
-            ),
-            keyExtractor: (_item: any, index: any) => index
+            numColumns: 3,
+            data: discoverData?.filter(item => item.type == "reel" || item.type == "video"),
+            renderItem: renderUserPosts,
+            keyExtractor: (_item: any, index: any) => _item?.id
         }
     }]
 
