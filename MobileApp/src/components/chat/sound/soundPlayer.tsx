@@ -15,6 +15,7 @@ import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 import responsiveStyles from "./styles/styles";
 import { useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
+import { path } from "./hooks/soundRecorderhooks";
 // import colors from "../../../theme/colors";
 // const { width: deviceWidth } = Dimensions.get("window");
 
@@ -30,7 +31,7 @@ type sliderProps = {
 
 const SoundPlayer = ({
     // width = deviceWidth,
-    url = 'https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3',
+    url = path!,
     thumbStyles,
     progressStyles,
     containerStyles,

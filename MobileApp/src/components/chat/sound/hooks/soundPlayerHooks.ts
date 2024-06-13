@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Sound from 'react-native-sound';
+import { path } from './soundRecorderhooks';
 export type timeProp = {
     isPlaying: boolean,
     duration: number,
@@ -9,9 +10,7 @@ export type timeProp = {
 // Enable playback in silence mode
 Sound.setCategory('Playback');
 
-const path_ = 
-
-'https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3';
+const path_ = path!;
 
 export const useSoundPlayer = (uri: string = path_) => {
 

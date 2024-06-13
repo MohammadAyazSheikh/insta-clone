@@ -37,7 +37,7 @@ const UserReaction = ({
                 {/* name */}
                 <TextRegular style={styles.txtName}>
                     {
-                        user_?.id == user.id ?
+                        user_?.id == user?.id ?
                             'You'
                             :
                             user?.userName || user?.firstName

@@ -3,10 +3,6 @@ import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming,
-    withRepeat,
-    interpolate,
-    Extrapolation,
 } from 'react-native-reanimated';
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";

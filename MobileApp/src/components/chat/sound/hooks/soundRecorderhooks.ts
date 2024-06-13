@@ -1,3 +1,4 @@
+import { Alert, Platform } from 'react-native';
 import AudioRecorderPlayer,
 {
     AudioSet,
@@ -9,6 +10,18 @@ import AudioRecorderPlayer,
     RecordBackType,
     PlayBackType,
 } from 'react-native-audio-recorder-player';
+import RNFetchBlob from "rn-fetch-blob";
+
+
+ const dirs = RNFetchBlob.fs.dirs;
+export const path = Platform.select({
+  ios: `file://${dirs.DocumentDir}/sound.m4a`,
+  android: `${dirs.DocumentDir}/sound.mp3`,
+});
+
+
+
+
 
 type recordType = (e: RecordBackType) => void
 const audioRecorderPlayer = new AudioRecorderPlayer();
@@ -27,7 +40,7 @@ export default function useSoundRecorderHooks(listenerTime: number = 0.1) {
             AVFormatIDKeyIOS: AVEncodingOption.aac,
         };
         const meteringEnabled = true;
-        const path = undefined;
+        // const path = undefined;
         const result = await audioRecorderPlayer.startRecorder(path, audioSet, meteringEnabled);
         await audioRecorderPlayer.setSubscriptionDuration(listenerTime)
         audioRecorderPlayer.addRecordBackListener((e) => {

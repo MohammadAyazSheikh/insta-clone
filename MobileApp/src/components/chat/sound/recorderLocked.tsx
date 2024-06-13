@@ -14,6 +14,7 @@ import responsiveStyles from "./styles/styles";
 import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
+import { path } from "./hooks/soundRecorderhooks";
 //-160 - slowest sound
 //0 - loudest sound
 export const SOUND_BAR_GAP = 2;
@@ -87,7 +88,7 @@ const RecorderLocked = ({
             :
             // player
             <SoundPlayer
-              url="file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a"
+              url={path!}
             />
         }
         {/* recorder control view */}

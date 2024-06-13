@@ -5,14 +5,12 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
-  withRepeat,
   interpolate,
   Extrapolation,
 } from 'react-native-reanimated';
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
-import { RecordBackType } from "react-native-audio-recorder-player";
-import Slider from "./soundPlayer";
+
 
 //-160 - slowest sound
 //0 - loudest sound
