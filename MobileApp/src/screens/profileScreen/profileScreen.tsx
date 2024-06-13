@@ -2,27 +2,15 @@ import React, { useState } from 'react';
 import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import Header from '../../components/general/screenHeaders/header';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlashList } from '@shopify/flash-list';
-import IconSimp from "react-native-vector-icons/SimpleLineIcons";
-import ButtonRipple from '../../components/general/customButton/buttonRipple';
-import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
-import { FlatList, ScrollView, Text, View } from 'react-native';
-// import UserAvatar from '../../components/general/avatar/avatar';
-import { commonStyles } from '../../theme/common';
-import { TextBold, TextRegular } from '../../components/general/text/text';
-import { formatNumber } from '../../utils/formaters/numbers';
-import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
 import CollapsibleTabViewHeader from "react-native-tab-view-header";
 import Animated from 'react-native-reanimated';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { Tab, Tabs } from 'react-native-collapsible-tab-view'
 import ProfileHeader from './header';
 import { TabBar } from 'react-native-tab-view';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconFa5 from 'react-native-vector-icons/FontAwesome5';
 import { discoverData } from '../../constants/data/discoverData';
-import {renderUserPosts} from './renderUserItems';
+import { renderUserPosts } from './renderUserItems';
 
 const getTabIcon = (name: string, color: string) => {
     return ({
@@ -81,6 +69,7 @@ export default function Profile() {
     }]
 
     const renderTabBar = props => (
+
         <TabBar
             activeColor={colors.secondary1}
             inactiveColor={colors.grey1}
@@ -92,6 +81,41 @@ export default function Profile() {
             )}
         />
     );
+
+
+
+    // return (
+    //     <Tabs.Container
+    //     revealHeaderOnScroll
+    //         renderHeader={ProfileHeader}
+    //       headerHeight={200} // optional
+    //     //   renderTabBar={renderTabBar}
+    //     >
+    //         <Tabs.Tab name="POST">
+
+  
+    //             {/* <Tabs.FlatList
+    //             numColumns={3}
+    //                 data={discoverData}
+    //                 renderItem={renderUserPosts}
+    //                 keyExtractor={(_item: any, index: any) => _item?.id+1}
+    //             />  */}
+
+    //             {/* <Tabs.FlashList
+    //                 data={discoverData}
+    //                 renderItem={renderUserPosts}
+    //                 keyExtractor={(_item: any, index: any) => _item?.id+1}
+    //             /> */}
+    //         </Tabs.Tab>
+    //         <Tabs.Tab name="VIDEOS">
+    //             <Tabs.ScrollView
+    //             >
+
+
+    //             </Tabs.ScrollView>
+    //         </Tabs.Tab>
+    //     </Tabs.Container>
+    // )
 
     return (
         <CollapsibleTabViewHeader

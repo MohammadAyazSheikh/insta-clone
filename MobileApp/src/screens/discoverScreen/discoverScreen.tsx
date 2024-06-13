@@ -25,20 +25,19 @@ export default function Discover() {
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
                 {/* added this view because of flashList */}
-                <View style={{ width, height, alignItems: 'center' }}>
+                <View style={{ width, height }}>
                     {/* search bar */}
-                    <SearchBar containerStyles={{ width: '95%' }} />
+                    <SearchBar containerStyles={{ width: '95%', alignSelf: 'center' }} />
                     {/* list */}
                     <MasonryFlashList
                         contentContainerStyle={styles.scroll}
                         data={discoverData}
                         numColumns={3}
-                        estimatedItemSize={20}
+                        estimatedItemSize={50}
                         renderItem={({ item }) =>
                             <ContentItemCard
                                 data={item}
                                 pauseAll
-                                isAllSquare
                                 onPress={() =>
                                     navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
                                 }

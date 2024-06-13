@@ -40,6 +40,9 @@ export default function Home() {
                 <HomeHeader />
                 {/* posts */}
                 <FlatList
+                onViewableItemsChanged={(items)=>{
+                    console.log(JSON.stringify(items,null,2))
+                }}
                     // estimatedItemSize={height / 2}
                     //commenting this because flashList only support padding related styles and bg color
                     contentContainerStyle={styles.scroll}

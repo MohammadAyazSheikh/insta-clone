@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, ScrollView, TextInput, } from 'react-native';
 import Animated, {
     Extrapolation,
@@ -19,6 +19,7 @@ import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconFe from 'react-native-vector-icons/Feather';
 import { StoryMedia } from './storyMedia';
 import { storyDataType } from '../../../constants/data/storyData';
+import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -50,6 +51,9 @@ const StoryContent = ({
     const { styles } = useFunctionalOrientation(responsiveStyles);
 
 
+    //holds value if visible story in screen or not
+    const [isVisible, setIsVisible] = useState(false);
+
     //opacity animation for header and footer
     const opacity = useSharedValue(1);
     const hide = (duration = 300) => {
@@ -76,6 +80,7 @@ const StoryContent = ({
                 onClose && onClose()
             },
             onNextStory,
+            isVisible
         );
 
 
@@ -125,74 +130,82 @@ const StoryContent = ({
 
 
     return (
+
         <Animated.View
             style={[
                 styles.container,
                 containerStyle
             ]}
         >
-            {/* header */}
-            <Animated.View style={[
-                styles.col,
-                { opacity }
-            ]}>
-                {/* progress bars */}
-                <RenderStoryBars animatedValuesBar={animValuesBar} />
+            <VisibilitySensor onChange={(isVisible) => setIsVisible(isVisible)}
+                style={[
+                    styles.container,
+                ]}
+            >
                 {/* header */}
-                <ContentHeader
-                    image={contentData.image}
-                    title={contentData.userName}
-                    time={contentData.timeStamp}
-                    subtile=''
+                <Animated.View style={[
+                    styles.col,
+                    { opacity }
+                ]}>
+                    {/* progress bars */}
+                    <RenderStoryBars animatedValuesBar={animValuesBar} />
+                    {/* header */}
+                    <ContentHeader
+                        image={contentData.image}
+                        title={contentData.userName}
+                        time={contentData.timeStamp}
+                        subtile=''
+                    />
+                </Animated.View>
+                {/* content */}
+                <StoryMedia
+                    mediaSource={contentData.content[currentBarIndex.current].image}
+                    onPause={() => {
+                        pauseStory();
+                        hide();
+                    }}
+                    onPlay={() => {
+                        playStory();
+                        show();
+                    }}
+                    onPrev={playPrev}
+                    onNext={playNext}
                 />
-            </Animated.View>
-            {/* content */}
-            <StoryMedia
-                mediaSource={contentData.content[currentBarIndex.current].image}
-                onPause={() => {
-                    pauseStory();
-                    hide();
-                }}
-                onPlay={() => {
-                    playStory();
-                    show();
-                }}
-                onPrev={playPrev}
-                onNext={playNext}
-            />
 
-            {/* Input and Send button */}
-            <Animated.View style={[
-                styles.row,
-                { opacity }
-            ]}>
-                <TextInput
-                    placeholderTextColor={colors.grey1}
-                    style={styles.txtInput}
-                    placeholder='Reply story'
-                />
-                {/* favorite */}
-                <ButtonRipple
-                    style={styles.btnStyles}
-                >
-                    <IconAnt
-                        name='hearto'
-                        color={"red"}
-                        size={20}
+                {/* Input and Send button */}
+                <Animated.View style={[
+                    styles.row,
+                    { opacity }
+                ]}>
+                    <TextInput
+                        placeholderTextColor={colors.grey1}
+                        style={styles.txtInput}
+                        placeholder='Reply story'
                     />
-                </ButtonRipple>
-                {/* send button */}
-                <ButtonRipple
-                    style={styles.btnStyles}
-                >
-                    <IconFe
-                        name='send'
-                        color={colors.grey1}
-                        size={20}
-                    />
-                </ButtonRipple>
-            </Animated.View>
+                    {/* favorite */}
+                    <ButtonRipple
+                        style={styles.btnStyles}
+                    >
+                        <IconAnt
+                            name='hearto'
+                            color={"red"}
+                            size={20}
+                        />
+                    </ButtonRipple>
+                    {/* send button */}
+                    <ButtonRipple
+                        style={styles.btnStyles}
+                    >
+                        <IconFe
+                            name='send'
+                            color={colors.grey1}
+                            size={20}
+                        />
+                    </ButtonRipple>
+                </Animated.View>
+            </VisibilitySensor>
         </Animated.View>
+
     );
 };
 

@@ -24,10 +24,10 @@ export function renderUserPosts({ item, index }: userPostProp) {
             data={item}
             pauseAll
             isAllSquare
-            containerStyles={{width:widthToDp(33.33)}}
-            // onPress={() =>
-            //     // navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
-            // }
+            containerStyles={{ width: widthToDp(33.33) }}
+        // onPress={() =>
+        //     // navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
+        // }
         />
     );
 }
