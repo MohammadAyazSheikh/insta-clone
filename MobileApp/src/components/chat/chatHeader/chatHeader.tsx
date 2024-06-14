@@ -68,7 +68,7 @@ const ChatHeader = ({
             <IconAnt
               name="left"
               size={26}
-              color={'white'}
+              color={colors.secondary1}
             />
           </ButtonRipple>
           {/* total selected  messages */}
@@ -84,7 +84,7 @@ const ChatHeader = ({
             <IconEnt
               name='forward'
               size={24}
-              color={'white'}
+              color={colors.ternary1}
             />
           </ButtonRipple>
           {/* -----------star-------- */}
@@ -107,7 +107,7 @@ const ChatHeader = ({
             <IconMtc
               name={un_starred ? 'star' : 'star-off-outline'}
               size={24}
-              color={'white'}
+              color={colors.ternary1}
             />
           </ButtonRipple>
           {/* delete */}
@@ -117,7 +117,7 @@ const ChatHeader = ({
             <IconMt
               name='delete'
               size={24}
-              color={"white"}
+              color={"tomato"}
             />
           </ButtonRipple>
         </View>
@@ -136,7 +136,7 @@ const ChatHeader = ({
           <IconAnt
             name="left"
             size={26}
-            color={'white'}
+            color={colors.secondary1}
           />
         </ButtonRipple>
         {/* user details */}
@@ -162,7 +162,7 @@ const ChatHeader = ({
           <IconMt
             name='videocam'
             size={24}
-            color={'white'}
+            color={colors.ternary1}
           />
         </ButtonRipple>
         {/* call */}
@@ -172,7 +172,7 @@ const ChatHeader = ({
           <IconMt
             name='call'
             size={24}
-            color={'white'}
+            color={colors.ternary1}
           />
         </ButtonRipple>
         {/* menu */}
@@ -182,7 +182,7 @@ const ChatHeader = ({
           <IconEnt
             name='dots-three-vertical'
             size={20}
-            color={"white"}
+            color={colors.ternary1}
           />
         </ButtonRipple>
         {/*---------- menu ------- */}

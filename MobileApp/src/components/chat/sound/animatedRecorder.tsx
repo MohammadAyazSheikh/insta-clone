@@ -9,14 +9,13 @@ import {
     GestureDetector
 } from 'react-native-gesture-handler';
 import moment from "moment";
-const { width: deviceWidth } = Dimensions.get("window");
 import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation, widthToDp } from '../../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import IconFa from 'react-native-vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
-import useSoundRecorderHooks, { path } from "./hooks/soundRecorderhooks";
+import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import RecorderLocked, { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from "./recorderLocked";
 const { width } = Dimensions.get("window");
 
@@ -46,6 +45,9 @@ const AnimatedRecorder = ({
 
     const [isRecording, setIsRecording] = useState(false);
 
+    //stat for sound uri
+    const [uri, setUri] = useState<string | null>(null);
+
     //function to stop recording
     const stopRecording = () =>
         onStopRecord(() => {
@@ -57,9 +59,9 @@ const AnimatedRecorder = ({
         });
 
     //function to start recording
-    const startRecording = () => {
+    const startRecording = async () => {
         setIsRecording(true);
-        onStartRecord((e) => {
+        const uri_ = await onStartRecord((e) => {
             //for quick recorder lottie wave animation
             metering.value = withTiming(
                 interpolate(
@@ -90,6 +92,9 @@ const AnimatedRecorder = ({
             });
 
         });
+
+        //setting sound uri
+        setUri(uri_);
     }
 
     //animation hook
@@ -109,7 +114,7 @@ const AnimatedRecorder = ({
             stopRecording();
             setIsRecording(false);
             if (!isDeleted && time > 1) {
-                onSend(path!)
+                onSend(uri!)
             }
             // if (time > 0) {
             //     onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
@@ -165,13 +170,14 @@ const AnimatedRecorder = ({
             :
             // locked recorder
             <RecorderLocked
+                uri={uri!}
                 translateX={translateX}
                 meteringList={meteringList}
                 time={moment.utc(time).format('mm:ss')}
                 isRecording={isRecording}
                 onSend={() => {
                     setIsLocked(false);
-                    onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
+                    onSend(uri!)
                 }}
                 onDelete={() => {
                     stopRecording();

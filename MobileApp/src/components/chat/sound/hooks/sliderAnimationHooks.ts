@@ -7,6 +7,7 @@ import {
 } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
+import { THUMB_WIDTH } from '../styles/portraitStyles';
 const { width: deviceWidth } = Dimensions.get("window");
 
 
@@ -33,7 +34,7 @@ export const useGestureAnimation = ({
         .Pan()
         .manualActivation(true)
         .onTouchesDown((e) => {
-            scale.value = withTiming(1.2,{duration:300})
+            scale.value = withTiming(1.2, { duration: 300 })
             onStart && runOnJS(onStart)();
             touchStart.value = {
                 x: e.changedTouches[0].x,
@@ -53,21 +54,20 @@ export const useGestureAnimation = ({
             }
         })
         .onTouchesUp(() => {
-            scale.value = withTiming(1,{duration:300})
+            scale.value = withTiming(1, { duration: 300 })
             //passing progress in percentage when gesture ends
             const percentage = Math.round(translateX.value / width * 100);
+            console.log(percentage)
             onEnd && runOnJS(onEnd)(percentage);
         })
         .onChange((event) => {
             const offset = event.changeX + translateX.value;
 
-            if (offset <= width && offset > 0)
+            if (offset <= (width  ) && offset > 0)
                 translateX.value = offset
 
         })
-    // .onEnd((e) => {
-
-    // })
+  
 
     // ---- animated styles ----
     const animatedGestureStyle = useAnimatedStyle(() => {
@@ -77,7 +77,7 @@ export const useGestureAnimation = ({
                     translateX: translateX.value,
                 },
                 {
-                    scale:scale.value
+                    scale: scale.value
                 },
             ],
         };

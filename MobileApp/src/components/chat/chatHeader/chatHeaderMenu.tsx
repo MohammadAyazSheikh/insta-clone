@@ -81,19 +81,22 @@ const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
           >
             <Animated.View style={[styles.menuBox, stylesAnim]}>
               <CustomButton
+                textProps={{ style: styles.txtBtnMenu }}
                 style={styles.btnMenu}
                 buttonText='View contact'
                 onPress={() => {
-                  navigation.navigate('UserProfile')
+                  navigation.navigate('Profile')
                   onClose();
                 }}
               />
               <CustomButton
+                textProps={{ style: styles.txtBtnMenu }}
                 style={styles.btnMenu}
                 buttonText='Media, links and docs'
                 onPress={() => onClose()}
               />
               <CustomButton
+                textProps={{ style: styles.txtBtnMenu }}
                 style={styles.btnMenu}
                 buttonText='Search'
                 onPress={() => {

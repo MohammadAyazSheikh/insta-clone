@@ -6,7 +6,7 @@ import { BUTTON_SIZE } from '../animatedRecorder';
 import { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from '../recorderLocked';
 
 type p = (number: number) => number;
-
+export const THUMB_WIDTH = 20;
 const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
 
   return StyleSheet.create({
@@ -137,7 +137,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       backgroundColor: colors.grey1
     },
     thumb: {
-      width: 20,
+      width: THUMB_WIDTH,
       aspectRatio: 1,
       borderRadius: 10,
       backgroundColor: 'white',

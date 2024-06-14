@@ -44,7 +44,7 @@ const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
          // ------------- Animated Search bar-------------
          viewSearchBar: {
             width: '100%',
-            height: w(8),
+            height: w(6),
             paddingVertical:5,
             paddingHorizontal: 5,
            
@@ -52,7 +52,7 @@ const landscapeStyles = (w: p, h: p, colors :colorObjectType) => {
         searchBarContainer: {
             width: '100%',
             height: '100%',
-            backgroundColor: colors.secondary2,
+            backgroundColor: colors.primary4,
             borderWidth: 0,
             borderRadius:1000,
             overflow: 'hidden'

@@ -90,8 +90,8 @@ const SearchBarAnimated = ({
                         ...styles.searchBarContainer,                    }}
                     inputViewStyle={{ ...styles.inputViewStyles, ...containerInputLight }}
                     inputViewFocusStyle={{ borderWidth: 0 }}
-                    style={{ color: 'white' }}
-                    placeholderTextColor={"white"}
+                    style={{ color: colors.secondary1 }}
+                    placeholderTextColor={colors.grey1}
                     placeholder='search'
                     value={text}
                     onChangeText={(value) => {
@@ -105,7 +105,7 @@ const SearchBarAnimated = ({
                         <IconAnt
                             name="left"
                             size={26}
-                            color={iconLeftColor ?? 'white'}
+                            color={iconLeftColor ?? colors.secondary1 }
                         />
                     </TouchableRipple>}
                     // clear text
@@ -117,7 +117,7 @@ const SearchBarAnimated = ({
                             <IconEnt
                                 name="cross"
                                 size={26}
-                                color={iconLeftColor ?? 'white'}
+                                color={iconLeftColor ?? colors.secondary1}
                             />
                         </TouchableRipple>}
                 />

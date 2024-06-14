@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
-const { width } = Dimensions.get("window");
+import React from "react";
+import { View  } from "react-native";
 import Animated, {
   useAnimatedStyle,
   interpolate,
@@ -8,13 +7,12 @@ import Animated, {
   SharedValue,
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
-import Slider from "./soundPlayer";
-import { heightToDp, useAppThemeColors, useFunctionalOrientation, widthToDp } from "../../../utils/functions/responsiveUtils";
+import {  useAppThemeColors, useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
 import responsiveStyles from "./styles/styles";
 import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
-import { path } from "./hooks/soundRecorderhooks";
+
 //-160 - slowest sound
 //0 - loudest sound
 export const SOUND_BAR_GAP = 2;
@@ -27,6 +25,7 @@ type props = {
   onDelete: () => void,
   onSend: () => void,
   onPauseRecord: () => void,
+  uri?:string,
 }
 
 const RecorderLocked = ({
@@ -34,6 +33,7 @@ const RecorderLocked = ({
   translateX,
   time,
   isRecording,
+  uri,
   onDelete,
   onSend,
   onPauseRecord,
@@ -88,7 +88,7 @@ const RecorderLocked = ({
             :
             // player
             <SoundPlayer
-              url={path!}
+              url={uri!}
             />
         }
         {/* recorder control view */}

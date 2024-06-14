@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Sound from 'react-native-sound';
-import { path } from './soundRecorderhooks';
+
 export type timeProp = {
     isPlaying: boolean,
     duration: number,
@@ -10,7 +10,7 @@ export type timeProp = {
 // Enable playback in silence mode
 Sound.setCategory('Playback');
 
-const path_ = path!;
+const path_ = '';
 
 export const useSoundPlayer = (uri: string = path_) => {
 
@@ -52,6 +52,7 @@ export const useSoundPlayer = (uri: string = path_) => {
         //releasing sound resource associated with the sound instance
         return () => {
             sound.release();
+            clearInterval(intervalId.current);
         }
     }, []);
 

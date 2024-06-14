@@ -15,7 +15,8 @@ import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
 import responsiveStyles from "./styles/styles";
 import { useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
-import { path } from "./hooks/soundRecorderhooks";
+import { THUMB_WIDTH } from "./styles/portraitStyles";
+
 // import colors from "../../../theme/colors";
 // const { width: deviceWidth } = Dimensions.get("window");
 
@@ -31,7 +32,7 @@ type sliderProps = {
 
 const SoundPlayer = ({
     // width = deviceWidth,
-    url = path!,
+    url,
     thumbStyles,
     progressStyles,
     containerStyles,
@@ -149,8 +150,10 @@ const SoundPlayer = ({
             {/* progress */}
             <View style={[styles.playerProgressView, progressStyles]}
                 onLayout={(e) => {
-                    console.log(e.nativeEvent.layout.width)
-                    setProgressViewWidth(e.nativeEvent.layout.width)
+                    //set progress width =  minus thumb width to progress width
+                    //because when we translating thumb ac/ to width of progressbar
+                    //when it reaches to 100% (at end of progress) thumb is going out from progress 
+                    setProgressViewWidth(e.nativeEvent.layout.width-THUMB_WIDTH);
                 }}
             >
                 {/* thumb */}

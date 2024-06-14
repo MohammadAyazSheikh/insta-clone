@@ -20,9 +20,9 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         },
         txtName: {
             fontSize: 16,
-            color: "white"
+            color: colors.secondary1
         },
-        txtSub:{
+        txtSub: {
             fontSize: 12,
             color: colors.grey1
         },
@@ -56,17 +56,20 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             right: '5%',
             top: '5%',
             borderRadius: 10,
-            overflow:'hidden',
-            ...getShadow({elevation:20}),
-            transformOrigin:'top'
+            overflow: 'hidden',
+            ...getShadow({ elevation: 20 }),
+            transformOrigin: 'top'
         },
         btnMenu: {
             width: '100%',
-            marginVertical:0,
-            borderRadius:0,
-            justifyContent:'flex-start',
-            backgroundColor:colors.primary4,
-        }
+            marginVertical: 0,
+            borderRadius: 0,
+            justifyContent: 'flex-start',
+            backgroundColor: colors.primary4,
+        },
+        txtBtnMenu: {
+            color: colors.secondary1
+        },
     });
 }
 
