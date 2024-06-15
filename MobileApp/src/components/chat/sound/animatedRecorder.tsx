@@ -17,7 +17,7 @@ import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import RecorderLocked, { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from "./recorderLocked";
-const { width } = Dimensions.get("window");
+
 
 export const BUTTON_SIZE = 10;
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
@@ -30,11 +30,11 @@ const AnimatedRecorder = ({
     onSend,
 }: props) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, width } = useFunctionalOrientation(responsiveStyles);
     //animated value for lottie wave
     const metering = useSharedValue(0);
     // animated value for wave bars (locked recorder waves)
-    const translateX = useSharedValue(width);
+    // const translateX = useSharedValue(width);
 
     const [time, setTime] = useState(0);
     const [meteringList, setMeteringList] = useState<number[]>([]);
@@ -51,7 +51,7 @@ const AnimatedRecorder = ({
     //function to stop recording
     const stopRecording = () =>
         onStopRecord(() => {
-            translateX.value = width;
+            // translateX.value = width;
             setMeteringList([]);
             //quick reorder value
             metering.value = 0;
@@ -60,6 +60,12 @@ const AnimatedRecorder = ({
 
     //function to start recording
     const startRecording = async () => {
+
+        const barTotalWidth = SOUND_BAR_WIDTH + SOUND_BAR_GAP;
+        //number of bars container can hold
+        const numOfBars = Math.round(width / barTotalWidth);
+
+
         setIsRecording(true);
         const uri_ = await onStartRecord((e) => {
             //for quick recorder lottie wave animation
@@ -77,18 +83,33 @@ const AnimatedRecorder = ({
             //for locked recorder wave bars
 
             setMeteringList(prev => {
-                const totalBarSpace = SOUND_BAR_WIDTH + SOUND_BAR_GAP
-                const totalBarsAndGapWidth =
-                    (prev.length * (totalBarSpace))
 
-                if (totalBarsAndGapWidth >= 2 * width) {
-
-                    translateX.value = 0;
-                    return [...prev.slice(Math.round(prev.length / 2)), e.currentMetering || 0];
+                if (prev?.length >= numOfBars) {
+                    const currentBars = [...prev];
+                    currentBars.shift();
+                    return [...currentBars, e.currentMetering ?? 0]
                 }
-                const translate = totalBarSpace;
-                translateX.value = withTiming(translateX.value - translate, { duration: 100 });
-                return [...prev, e.currentMetering || 0]
+
+
+                // const totalBarSpace = SOUND_BAR_WIDTH + SOUND_BAR_GAP
+                // const totalBarsAndGapWidth =
+                //     (prev.length * (totalBarSpace))
+
+                // const offset = width;
+                // if (totalBarsAndGapWidth > offset) {
+
+                //     console.log("-----")
+                //     const diff = totalBarsAndGapWidth - width;
+                //     console.log(translateX.value)
+                //     console.log(totalBarsAndGapWidth);
+                //     console.log(offset)
+                //     console.log(totalBarSpace, SOUND_BAR_GAP, SOUND_BAR_WIDTH, diff)
+                //     translateX.value = withTiming(barTotalWidth, { duration: 100 });
+                //     return [...prev.slice(1), e.currentMetering || 0];
+                // }
+                // const translate = totalBarSpace;
+                // translateX.value = withTiming(translateX.value - translate, { duration: 100 });
+                return [...prev, e.currentMetering ?? 0]
             });
 
         });
@@ -135,6 +156,7 @@ const AnimatedRecorder = ({
 
     return (
         !isLocked ?
+            // false ?
             <View style={[styles.container]}>
                 {/* lock icon */}
                 <Animated.View style={[
@@ -171,7 +193,7 @@ const AnimatedRecorder = ({
             // locked recorder
             <RecorderLocked
                 uri={uri!}
-                translateX={translateX}
+                // translateX={translateX}
                 meteringList={meteringList}
                 time={moment.utc(time).format('mm:ss')}
                 isRecording={isRecording}

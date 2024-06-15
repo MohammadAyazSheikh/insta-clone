@@ -14,20 +14,14 @@ import RNFetchBlob from "rn-fetch-blob";
 import uuid from 'react-native-uuid';
 
  const dirs = RNFetchBlob.fs.dirs;
-// export const path = Platform.select({
-//   ios: `file://${dirs.DocumentDir}/sound.m4a`,
-//   android: `${dirs.DocumentDir}/sound.mp3`,
-// });
 
+//function to generate path for ios and android
 const generatePath = ()=>{
     return Platform.select({
         ios: `file://${dirs.DocumentDir}/${uuid.v4()}.m4a`,
         android: `${dirs.DocumentDir}/${uuid.v4()}.mp3`,
       });
 }
-
-
-
 
 type recordType = (e: RecordBackType) => void
 const audioRecorderPlayer = new AudioRecorderPlayer();

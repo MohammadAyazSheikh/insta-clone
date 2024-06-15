@@ -1,36 +1,38 @@
 import React from "react";
-import { View  } from "react-native";
+import { View } from "react-native";
 import Animated, {
-  useAnimatedStyle,
   interpolate,
   Extrapolation,
   SharedValue,
+  FadeIn,
+  FadeOut,
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
-import {  useAppThemeColors, useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
+import { useAppThemeColors, useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
 import responsiveStyles from "./styles/styles";
 import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 
+
 //-160 - slowest sound
 //0 - loudest sound
-export const SOUND_BAR_GAP = 2;
-export const SOUND_BAR_WIDTH = 3;
+export const SOUND_BAR_GAP =1;
+export const SOUND_BAR_WIDTH = 2;
 type props = {
   meteringList: number[],
-  translateX: SharedValue<number>,
+  // translateX: SharedValue<number>,
   time: string,
   isRecording: Boolean,
   onDelete: () => void,
   onSend: () => void,
   onPauseRecord: () => void,
-  uri?:string,
+  uri?: string,
 }
 
 const RecorderLocked = ({
   meteringList,
-  translateX,
+  // translateX,
   time,
   isRecording,
   uri,
@@ -41,9 +43,9 @@ const RecorderLocked = ({
 
   const { styles } = useFunctionalOrientation(responsiveStyles);
   const colors = useAppThemeColors();
-  const rStyles = useAnimatedStyle(() => ({
-    transform: [{ translateX: translateX.value }],
-  }));
+  // const rStyles = useAnimatedStyle(() => ({
+  //   transform: [{ translateX: translateX.value }],
+  // }));
 
 
 
@@ -59,26 +61,31 @@ const RecorderLocked = ({
           isRecording ?
             <View style={styles.recorderCol}>
               <View style={styles.barRootContainer}>
-                <Animated.View style={[styles.barContainer,
-                  rStyles
-                ]}>
-                  {
-                    meteringList.
-                      //  new Array(1).fill(0).
-                      map((metering, index) => {
-
-                        return (
-                          <View
-                            key={index}
-                            style={[
-                              styles.bar, {
-                                //setting height of the bars according the loudness of the sound
-                                height: `${interpolate(metering, [-15, -7.5, 0, 1], [10, 10, 40, 80], Extrapolation.CLAMP)}%`
-                              }]}
-                          />
-                        );
-                      })
-                  }
+                <Animated.View style={[
+                  styles.barContainer,
+                  // rStyles,
+                  { width: '100%' }
+                ]}
+                // layout={FadeIn}
+                >
+                    {
+                      meteringList.
+                        map((metering, index) => {
+                          return (
+                            <Animated.View
+                              entering={FadeIn}
+                              exiting={FadeOut}
+                              key={`${index}}`}
+                              style={[
+                                styles.bar, {
+                                  //setting height of the bars according the loudness of the sound
+                                  height: `${interpolate(metering, [-15, -7.5, 0, 1], [10, 10, 40, 80], Extrapolation.CLAMP)}%`
+                                }]}
+                            />
+                          );
+                        })
+                    }
+               
                 </Animated.View>
               </View>
               <TextRegular style={[styles.txtQuickTime]}>
