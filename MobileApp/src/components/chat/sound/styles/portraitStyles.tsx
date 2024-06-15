@@ -1,7 +1,6 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
-import { getShadow } from '../../../../theme/platformSpecificStyles';
 import { BUTTON_SIZE } from '../animatedRecorder';
 import { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from '../recorderLocked';
 
@@ -10,9 +9,7 @@ export const THUMB_WIDTH = 20;
 const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
 
   return StyleSheet.create({
-    container: {
 
-    },
     btnRecorder: {
       width: w(BUTTON_SIZE),
       aspectRatio: 1,

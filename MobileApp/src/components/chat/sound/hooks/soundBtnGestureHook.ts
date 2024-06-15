@@ -6,14 +6,11 @@ import {
     withTiming,
     interpolate,
     Extrapolation,
-    SharedValue,
-    runOnUI,
 } from 'react-native-reanimated';
-import { Alert, Dimensions } from 'react-native';
+import {  Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
 import { BUTTON_SIZE } from '../animatedRecorder';
 import { widthToDp } from '../../../../utils/functions/responsiveUtils';
-import { useState } from 'react';
 
 const { width } = Dimensions.get("window");
 
@@ -85,7 +82,7 @@ export const useSoundBtnGesture = ({
         .onTouchesDown((e) => {
 
             dragEnabled.value = true;
-            scale.value = withTiming(1.7, { duration: 100 });
+            scale.value = withTiming(2.5, { duration: 100 });
             lockHeight.value = withTiming(LOCK_BUTTON_MAX_HEIGHT, { duration: 200 });
             translateYLockIcon.value = -LOCK_BTN_MIN_HEIGHT / 2;
             scaleXQuickRec.value = withTiming(QUICK_RECORDER_WIDTH, { duration: 150 });

@@ -1,6 +1,7 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
+import { BUTTON_SIZE } from '../../sound/animatedRecorder';
 
 type p = (number: number) => number;
 
@@ -31,7 +32,10 @@ const landscapeStyles = (w: p, h: p, colors: colorObjectType) => {
             color:colors.secondary1,
         },
         btnStyle: {
-            padding: 10,
+            width: h(BUTTON_SIZE),
+            aspectRatio: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
             borderRadius: 100,
             backgroundColor: colors.ternary1,
             marginLeft: 10,
