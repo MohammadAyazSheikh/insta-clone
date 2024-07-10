@@ -20,6 +20,7 @@ import IconFe from 'react-native-vector-icons/Feather';
 import { StoryMedia } from './storyMedia';
 import { storyDataType } from '../../../constants/data/storyData';
 import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
+import { View } from 'react-native-animatable';
 
 const { width } = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ const StoryContent = ({
 
 
     //holds value if visible story in screen or not
-    const [isVisible, setIsVisible] = useState(false);
+    // const [isVisible, setIsVisible] = useState(false);
 
     //opacity animation for header and footer
     const opacity = useSharedValue(1);
@@ -80,7 +81,7 @@ const StoryContent = ({
                 onClose && onClose()
             },
             onNextStory,
-            isVisible
+            // isVisible
         );
 
 
@@ -137,7 +138,9 @@ const StoryContent = ({
                 containerStyle
             ]}
         >
-            <VisibilitySensor onChange={(isVisible) => setIsVisible(isVisible)}
+            <View
+            // <VisibilitySensor
+            // onChange={(isVisible) => setIsVisible(isVisible)}
                 style={[
                     styles.container,
                 ]}
@@ -170,6 +173,7 @@ const StoryContent = ({
                     }}
                     onPrev={playPrev}
                     onNext={playNext}
+                    onSwipeDown={onClose}
                 />
 
                 {/* Input and Send button */}
@@ -203,7 +207,7 @@ const StoryContent = ({
                         />
                     </ButtonRipple>
                 </Animated.View>
-            </VisibilitySensor>
+            </View>
         </Animated.View>
 
     );

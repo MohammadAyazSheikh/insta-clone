@@ -12,6 +12,7 @@ type storyMediaProps = {
     onPlay?: () => void,
     onNext?: () => void,
     onPrev?: () => void,
+    onSwipeDown?: () => void,
     mediaType?: 'image' | 'video',
     mediaSource?: any,
     description?: string,
@@ -22,6 +23,7 @@ const StoryMedia = ({
     onPlay,
     onNext,
     onPrev,
+    onSwipeDown,
     mediaSource,
     mediaType,
     description,
@@ -52,6 +54,7 @@ const StoryMedia = ({
                 onHold={onPause}
                 onRelease={onPlay}
                 onPress={onPrev}
+                onSwipeDown={onSwipeDown}
                 styles={[styles.btnStory, styles.btnStoryLeft]}
             />
             {/* right button */}
@@ -59,6 +62,7 @@ const StoryMedia = ({
                 onHold={onPause}
                 onRelease={onPlay}
                 onPress={onNext}
+                onSwipeDown={onSwipeDown}
                 styles={[styles.btnStory, styles.btnStoryRight]}
             />
         </View>

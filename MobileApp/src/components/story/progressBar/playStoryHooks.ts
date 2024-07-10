@@ -21,10 +21,10 @@ export const usePlayStory = (
     animValuesBar: SharedValue<number>[],
     onEnd: () => void,
     onNextStory: (barIndex: number, storyIndex: number) => void,
-    isVisible: boolean,
+    // isVisible: boolean,
 ) => {
 
-    //since currentBarIndex ref can't update the UI and we want to switch next story of a user
+    //since currentBarIndex ref can't update the UI and we want to switch to the next story of a user
     //so toggling rerender state in order to get new updated currentBarIndex value
     //I know it is very bad approach but I could'nt found a better solution 
     //so please don't yell at me 😬 
@@ -159,32 +159,8 @@ export const usePlayStory = (
 
 
 
-    useEffect(() => {
-        console.log(isVisible)
-        //pause story when it is not visible on the screen
-        //if user scrolls or scroll to the other screen 
-        if (!isVisible && isPlaying.current) {
-            isPlaying.current = false;
-            runOnJS(pauseAndResetStory)();
-            return;
-        }
-
-        //play story when it is visible on the screen 
-        if (isVisible && !isPlaying.current) {
-            isPlaying.current = true;
-            runOnJS(playStory)();
-        }
-    }, [isVisible])
-
-    // //this hooks runs every time whenever 
-    // //at least one of the shared values or 
-    // //state used in the function body changes
-    // useDerivedValue(() => {
-
-    //     const isVisible = scrollX.value.toFixed(0) ==
-    //         (width * storyIndex).toFixed(0);
-
-
+    //if using visibility sensor
+    // useEffect(() => {
     //     //pause story when it is not visible on the screen
     //     //if user scrolls or scroll to the other screen 
     //     if (!isVisible && isPlaying.current) {
@@ -198,8 +174,32 @@ export const usePlayStory = (
     //         isPlaying.current = true;
     //         runOnJS(playStory)();
     //     }
+    // }, [isVisible])
 
-    // }, []);
+    //this hooks runs every time whenever 
+    //at least one of the shared values or 
+    //state used in the function body changes
+    useDerivedValue(() => {
+
+        const isVisible = scrollX.value.toFixed(0) ==
+            (width * storyIndex).toFixed(0);
+
+
+        //pause story when it is not visible on the screen
+        //if user scrolls or scroll to the other screen 
+        if (!isVisible && isPlaying.current) {
+            isPlaying.current = false;
+            runOnJS(pauseAndResetStory)();
+            return;
+        }
+
+        //play story when it is visible on the screen 
+        if (isVisible && !isPlaying.current) {
+            isPlaying.current = true;
+            runOnJS(playStory)();
+        }
+
+    }, []);
 
     return {
         playStory,
