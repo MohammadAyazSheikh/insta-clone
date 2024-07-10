@@ -22,7 +22,7 @@ export default function ProfileHeader() {
     const renderHighlights = () => (
         <FlatList
             showsHorizontalScrollIndicator={false}
-            style={{ width: '100%', paddingVertical: 10 }}
+            style={{ width: w(100), paddingVertical: 10}}
             data={heightData}
             horizontal
             keyExtractor={(item) => String(item.id)}
@@ -85,17 +85,17 @@ export default function ProfileHeader() {
             </View>
             {/* follow and message button */}
             {/* <View style={commonStyles.rowCenter}>
-                        <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}>
-                            <TextBold style={[styles.txtName, { color: 'white' }]}>
-                                Follow
-                            </TextBold>
-                        </ButtonRipple>
-                        <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}>
-                            <TextBold style={[styles.txtName]}>
-                                Message
-                            </TextBold>
-                        </ButtonRipple>
-                    </View> */}
+                <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}>
+                    <TextBold style={[styles.txtName, { color: 'white' }]}>
+                        Follow
+                    </TextBold>
+                </ButtonRipple>
+                <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}>
+                    <TextBold style={[styles.txtName]}>
+                        Message
+                    </TextBold>
+                </ButtonRipple>
+            </View> */}
             {/* edit button */}
             <ButtonRipple style={styles.btnEdit}>
                 <TextBold style={styles.txtName}>

@@ -10,10 +10,8 @@ import { widthToDp } from '../../utils/functions/responsiveUtils';
 
 
 type userPostProp = {
-
     item: discoverDataType,
     index: number,
-
 }
 export function renderUserPosts({ item, index }: userPostProp) {
 
@@ -24,7 +22,7 @@ export function renderUserPosts({ item, index }: userPostProp) {
             data={item}
             pauseAll
             isAllSquare
-            containerStyles={{ width: widthToDp(33.33) }}
+            containerStyles={{ flex:1}}
         // onPress={() =>
         //     // navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
         // }

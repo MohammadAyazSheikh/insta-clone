@@ -14,10 +14,6 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             justifyContent: 'flex-start',
             alignItems: 'center',
         },
-        scroll: {
-            width: w(100),
-            paddingHorizontal: 10,
-        },
         topView: {
             justifyContent: 'center',
             alignItems: 'center',
