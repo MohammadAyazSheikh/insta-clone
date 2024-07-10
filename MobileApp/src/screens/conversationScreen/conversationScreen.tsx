@@ -6,9 +6,8 @@ import type { StackScreenProps } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { RenderBubble } from '../../components/chat/renderBubble';
 import { messageObjType } from '../../constants/types/sharedTypes';
-import { FlatList, SafeAreaView } from 'react-native';
+import { FlatList, SafeAreaView, View } from 'react-native';
 import { SenderFooter } from '../../components/chat/senderFooter/senderFooter';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { getConversationData } from '../../constants/data/conversation';
 import { appendMessage, getMessages } from '../../redux/features/chat/chatSlice';
 import ChatHeader from '../../components/chat/chatHeader/chatHeader';
@@ -110,7 +109,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                     showOptions={selectedMessages.length > 0}
                 />
                 {/* list messages */}
-                <GestureHandlerRootView style={styles.container}>
+                <View style={styles.container}>
                     <FlatList
                         ref={chatScrollRef}
                         style={styles.scrollContainer}
@@ -126,7 +125,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
 
                     />
 
-                </GestureHandlerRootView>
+                </View>
                 {/* Footer */}
                 <SenderFooter
                     {

@@ -6,13 +6,11 @@ import HomeHeader from './header';
 import RenderStory from '../../components/story/renderStory';
 import ContentCard from '../../components/cards/contentCard/contentCard';
 import { homeData } from '../../constants/data/homeData';
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlashList } from '@shopify/flash-list';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 
@@ -42,7 +40,7 @@ export default function Home() {
                 <FlatList
                     // estimatedItemSize={height / 2}
                     //commenting this because flashList only support padding related styles and bg color
-                    contentContainerStyle={styles.scroll}
+                    contentContainerStyle={[styles.scroll]}
                     data={homeData}
                     keyExtractor={(item) => item.userId}
                     renderItem={({ index, item }) => (

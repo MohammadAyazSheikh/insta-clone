@@ -15,6 +15,7 @@ import colors from './src/theme/colors';
 import { useAppExit } from './src/hooks/backHandlerHooks';
 import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert';
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 
@@ -44,11 +45,13 @@ const App = () => {
     <PaperProvider theme={theme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <RootNavigation />
+          <GestureHandlerRootView>
+            <RootNavigation />
+          </GestureHandlerRootView>
           <Toast config={toastConfig} />
           {/* alerts */}
-          <RenderConfirmAlert/>
-          <RenderDismissAlert/>
+          <RenderConfirmAlert />
+          <RenderDismissAlert />
         </PersistGate>
       </Provider>
     </PaperProvider>

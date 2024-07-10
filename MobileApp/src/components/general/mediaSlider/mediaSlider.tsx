@@ -12,6 +12,7 @@ import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import ZoomAbleView from '../../animatedComponent/zoomableView';
 import VideoPlayerContent from '../video/videoPlayerContent';
+import HeartAnimation from '../../animatedComponent/heartAnimation';
 
 export type imageListType =
   { id: string, uri: any | { uri: string }, type: "image" | 'video' }
@@ -33,6 +34,7 @@ type mediaType = {
   scrollIndex?: number | null;
   indicatorLeftIcon?: React.ComponentType;
   indicatorRightIcon?: React.ComponentType;
+  onDoubleTab?:()=>void,
 };
 
 const remoteVideo = { uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }
@@ -53,6 +55,8 @@ export const MediaSlider = ({
   indicatorRowContainerStyle,
   indicatorLeftIcon: IndLeftIcon,
   indicatorRightIcon: IndRightIcon,
+  //for double tab
+  onDoubleTab
 }: mediaType) => {
 
 
@@ -120,6 +124,8 @@ export const MediaSlider = ({
                   style={[styles.sliderImage, imageStyle]}
                 />
             }
+            {/* heart animation */}
+            <HeartAnimation onDoubleTab={onDoubleTab} />
           </ZoomAbleView>
         ))}
       </Animated.ScrollView>

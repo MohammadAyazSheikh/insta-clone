@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     View,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
@@ -39,6 +38,72 @@ const ContentCard = ({
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
 
+    const [isFav, setIsFav] = useState(false);
+    const [saved, setSaved] = useState(false);
+
+    // left icons
+    const IconsLeft = useCallback(() => {
+        return (
+            <View style={styles.row}>
+
+                {/* like */}
+                <ButtonRipple
+                    onPress={() => {
+                        setIsFav(prev => !prev);
+                        onLike && onLike();
+                    }}
+                    style={styles.btnStyle}
+                >
+                    <IconIo
+                        name={isFav ? 'heart' : 'heart-outline'}
+                        color={isFav ? "red" : colors.secondary1}
+                        size={25}
+                    />
+                </ButtonRipple>
+                {/* comment */}
+                <ButtonRipple
+                    onPress={onComment}
+                    style={styles.btnStyle}
+                >
+                    <IconIo
+                        name='chatbubble-outline'
+                        color={colors.secondary1}
+                        size={25}
+                    />
+                </ButtonRipple>
+                {/* share */}
+                <ButtonRipple
+                    onPress={onShare}
+                    style={styles.btnStyle}
+                >
+                    <IconIo
+                        name='paper-plane-outline'
+                        color={colors.secondary1}
+                        size={25}
+                    />
+                </ButtonRipple>
+            </View>
+        )
+    }, [isFav]);
+
+
+    // save post icon
+    const SaveIcon = useCallback(() => (<View style={[styles.row,
+    { justifyContent: 'flex-end' }]}>
+        <ButtonRipple
+            onPress={() => {
+                setSaved(prev => !prev);
+                onSave && onSave();
+            }}
+            style={styles.btnStyle}
+        >
+            <IconIo
+                name={saved ? 'bookmark' : 'bookmark-outline'}
+                color={colors.secondary1}
+                size={25}
+            />
+        </ButtonRipple>
+    </View>), [saved]);
 
     return (
         <View style={styles.container}>
@@ -61,58 +126,12 @@ const ContentCard = ({
                 indicatorColor={colors.ternary1}
                 indicatorContainerWidth={50}
                 indicatorRowContainerStyle={{ paddingVertical: 5 }}
+                onDoubleTab={() => setIsFav(true)}
                 indicatorLeftIcon={() => (
-                    <View style={styles.row}>
-
-                        {/* like */}
-                        <ButtonRipple
-                            onPress={onLike}
-                            style={styles.btnStyle}
-                        >
-                            <IconIo
-                                name='heart-outline'
-                                color={colors.secondary1}
-                                size={25}
-                            />
-                        </ButtonRipple>
-                        {/* comment */}
-                        <ButtonRipple
-                            onPress={onComment}
-                            style={styles.btnStyle}
-                        >
-                            <IconIo
-                                name='chatbubble-outline'
-                                color={colors.secondary1}
-                                size={25}
-                            />
-                        </ButtonRipple>
-                        {/* share */}
-                        <ButtonRipple
-                            onPress={onShare}
-                            style={styles.btnStyle}
-                        >
-                            <IconIo
-                                name='paper-plane-outline'
-                                color={colors.secondary1}
-                                size={25}
-                            />
-                        </ButtonRipple>
-                    </View>
+                    <IconsLeft />
                 )}
                 indicatorRightIcon={() => (
-                    <View style={[styles.row,
-                    { justifyContent: 'flex-end' }]}>
-                        <ButtonRipple
-                            onPress={onSave}
-                            style={styles.btnStyle}
-                        >
-                            <IconIo
-                                name='bookmark-outline'
-                                color={colors.secondary1}
-                                size={25}
-                            />
-                        </ButtonRipple>
-                    </View>
+                    <SaveIcon />
                 )}
             />
         </View>

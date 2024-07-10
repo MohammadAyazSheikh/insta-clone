@@ -5,13 +5,12 @@ import { useAppDispatch } from '../../redux/hooks';
 import Header from '../../components/general/screenHeaders/header';
 import ContentCard from '../../components/cards/contentCard/contentCard';
 import { homeData } from '../../constants/data/homeData';
-import { FlatList, GestureHandlerRootView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlashList } from '@shopify/flash-list';
 
 
 
