@@ -6,7 +6,7 @@ import React from 'react';
 import ContentItemCard from '../../components/cards/contentItemCard/contentItemCard';
 import { discoverDataType } from '../../constants/data/discoverData';
 import { widthToDp } from '../../utils/functions/responsiveUtils';
-
+import { View } from 'react-native';
 
 
 type userPostProp = {

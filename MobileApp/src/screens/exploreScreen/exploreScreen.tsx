@@ -11,12 +11,14 @@ import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { FlashList } from '@shopify/flash-list';
+
 
 
 
 export default function Explore() {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles,height } = useFunctionalOrientation(responsiveStyles);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
@@ -34,8 +36,8 @@ export default function Explore() {
                     title='Explore'
                 />
                 {/* posts */}
-                <FlatList
-                    // estimatedItemSize={height / 2}
+                <FlashList
+                    estimatedItemSize={height / 1.5}
                     //commenting this because flashList only support padding related styles and bg color
                     contentContainerStyle={styles.scroll}
                     data={homeData}

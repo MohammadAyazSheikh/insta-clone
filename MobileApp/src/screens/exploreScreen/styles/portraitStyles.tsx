@@ -11,7 +11,6 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             width:w(100),
             backgroundColor: colors.primary1,
             justifyContent: 'flex-start',
-            alignItems: 'center',
         },
         scroll: {
             width: w(100),
