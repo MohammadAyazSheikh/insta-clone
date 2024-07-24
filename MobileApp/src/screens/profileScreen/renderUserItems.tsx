@@ -1,12 +1,7 @@
 import React from 'react';
-// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-// import { useNavigation } from '@react-navigation/core'
-// import type { StackNavigationProp } from '@react-navigation/stack';
-// import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import ContentItemCard from '../../components/cards/contentItemCard/contentItemCard';
 import { discoverDataType } from '../../constants/data/discoverData';
-import { widthToDp } from '../../utils/functions/responsiveUtils';
-import { View } from 'react-native';
+
 
 
 type userPostProp = {

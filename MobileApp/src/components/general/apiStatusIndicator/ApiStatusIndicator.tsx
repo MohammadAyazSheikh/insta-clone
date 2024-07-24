@@ -1,19 +1,18 @@
 import React from 'react';
 import {
-  View,
-  Text,
   ActivityIndicator,
   TouchableOpacityProps,
   TextProps,
   ActivityIndicatorProps,
-  Image,
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { TouchableRipple } from 'react-native-paper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-
+import IconEnt from 'react-native-vector-icons/Entypo';
+import IconFn from 'react-native-vector-icons/Fontisto';
+import { TextRegular } from '../text/text';
 type btnProps = TouchableOpacityProps;
 
 type buttonProps = {
@@ -22,7 +21,7 @@ type buttonProps = {
   isLoading?: boolean;
   isEmpty?: boolean;
   errorText?: string | null,
-  loaderText?: string,
+  loaderText?: string | null,
   loaderPops?: ActivityIndicatorProps;
   iconError?: React.ComponentType;
   iconEmpty?: React.ComponentType;
@@ -35,7 +34,7 @@ const ApiStatusIndicator = ({
   errorTextProps,
   loadingTextProp,
   errorText = null,
-  loaderText = 'Loading...',
+  loaderText = null,
   iconError: IconError,
   iconLoader: IconLoader,
   iconEmpty: IconEmpty,
@@ -70,15 +69,20 @@ const ApiStatusIndicator = ({
                   IconLoader ?
                     <IconLoader />
                     :
-                    <ActivityIndicator color={colors.primary4} size={"large"}
+                    <ActivityIndicator color={colors.ternary1} size={"large"}
                       {...loaderPops}
                     />
                 }
-                <Text
-                  {...loadingTextProp}
-                  style={[styles.txtLoading, loadingTextProp?.style]}>
-                  {loaderText}
-                </Text>
+                {
+                  loaderText ?
+                    <TextRegular
+                      {...loadingTextProp}
+                      style={[styles.txtLoading, loadingTextProp?.style]}>
+                      {loaderText}
+                    </TextRegular>
+                    :
+                    null
+                }
               </Animated.View>
               :
               // iff error
@@ -91,15 +95,15 @@ const ApiStatusIndicator = ({
                     IconError ?
                       <IconError />
                       :
-                      <Image
-                        source={require('../../../../assets/icons/errorPage.png')}
-                        style={[styles.imgError, errorIconSize ? { width: errorIconSize, height: errorIconSize } : {}]}
-                      />
+                      <IconEnt name="warning" color={"tomato"} size={36} />
                   }
-                  <Text
-                    {...errorTextProps}
-                    style={[styles.txtLoading, errorTextProps?.style]}>
-                    {errorText}</Text>
+                  {
+                    <TextRegular
+                      {...errorTextProps}
+                      style={[styles.txtLoading, errorTextProps?.style]}>
+                      {errorText}
+                    </TextRegular>
+                  }
                 </Animated.View>
                 :
                 // empty
@@ -111,10 +115,7 @@ const ApiStatusIndicator = ({
                     IconEmpty ?
                       <IconEmpty />
                       :
-                      <Image
-                        source={require('../../../../assets/icons/empty-cart.png')}
-                        style={[styles.imgError, emptyIconSize ? { width: emptyIconSize, height: emptyIconSize } : {}]}
-                      />
+                      <IconFn name={"wind"} color={colors.ternary1} size={36} />
                   }
                 </Animated.View>
           }

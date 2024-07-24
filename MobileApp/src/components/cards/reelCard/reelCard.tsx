@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
     Pressable,
     View,
     ViewStyle,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import { useFunctionalOrientation, widthToDp } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
@@ -13,11 +13,14 @@ import { TextBold, TextRegular } from '../../general/text/text';
 import CustomButton from '../../general/customButton/customButton';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';
 import { remoteVideos } from '../../../constants/data/remoteVideo';
+import VideoPlayerReel from '../../general/video/videoPlayerReel';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 
 type dataProp = typeof remoteVideos[0]
 type reelCardProps = {
     data: dataProp,
+    isVisible: boolean,
     containerStyles?: ViewStyle,
     onMenu?: () => void,
     onTitle?: () => void,
@@ -29,6 +32,7 @@ type reelCardProps = {
 
 const ReelCard = ({
     data,
+    isVisible,
     containerStyles,
     onMenu = () => '',
     onTitle = () => '',
@@ -38,22 +42,22 @@ const ReelCard = ({
     onSave = () => '',
 }: reelCardProps) => {
 
-    const { styles, width } = useFunctionalOrientation(responsiveStyles);
+    const { styles, width, height } = useFunctionalOrientation(responsiveStyles);
     // const colors = useAppThemeColors();
     const [numOfLine, setNumOfLine] = useState<number | undefined>(1);
     const [liked, setLiked] = useState(false);
     const [followed, setFollowed] = useState(false);
-
-    
-
+   
     return (
-        <View style={[styles.container, containerStyles]}>
+        <View style={[styles.container,containerStyles]}>
             {/* video player */}
-            <VideoPlayerContent
+            <VideoPlayerReel
                 source={{ uri: data.uri }}
-                style={styles.video}
+                style={[styles.video]}
                 showVolumeIcon={false}
                 resizeMode='cover'
+                paused={false}
+                isVisible={isVisible}
             />
             {/* camera */}
             <ButtonRipple

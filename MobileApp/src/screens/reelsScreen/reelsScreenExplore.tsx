@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import React, { useCallback, useRef, useState } from 'react';
+import { useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { FlatList } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
@@ -7,10 +7,11 @@ import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { FlashList } from '@shopify/flash-list';
 import ReelCard from '../../components/cards/reelCard/reelCard';
-import { remoteVideos } from '../../constants/data/remoteVideo';
+import { remoteVideos, remoteVideosType } from '../../constants/data/remoteVideo';
 import Header from '../../components/general/screenHeaders/header';
+import ViewableFlatList from '../../components/list/ViewableFlatlist';
+import { View } from 'react-native-animatable';
 
 
 
@@ -27,38 +28,42 @@ export default function ReelsExplore() {
     const refShare = useRef<BottomSheet>(null);
     const [containerHeight, setContainerHeight] = useState(0);
 
+    const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
+        return  (
+                <ReelCard
+                    isVisible={isVisible}
+                    data={item}
+                    containerStyles={{ height: containerHeight, width: "100%",borderWidth: 0.5, borderColor: "transparent"  }}
+                    onMenu={() => {
+                        refOption.current?.collapse()
+                    }}
+                    onComment={() => {
+                        refComment.current?.expand();
+                    }}
+                    onShare={() => {
+                        refShare?.current?.collapse();
+                    }}
+                />
+        )
+    }, [containerHeight])
+
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
                 {/* header */}
                 <Header title='Explore' />
                 {/* posts */}
-                <FlatList
+                <ViewableFlatList
                     onLayout={(e) => {
                         setContainerHeight(e.nativeEvent.layout.height)
                     }}
-                    // estimatedItemSize={height / 2}
-                    //commenting this because flashList only support padding related styles and bg color
+                    pagingEnabled
+                    uniqueKeyName={"title"}
+                    keyExtractor={(item) => item.title}
                     style={styles.scroll}
                     showsVerticalScrollIndicator={false}
-                    pagingEnabled
                     data={remoteVideos}
-                    keyExtractor={(item) => item.title}
-                    renderItem={({ index, item }) => (
-                        <ReelCard
-                            data={item}
-                            containerStyles={{ height: containerHeight }}
-                            onMenu={() => {
-                                refOption.current?.collapse()
-                            }}
-                            onComment={() => {
-                                refComment.current?.expand();
-                            }}
-                            onShare={() => {
-                                refShare?.current?.collapse();
-                            }}
-                        />
-                    )}
+                    renderItem={renderItem}
                 />
                 {/*--- menu sheet ----*/}
                 <MenuSheet

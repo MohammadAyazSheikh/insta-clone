@@ -10,7 +10,7 @@ import { Image as ImageType, openCamera } from 'react-native-image-crop-picker';
 import AttachmentSheet from './attachmentSheet';
 import VoiceNoteSheet from '../../general/audioSheet/audioSheet';
 import { DocumentPickerResponse } from 'react-native-document-picker';
-import VideoPlayerModal from '../../general/videoPlayer/videoPlayerModal';
+import VideoPlayerModal from '../../general/videoSlider/videoPlayerModal';
 import { pickSingleVideo } from '../../../utils/functions/imagePicker';
 import { coordType, messageObjType } from '../../../constants/types/sharedTypes';
 import uuid from 'react-native-uuid';

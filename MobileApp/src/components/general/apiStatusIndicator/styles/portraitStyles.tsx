@@ -1,8 +1,8 @@
 
 import { StyleSheet } from 'react-native';
 import { colorObjectType } from '../../../../theme/colors';
-import { fontFamily, fontSize } from '../../../../theme/fonts';
-import { radius, spacing } from '../../../../theme/spacing';
+import { fontFamily } from '../../../../theme/fonts';
+
 
 
 type p = (number: number) => number;
@@ -13,21 +13,23 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         container: {
             height: '100%',
             width: '100%',
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary1,
             justifyContent: 'center',
             alignItems: 'center',
-            paddingHorizontal:10,
-            paddingVertical:20,
+            paddingHorizontal: 10,
+            paddingVertical: 20,
+            ...StyleSheet.absoluteFillObject
         },
         txtLoading: {
             color: colors.primary1,
             fontFamily: fontFamily.bold,
-            fontSize: w(fontSize.size8),
-            marginTop:10
+            fontSize: w(4),
+            marginTop: 10,
+            alignSelf: 'center',
         },
-        imgError:{
-            width:w(20),
-            height:w(20)
+        imgError: {
+            width: w(20),
+            height: w(20)
         }
     });
 }

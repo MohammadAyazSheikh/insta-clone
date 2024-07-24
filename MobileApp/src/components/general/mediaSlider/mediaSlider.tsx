@@ -37,7 +37,6 @@ type mediaType = {
   onDoubleTab?:()=>void,
 };
 
-const remoteVideo = { uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }
 export const MediaSlider = ({
   autoSlide = false,
   mediaList = [],

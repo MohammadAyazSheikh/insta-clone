@@ -35,7 +35,7 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
     (props: any) => (
       <BottomSheetBackdrop
         {...props}
-        // disappearsOnIndex={snapPoints.length}
+        disappearsOnIndex={0}
         appearsOnIndex={1}
       />
     ),

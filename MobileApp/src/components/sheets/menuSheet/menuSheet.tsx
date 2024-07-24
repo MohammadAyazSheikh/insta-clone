@@ -3,8 +3,8 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Menu from './menu';
 import IconFe from 'react-native-vector-icons/Feather';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import colors from '../../../theme/colors';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
+import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 
 
 
@@ -22,7 +22,7 @@ const OptionSheet = forwardRef<BottomSheet, sheetProps>(({
   onReport,
   ...rest
 }, ref) => {
-
+  const colors = useAppThemeColors();
   return (
     <SheetWrapper {...rest} ref={ref}>
       <BottomSheetScrollView>

@@ -12,6 +12,7 @@ import uuid from 'react-native-uuid';
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import Video from 'react-native-video';
+
 type sliderType = {
   autoSlide?: boolean;
   videoList: string[];

@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import React, { useCallback, useRef, useState } from 'react';
+import { heightToDp, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { FlatList } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
@@ -9,13 +9,18 @@ import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlashList } from '@shopify/flash-list';
 import ReelCard from '../../components/cards/reelCard/reelCard';
-import { remoteVideos } from '../../constants/data/remoteVideo';
-
+import { remoteVideos, remoteVideosType } from '../../constants/data/remoteVideo';
+import {
+    ViewPortDetectorProvider,
+} from "react-native-viewport-detector";
+import { View } from 'react-native';
+import ViewableFlatList from '../../components/list/ViewableFlatlist';
+import { TextRegular } from '../../components/general/text/text';
 
 
 export default function Reels() {
 
-    const { styles, } = useFunctionalOrientation(responsiveStyles);
+    const { styles, height } = useFunctionalOrientation(responsiveStyles);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
@@ -25,38 +30,47 @@ export default function Reels() {
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
     const [containerHeight, setContainerHeight] = useState(0);
-   
+
+    const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
+        return  (
+            <View style={{ width: widthToDp(100), height: containerHeight, borderWidth: 0.5, borderColor: "transparent" }}>
+                <ReelCard
+                    isVisible={isVisible}
+                    data={item}
+                    containerStyles={{ height: containerHeight, width: "100%" }}
+                    onMenu={() => {
+                        refOption.current?.collapse()
+                    }}
+                    onComment={() => {
+                        refComment.current?.expand();
+                    }}
+                    onShare={() => {
+                        refShare?.current?.collapse();
+                    }}
+                />
+            </View>
+        )
+    }, [containerHeight])
+
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView style={styles.container}
+            >
                 {/* posts */}
-                <FlatList
-                    onLayout={(e) => {
-                        setContainerHeight(e.nativeEvent.layout.height)
-                    }}
-                    // estimatedItemSize={height / 2}
-                    //commenting this because flashList only support padding related styles and bg color
-                    style={styles.scroll}
-                    showsVerticalScrollIndicator={false}
-                    pagingEnabled
-                    data={remoteVideos}
-                    keyExtractor={(item) => item.title}
-                    renderItem={({ index, item }) => (
-                        <ReelCard
-                            data={item}
-                            containerStyles={{ height: containerHeight }}
-                            onMenu={() => {
-                                refOption.current?.collapse()
-                            }}
-                            onComment={() => {
-                                refComment.current?.expand();
-                            }}
-                            onShare={() => {
-                                refShare?.current?.collapse();
-                            }}
-                        />
-                    )}
-                />
+                {
+                    <ViewableFlatList
+                        onLayout={(e) => {
+                            setContainerHeight(e.nativeEvent.layout.height)
+                        }}
+                        style={[styles.scroll]}
+                        showsVerticalScrollIndicator={false}
+                        pagingEnabled
+                        data={remoteVideos}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.title}
+                        uniqueKeyName={"title"}
+                    />
+                }
                 {/*--- menu sheet ----*/}
                 <MenuSheet
                     ref={refOption}
@@ -85,7 +99,7 @@ export default function Reels() {
                     snapPoints={["60%", "100%"]}
                 />
             </SafeAreaView >
-        </SafeAreaProvider>
+        </SafeAreaProvider >
     );
 }
 

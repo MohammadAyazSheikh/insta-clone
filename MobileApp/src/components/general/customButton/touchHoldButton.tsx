@@ -1,11 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { TouchableOpacity, ViewStyle } from "react-native";
 import {
     Gesture,
     GestureDetector,
+    GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import Animated, { runOnJS, useSharedValue } from 'react-native-reanimated';
 
+
+type gestureDownProps = {
+    children?: React.ReactNode,
+    gestureRootViewStyles?: ViewStyle | ViewStyle[],
+    animatedViewStyles?: ViewStyle | ViewStyle[],
+    onSwipeDown?: () => void
+}
 type touchHold = {
     onHold?: () => void,
     onRelease?: () => void,
@@ -14,12 +22,11 @@ type touchHold = {
     children?: React.ReactNode,
     styles?: ViewStyle | ViewStyle[],
     activeOpacity?: number,
-    onSwipeDown?: () => void
-}
+    enableDownGesture?: boolean,
 
-function clamp(val, min, max) {
-    return Math.min(Math.max(val, min), max);
-}
+} & gestureDownProps;
+
+
 export const TouchHold = ({
     onHold,
     onRelease,
@@ -28,14 +35,60 @@ export const TouchHold = ({
     activeOpacity = 1,
     holdDelay = 500,
     children,
-    onSwipeDown
+    onSwipeDown,
+    gestureRootViewStyles,
+    animatedViewStyles,
+    enableDownGesture,
 }: touchHold) => {
     //for detection long press action
     const longPressed = useRef(false);
 
+    const BtnHold = useCallback(() => (
+        <TouchableOpacity
+            delayLongPress={holdDelay}
+            activeOpacity={activeOpacity}
+            style={styles || { flex: 1 }}
+            onLongPress={() => {
+                longPressed.current = true;
+                onHold && onHold();
+            }}
+            onPressOut={() => {
+                if (!longPressed.current)
+                    return;
+                longPressed.current = false;
+                onRelease && onRelease();
+            }}
+            onPress={onPress}
+        >
+            {children}
+        </TouchableOpacity >
+    ), [])
+
+    return (
+        enableDownGesture ?
+            <DownGesture
+                gestureRootViewStyles={gestureRootViewStyles}
+                animatedViewStyles={animatedViewStyles}
+                onSwipeDown={onSwipeDown}
+            >
+                <BtnHold />
+            </DownGesture >
+            :
+            <BtnHold />
+    )
+}
+
+
+
+//down gesture
+export const DownGesture = ({
+    gestureRootViewStyles,
+    animatedViewStyles,
+    children,
+    onSwipeDown
+}: gestureDownProps) => {
 
     //for swipe down
-
     const initialTouchLocation = useSharedValue<{ x: number, y: number } | null>(null);
     const pan = Gesture.Pan()
         .onBegin((evt) => {
@@ -64,28 +117,12 @@ export const TouchHold = ({
         });
 
     return (
-
-        <TouchableOpacity
-            delayLongPress={holdDelay}
-            activeOpacity={activeOpacity}
-            style={styles}
-            onLongPress={() => {
-                longPressed.current = true;
-                onHold && onHold();
-            }}
-            onPressOut={() => {
-                if (!longPressed.current)
-                    return;
-                longPressed.current = false;
-                onRelease && onRelease();
-            }}
-            onPress={onPress}
-        >
-            <GestureDetector gesture={pan}>
-                <Animated.View style={{ flex: 1 }}>
+        <GestureHandlerRootView style={gestureRootViewStyles }>
+            <GestureDetector gesture={pan} >
+                <Animated.View style={animatedViewStyles || { flex: 1 }}>
                     {children}
                 </Animated.View>
             </GestureDetector>
-        </TouchableOpacity >
+        </GestureHandlerRootView>
     )
 }

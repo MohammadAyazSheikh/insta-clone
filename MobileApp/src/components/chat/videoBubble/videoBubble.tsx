@@ -6,7 +6,7 @@ import { useFunctionalOrientation } from '../../../utils/functions/responsiveUti
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import colors from '../../../theme/colors';
-import VideoPlayerModal from '../../general/videoPlayer/videoPlayerModal';
+import VideoPlayerModal from '../../general/videoSlider/videoPlayerModal';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
 
 type propsType = {

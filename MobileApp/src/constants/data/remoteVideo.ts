@@ -91,3 +91,5 @@ export const remoteVideos = [
         "title": "What care can you get for a grand?"
     }
 ]
+
+export type remoteVideosType = typeof remoteVideos[0];

@@ -55,7 +55,8 @@ const StoryMedia = ({
                 onRelease={onPlay}
                 onPress={onPrev}
                 onSwipeDown={onSwipeDown}
-                styles={[styles.btnStory, styles.btnStoryLeft]}
+                enableDownGesture
+                gestureRootViewStyles={[styles.btnStory, styles.btnStoryLeft]}
             />
             {/* right button */}
             <TouchHold
@@ -63,7 +64,8 @@ const StoryMedia = ({
                 onRelease={onPlay}
                 onPress={onNext}
                 onSwipeDown={onSwipeDown}
-                styles={[styles.btnStory, styles.btnStoryRight]}
+                enableDownGesture
+                gestureRootViewStyles={[styles.btnStory, styles.btnStoryRight]}
             />
         </View>
 

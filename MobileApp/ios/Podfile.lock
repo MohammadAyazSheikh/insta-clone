@@ -920,6 +920,11 @@ PODS:
     - React-debug
   - react-native-document-picker (9.3.0):
     - React-Core
+  - react-native-fast-video (5.1.7):
+    - React-Core
+    - react-native-fast-video/Video (= 5.1.7)
+  - react-native-fast-video/Video (5.1.7):
+    - React-Core
   - react-native-google-maps (1.11.3):
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
@@ -941,11 +946,6 @@ PODS:
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
   - react-native-splash-screen (3.3.0):
-    - React-Core
-  - react-native-video (5.2.1):
-    - React-Core
-    - react-native-video/Video (= 5.2.1)
-  - react-native-video/Video (5.2.1):
     - React-Core
   - react-native-webview (13.10.5):
     - glog
@@ -1124,7 +1124,7 @@ PODS:
     - React-Core
   - RNAudioRecorderPlayer (3.6.10):
     - React-Core
-  - RNCAsyncStorage (1.23.1):
+  - RNCAsyncStorage (1.24.0):
     - React-Core
   - RNCMaskedView (0.3.1):
     - React-Core
@@ -1145,7 +1145,7 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController
-  - RNReanimated (3.13.0):
+  - RNReanimated (3.14.0):
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
@@ -1204,6 +1204,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - react-native-fast-video (from `../node_modules/react-native-fast-video`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
@@ -1211,7 +1212,6 @@ DEPENDENCIES:
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
-  - react-native-video (from `../node_modules/react-native-video`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-nativeconfig (from `../node_modules/react-native/ReactCommon`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1320,6 +1320,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
+  react-native-fast-video:
+    :path: "../node_modules/react-native-fast-video"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-image-picker:
@@ -1334,8 +1336,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/slider"
   react-native-splash-screen:
     :path: "../node_modules/react-native-splash-screen"
-  react-native-video:
-    :path: "../node_modules/react-native-video"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-nativeconfig:
@@ -1443,6 +1443,7 @@ SPEC CHECKSUMS:
   React-logger: 66b168e2b2bee57bd8ce9e69f739d805732a5570
   React-Mapbuffer: 9ee041e1d7be96da6d76a251f92e72b711c651d6
   react-native-document-picker: 5b97e24a7f1a1e4a50a72c540a043f32d29a70a2
+  react-native-fast-video: 2b3203e05780cbaf23694c64e0194ab66fb8825d
   react-native-google-maps: b80d3947411fcf462ec420c3e6122b7fa24beb9a
   react-native-image-picker: 994a97b28e7f2c2197e21801569bb19f6e494e38
   react-native-maps: 79610ffcd0ec2ca8e0cefb48aa8ae7c62a75d7cc
@@ -1450,7 +1451,6 @@ SPEC CHECKSUMS:
   react-native-safe-area-context: b7daa1a8df36095a032dff095a1ea8963cb48371
   react-native-slider: 07df44a6b615c6bf8584a5ee88288024b3cbf498
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-video: c26780b224543c62d5e1b2a7244a5cd1b50e8253
   react-native-webview: affdb232d5089a3a25df4b663273012b18764b69
   React-nativeconfig: d753fbbc8cecc8ae413d615599ac378bbf6999bb
   React-NativeModulesApple: 964f4eeab1b4325e8b6a799cf4444c3fd4eb0a9c
@@ -1475,12 +1475,12 @@ SPEC CHECKSUMS:
   ReactNativeGetLocation: b4379a01dff72507d9abce5f4d569b98abef7761
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNAudioRecorderPlayer: f3b4f32d5581a44be0f9eb383dc87f98f941b08b
-  RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
+  RNCAsyncStorage: ec53e44dc3e75b44aa2a9f37618a49c3bc080a7a
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
   RNFlashList: 41487cd61fd220e21372f7f10a9b4f4e4d5b55b2
   RNGestureHandler: 1c2341f8a84794a483ed739c446dc9f3b5191908
   RNImageCropPicker: e7ab6fb43d2fc3e84651e786ef4a080d63b0ed3d
-  RNReanimated: 2fb8bf314df48f4968d9080aec46c47eb44a446a
+  RNReanimated: 2f89dcbb50dd4f98f1104ca7f902810208e99034
   RNScreens: f0edd01b3ab160acc31fb056622a1d7c2909a0a5
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 963a95f1f5d512a13d11ffd50d351c87fb5c6890
