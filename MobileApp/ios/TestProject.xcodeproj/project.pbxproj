@@ -36,6 +36,7 @@
 		DEB179DE0A3843FD8916CDBC /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 83275AC36F614D85AFEC761D /* SF-Pro-Text-Regular.otf */; };
 		EEAFCDB0FFF74B8686E1F690 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 54794775CD684AFFA8DB31B9 /* SF-Pro-Text-Heavy.otf */; };
 		EEEB27B0BC1445ECA01F72B5 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE06AD5E5A964209AF86A950 /* SF-Pro-Text-Light.otf */; };
+		F6771D82ED7726022BCAA15F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A5FCAAB14BD048D31D695BA6 /* PrivacyInfo.xcprivacy */; };
 		FC32A30247984E2EA88C0626 /* SF-Pro-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE6E6CBCBEBB42B68B2EFB01 /* SF-Pro-Text-RegularItalic.otf */; };
 		FF52C9B42447422E85AFC549 /* ProductSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E46127FBFD734F008FCB8D70 /* ProductSans-Regular.ttf */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TestProject/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TestProject/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TestProject/main.m; sourceTree = "<group>"; };
+		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = RnDiffApp/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2BF0EDD35663401592F42C0F /* ProductSans-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Thin.ttf"; path = "../assets/fonts/ProductSans-Thin.ttf"; sourceTree = "<group>"; };
 		2D36F9E431CF5729416C799F /* libPods-TestProject-TestProjectTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TestProject-TestProjectTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		340C767BA83B4D7199028745 /* SF-Pro-Text-HeavyItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-HeavyItalic.otf"; path = "../assets/fonts/SF-Pro-Text-HeavyItalic.otf"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		8D2A894CDEF842198F51EF55 /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-BoldItalic.otf"; path = "../assets/fonts/SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
 		934959E100784AB6A25C2818 /* ProductSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-Medium.ttf"; path = "../assets/fonts/ProductSans-Medium.ttf"; sourceTree = "<group>"; };
 		942857678AE88BEA8D5FB092 /* Pods-TestProject-TestProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProject-TestProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-TestProject-TestProjectTests/Pods-TestProject-TestProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A5FCAAB14BD048D31D695BA6 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = TestProject/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A8BB920B42A74C518C62A62D /* ProductSans-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-BlackItalic.ttf"; path = "../assets/fonts/ProductSans-BlackItalic.ttf"; sourceTree = "<group>"; };
 		A980D669C990CBC0FDEEF57B /* Pods-TestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProject.release.xcconfig"; path = "Target Support Files/Pods-TestProject/Pods-TestProject.release.xcconfig"; sourceTree = "<group>"; };
 		D7728E9355A04E4C92D727B5 /* ProductSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "ProductSans-MediumItalic.ttf"; path = "../assets/fonts/ProductSans-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -140,6 +143,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				A5FCAAB14BD048D31D695BA6 /* PrivacyInfo.xcprivacy */,
 			);
 			name = TestProject;
 			sourceTree = "<group>";
@@ -348,6 +353,7 @@
 				FC32A30247984E2EA88C0626 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				140C74E74F384AC98DFE2C60 /* SF-Pro-Text-Semibold.otf in Resources */,
 				2DC296AE5BB044078AF227C4 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				F6771D82ED7726022BCAA15F /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
 		1E64056DF8A353843F6376A7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -620,6 +626,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -647,6 +654,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
@@ -666,6 +674,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -687,15 +697,12 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
-					" ",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				USE_HERMES = true;
 			};
 			name = Debug;
@@ -704,6 +711,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CC = "";
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -731,6 +739,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
@@ -743,6 +752,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD = "";
+				LDPLUSPLUS = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -763,13 +774,9 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
-					" ",
+					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
