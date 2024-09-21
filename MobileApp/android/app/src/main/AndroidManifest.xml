@@ -17,7 +17,8 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
       android:theme="@style/AppTheme"
-      android:screenOrientation="portrait">
+      android:screenOrientation="portrait"
+      android:supportsRtl="true">
 
         <!--added by me (google api key)-->
        <meta-data
