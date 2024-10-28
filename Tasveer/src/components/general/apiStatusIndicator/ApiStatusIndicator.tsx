@@ -90,6 +90,10 @@ const ApiStatusIndicator = ({
                 <Animated.View
                   entering={FadeIn}
                   exiting={FadeOut}
+                  style = {{
+                    justifyContent:'center',
+                    alignItems:'center'
+                  }}
                 >
                   {
                     IconError ?

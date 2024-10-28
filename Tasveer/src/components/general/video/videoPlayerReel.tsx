@@ -52,7 +52,6 @@ export default function VideoPlayerReel({
 
     useEffect(() => {
         const statusSubscription = player.addListener('statusChange', status => {
-            console.log("Video Status: ", status)
             setStatus(status);
         });
 

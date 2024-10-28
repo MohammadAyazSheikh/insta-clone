@@ -61,7 +61,6 @@ export default function VideoPlayerContent({
         // });
 
         const statusSubscription = player.addListener('statusChange', status => {
-            console.log("Video Status: ", status)
             setStatus(status);
         });
 
