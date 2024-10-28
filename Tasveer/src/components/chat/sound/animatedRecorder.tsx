@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { View, Dimensions } from "react-native";
 import Animated, {
     useSharedValue,
@@ -44,6 +44,7 @@ const AnimatedRecorder = ({
     const [isLocked, setIsLocked] = useState(false);
 
     const [isRecording, setIsRecording] = useState(false);
+    const isRecordingSharedValue = useSharedValue(false);
 
     //stat for sound uri
     const [uri, setUri] = useState<string | null>(null);
@@ -59,13 +60,12 @@ const AnimatedRecorder = ({
         });
 
     //function to start recording
-    const startRecording = async () => {
-
+    const startRecording = useCallback(async () => {
+        if (isRecordingSharedValue.value)
+            return;
         const barTotalWidth = SOUND_BAR_WIDTH + SOUND_BAR_GAP;
         //number of bars container can hold
         const numOfBars = Math.round(width / barTotalWidth);
-
-
         setIsRecording(true);
         const uri_ = await onStartRecord((e) => {
             //for quick recorder lottie wave animation
@@ -116,7 +116,7 @@ const AnimatedRecorder = ({
 
         //setting sound uri
         setUri(uri_);
-    }
+    }, [])
 
     //animation hook
     const {
@@ -127,21 +127,21 @@ const AnimatedRecorder = ({
         trashIconProgress,
         lockIconProgress,
     } = useSoundBtnGesture({
+        isRecording: isRecordingSharedValue,
         onHold() {
+            isRecordingSharedValue.value = true;
             startRecording();
         },
         onRelease(isDeleted) {
 
             stopRecording();
+            isRecordingSharedValue.value = false;
             setIsRecording(false);
-            if (!isDeleted && time > 1) {
+            if (!isDeleted && time > 1) 
                 onSend(uri!)
-            }
-            // if (time > 0) {
-            //     onSend("file:///Users/apple/Library/Developer/CoreSimulator/Devices/18AAA775-E3E8-4E9C-B3E5-74777B37CA73/data/Containers/Data/Application/FE6AAC40-38B7-42D6-A178-101E1413CF79/Library/Caches/sound.m4a")
-            // }
         },
         onDelete() {
+            isRecordingSharedValue.value = false;
             setIsRecording(false);
         },
         onLock() {
@@ -151,8 +151,7 @@ const AnimatedRecorder = ({
 
 
 
-
-
+    // return null
 
     return (
         !isLocked ?
@@ -187,7 +186,6 @@ const AnimatedRecorder = ({
                         <IconFa name='microphone' size={22} color={"white"} />
                     </Animated.View>
                 </GestureDetector>
-
             </View>
             :
             // locked recorder
@@ -208,9 +206,11 @@ const AnimatedRecorder = ({
                 onPauseRecord={() => {
                     if (isRecording) {
                         stopRecording();
+                        isRecordingSharedValue.value = false;
                         setIsRecording(false);
                     }
                     else {
+                        isRecordingSharedValue.value = true;
                         startRecording();
                         setIsRecording(true);
                     }

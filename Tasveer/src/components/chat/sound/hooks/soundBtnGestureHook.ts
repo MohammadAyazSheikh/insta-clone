@@ -6,6 +6,7 @@ import {
     withTiming,
     interpolate,
     Extrapolation,
+    SharedValue,
 } from 'react-native-reanimated';
 import {  Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
@@ -17,7 +18,7 @@ const { width } = Dimensions.get("window");
 
 const DRAG_LIMIT_X = width / 3;
 const LOCK_BUTTON_MAX_HEIGHT = 130;
-const LOCK_BTN_MIN_HEIGHT = widthToDp(BUTTON_SIZE);
+const LOCK_BTN_MIN_HEIGHT = widthToDp(10);
 const QUICK_RECORDER_WIDTH = widthToDp(100) - 20
 
 
@@ -26,7 +27,8 @@ type props = {
     onRelease?: (dlt: boolean) => void,
     onDelete?: () => void,
     onLock?: () => void,
-    onEnd?: () => void
+    onEnd?: () => void,
+    isRecording?:SharedValue<Boolean>,
 }
 export const useSoundBtnGesture = ({
     onHold,
@@ -34,6 +36,7 @@ export const useSoundBtnGesture = ({
     onDelete,
     onLock,
     onEnd,
+    isRecording,
 }: props) => {
 
 
@@ -288,6 +291,7 @@ export const useSoundBtnGesture = ({
             inputRange,
             [1, 0.5, 0]
         )
+        
         return {
             height: lockHeight.value,
             opacity: opacity,

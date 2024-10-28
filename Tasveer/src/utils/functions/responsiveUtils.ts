@@ -3,6 +3,7 @@ import { Dimensions, PixelRatio, ScaledSize, useWindowDimensions ,
     // LayoutAnimation,Platform,UIManager
 } from 'react-native';
 let { width, height } = Dimensions.get('window');
+
 import { useAppSelector } from '../../redux/hooks';
 import colors_, { colorObjectType, darkColors, lightColors } from '../../theme/colors';
 

@@ -41,13 +41,13 @@ export const protectedRoutes = () => {
                     headerShown: false,
                 }}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
                 name="Conversation"
                 component={Conversation}
                 options={{
                     headerShown: false,
                 }}
-            /> */}
+            />
             <Stack.Screen
                 name="ExplorePost"
                 component={Explore}
