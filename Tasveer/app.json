@@ -13,17 +13,37 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tasveer"
+      "bundleIdentifier": "com.tasveer",
+      "config": {
+        "googleMapsApiKey": "AIzaSyB7Haog03RkW-Jw_gjxDBt5reynjLGw4-c"
+      },
+      "infoPlist": {
+        "NSCameraUsageDescription": "Tasveer needs to access your camera.",
+        "NSMicrophoneUsageDescription": "Tasveer needs to use your microphone.",
+        "NSPhotoLibraryUsageDescription": "Tasveer needs to access your media library.",
+        "NSLocationWhenInUseUsageDescription": "Tasveer needs to track your current location."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB7Haog03RkW-Jw_gjxDBt5reynjLGw4-c"
+        }
+      },
       "permissions": [
+        "CAMERA",
+        "READ_MEDIA_AUDIO",
+        "READ_MEDIA_IMAGES",
+        "READ_MEDIA_VIDEO",
         "android.permission.RECORD_AUDIO",
         "android.permission.WRITE_EXTERNAL_STORAGE",
-        "android.permission.READ_EXTERNAL_STORAGE"
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
       ],
       "package": "com.tasveer"
     },

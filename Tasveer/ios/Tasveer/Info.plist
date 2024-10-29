@@ -33,6 +33,8 @@
     </array>
     <key>CFBundleVersion</key>
     <string>1</string>
+    <key>GMSApiKey</key>
+    <string>AIzaSyB7Haog03RkW-Jw_gjxDBt5reynjLGw4-c</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -42,6 +44,14 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSCameraUsageDescription</key>
+    <string>Tasveer needs to access your camera.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Tasveer needs to track your current location.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Tasveer needs to use your microphone.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Tasveer needs to access your media library.</string>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
@@ -68,7 +78,5 @@
     <string>Light</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>Give $(PRODUCT_NAME) permission to use your microphone. Your record wont be shared without your permission.</string>
   </dict>
 </plist>

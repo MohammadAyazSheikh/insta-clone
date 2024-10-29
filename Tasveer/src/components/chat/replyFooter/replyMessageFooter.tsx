@@ -24,7 +24,7 @@ const ReplyMessageFooter = ({
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
     const { user: userInfo, type, text } = message;
-    const you = user?.id == userInfo.id;
+    const you = user?.id == userInfo?.id;
     const { styles } = useFunctionalOrientation(responsiveStyles);
     const colors = useAppThemeColors();
 
