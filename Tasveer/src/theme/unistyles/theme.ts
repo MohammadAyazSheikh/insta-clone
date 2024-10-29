@@ -6,6 +6,18 @@ const spacing = {
   lg: 8,
   xl: 12
 };
+
+const fontSize = {
+  xsm:10,
+  sm: 12,
+  md: 14,
+  lg: 16,
+  xl: 18,
+  xl2:20,
+  xl3:22,
+  xl4:24,
+  xl6:26,
+}
 const commonColors = {
   lightYellow: '#feda75',
   yellow: '#fccc63',
@@ -47,7 +59,8 @@ export const lightTheme = {
     ...lightColors,
     common:commonColors
   },
-  spacing
+  spacing,
+  fontSize
 } as const
 
 export const darkTheme = {
@@ -55,5 +68,6 @@ export const darkTheme = {
     ...darkColors,
     common:commonColors
   },
-  spacing
+  spacing,
+  fontSize
 } as const

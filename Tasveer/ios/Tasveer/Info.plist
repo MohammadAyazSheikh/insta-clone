@@ -52,6 +52,32 @@
     <string>Tasveer needs to use your microphone.</string>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>Tasveer needs to access your media library.</string>
+    <key>UIAppFonts</key>
+    <array>
+      <string>ProductSans-Black.ttf</string>
+      <string>ProductSans-BlackItalic.ttf</string>
+      <string>ProductSans-Bold.ttf</string>
+      <string>ProductSans-BoldItalic.ttf</string>
+      <string>ProductSans-Italic.ttf</string>
+      <string>ProductSans-Light.ttf</string>
+      <string>ProductSans-LightItalic.ttf</string>
+      <string>ProductSans-Medium.ttf</string>
+      <string>ProductSans-MediumItalic.ttf</string>
+      <string>ProductSans-Regular.ttf</string>
+      <string>ProductSans-Thin.ttf</string>
+      <string>ProductSans-ThinItalic.ttf</string>
+      <string>SF-Pro-Text-Bold.otf</string>
+      <string>SF-Pro-Text-BoldItalic.otf</string>
+      <string>SF-Pro-Text-Heavy.otf</string>
+      <string>SF-Pro-Text-HeavyItalic.otf</string>
+      <string>SF-Pro-Text-Light.otf</string>
+      <string>SF-Pro-Text-LightItalic.otf</string>
+      <string>SF-Pro-Text-Medium.otf</string>
+      <string>SF-Pro-Text-MediumItalic.otf</string>
+      <string>SF-Pro-Text-Regular.otf</string>
+      <string>SF-Pro-Text-RegularItalic.otf</string>
+      <string>SF-Pro-Text-Semibold.otf</string>
+    </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>
     <key>UIRequiredDeviceCapabilities</key>
