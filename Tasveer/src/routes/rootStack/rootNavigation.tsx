@@ -42,7 +42,7 @@ function RootNav() {
 
   useEffect(() => {
     isDefault && dispatch(changeTheme({
-      theme: scheme == "dark" ? "dark" : "light",
+      theme: scheme!,
     }))
   }, [scheme]);
 

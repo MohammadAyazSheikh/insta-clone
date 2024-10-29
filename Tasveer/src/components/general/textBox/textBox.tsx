@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, TextInput, TextInputProps, ViewStyle, Text } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 type inputProps = TextInputProps;
@@ -29,7 +30,7 @@ const TextBox = ({
   error,
   ...inputProps
 }: textBoxProp) => {
-  const { styles } = useFunctionalOrientation(responsiveStyles);
+  const { styles } = useStyles(styleSheet);
   const colors = useAppThemeColors();
   const [isFocused, setFocus] = useState(false);
 
@@ -46,8 +47,8 @@ const TextBox = ({
           inputViewStyle,
           isFocused && styles.inputViewFocus,
           isFocused && inputViewFocusStyle,
-          error && styles.inputViewErrStyle,
-          error && inputViewErrStyle
+          error ? styles.inputViewErrStyle : null,
+          error ? inputViewErrStyle : null
         ]}>
         {IconLeft && IconLeft}
         <TextInput

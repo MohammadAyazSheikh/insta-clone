@@ -1,11 +1,9 @@
+import { createStyleSheet } from 'react-native-unistyles';
 
-import { StyleSheet } from 'react-native';
-import { colorObjectType } from "../../../theme/colors";
-type p = (number: number) => number;
-
-const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
-
-    return StyleSheet.create({
+const styleSheet = createStyleSheet((theme, runTime) => {
+    const { colors } = theme;
+    const { width } = runTime.screen;
+    return ({
         container: {
             flex: 1,
             backgroundColor: colors.primary1,
@@ -13,18 +11,18 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             alignItems: 'center',
         },
         scroll: {
-            width: w(100),
+            width,
             alignItems: 'center',
         },
         logoStyles: {
-            width: w(55),
+            width: "55%",
             resizeMode: 'contain',
             marginTop: '40%',
             marginBottom: '10%'
         },
         txtForgetPss: {
             fontSize: 12,
-            color: colors.grey1,
+            color: colors.common.grey1,
             marginVertical: 10
         },
         row: {
@@ -36,13 +34,15 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
         line: {
             flex: 1,
             paddingVertical: 0.7,
-            opacity:0.2,
-            backgroundColor: colors.grey1,
+            opacity: 0.2,
+            backgroundColor: colors.common.grey1,
         }
-    });
-}
+    })
+});
 
-export default portraitStyles;
+export default styleSheet;
+
+
 
 
 

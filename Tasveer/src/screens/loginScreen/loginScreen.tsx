@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Image, Alert, Text } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import { View, ScrollView, Image} from 'react-native';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import CustomButton from '../../components/general/customButton/customButton';
-import Toast from 'react-native-toast-message';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import Loader from '../../components/general/loader/loader';
 import TextBox from '../../components/general/textBox/textBox';
 import IconFe from 'react-native-vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
-import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
-import { authSuccess, logoutSuccess } from '../../redux/features/user/userSlice';
+import { authSuccess } from '../../redux/features/user/userSlice';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles';
 
 type loginProps = {
     username?: string,
@@ -29,7 +28,7 @@ type loginPropsErr = {
 
 export default function Login() {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const {styles} = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);
@@ -39,11 +38,10 @@ export default function Login() {
     const dispatch = useAppDispatch();
 
 
-
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
-                <ScrollView contentContainerStyle={styles.scroll}>
+                <KeyboardAwareScrollView contentContainerStyle={styles.scroll}>
                     {/* logo */}
                     <Image
                         source={
@@ -142,8 +140,7 @@ export default function Login() {
                             {' Sign up.'}
                         </TextBold>
                     </TextRegular>
-
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
     );

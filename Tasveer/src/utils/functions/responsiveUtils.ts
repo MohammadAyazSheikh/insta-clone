@@ -44,7 +44,7 @@ export const useFunctionalOrientation = (callBack: Function) => {
 
 
     const theme = useAppSelector(state => state.theme);
-    const colors = useAppThemeColors()
+    const colors = useAppThemeColors();
     // const [screenInfo, setScreenInfo] = useState(Dimensions.get('window'));
     const screenInfo = useWindowDimensions();
     const isPortrait = screenInfo.height > screenInfo.width;
