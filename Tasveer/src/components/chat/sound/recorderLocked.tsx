@@ -13,16 +13,17 @@ import responsiveStyles from "./styles/styles";
 import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
+import { RecordTime } from "./recorderQuick";
 
 
 //-160 - slowest sound
 //0 - loudest sound
-export const SOUND_BAR_GAP =1;
+export const SOUND_BAR_GAP = 1;
 export const SOUND_BAR_WIDTH = 2;
 type props = {
   meteringList: number[],
   // translateX: SharedValue<number>,
-  time: string,
+  recordTimeSharedVal: SharedValue<number>
   isRecording: Boolean,
   onDelete: () => void,
   onSend: () => void,
@@ -33,7 +34,7 @@ type props = {
 const RecorderLocked = ({
   meteringList,
   // translateX,
-  time,
+  recordTimeSharedVal,
   isRecording,
   uri,
   onDelete,
@@ -68,29 +69,28 @@ const RecorderLocked = ({
                 ]}
                 // layout={FadeIn}
                 >
-                    {
-                      meteringList.
-                        map((metering, index) => {
-                          return (
-                            <Animated.View
-                              entering={FadeIn}
-                              exiting={FadeOut}
-                              key={`${index}}`}
-                              style={[
-                                styles.bar, {
-                                  //setting height of the bars according the loudness of the sound
-                                  height: `${interpolate(metering, [-15, -7.5, 0, 1], [10, 10, 40, 80], Extrapolation.CLAMP)}%`
-                                }]}
-                            />
-                          );
-                        })
-                    }
-               
+                  {
+                    meteringList.
+                      map((metering, index) => {
+                        return (
+                          <Animated.View
+                            entering={FadeIn}
+                            exiting={FadeOut}
+                            key={`${index}}`}
+                            style={[
+                              styles.bar, {
+                                //setting height of the bars according the loudness of the sound
+                                height: `${interpolate(metering, [-15, -7.5, 0, 1], [10, 10, 40, 80], Extrapolation.CLAMP)}%`
+                              }]}
+                          />
+                        );
+                      })
+                  }
+
                 </Animated.View>
               </View>
-              <TextRegular style={[styles.txtQuickTime]}>
-                {time}
-              </TextRegular>
+              {/* recording time */}
+              <RecordTime recordTimeSharedVal={recordTimeSharedVal} styles={styles.txtQuickTime} />
             </View>
             :
             // player

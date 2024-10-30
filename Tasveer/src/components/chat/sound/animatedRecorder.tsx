@@ -36,7 +36,8 @@ const AnimatedRecorder = ({
     // animated value for wave bars (locked recorder waves)
     // const translateX = useSharedValue(width);
 
-    const [time, setTime] = useState(0);
+    //animated value for current recording time
+    const recordTimeSharedVal = useSharedValue(0);
     const [meteringList, setMeteringList] = useState<number[]>([]);
     //sound hook
     const { onStartRecord, onStopRecord } = useSoundRecorderHooks();
@@ -56,7 +57,7 @@ const AnimatedRecorder = ({
             setMeteringList([]);
             //quick reorder value
             metering.value = 0;
-            setTime(0);
+            recordTimeSharedVal.value = 0;
         });
 
     //function to start recording
@@ -78,39 +79,40 @@ const AnimatedRecorder = ({
                 { duration: 200 }
             );
 
-            setTime(e.currentPosition);
+            //set recording time zero when it starts
+            recordTimeSharedVal.value = e.currentPosition;
 
             //for locked recorder wave bars
 
-            setMeteringList(prev => {
+            // setMeteringList(prev => {
 
-                if (prev?.length >= numOfBars) {
-                    const currentBars = [...prev];
-                    currentBars.shift();
-                    return [...currentBars, e.currentMetering ?? 0]
-                }
+            //     if (prev?.length >= numOfBars) {
+            //         const currentBars = [...prev];
+            //         currentBars.shift();
+            //         return [...currentBars, e.currentMetering ?? 0]
+            //     }
 
 
-                // const totalBarSpace = SOUND_BAR_WIDTH + SOUND_BAR_GAP
-                // const totalBarsAndGapWidth =
-                //     (prev.length * (totalBarSpace))
+            //     // const totalBarSpace = SOUND_BAR_WIDTH + SOUND_BAR_GAP
+            //     // const totalBarsAndGapWidth =
+            //     //     (prev.length * (totalBarSpace))
 
-                // const offset = width;
-                // if (totalBarsAndGapWidth > offset) {
+            //     // const offset = width;
+            //     // if (totalBarsAndGapWidth > offset) {
 
-                //     console.log("-----")
-                //     const diff = totalBarsAndGapWidth - width;
-                //     console.log(translateX.value)
-                //     console.log(totalBarsAndGapWidth);
-                //     console.log(offset)
-                //     console.log(totalBarSpace, SOUND_BAR_GAP, SOUND_BAR_WIDTH, diff)
-                //     translateX.value = withTiming(barTotalWidth, { duration: 100 });
-                //     return [...prev.slice(1), e.currentMetering || 0];
-                // }
-                // const translate = totalBarSpace;
-                // translateX.value = withTiming(translateX.value - translate, { duration: 100 });
-                return [...prev, e.currentMetering ?? 0]
-            });
+            //     //     console.log("-----")
+            //     //     const diff = totalBarsAndGapWidth - width;
+            //     //     console.log(translateX.value)
+            //     //     console.log(totalBarsAndGapWidth);
+            //     //     console.log(offset)
+            //     //     console.log(totalBarSpace, SOUND_BAR_GAP, SOUND_BAR_WIDTH, diff)
+            //     //     translateX.value = withTiming(barTotalWidth, { duration: 100 });
+            //     //     return [...prev.slice(1), e.currentMetering || 0];
+            //     // }
+            //     // const translate = totalBarSpace;
+            //     // translateX.value = withTiming(translateX.value - translate, { duration: 100 });
+            //     return [...prev, e.currentMetering ?? 0]
+            // });
 
         });
 
@@ -127,7 +129,6 @@ const AnimatedRecorder = ({
         trashIconProgress,
         lockIconProgress,
     } = useSoundBtnGesture({
-        isRecording: isRecordingSharedValue,
         onHold() {
             isRecordingSharedValue.value = true;
             startRecording();
@@ -137,7 +138,8 @@ const AnimatedRecorder = ({
             stopRecording();
             isRecordingSharedValue.value = false;
             setIsRecording(false);
-            if (!isDeleted && time > 1) 
+    
+            if (!isDeleted && recordTimeSharedVal.value > 1)
                 onSend(uri!)
         },
         onDelete() {
@@ -175,7 +177,7 @@ const AnimatedRecorder = ({
                     animatedStyles={animatedRecorderStyle}
                     iconProgress={trashIconProgress}
                     waveProgress={metering}
-                    time={moment.utc(time).format('mm:ss')}
+                    recordTimeSharedVal={recordTimeSharedVal}
                 />
                 {/* sound button */}
                 <GestureDetector gesture={panGestureEvent}>
@@ -193,7 +195,7 @@ const AnimatedRecorder = ({
                 uri={uri!}
                 // translateX={translateX}
                 meteringList={meteringList}
-                time={moment.utc(time).format('mm:ss')}
+                recordTimeSharedVal={recordTimeSharedVal}
                 isRecording={isRecording}
                 onSend={() => {
                     setIsLocked(false);

@@ -63,6 +63,9 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       // transformOrigin: "left center"
     },
     txtTime: {
+      padding:0,
+      paddingHorizontal:0,
+      paddingVertical:0,
       color: colors.secondary1,
       fontSize: 12,
       position: 'absolute',
@@ -114,6 +117,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       color: colors.secondary1,
       fontSize: 12,
       marginLeft: 5,
+      position:'static'
     },
     // ========================== sound player ==============
     playerContainer: {

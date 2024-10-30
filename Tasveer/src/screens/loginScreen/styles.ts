@@ -1,7 +1,7 @@
 import { createStyleSheet } from 'react-native-unistyles';
 
 const styleSheet = createStyleSheet((theme, runTime) => {
-    const { colors } = theme;
+    const { colors,fontSize } = theme;
     const { width } = runTime.screen;
     return ({
         container: {
@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet((theme, runTime) => {
             marginBottom: '10%'
         },
         txtForgetPss: {
-            fontSize: 12,
+            fontSize: fontSize.sm,
             color: colors.common.grey1,
             marginVertical: 10
         },

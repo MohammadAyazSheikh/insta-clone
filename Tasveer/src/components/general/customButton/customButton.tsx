@@ -29,7 +29,7 @@ type buttonProps = {
 
 const CustomButton = ({
   textProps,
-  buttonText = 'Button Text',
+  buttonText = 'Submit',
   icon: Icon,
   iconPosition = 'right',
   isLoading = false,

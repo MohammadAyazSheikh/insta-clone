@@ -28,7 +28,6 @@ type props = {
     onDelete?: () => void,
     onLock?: () => void,
     onEnd?: () => void,
-    isRecording?:SharedValue<Boolean>,
 }
 export const useSoundBtnGesture = ({
     onHold,
@@ -36,7 +35,6 @@ export const useSoundBtnGesture = ({
     onDelete,
     onLock,
     onEnd,
-    isRecording,
 }: props) => {
 
 
