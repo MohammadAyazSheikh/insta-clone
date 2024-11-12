@@ -1,16 +1,14 @@
 import React from "react";
-import { View } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Animated, {
   interpolate,
   Extrapolation,
   SharedValue,
-  FadeIn,
-  FadeOut,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
-import { useAppThemeColors, useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
+import { useAppThemeColors, useFunctionalOrientation, widthToDp } from "../../../utils/functions/responsiveUtils";
 import responsiveStyles from "./styles/styles";
-import { TextRegular } from "../../general/text/text";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 import { RecordTime } from "./recorderQuick";
@@ -18,11 +16,14 @@ import { RecordTime } from "./recorderQuick";
 
 //-160 - slowest sound
 //0 - loudest sound
-export const SOUND_BAR_GAP = 1;
-export const SOUND_BAR_WIDTH = 2;
+export const SOUND_BAR_GAP = 5;
+export const SOUND_BAR_WIDTH = 10;
+export const TOTAL_BAR_WIDTH = SOUND_BAR_WIDTH + SOUND_BAR_GAP;
+export const BAR_CONTAINER_WIDTH = widthToDp(100);
 type props = {
-  meteringList: number[],
-  // translateX: SharedValue<number>,
+  animPastBarsWidth: SharedValue<number>,
+  meteringList: { metering: number, isPastBar?: boolean }[],
+  translateX: SharedValue<number>,
   recordTimeSharedVal: SharedValue<number>
   isRecording: Boolean,
   onDelete: () => void,
@@ -33,7 +34,8 @@ type props = {
 
 const RecorderLocked = ({
   meteringList,
-  // translateX,
+  translateX,
+  animPastBarsWidth,
   recordTimeSharedVal,
   isRecording,
   uri,
@@ -44,14 +46,19 @@ const RecorderLocked = ({
 
   const { styles } = useFunctionalOrientation(responsiveStyles);
   const colors = useAppThemeColors();
-  // const rStyles = useAnimatedStyle(() => ({
-  //   transform: [{ translateX: translateX.value }],
-  // }));
+
+
+  const stylesAnimBarContainer = useAnimatedStyle(() => ({
+    transform: [{ translateX: -translateX.value }],
+  }), [translateX]);
+
+  const styles1stBar = useAnimatedStyle(() => ({
+    width: animPastBarsWidth.value
+  }), [animPastBarsWidth]);
 
 
 
 
-  //else if recording
   return (
     <View style={styles.recorderView}>
       <Animated.View style={styles.recorderContainer}
@@ -61,33 +68,26 @@ const RecorderLocked = ({
           //recorder
           isRecording ?
             <View style={styles.recorderCol}>
-              <View style={styles.barRootContainer}>
-                <Animated.View style={[
-                  styles.barContainer,
-                  // rStyles,
-                  { width: '100%' }
-                ]}
-                // layout={FadeIn}
-                >
-                  {
-                    meteringList.
-                      map((metering, index) => {
+              <View style={stylesBars.recorderContainer}>
+                <View style={stylesBars.recorderBody}>
+                  <Animated.View style={[stylesBars.barContainer, stylesAnimBarContainer]}>
+                    {
+                      meteringList.map((b, index) => {
+                        const height = interpolate(b.metering, [-10, -5, 0], [SOUND_BAR_WIDTH, 15, 35], Extrapolation.CLAMP)
                         return (
                           <Animated.View
-                            entering={FadeIn}
-                            exiting={FadeOut}
-                            key={`${index}}`}
+                            // entering={StretchInY.duration(200).delay(50)}
+                            key={index}
                             style={[
-                              styles.bar, {
-                                //setting height of the bars according the loudness of the sound
-                                height: `${interpolate(metering, [-15, -7.5, 0, 1], [10, 10, 40, 80], Extrapolation.CLAMP)}%`
-                              }]}
-                          />
-                        );
+                              stylesBars.bar,
+                              { height: height },
+                              b?.isPastBar ? styles1stBar : {}
+                            ]}
+                          />)
                       })
-                  }
-
-                </Animated.View>
+                    }
+                  </Animated.View>
+                </View>
               </View>
               {/* recording time */}
               <RecordTime recordTimeSharedVal={recordTimeSharedVal} styles={styles.txtQuickTime} />
@@ -100,7 +100,7 @@ const RecorderLocked = ({
         }
         {/* recorder control view */}
         <View style={styles.recorderControlRow}>
-          {/* delete */}
+          {/* --- delete --- */}
           <TouchableRipple style={styles.btnController}
             onPress={onDelete}
           >
@@ -110,7 +110,7 @@ const RecorderLocked = ({
               color={"white"}
             />
           </TouchableRipple>
-          {/* pause / recording */}
+          {/* --- pause / recording  --- */}
           <TouchableRipple style={[styles.btnController, { backgroundColor: 'tomato' }]}
             onPress={onPauseRecord}
           >
@@ -120,10 +120,10 @@ const RecorderLocked = ({
               color={"white"}
             />
           </TouchableRipple>
-          {/* send */}
+          {/* ---- send button --- */}
           <TouchableRipple
             style={[styles.btnController, { backgroundColor: colors.ternary1 }]}
-            disabled={isRecording ? true : false}
+            // disabled={!!!isRecording}
             onPress={onSend}
           >
             <IconMtc
@@ -134,12 +134,49 @@ const RecorderLocked = ({
           </TouchableRipple>
         </View>
       </Animated.View>
-
     </View>
   )
 
 }
 
 export default RecorderLocked;
+
+
+
+const stylesBars = StyleSheet.create({
+
+  recorderContainer: {
+    alignSelf: "center",
+    width: BAR_CONTAINER_WIDTH - TOTAL_BAR_WIDTH * 2,
+    height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    // backgroundColor:'red',
+  },
+  recorderBody: {
+    width: BAR_CONTAINER_WIDTH,
+    height: 100,
+    alignItems: "flex-start",
+    borderRadius: 5,
+    position: 'absolute',
+    right: 0,
+    top: 0
+  },
+  barContainer: {
+    height: "100%",
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    // gap: SPACE_WIDTH
+  },
+  bar: {
+    height: "100%",
+    width: SOUND_BAR_WIDTH,
+    marginRight: SOUND_BAR_GAP,
+    backgroundColor: "black",
+    borderRadius: SOUND_BAR_WIDTH,
+  },
+})
 
 

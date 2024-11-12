@@ -84,7 +84,8 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
     },
     recorderContainer: {
       width: w(100),
-      height: h(20),
+      // minHeight: h(20),
+      paddingVertical:20,
       backgroundColor: colors.primary4,
       justifyContent: 'center',
       alignItems: 'center'
@@ -92,27 +93,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
     recorderCol: {
       width: '100%',
     },
-    barRootContainer: {
-      width: '100%',
-      height: 40,
-      justifyContent: 'center',
-      backgroundColor: colors.primary3,
-    },
-    barContainer: {
-      height: '100%',
-      flexDirection: 'row',
-      alignItems: 'center',
-      // gap:  SOUND_BAR_GAP,
-      // backgroundColor: colors.ternary1,
-      position: 'absolute',
-    },
-    bar: {
-      height: '100%',
-      width: SOUND_BAR_WIDTH,
-      backgroundColor: colors.ternary1,
-      borderRadius: 3,
-      marginRight: SOUND_BAR_GAP
-    },
+  
     txtQuickTime: {
       color: colors.secondary1,
       fontSize: 12,
@@ -151,7 +132,7 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
       alignItems: 'center',
       justifyContent: 'space-between',
       paddingHorizontal: 10,
-      marginTop: h(2)
+      marginTop: h(2),
     },
     btnController: {
       padding: 10,

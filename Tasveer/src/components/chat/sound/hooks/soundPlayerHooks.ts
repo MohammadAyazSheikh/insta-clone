@@ -45,7 +45,7 @@ export const useSoundPlayer = (uri: string = path_) => {
             })
 
         })
-    }, []);
+    }, [uri]);
 
     useEffect(() => {
         sound.setVolume(1);

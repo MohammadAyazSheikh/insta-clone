@@ -16,6 +16,7 @@ import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/theme/unistyles/unistyles'
+import TestAnim from './testAnimation';
 
 const theme = {
   ...DefaultTheme,
@@ -55,5 +56,4 @@ const App = () => {
 }
 
 export default App;
-
 

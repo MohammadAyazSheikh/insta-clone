@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo, useState } from "react";
-import { View, Dimensions } from "react-native";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { View } from "react-native";
 import Animated, {
     useSharedValue,
     interpolate,
     withTiming,
+    Easing,
 } from 'react-native-reanimated';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
-import moment from "moment";
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import IconFa from 'react-native-vector-icons/FontAwesome';
@@ -16,7 +16,7 @@ import LottieView from 'lottie-react-native';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
-import RecorderLocked, { SOUND_BAR_GAP, SOUND_BAR_WIDTH } from "./recorderLocked";
+import RecorderLocked, { BAR_CONTAINER_WIDTH, TOTAL_BAR_WIDTH } from "./recorderLocked";
 
 
 export const BUTTON_SIZE = 10;
@@ -30,20 +30,34 @@ const AnimatedRecorder = ({
     onSend,
 }: props) => {
 
-    const { styles, width } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useFunctionalOrientation(responsiveStyles);
+
+    /* --- Quick Recorder -- */
+
     //animated value for lottie wave
     const metering = useSharedValue(0);
-    // animated value for wave bars (locked recorder waves)
-    // const translateX = useSharedValue(width);
+
 
     //animated value for current recording time
     const recordTimeSharedVal = useSharedValue(0);
-    const [meteringList, setMeteringList] = useState<number[]>([]);
+
+
+    /* ---  Locked Recorder Sates --- */
+
+    //if bars is translating left
+    const isSliding = useRef(false);
+    //animated value for translating bar container
+    const animTranslateX = useSharedValue(0);
+    //animated value for making 1st var width equal to the past bars width 
+    const animPastBarsWidth = useSharedValue(TOTAL_BAR_WIDTH);
+    //holds metering list data
+    const [voiceData, setVoiceData] = useState<{ metering: number, isPastBar?: boolean }[]>([]);
+
+
     //sound hook
-    const { onStartRecord, onStopRecord } = useSoundRecorderHooks();
+    const { onStartRecord, onStopRecord } = useSoundRecorderHooks(0.5);
 
     const [isLocked, setIsLocked] = useState(false);
-
     const [isRecording, setIsRecording] = useState(false);
     const isRecordingSharedValue = useSharedValue(false);
 
@@ -51,23 +65,28 @@ const AnimatedRecorder = ({
     const [uri, setUri] = useState<string | null>(null);
 
     //function to stop recording
-    const stopRecording = () =>
-        onStopRecord(() => {
-            // translateX.value = width;
-            setMeteringList([]);
-            //quick reorder value
-            metering.value = 0;
-            recordTimeSharedVal.value = 0;
-        });
+    const stopRecording = useCallback(async () => {
+        const uri = await onStopRecord();
+        setUri(uri);
+        setIsRecording(false);
+        isRecordingSharedValue.value = false;
+        //locked recorder
+        setVoiceData([]);
+        animPastBarsWidth.value = TOTAL_BAR_WIDTH;
+        animTranslateX.value = 0;
+        //quick reorder value
+        metering.value = 0;
+        recordTimeSharedVal.value = 0;
+    }, []);
+
 
     //function to start recording
     const startRecording = useCallback(async () => {
         if (isRecordingSharedValue.value)
             return;
-        const barTotalWidth = SOUND_BAR_WIDTH + SOUND_BAR_GAP;
-        //number of bars container can hold
-        const numOfBars = Math.round(width / barTotalWidth);
+
         setIsRecording(true);
+
         const uri_ = await onStartRecord((e) => {
             //for quick recorder lottie wave animation
             metering.value = withTiming(
@@ -79,41 +98,25 @@ const AnimatedRecorder = ({
                 { duration: 200 }
             );
 
-            //set recording time zero when it starts
+            //setting recording time 
             recordTimeSharedVal.value = e.currentPosition;
 
             //for locked recorder wave bars
+            setVoiceData((prev) => {
+                isSliding.current = false;
+                if ((TOTAL_BAR_WIDTH * prev.length) >= BAR_CONTAINER_WIDTH) {
+                    isSliding.current = true;
+                    animPastBarsWidth.value += TOTAL_BAR_WIDTH;
+                    //replacing unused old bars with one long single bars
+                    //to avoid lagging 
+                    const latest = [...prev];
+                    latest.shift();
+                    latest[0] = { isPastBar: true, metering: latest[0].metering };
 
-            // setMeteringList(prev => {
-
-            //     if (prev?.length >= numOfBars) {
-            //         const currentBars = [...prev];
-            //         currentBars.shift();
-            //         return [...currentBars, e.currentMetering ?? 0]
-            //     }
-
-
-            //     // const totalBarSpace = SOUND_BAR_WIDTH + SOUND_BAR_GAP
-            //     // const totalBarsAndGapWidth =
-            //     //     (prev.length * (totalBarSpace))
-
-            //     // const offset = width;
-            //     // if (totalBarsAndGapWidth > offset) {
-
-            //     //     console.log("-----")
-            //     //     const diff = totalBarsAndGapWidth - width;
-            //     //     console.log(translateX.value)
-            //     //     console.log(totalBarsAndGapWidth);
-            //     //     console.log(offset)
-            //     //     console.log(totalBarSpace, SOUND_BAR_GAP, SOUND_BAR_WIDTH, diff)
-            //     //     translateX.value = withTiming(barTotalWidth, { duration: 100 });
-            //     //     return [...prev.slice(1), e.currentMetering || 0];
-            //     // }
-            //     // const translate = totalBarSpace;
-            //     // translateX.value = withTiming(translateX.value - translate, { duration: 100 });
-            //     return [...prev, e.currentMetering ?? 0]
-            // });
-
+                    return [...latest, { metering: e.currentMetering || 0 }];
+                }
+                return [...prev, { metering: e.currentMetering ?? 0, isPastBar: false }]
+            });
         });
 
         //setting sound uri
@@ -134,17 +137,12 @@ const AnimatedRecorder = ({
             startRecording();
         },
         onRelease(isDeleted) {
-
             stopRecording();
-            isRecordingSharedValue.value = false;
-            setIsRecording(false);
-    
             if (!isDeleted && recordTimeSharedVal.value > 1)
                 onSend(uri!)
         },
         onDelete() {
-            isRecordingSharedValue.value = false;
-            setIsRecording(false);
+            stopRecording();
         },
         onLock() {
             setIsLocked(true);
@@ -153,11 +151,29 @@ const AnimatedRecorder = ({
 
 
 
-    // return null
+    //*Translating locked recorder bars to the left */
+    useEffect(() => {
+        //translating bar container to the left
+        if ((TOTAL_BAR_WIDTH * voiceData.length) >= BAR_CONTAINER_WIDTH
+            && isSliding.current && isRecording) {
+            isSliding.current = false;
+            animTranslateX.value =
+                withTiming(animTranslateX.value + TOTAL_BAR_WIDTH, {
+
+                    //idk why withTiming slows down after sometime,
+                    //that's why i've assign duration 470ms to withTiming 
+                    //and 500ms to the recording callback 
+                    //for syncing recording callback & translate animation  
+
+                    duration: 470,
+                    easing: Easing.linear,
+                })
+        }
+
+    }, [voiceData]);
 
     return (
         !isLocked ?
-            // false ?
             <View style={[styles.container]}>
                 {/* lock icon */}
                 <Animated.View style={[
@@ -193,11 +209,13 @@ const AnimatedRecorder = ({
             // locked recorder
             <RecorderLocked
                 uri={uri!}
-                // translateX={translateX}
-                meteringList={meteringList}
+                animPastBarsWidth={animPastBarsWidth}
+                translateX={animTranslateX}
+                meteringList={voiceData}
                 recordTimeSharedVal={recordTimeSharedVal}
                 isRecording={isRecording}
-                onSend={() => {
+                onSend={async () => {
+                    await stopRecording();
                     setIsLocked(false);
                     onSend(uri!)
                 }}
