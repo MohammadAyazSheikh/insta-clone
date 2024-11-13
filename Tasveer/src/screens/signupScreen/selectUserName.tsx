@@ -1,7 +1,4 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch } from '../../redux/hooks';
 import TextBox from '../../components/general/textBox/textBox';
@@ -11,7 +8,8 @@ import { childScreenProps } from './signupScreen';
 import { isValidUsername } from '../../utils/functions/validations';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-
+import styleSheet from './styles';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -23,14 +21,13 @@ export default function SelectUserName({
     setActiveScreen,
 }: childScreenProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
     const dispatch = useAppDispatch();
-
+    const {styles} = useStyles(styleSheet);
 
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.scroll}>
+            <SafeAreaView style={styles.container}>
                 <Animated.View
                     style={styles.containerChild}
                     entering={FadeInRight}
@@ -91,7 +88,7 @@ export default function SelectUserName({
 
 
 const RenderIcon = ({ err, data, setData, setErr }: childScreenProps) => {
-    const colors = useAppThemeColors();
+    const {theme:{colors}} = useStyles(styleSheet);
     if (!data.username) {
         return null;
     }
@@ -116,7 +113,7 @@ const RenderIcon = ({ err, data, setData, setErr }: childScreenProps) => {
             }}
             size={24}
             name='close'
-            color={colors.grey1}
+            color={colors.common.grey1}
         />
     }
 

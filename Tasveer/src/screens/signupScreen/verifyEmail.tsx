@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
@@ -15,15 +13,17 @@ import { phoneEmailTabsProps } from './selectPhoneEmail';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { signUpProps } from './signupScreen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles';
+
 type VerifyScreenProps = { data: signUpProps } & phoneEmailTabsProps;
 export default function VerifyEmail({
     data,
     setActiveTopTab
 }: VerifyScreenProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const {styles,theme:{colors}} = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     const [otp, setOtp] = useState('');
     const dispatch = useAppDispatch();
 
@@ -57,7 +57,7 @@ export default function VerifyEmail({
                                 Change email
                             </TextBold>
                             <TextRegular
-                                style={{ fontSize: 12, color: colors.grey1 }}
+                                style={{ fontSize: 12, color: colors.common.grey1 }}
                             >
                                 {'  OR  '}
                             </TextRegular>
@@ -73,7 +73,6 @@ export default function VerifyEmail({
                                 Resend message
                             </TextBold>
                         </View>
-
                     </View>
                     {/* ----Text input---- */}
                     <TextBox
@@ -82,7 +81,6 @@ export default function VerifyEmail({
                         onChangeText={(value) => {
                             setOtp(value)
                         }}
-
                     />
                     {/* Next button */}
                     <CustomButton

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
@@ -14,6 +12,8 @@ import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import IconFe from 'react-native-vector-icons/Feather'
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles';
 
 
 
@@ -25,9 +25,8 @@ export default function SelectPassword({
     setActiveScreen,
 }: childScreenProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     const [hidePass, setHidePass] = useState(true);
     const dispatch = useAppDispatch();
 
@@ -82,7 +81,7 @@ export default function SelectPassword({
                         iconRight={
                             <IconFe size={20}
                                 onPress={() => setHidePass(hide => !hide)}
-                                color={colors.grey1}
+                                color={colors.common.grey1}
                                 name={hidePass ? 'eye-off' : 'eye'}
                             />
                         }

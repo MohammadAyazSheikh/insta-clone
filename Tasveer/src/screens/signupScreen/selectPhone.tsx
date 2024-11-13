@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
@@ -16,6 +14,8 @@ import CountryCodePicker from '../../components/general/countryCodePicker/countr
 import { countiesInfo, countiesInfoType } from '../../constants/data/countriesInfo';
 import { isValidPhoneNo } from '../../utils/functions/validations';
 import { phoneEmailTabsProps } from './selectPhoneEmail';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles';
 
 export default function SelectPhone({
     setData,
@@ -25,9 +25,9 @@ export default function SelectPhone({
     setActiveTopTab
 }: childScreenProps & phoneEmailTabsProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const {styles,theme:{colors}} = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
+
     const dispatch = useAppDispatch();
     const [code, setCode] = useState<countiesInfoType>(countiesInfo[0]);
     const [showCounties, setShowCounties] = useState(false);
@@ -50,11 +50,11 @@ export default function SelectPhone({
                 marginRight: 8,
                 justifyContent: 'center',
                 alignItems: 'center',
-                borderRightColor: colors.grey1,
+                borderRightColor: colors.common.grey1,
                 borderRightWidth: 0.5
             }}
         >
-            <TextBold style={{ color: colors.grey1, fontSize: 13 }}>
+            <TextBold style={{ color: colors.common.grey1, fontSize: 13 }}>
                 {code}
             </TextBold>
         </TouchableRipple>
@@ -95,7 +95,7 @@ export default function SelectPhone({
                             ...data,
                             phone: '',
                         })}
-                        color={colors.grey1}
+                        color={colors.common.grey1}
                         name={'close'}
                     />
                 }

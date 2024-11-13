@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
@@ -38,7 +36,7 @@ export type signUpPropsErr = {
 
 export default function Signup() {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const [data, setData] = useState<signUpProps>({});
     const [err, setErr] = useState<signUpPropsErr>({});

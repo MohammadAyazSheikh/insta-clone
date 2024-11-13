@@ -6,14 +6,11 @@ import {
   TextProps,
   ActivityIndicatorProps,
   ViewStyle,
-  StyleSheetProperties,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import { TouchableRipple } from 'react-native-paper';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
-import { useAppSelector } from '../../../redux/hooks';
-
+import styleSheet from './styles';
+import { useStyles } from 'react-native-unistyles';
+import { UnistylesRuntime } from 'react-native-unistyles'
 
 type btnProps = TouchableOpacityProps;
 
@@ -37,10 +34,11 @@ const CustomButton = ({
   disableStyles = {},
   ...touchProps
 }: buttonProps) => {
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  const colors = useAppThemeColors();
-  const { theme } = useAppSelector(state => state.theme);
-  const isDark = theme == "dark";
+
+  const { styles, theme: { colors } } = useStyles(styleSheet);
+
+  const isDark = UnistylesRuntime.themeName == "dark";
+ 
 
   return (
     <TouchableRipple

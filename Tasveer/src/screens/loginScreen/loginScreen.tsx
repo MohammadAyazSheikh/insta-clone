@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Image} from 'react-native';
+import { View, Image } from 'react-native';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { authSuccess } from '../../redux/features/user/userSlice';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles';
 
@@ -28,7 +28,7 @@ type loginPropsErr = {
 
 export default function Login() {
 
-    const {styles} = useStyles(styleSheet);
+    const { styles } = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);

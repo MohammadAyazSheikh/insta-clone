@@ -1,15 +1,11 @@
+import { createStyleSheet } from 'react-native-unistyles';
+import { fontFamily } from '../../../theme/fonts';
 
-import { StyleSheet } from 'react-native';
-import { colorObjectType } from '../../../../theme/colors';
-import { fontFamily } from '../../../../theme/fonts';
+const styleSheet = createStyleSheet((theme) => {
+    const { colors,fontSize } = theme;
 
-
-
-type p = (number: number) => number;
-
-const portraitStyles  = (w: p, h: p, colors :colorObjectType) => {
-    return StyleSheet.create({
-
+    return ({
+      
         btnView: {
             flexDirection: 'row',
             justifyContent: 'center',
@@ -29,10 +25,12 @@ const portraitStyles  = (w: p, h: p, colors :colorObjectType) => {
             fontFamily: fontFamily.bold,
             fontSize: 14
         }
-    });
-}
+    })
+});
 
-export default portraitStyles;
+export default styleSheet;
+
+
 
 
 

@@ -1,11 +1,10 @@
+import { createStyleSheet } from 'react-native-unistyles';
+import { widthToDp as w } from '../../utils/functions/responsiveUtils';
 
-import { StyleSheet } from 'react-native';
-import { colorObjectType } from "../../../theme/colors";
-type p = (number: number) => number;
+const styleSheet = createStyleSheet((theme, runTime) => {
+    const { colors, fontSize } = theme;
 
-const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
-
-    return StyleSheet.create({
+    return ({
         container: {
             flex: 1,
             backgroundColor: colors.primary1,
@@ -23,14 +22,14 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             paddingTop: 50
         },
         txtChildTitle: {
-            fontSize: 30,
+            fontSize: fontSize.xl8,
             color: colors.secondary1,
-            textAlign:'center',
+            textAlign: 'center',
         },
 
         txtChildSubTitle: {
-            fontSize: 14,
-            color: colors.grey1,
+            fontSize: fontSize.md,
+            color: colors.common.grey1,
             marginVertical: 20,
             textAlign: 'center',
         },
@@ -54,24 +53,21 @@ const portraitStyles = (w: p, h: p, colors: colorObjectType) => {
             borderBlockColor: colors.secondary1,
         },
         btnTabTxt: {
-            fontSize: 16,
-            color: colors.grey1,
+            fontSize: fontSize.lg,
+            color: colors.common.grey1,
         },
         // resend text
-        texView:{
-            width:w(85),
-            justifyContent:'center',
-            alignItems:'center',
+        texView: {
+            width: w(85),
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         txtResend: {
             color: colors.ternary3,
-            fontSize: 14,
-            marginVertical:20,
-        },
+            fontSize: fontSize.md,
+            marginVertical: 20,
+        }
     });
-}
+});
 
-export default portraitStyles;
-
-
-
+export default styleSheet;

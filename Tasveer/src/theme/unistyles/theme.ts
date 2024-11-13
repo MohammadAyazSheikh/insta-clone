@@ -17,6 +17,8 @@ const fontSize = {
   xl3:22,
   xl4:24,
   xl6:26,
+  xl7:28,
+  xl8:30,
 }
 const commonColors = {
   lightYellow: '#feda75',

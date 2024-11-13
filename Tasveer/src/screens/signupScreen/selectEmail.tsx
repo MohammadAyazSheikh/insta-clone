@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import React, {  } from 'react';
+import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import TextBox from '../../components/general/textBox/textBox';
-import { TextRegular } from '../../components/general/text/text';
 import { childScreenProps } from './signupScreen';
-import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import IconAnt from 'react-native-vector-icons/AntDesign'
-import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { phoneEmailTabsProps } from './selectPhoneEmail';
 import { validEmail } from '../../utils/functions/validations';
+import styleSheet from './styles';
+import { useStyles } from 'react-native-unistyles';
 
 
 export default function SelectEmail({
@@ -25,9 +22,8 @@ export default function SelectEmail({
     setActiveTopTab
 }: childScreenProps & phoneEmailTabsProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const {styles,theme:{colors}} = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     const dispatch = useAppDispatch();
 
 
@@ -67,7 +63,7 @@ export default function SelectEmail({
                             ...data,
                             email: '',
                         })}
-                        color={colors.grey1}
+                        color={colors.common.grey1}
                         name={'close'}
                     />
                 }

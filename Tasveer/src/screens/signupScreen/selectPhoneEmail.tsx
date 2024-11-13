@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import CustomButton from '../../components/general/customButton/customButton';
+import { View } from 'react-native';
 import { useAppDispatch, } from '../../redux/hooks';
-import { useNavigation } from '@react-navigation/core'
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import TextBox from '../../components/general/textBox/textBox';
 import { TextRegular } from '../../components/general/text/text';
 import { childScreenProps } from './signupScreen';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
-import IconFe from 'react-native-vector-icons/Feather'
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { TouchableRipple } from 'react-native-paper';
 import SelectEmail from './selectEmail';
@@ -19,6 +11,8 @@ import SelectPhone from './selectPhone';
 import VerifyPassword from './verifyPhone';
 import VerifyEmail from './verifyEmail';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import styleSheet from './styles';
+import { useStyles } from 'react-native-unistyles';
 
 
 export type phoneEmailScreenType = 'phone' | 'email' | 'verifyPhone' | 'verifyEmail';
@@ -36,7 +30,7 @@ export default function SelectPhoneEmail({
     setActiveScreen,
 }: childScreenProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     const dispatch = useAppDispatch();
 
@@ -108,12 +102,12 @@ export default function SelectPhoneEmail({
 
 
 const Tabs = ({ setActiveTopTab, activeTopTab }: phoneEmailTabsProps) => {
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+    const { styles,theme:{colors} } = useStyles(styleSheet);
+    
     return (
         <View style={[styles.row, {
             borderBottomWidth: 0.5,
-            borderBottomColor: colors.grey1
+            borderBottomColor: colors.common.grey1
         }]}>
             {/* ----------------phone-------- */}
             <TouchableRipple
