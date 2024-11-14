@@ -1,24 +1,25 @@
 // import { commonColors, darkColors, lightColors } from "../colors"
 
 const spacing = {
-  sm: 2,
-  md: 4,
-  lg: 8,
-  xl: 12
+  xsm: 2,
+  md: 5,
+  lg: 10,
+  xl: 15,
+  xxl:20,
 };
 
 const fontSize = {
-  xsm:10,
+  xsm: 10,
   sm: 12,
   md: 14,
   lg: 16,
   xl: 18,
-  xl2:20,
-  xl3:22,
-  xl4:24,
-  xl6:26,
-  xl7:28,
-  xl8:30,
+  xl2: 20,
+  xl3: 22,
+  xl4: 24,
+  xl6: 26,
+  xl7: 28,
+  xl8: 30,
 }
 const commonColors = {
   lightYellow: '#feda75',
@@ -59,7 +60,7 @@ export const lightColors = {
 export const lightTheme = {
   colors: {
     ...lightColors,
-    common:commonColors
+    common: commonColors
   },
   spacing,
   fontSize
@@ -68,7 +69,7 @@ export const lightTheme = {
 export const darkTheme = {
   colors: {
     ...darkColors,
-    common:commonColors
+    common: commonColors
   },
   spacing,
   fontSize

@@ -20,11 +20,11 @@ export const onStart = <T>(
 
         const totalPages = Math.ceil(allData.length / pageSize);
 
-        console.log({
-            totalPages,
-            pageSize,
-            currentPage
-        })
+        // console.log({
+        //     totalPages,
+        //     pageSize,
+        //     currentPage
+        // })
         if (currentPage > 1) {
 
             const data_ = paginateData(allData, pageSize, currentPage - 1);
@@ -48,11 +48,11 @@ export const onEnd = <T>(
 
         const totalPages = Math.ceil(allData.length / pageSize);
 
-        console.log({
-            totalPages,
-            pageSize,
-            currentPage
-        })
+        // console.log({
+        //     totalPages,
+        //     pageSize,
+        //     currentPage
+        // })
         if (currentPage < totalPages) {
 
             const data_ = paginateData(allData, pageSize, currentPage + 1);

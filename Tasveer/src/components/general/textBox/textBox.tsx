@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, TextInput, TextInputProps, ViewStyle, Text } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';

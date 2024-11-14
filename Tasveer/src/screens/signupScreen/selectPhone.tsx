@@ -46,7 +46,7 @@ export default function SelectPhone({
             }}
             style={{
                 height: '70%',
-                padding: 10,
+                paddingHorizontal: 10,
                 marginRight: 8,
                 justifyContent: 'center',
                 alignItems: 'center',

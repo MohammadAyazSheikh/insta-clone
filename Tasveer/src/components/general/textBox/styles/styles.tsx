@@ -1,13 +1,10 @@
-
-import { StyleSheet } from 'react-native';
-import { colorObjectType } from '../../../../theme/colors';
 import { fontFamily, } from '../../../../theme/fonts';
 import { createStyleSheet } from 'react-native-unistyles';
 
 
-const styleSheet = createStyleSheet((theme, runTime) => {
-    const { colors, spacing } = theme;
-    const { width } = runTime.screen;
+const styleSheet = createStyleSheet((theme) => {
+    const { colors, fontSize,spacing } = theme;
+
     return ({
         container: {
             justifyContent: 'center',
@@ -22,9 +19,9 @@ const styleSheet = createStyleSheet((theme, runTime) => {
             backgroundColor: colors.primary3,
             width: "100%",
             height: 50,
-            borderRadius: 5,
-            paddingHorizontal: 5,
-            marginVertical: 5,
+            borderRadius: spacing.md,
+            paddingHorizontal: spacing.md,
+            marginVertical: spacing.md,
         },
         inputViewFocus: {
             borderWidth: 1,
@@ -38,18 +35,18 @@ const styleSheet = createStyleSheet((theme, runTime) => {
             color: colors.secondary1,
             flex: 1,
             fontFamily: fontFamily.regular,
-            fontSize: 14,
+            fontSize: fontSize.md,
         },
         //error and label
         txtErr: {
             color: "tomato",
             fontFamily: fontFamily.regular,
-            fontSize: 12
+            fontSize: fontSize.sm
         },
         txtLabel: {
             color: colors.primary1,
             fontFamily: fontFamily.regular,
-            fontSize: 16,
+            fontSize: fontSize.lg,
             alignSelf: "flex-start"
         },
     });
