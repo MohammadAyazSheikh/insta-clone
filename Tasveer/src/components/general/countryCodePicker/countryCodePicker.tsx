@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import {
-    Modal, ViewStyle, View,
+    ViewStyle, View,
     FlatList,
 } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
-import { useAppThemeColors, widthToDp } from '../../../utils/functions/responsiveUtils';
 import { TextBold, TextRegular } from '../text/text';
 import TextBox from '../textBox/textBox';
 import IconAnt from 'react-native-vector-icons/AntDesign';
@@ -13,7 +12,6 @@ import { SvgUri } from 'react-native-svg';
 import { onEnd, paginateData } from '../../../utils/functions/pagination';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
-import { FlashList } from '@shopify/flash-list';
 import ModalWrapper from '../../modals/modalWrapper';
 
 
@@ -36,8 +34,7 @@ const CountryCodePicker = ({
 
 }: loaderType) => {
 
-    const { styles } = useStyles(styleSheet)
-    const colors = useAppThemeColors();
+    const { styles, theme: { colors } } = useStyles(styleSheet)
     const [filteredCountries, setFilteredCountries] = useState<countiesInfoType[]>(countiesInfo);
 
     const [paginatedCountries, setPaginatedCountries] = useState<countiesInfoType[]>(countiesInfo);
@@ -57,34 +54,37 @@ const CountryCodePicker = ({
         {
             countryInfo: countiesInfoType,
             showFlag?: boolean, onPress: () => void
-        }) => (
-        <TouchableRipple
-            onPress={onPress}
-            style={styles.listStyle}
-        >
-            <>
-                {
-                    showFlag ?
-                        <SvgUri
-                            width={40}
-                            height={20}
-                            style={{ marginRight: 5 }}
-                            uri={countryInfo.flag!}
-                        />
-                        :
-                        null
-                }
-                <TextRegular
-                    style={{
-                        fontSize: 16,
-                        color: colors.secondary1
-                    }}
-                >
-                    {`${countryInfo.emoji} ${countryInfo.name}  (+${countryInfo.callingCode})`}
-                </TextRegular>
-            </>
-        </TouchableRipple>
-    ), [styles]);
+        }) => {
+        const { styles, theme: { colors } } = useStyles(styleSheet)
+        return (
+            <TouchableRipple
+                onPress={onPress}
+                style={styles.listStyle}
+            >
+                <>
+                    {
+                        showFlag ?
+                            <SvgUri
+                                width={40}
+                                height={20}
+                                style={{ marginRight: 5 }}
+                                uri={countryInfo.flag!}
+                            />
+                            :
+                            null
+                    }
+                    <TextRegular
+                        style={{
+                            fontSize: 16,
+                            color: colors.secondary1
+                        }}
+                    >
+                        {`${countryInfo.emoji} ${countryInfo.name}  (+${countryInfo.callingCode})`}
+                    </TextRegular>
+                </>
+            </TouchableRipple>
+        )
+    }, []);
 
     // flat list render data
     const renderCodes = useCallback(({ item }: { item: countiesInfoType }) => (
@@ -95,7 +95,7 @@ const CountryCodePicker = ({
                 onPress(item);
             }}
         />
-    ), [])
+    ), [paginatedCountries])
 
     return (
         <ModalWrapper
@@ -137,7 +137,7 @@ const CountryCodePicker = ({
                             }}
                             iconLeft={<IconAnt
                                 name='search1'
-                                color={colors.grey1}
+                                color={colors.common.grey1}
                                 size={25}
                             />}
                         />

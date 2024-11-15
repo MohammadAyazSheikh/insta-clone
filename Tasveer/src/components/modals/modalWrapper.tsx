@@ -35,6 +35,9 @@ const ModalWrapper = ({
                 style={[
                     {
                         ...StyleSheet.absoluteFillObject,
+                        // backgroundColor:'white',
+                        // filter:"opacity(0%)
+                        // filter: opacity(25%);"
                     },
                     backDropStyles,
                 ]}
