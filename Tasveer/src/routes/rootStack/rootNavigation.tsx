@@ -77,7 +77,7 @@ function RootNav() {
           //   protectedRoutes()
           //   :
           //   authRoutes()
-          authRoutes()
+          protectedRoutes()
         }
       </Stack.Navigator>
     </NavigationContainer>

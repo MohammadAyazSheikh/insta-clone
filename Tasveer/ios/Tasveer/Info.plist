@@ -35,6 +35,8 @@
     <string>1</string>
     <key>GMSApiKey</key>
     <string>AIzaSyB7Haog03RkW-Jw_gjxDBt5reynjLGw4-c</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>12.0</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
