@@ -1,8 +1,5 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-// import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
@@ -11,14 +8,15 @@ import SearchBar from '../../components/general/searchbars/searchbar';
 import ContentItemCard from '../../components/cards/contentItemCard/contentItemCard';
 import { MasonryFlashList } from '@shopify/flash-list';
 import { discoverData } from '../../constants/data/discoverData';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 export default function Discover() {
 
-    const { styles, width, height } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
+    const { screen: { width, height } } = UnistylesRuntime;
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-
-
 
 
     return (

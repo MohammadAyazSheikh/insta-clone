@@ -1,18 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 import IconIo from 'react-native-vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
 import { View, ViewStyle } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
+import { useStyles } from 'react-native-unistyles';
 
 
 type vidProps = {
     showVolumeIcon?: boolean,
     mute?: boolean,
     source: string,
-    style: ViewStyle | ViewStyle[]
+    style: ViewStyle | ViewStyle[],
+    paused?: boolean,
 }
 
 export default function VideoPlayerContent({
@@ -20,9 +21,10 @@ export default function VideoPlayerContent({
     mute = true,
     source,
     style,
+    paused = false
 }: vidProps) {
 
-    const colors = useAppThemeColors();
+    const { theme: { colors } } = useStyles({});
     //for volume
     const [muted, setMuted] = useState(mute);
     const [isOnScreen, setIsOnScreen] = useState(false);
@@ -41,6 +43,9 @@ export default function VideoPlayerContent({
     });
 
     const onChange = (isOnScreen: boolean) => {
+        if (paused)
+            return;
+
         if (isOnScreen) {
             player.play();
             setIsOnScreen(isOnScreen);
@@ -60,6 +65,7 @@ export default function VideoPlayerContent({
         //     setIsPlaying(isPlaying);
         // });
 
+        paused && player.pause();
         const statusSubscription = player.addListener('statusChange', status => {
             setStatus(status);
         });
@@ -98,7 +104,7 @@ export default function VideoPlayerContent({
             {
                 showVolumeIcon ?
                     <ButtonRipple
-                        onPress={() =>setMuted(prev => !prev)
+                        onPress={() => setMuted(prev => !prev)
                         }
                         style={{
                             position: 'absolute',

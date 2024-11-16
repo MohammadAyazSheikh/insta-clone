@@ -2,13 +2,12 @@ import React from 'react';
 import {
     Image, StyleSheet, View, ViewStyle
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { discoverDataType } from '../../../constants/data/discoverData';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -28,9 +27,9 @@ const ContentItemCard = ({
     onPress,
 }: contentCardProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
 
-    const colors = useAppThemeColors();
+
     const media = typeof data?.uri == 'string' ? { uri: data.uri } : data.uri;
     const isImage = data.type == 'image';
     const isReel = data.type == 'reel';
@@ -58,7 +57,6 @@ const ContentItemCard = ({
                         showVolumeIcon={false}
                         source={media}
                         style={[styles.imgStyles]}
-                        resizeMode='cover'
                         paused={pauseAll}
                     />
             }

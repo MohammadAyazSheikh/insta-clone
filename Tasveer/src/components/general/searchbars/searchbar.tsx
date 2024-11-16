@@ -6,12 +6,11 @@ import {
     TextInputProps,
     ViewStyle
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import ButtonRipple from '../customButton/buttonRipple';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -30,8 +29,7 @@ const SearchBar = ({
     ...inputProps
 }: barProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     const [text, setText] = useState<string>();
     const [focused, setFocused] = useState(false);
 
@@ -40,7 +38,7 @@ const SearchBar = ({
         <View style={[styles.container, containerStyles]}>
             <IconIo
                 name='search'
-                color={focused ? colors.secondary1 : colors.grey1}
+                color={focused ? colors.secondary1 : colors.common.grey1}
                 size={22}
             />
             {/* input text */}
@@ -48,15 +46,15 @@ const SearchBar = ({
                 {...inputProps}
                 value={text}
                 placeholder='Search'
-                placeholderTextColor={colors.grey1}
+                placeholderTextColor={colors.common.grey1}
                 style={[styles.txtInput, inputProps?.style]}
                 onBlur={() => setFocused(false)}
                 onFocus={() => setFocused(true)}
                 onChangeText={
                     (val) => {
-                    setText(val);
-                    onChangeText && onChangeText(val)
-                }}
+                        setText(val);
+                        onChangeText && onChangeText(val)
+                    }}
             />
             {/* clear button */}
             {
