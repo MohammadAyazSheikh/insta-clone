@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { View, ViewStyle } from "react-native";
 import Svg, { G, Circle, } from "react-native-svg";
 import { getBackDash, getDash } from './utils';
@@ -74,15 +74,22 @@ export default function StoryAvatar({
     const halfCircle = radius + strokeWidth;
     const circleCircumference = 2 * Math.PI * radius;
 
-    const strokeDasharrayBack = getBackDash(circleCircumference, numberOfArch, spaceSize);
-    const strokeDasharrayFront = getDash(circleCircumference, numberOfArch, spaceSize, showNumberOfArch);
+    //calculating back circle stroke dash array
+    const strokeDasharrayBack = useMemo(() => getBackDash(circleCircumference, numberOfArch, spaceSize),
+        [circleCircumference, numberOfArch, spaceSize]);
+
+    //calculating front circle stroke dash array
+    const strokeDasharrayFront = useMemo(() => getDash(circleCircumference, numberOfArch, spaceSize, showNumberOfArch),
+        [circleCircumference, numberOfArch, spaceSize, showNumberOfArch]);
+
     //if no we want to render zero arch (every story is viewed) 
     //assign offset equal to circumference to hide front circle stroke
     const strokeDashoffsetFront = showNumberOfArch == 0 ? circleCircumference : 0;
 
 
     const iconWidth = (halfCircle * 2) - strokeWidth * 8;
-    const iconStyles: ViewStyle = {
+
+    const iconStyles: ViewStyle = useMemo(() => ({
         width: iconWidth,
         height: iconWidth,
         borderRadius: 100,
@@ -90,7 +97,7 @@ export default function StoryAvatar({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 0
-    };
+    }), []);
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', width: halfCircle * 2, height: name ? "auto" : halfCircle * 2 }}>

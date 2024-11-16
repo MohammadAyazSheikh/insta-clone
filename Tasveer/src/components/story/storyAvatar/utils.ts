@@ -11,7 +11,7 @@ export const getBackDash = (circumference: number, numberOfArch: number, spaceSi
 
     //one space length
     const spaceLength = getPercentage(circumference, spaceSize);
-    // total Dahs Length = total Length - total Space Length
+    // total Dash Length = total Length - total Space Length
     const totalDashLength = circumference - (numberOfArch * spaceLength);
     //one dash length
     const dashLength = totalDashLength / numberOfArch;
@@ -45,7 +45,7 @@ export const getDash = (
     //return circumference and also assign 
     //offset equal to circumference to svg circle 
     //for hiding front circle stroke
-    if (showNumberOfArch == 0)
+    if (showNumberOfArch === 0)
         return circumference;
 
 
@@ -54,7 +54,7 @@ export const getDash = (
 
             //If it is last arch 1st we will draw last arch
             //and in the remaining space we will draw space
-            if (showNumberOfArch - 1 == index) {
+            if (showNumberOfArch - 1 === index) {
                 //number of remaining arch
                 const remaining = totalNumberOfArch - showNumberOfArch;
 

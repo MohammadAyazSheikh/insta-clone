@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions, ScrollView, TextInput, } from 'react-native';
 import Animated, {
     Extrapolation,
@@ -8,8 +8,6 @@ import Animated, {
     useSharedValue,
     withTiming,
 } from 'react-native-reanimated';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import colors from '../../../theme/colors';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { usePlayStory } from '../progressBar/playStoryHooks';
@@ -19,8 +17,9 @@ import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconFe from 'react-native-vector-icons/Feather';
 import { StoryMedia } from './storyMedia';
 import { storyDataType } from '../../../constants/data/storyData';
-import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
 import { View } from 'react-native-animatable';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 const { width } = Dimensions.get('window');
 
@@ -49,7 +48,7 @@ const StoryContent = ({
 }: storyContentProps) => {
 
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
 
     //holds value if visible story in screen or not
@@ -139,8 +138,8 @@ const StoryContent = ({
             ]}
         >
             <View
-            // <VisibilitySensor
-            // onChange={(isVisible) => setIsVisible(isVisible)}
+                // <VisibilitySensor
+                // onChange={(isVisible) => setIsVisible(isVisible)}
                 style={[
                     styles.container,
                 ]}

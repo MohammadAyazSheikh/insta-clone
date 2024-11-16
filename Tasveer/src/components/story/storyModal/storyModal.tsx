@@ -1,16 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-    Modal, View
-} from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import Animated, {
     useAnimatedScrollHandler,
     useSharedValue,
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
 import { storyData, storyDataType } from '../../../constants/data/storyData';
-import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+import ModalWrapper from '../../modals/modalWrapper';
+import { ScrollView } from 'react-native';
 
 type storyModalProps = {
     show: boolean,
@@ -24,7 +23,8 @@ const StoryModal = ({
     scrollToIndex = 0,
 }: storyModalProps) => {
 
-    const { styles, width } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
+    const { screen: { width } } = UnistylesRuntime;
 
     const [data, setData] = useState<storyDataType[]>(storyData);
 
@@ -33,7 +33,7 @@ const StoryModal = ({
     const isModalOpen = useRef(false);
 
     //scroll ref
-    const scrollRef = useRef(null);
+    const scrollRef = useRef<Animated.ScrollView>(null);
 
     //holds scroll animated value
     const translateX = useSharedValue(0);
@@ -60,7 +60,7 @@ const StoryModal = ({
     }, [show]);
 
     return (
-        <Modal
+        <ModalWrapper
             animationType="slide"
             transparent={true}
             visible={show}
@@ -69,9 +69,6 @@ const StoryModal = ({
                 scrollToUserStory(scrollToIndex);
             }}
         >
-            <View
-                style={styles.backDrop}
-            />
             <SafeAreaProvider>
                 <SafeAreaView
                     style={styles.centeredView}
@@ -111,7 +108,7 @@ const StoryModal = ({
                     </Animated.ScrollView>
                 </SafeAreaView>
             </SafeAreaProvider>
-        </Modal >
+        </ModalWrapper >
     );
 };
 export default StoryModal;

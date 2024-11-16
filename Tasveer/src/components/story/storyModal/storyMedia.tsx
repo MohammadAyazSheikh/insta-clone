@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Image, } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-
 import { TouchHold } from '../../general/customButton/touchHoldButton';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -30,7 +29,7 @@ const StoryMedia = ({
 }: storyMediaProps) => {
 
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
 
     return (

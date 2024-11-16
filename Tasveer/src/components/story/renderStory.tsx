@@ -3,8 +3,7 @@ import { View, FlatList } from 'react-native';
 import { storyData } from '../../constants/data/storyData';
 import StoryModal from './storyModal/storyModal';
 import StoryAvatar from './storyAvatar/storyAvatar';
-import IconEn from 'react-native-vector-icons/Entypo';
-import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+
 
 export const RADIUS_STORY_AVATAR = 40;
 export const STROKE_STORY_AVATAR = 2;
@@ -15,9 +14,6 @@ export default function RenderStory() {
 
     const [scrollIndex, setScrollIndex] = useState(0);
 
-    const colors = useAppThemeColors();
-
-
 
     return (
         <View style={{ width: '100%', paddingVertical: 5 }}>
@@ -27,7 +23,7 @@ export default function RenderStory() {
                 horizontal
                 data={storyData}
                 keyExtractor={(item => item.userId)}
-                // your story
+                // logged in user's story
                 ListHeaderComponent={() => (
                     <StoryAvatar
                         numberOfArch={1}

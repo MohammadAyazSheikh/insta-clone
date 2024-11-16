@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { TouchableRipple, } from 'react-native-paper';
 import { useAppSelector } from '../../../redux/hooks';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import { Image, ViewStyle, View, StyleSheet, ImageStyle, TextStyle } from 'react-native';
 import { TextRegular } from '../text/text';
 import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming } from 'react-native-reanimated';
@@ -11,6 +9,9 @@ import ButtonRipple from '../customButton/buttonRipple';
 import IconEn from 'react-native-vector-icons/Entypo';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { colorsList } from '../../../theme/colors';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+
 type avatarProps = {
     name?: string
     image?: { uri: string } | any,
@@ -50,9 +51,8 @@ export default function UserAvatar({
     onPress
 }: avatarProps) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet)
     const { theme } = useAppSelector(state => state.theme);
-    const colors = useAppThemeColors();
     const isDark = theme == "dark";
 
 
@@ -100,10 +100,10 @@ export default function UserAvatar({
                         >
                             <LinearGradient
                                 colors={[
-                                    colors.blue,
-                                    colors.purple,
-                                    colors.pink,
-                                    colors.orange,
+                                    colors.common.blue,
+                                    colors.common.purple,
+                                    colors.common.pink,
+                                    colors.common.orange,
                                     // colors.yellow
                                 ]}
                                 start={{ x: 1, y: 0 }}

@@ -1,8 +1,7 @@
 
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, Animated, TextInput, StyleSheet } from "react-native";
-import Svg, { G, Circle, Defs, LinearGradient, Stop } from "react-native-svg";
-import { getBackDash, getDash, getPercentage } from './utils';
+import React from 'react';
+import { Defs, LinearGradient, Stop } from "react-native-svg";
+
 
 export type gradientColorProps = {
     color: string,
