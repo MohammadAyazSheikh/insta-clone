@@ -4,7 +4,7 @@ import { fontFamily } from '../../../../theme/fonts';
 
 const styleSheet = createStyleSheet((theme) => {
 
-    const { colors, spacing, fontSize } = theme;
+    const { colors, fontSize } = theme;
 
     return ({
         menuContainer: {
@@ -12,12 +12,12 @@ const styleSheet = createStyleSheet((theme) => {
             width: '100%',
             alignItems: 'center',
             justifyContent: 'flex-start',
-            paddingHorizontal:10,
-            paddingVertical:15,
+            paddingHorizontal: 10,
+            paddingVertical: 15,
         },
-        txtMenu:{
-            fontSize:16,
-            color:colors.secondary1,
+        txtMenu: {
+            fontSize: fontSize?.lg,
+            color: colors.secondary1,
         }
     });
 });

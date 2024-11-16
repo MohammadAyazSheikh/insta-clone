@@ -26,7 +26,7 @@ const styleSheet = createStyleSheet((theme) => {
         },
         txtHeader: {
             color: colors.secondary1,
-            fontSize: fontSize?.md,
+            fontSize: fontSize?.xl2,
             alignSelf: 'center'
         },
         // ---------Footer-------
@@ -56,7 +56,7 @@ const styleSheet = createStyleSheet((theme) => {
             marginHorizontal: spacing?.md,
             paddingVertical: spacing?.md,
             color: colors.secondary1,
-            fontSize: spacing?.md,
+            fontSize: fontSize?.md,
             fontFamily: fontFamily.regular
         },
         btnSend: {
@@ -94,16 +94,16 @@ const styleSheet = createStyleSheet((theme) => {
         },
         txtName: {
             color: colors.secondary1,
-            fontSize: spacing?.md,
+            fontSize: fontSize?.md,
         },
         txtTime: {
             color: colors.common.grey1,
-            fontSize: 12,
+            fontSize: fontSize?.sm,
             alignSelf: 'center'
         },
         txtComment: {
             color: colors.secondary1,
-            fontSize: spacing?.md,
+            fontSize: fontSize?.md,
         },
         lineViewReply: {
             paddingVertical: 0.5,

@@ -33,7 +33,6 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
 
   return (
     <SheetWrapper {...rest} ref={ref}>
-
       <View style={styles.headerView}>
         <TextBold style={styles.txtHeader}>
           Comments

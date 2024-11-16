@@ -29,7 +29,7 @@ const ModalWrapper = ({
         >
             {/* backdrop */}
             {showBackDrop && <TouchableOpacity
-                disabled={Boolean(onBackdropPress)!}
+                disabled={!onBackdropPress}
                 activeOpacity={0.9}
                 onPress={onBackdropPress}
                 style={[
@@ -43,7 +43,7 @@ const ModalWrapper = ({
                 ]}
 
             >
-                <BlurView intensity={40} tint="dark" style={{...StyleSheet.absoluteFillObject}}  />
+                <BlurView intensity={40} tint="dark" style={{...StyleSheet.absoluteFillObject}} experimentalBlurMethod='dimezisBlurView' />
             </TouchableOpacity>
             }
             <View style={
