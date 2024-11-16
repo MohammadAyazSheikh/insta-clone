@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import {
-    View,
-} from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
+import { View } from 'react-native';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextRegular, TextSemiBold } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import { commentType } from '../../../constants/types/sharedTypes';
 import moment from 'moment';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 export type commentProps = {
@@ -29,8 +26,7 @@ const Comment = ({
     onReply,
 }: commentProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     const [numOfLine, setNumOfLines] = useState<number | undefined>(3);
     const [liked, setSetLiked] = useState<boolean>(false);
     const [viewReply, setViewReply] = useState<boolean>(false);
@@ -123,7 +119,7 @@ const Comment = ({
                             :
                             null
                     }
-                    
+
                     {/* replies */}
                     {viewReply ? renderReplies : null}
 

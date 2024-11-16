@@ -2,10 +2,11 @@
 
 const spacing = {
   xsm: 2,
+  sm: 4,
   md: 5,
   lg: 10,
   xl: 15,
-  xxl:20,
+  xxl: 20,
 };
 
 const fontSize = {

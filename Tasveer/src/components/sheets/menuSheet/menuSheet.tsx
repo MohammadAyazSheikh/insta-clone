@@ -36,7 +36,7 @@ const OptionSheet = forwardRef<BottomSheet, sheetProps>(({
           icon={
             <IconFe
               name={'star'}
-              color={colors.primary1}
+              color={colors.secondary1}
               size={24}
             />
           }
@@ -55,7 +55,7 @@ const OptionSheet = forwardRef<BottomSheet, sheetProps>(({
           icon={
             <IconFe
               name={'user-minus'}
-              color={colors.primary1}
+              color={colors.secondary1}
               size={24}
             />
           }
@@ -69,7 +69,7 @@ const OptionSheet = forwardRef<BottomSheet, sheetProps>(({
           icon={
             <IconMtc
               name={'eye-off-outline'}
-              color={colors.primary1}
+              color={colors.secondary1}
               size={24}
             />
           }

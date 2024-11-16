@@ -8,11 +8,12 @@ import {
   ImageStyle,
 } from 'react-native';
 import { SliderIndicator } from './sliderIndicator';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import ZoomAbleView from '../../animatedComponent/zoomableView';
 import VideoPlayerContent from '../video/videoPlayerContent';
 import HeartAnimation from '../../animatedComponent/heartAnimation';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
 export type imageListType =
   { id: string, uri: any | { uri: string }, type: "image" | 'video' }
@@ -34,7 +35,7 @@ type mediaType = {
   scrollIndex?: number | null;
   indicatorLeftIcon?: React.ComponentType;
   indicatorRightIcon?: React.ComponentType;
-  onDoubleTab?:()=>void,
+  onDoubleTab?: () => void,
 };
 
 export const MediaSlider = ({
@@ -59,7 +60,7 @@ export const MediaSlider = ({
 }: mediaType) => {
 
 
-  const { styles, widthToDp: w, heightToDp: h } = useFunctionalOrientation(responsiveStyles);
+  const { styles } = useStyles(styleSheet);
 
   const scrollX = useRef(new Animated.Value(1)).current;
   const scrollRef = useRef<ScrollView>(null);

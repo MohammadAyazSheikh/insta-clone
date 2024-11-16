@@ -1,21 +1,19 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconEnt from 'react-native-vector-icons/Entypo';
 import IconFn from 'react-native-vector-icons/Fontisto';
 import IconOct from 'react-native-vector-icons/Octicons';
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
-import { Easing, FlatListComponent, StyleSheet, TextInput, View } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { TextBold, TextRegular } from '../../general/text/text';
+import { TextInput, View } from 'react-native';
 import UserAvatar from '../../general/avatar/avatar';
 import { useAppSelector } from '../../../redux/hooks';
-import { commentType, userType } from '../../../constants/types/sharedTypes';
+import { userType } from '../../../constants/types/sharedTypes';
 import SearchBar from '../../general/searchbars/searchbar';
 import { users } from '../../../constants/data/usersData';
 import CustomButton from '../../general/customButton/customButton';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 type optionBtnProp = {
   icon: React.ReactNode,
@@ -33,9 +31,8 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
   ...rest
 }, ref) => {
 
+  const { styles, theme: { colors } } = useStyles(styleSheet);
   const { user } = useAppSelector(state => state.user);
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  const colors = useAppThemeColors()
   const [text, setText] = useState<string>();
   const [userList, setUserList] = useState(users);
   const [selectedUsers, setSelectedUsers] = useState<userType[]>([]);
@@ -117,7 +114,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
           <View style={styles.col}>
             <TextInput
               placeholder='Write a message'
-              placeholderTextColor={colors.grey1}
+              placeholderTextColor={colors.common.grey1}
               style={styles.inputStyle}
             />
             <CustomButton

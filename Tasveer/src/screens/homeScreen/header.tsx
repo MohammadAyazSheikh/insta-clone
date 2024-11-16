@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Image } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons'
+import IconIo from 'react-native-vector-icons/Ionicons'
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 export default function HomeHeader() {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
+
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
     const dispatch = useAppDispatch();
@@ -36,8 +36,8 @@ export default function HomeHeader() {
                     onPress={() => ''}
                     style={{ marginRight: 10, borderRadius: 100, }}
                 >
-                    <IconMtc
-                        name='cards-heart'
+                    <IconIo
+                        name='heart-outline'
                         size={25}
                         color={colors.secondary1}
                     />
@@ -46,8 +46,8 @@ export default function HomeHeader() {
                     onPress={() => navigation.navigate('Inbox')}
                     style={{ borderRadius: 100, }}
                 >
-                    <IconMtc
-                        name='facebook-messenger'
+                    <IconIo
+                        name='chatbubble-ellipses-outline'
                         size={25}
                         color={colors.secondary1}
                     />

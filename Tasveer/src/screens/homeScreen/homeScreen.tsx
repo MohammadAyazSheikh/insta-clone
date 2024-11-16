@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import { useAppThemeColors, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 // import { useAppDispatch } from '../../redux/hooks';
 import HomeHeader from './header';
 import RenderStory from '../../components/story/renderStory';
@@ -13,6 +11,8 @@ import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
 import { View } from 'react-native';
+import styleSheet from './styles/styles';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -20,9 +20,8 @@ import { View } from 'react-native';
 
 export default function Home() {
 
-    const { styles, height } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
 
@@ -57,7 +56,7 @@ export default function Home() {
                             }}
                         />
                     )}
-                  
+
                     stickyHeaderHiddenOnScroll
                     stickyHeaderIndices={[0]}
                     ListHeaderComponent={() => (<View style={{ backgroundColor: colors.primary1 }}>

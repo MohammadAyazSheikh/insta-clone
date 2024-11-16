@@ -7,7 +7,9 @@ import { useFunctionalOrientation } from '../../../utils/functions/responsiveUti
 import responsiveStyles from './styles/styles';
 // import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
-import {  TextRegular } from '../../general/text/text';
+import { TextRegular } from '../../general/text/text';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -27,9 +29,7 @@ const Menu = ({
     onPress,
 }: menuProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    // const colors = useAppThemeColors();
-
+    const { styles } = useStyles(styleSheet)
 
     return (
         <ButtonRipple style={[styles.menuContainer, containerStyle]}

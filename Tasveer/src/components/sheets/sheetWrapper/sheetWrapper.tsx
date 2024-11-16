@@ -2,11 +2,11 @@ import React, { useCallback, forwardRef } from 'react';
 import {
   ViewStyle,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-// import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+
 
 
 export type sheetWrapperProps = {
@@ -22,9 +22,7 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
 },
   ref) => {
 
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  // const colors = useAppThemeColors();
-
+  const { styles } = useStyles(styleSheet);
 
   // callbacks
   // const handleSheetChanges = useCallback((index: number) => {
@@ -35,8 +33,8 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
     (props: any) => (
       <BottomSheetBackdrop
         {...props}
-        disappearsOnIndex={0}
-        appearsOnIndex={1}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
       />
     ),
     []

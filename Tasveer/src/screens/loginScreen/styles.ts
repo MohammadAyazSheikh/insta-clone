@@ -1,7 +1,7 @@
 import { createStyleSheet } from 'react-native-unistyles';
 
 const styleSheet = createStyleSheet((theme, runTime) => {
-    const { colors,fontSize } = theme;
+    const { colors, fontSize } = theme;
     const { width } = runTime.screen;
     return ({
         container: {

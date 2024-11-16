@@ -2,14 +2,13 @@ import React, { useCallback, useState } from 'react';
 import {
     View,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 import IconIo from 'react-native-vector-icons/Ionicons';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import ContentHeader from '../contentHeader/contentHeader';
 import { homeDataType } from '../../../constants/data/homeData';
 import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -35,8 +34,8 @@ const ContentCard = ({
     onSave = () => '',
 }: contentCardProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+
+    const { styles, theme: { colors } } = useStyles(styleSheet)
 
     const [isFav, setIsFav] = useState(false);
     const [saved, setSaved] = useState(false);

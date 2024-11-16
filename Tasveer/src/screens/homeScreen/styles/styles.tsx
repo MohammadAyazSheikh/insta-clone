@@ -1,9 +1,37 @@
-import { stylesObjType } from '../../../utils/functions/responsiveUtils';
-import landscapeStyles from './landscapeStyles';
-import portraitStyles from './portraitStyles';
+import { createStyleSheet } from 'react-native-unistyles';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
-
-export default function responsiveStyles({ widthToDp,heightToDp,isPortrait,colors}:stylesObjType) {
-
-    return isPortrait ? portraitStyles(widthToDp, heightToDp, colors) : landscapeStyles(widthToDp, heightToDp, colors)
-}
+const styleSheet = createStyleSheet((theme, runTime) => {
+    const { colors, fontSize } = theme;
+    
+    return ({
+        container: {
+            flex: 1,
+            backgroundColor: colors.primary1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+        },
+        scroll: {
+            width: w(100),
+            alignItems: 'center',
+        },
+        row: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        // header 
+        headerView: {
+            width: "100%",
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingHorizontal: 10,
+        },
+        logoStyles: {
+            width: w(35),
+            resizeMode: 'contain',
+        },
+    });
+});
+export default styleSheet;

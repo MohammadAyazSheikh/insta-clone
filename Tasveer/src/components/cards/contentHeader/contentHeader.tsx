@@ -13,6 +13,8 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextBold, TextRegular } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -39,8 +41,7 @@ const ContentHeader = ({
   onTitlePress = () => '',
 }: bannerProps) => {
 
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  const colors = useAppThemeColors();
+  const { styles, theme: { colors } } = useStyles(styleSheet);
 
   const icon = <IconMtc
     name={"movie-play"}
