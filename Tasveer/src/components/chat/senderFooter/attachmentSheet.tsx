@@ -2,12 +2,8 @@ import React from 'react';
 import {
     Modal, View, Pressable
 } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import Animated, { Extrapolate, Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
-import { useNavigation } from '@react-navigation/native';
+import styleSheet from './styles/styles';
+import Animated, { Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import AttachmentButton from './attachmentBtn';
 import IconFe from 'react-native-vector-icons/Feather';
 import IconAnt from 'react-native-vector-icons/AntDesign';
@@ -16,6 +12,8 @@ import { pickMultipleImage } from '../../../utils/functions/imagePicker';
 import { pickSingleDocument } from '../../../utils/functions/documentPicker';
 import { Image as ImageType } from 'react-native-image-crop-picker';
 import { DocumentPickerResponse } from 'react-native-document-picker';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import ModalWrapper from '../../modals/modalWrapper';
 
 type attachSheetProps = {
     show: boolean,
@@ -42,8 +40,8 @@ const AttachmentSheet = ({
 }: attachSheetProps) => {
 
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const { styles ,width} = useFunctionalOrientation(responsiveStyles);
-    // const colors = useAppThemeColors();
+    const { styles } = useStyles(styleSheet);
+    const { screen:{width}} = UnistylesRuntime;
 
 
     //animations
@@ -64,7 +62,7 @@ const AttachmentSheet = ({
 
     const stylesAnim = useAnimatedStyle(() => {
 
-   
+
         const scale = interpolate(
             animValue.value,
             inputRange,
@@ -75,17 +73,17 @@ const AttachmentSheet = ({
         const borderRadius = interpolate(
             animValue.value,
             inputRange,
-            [width, width/2, 20],
+            [width, width / 2, 20],
             Extrapolation.CLAMP
         );
 
 
         return {
-            borderTopLeftRadius:borderRadius,
-            borderTopRightRadius:borderRadius,
-            borderBottomLeftRadius:borderRadius,
+            borderTopLeftRadius: borderRadius,
+            borderTopRightRadius: borderRadius,
+            borderBottomLeftRadius: borderRadius,
             transform: [
-                {scale}
+                { scale }
                 // { scaleY },
                 // {scaleX}
                 // {translateY}
@@ -181,7 +179,7 @@ const AttachmentSheet = ({
                                         res && setDocument(res);
                                     }).finally(() => {
                                         closeSheet();
-                                })    
+                                    })
                             }}
                         />
                         {/* locations */}
@@ -211,7 +209,6 @@ const AttachmentSheet = ({
                         />
                     </View>
                 </Animated.View >
-
             </Pressable>
         </Modal >
     );

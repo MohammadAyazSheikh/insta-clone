@@ -1,13 +1,14 @@
 import React, { createRef, forwardRef, useImperativeHandle, useState } from 'react';
 import { View, Modal, Pressable } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { Text } from 'react-native';
 import Animated, { ZoomIn } from 'react-native-reanimated';
+import { useStyles } from 'react-native-unistyles';
 
-const emojis = ['👍', '❤', '😂', '😲', '😢', '😡']
-export type emojisType = '👍' | '❤' | '😂' | '😲' | '😢' | '😡'
+const emojis = ['👍', '❤', '😂', '😲', '😢', '😡'];
+export type emojisType = '👍' | '❤' | '😂' | '😲' | '😢' | '😡';
+
 type props = {
 
     onSelect: (emoji: string) => void,
@@ -26,7 +27,7 @@ const Reactions = forwardRef(({
 
 }, ref) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
     const [visible, setVisible] = useState(false);
     const [props, setProps] = useState<props>();
 

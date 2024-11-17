@@ -1,11 +1,10 @@
 import React, { } from 'react';
 import { useAppSelector } from '../../../redux/hooks';
-import SoundSlider from '../../general/audioSheet/soundSlider';
-import colors from '../../../theme/colors';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
 import SoundPlayer from '../sound/soundPlayer';
 import { widthToDp } from '../../../utils/functions/responsiveUtils';
+import { useStyles } from 'react-native-unistyles';
 
 
 type propsType = {
@@ -19,6 +18,8 @@ export default function SoundBubble(props: propsType) {
         message,
     } = props;
 
+    const { theme:{colors}} = useStyles({});
+
     const { user: sender, voice } = message;
 
     const { user } = useAppSelector(state => state.user);
@@ -26,8 +27,9 @@ export default function SoundBubble(props: propsType) {
     const isDark = theme == "dark";
     const you = sender?.id == user?.id;
 
-    const colorBtn = !isDark && !you ? colors.primary2 : "white";
-    const maxTrackColor = !isDark && !you ? colors.grey1 : "white";
+
+    // const colorBtn = !isDark && !you ? colors.primary1 : "white";
+    // const maxTrackColor = !isDark && !you ? colors.common?.grey1 : "white";
 
     return (
         <BubbleWrapper {...message}

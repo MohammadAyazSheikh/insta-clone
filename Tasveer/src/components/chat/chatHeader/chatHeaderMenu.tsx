@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import {
   Modal, View, Pressable
 } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import Animated, { Extrapolate, Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
+import Animated, {  Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import CustomButton from '../../general/customButton/customButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 type attachSheetProps = {
   showMenu: boolean,
@@ -19,8 +19,7 @@ type attachSheetProps = {
 const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  // const colors = useAppThemeColors();
+  const { styles } = useStyles(styleSheet);
 
 
   const animValue = useSharedValue(0);

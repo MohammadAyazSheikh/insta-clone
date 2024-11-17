@@ -2,12 +2,12 @@ import React from 'react';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
 import { WebView } from 'react-native-webview';
-import { useFunctionalOrientation, widthToDp } from '../../../utils/functions/responsiveUtils';
 import { getMapPageHtml } from './mapHtml';
 import { View, StyleSheet, Platform, Linking } from 'react-native';
 import { showConfirmAlert } from '../../general/alerts/confirmAlert';
 import { TextRegular } from '../../general/text/text';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
+import { useStyles } from 'react-native-unistyles';
 type propsType = {
     message: messageObjType,
     onPress?: () => void,
@@ -17,7 +17,7 @@ type propsType = {
 
 export default function LocationBubble(props: propsType) {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     const { message } = props;
     const { latitude, longitude, address } = message?.location!;
@@ -63,7 +63,7 @@ export default function LocationBubble(props: propsType) {
                 />
                 {/* for preventing user to touch  map  */}
                 <View
-                    style={{ ...StyleSheet.absoluteFill, zIndex: 1, }}
+                    style={{ ...StyleSheet.absoluteFillObject, zIndex: 1, }}
                 />
             </View>
             {/* ---address-- */}

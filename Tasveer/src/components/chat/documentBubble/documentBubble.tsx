@@ -1,12 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import responsiveStyles from './styles/styles';
+import uniStyles from './styles/styles';
 import { TextItalic } from '../../../components/general/text/text';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import { useAppSelector } from '../../../redux/hooks';
 import { getDocumentIcon } from '../documentPickerFooter/documentIcons';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
+import { useStyles } from 'react-native-unistyles';
 
 type propsType = {
     message: messageObjType,
@@ -16,10 +16,11 @@ type propsType = {
 
 export default function DocumentBubble(props: propsType) {
 
+    const { styles } = useStyles(uniStyles);
+
     const { user } = useAppSelector(state => state.user);
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
-    const { styles } = useFunctionalOrientation(responsiveStyles);
 
     const { message } = props;
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Image, ScrollView, } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import uuid from 'react-native-uuid';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import {Image as ImageType} from 'react-native-image-crop-picker';
+import { useStyles } from 'react-native-unistyles';
 
 type imageListFooterProps = {
     imageList: ImageType[],
@@ -18,8 +18,8 @@ const ImageListFooter = ({
     onImageRemove,
 }: imageListFooterProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+    const { styles,theme:{colors} } = useStyles(styleSheet);
+
 
     return (
         <View style={styles.imageFooterContainer}>
@@ -29,7 +29,7 @@ const ImageListFooter = ({
                     alignItems: 'center',
                 }}>
                 {imageList.map(item => (
-                    <View key={uuid.v4().toString()} style={styles.footerImageView}>
+                    <View key={item?.path} style={styles.footerImageView}>
                         <Image source={{ uri: item.path }} style={styles.imgFooterStyle} />
                         {/* remove image button */}
                         <ButtonRipple
@@ -47,7 +47,7 @@ const ImageListFooter = ({
                 onPress={() => onClose && onClose()}
                 style={styles.btnCloseImgList}
             >
-                <IconAnt name="close" size={18} color={colors.primary1} />
+                <IconAnt name="close" size={18} color={"white"} />
             </ButtonRipple>
         </View>
     );

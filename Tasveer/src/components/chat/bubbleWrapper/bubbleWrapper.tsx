@@ -1,8 +1,6 @@
 import React from 'react';
 import { ColorValue, View } from 'react-native';
-import responsiveStyles from './styles/styles';
 import { TextRegular } from '../../../components/general/text/text';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { messageObjType } from '../../../constants/types/sharedTypes';
@@ -16,6 +14,8 @@ import { updateMessage } from '../../../redux/features/chat/chatSlice';
 import { setSelectedMsgs, setSelectedReaction } from '../../../redux/features/ui/uiSlice';
 import { showReaction } from '../reactions/reactions';
 import { Text } from 'react-native';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 const getMsgStatusIcon = (name: 'sent' | 'delivered' | 'seen' | 'sending',
     color?: number | ColorValue | undefined) => {
@@ -58,6 +58,8 @@ export default function BubbleWrapper({
     ...props
 }: bubbleWrapperType) {
 
+    const { styles } = useStyles(styleSheet);
+
     const dispatch = useAppDispatch();
     const { user: sender, text, replyMessage, starred } = props;
     const { messages } = useAppSelector(state => state.chat);
@@ -65,7 +67,6 @@ export default function BubbleWrapper({
     const { user } = useAppSelector(state => state.user);
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
-    const { styles } = useFunctionalOrientation(responsiveStyles);
     const you = sender?.id == user?.id;
 
     //scroll to message
@@ -205,7 +206,7 @@ export default function BubbleWrapper({
                     </TextRegular>
                     {/* status icon */}
                     {
-                        you ? getMsgStatusIcon(props.status,colors.primary4) : null
+                        you ? getMsgStatusIcon(props.status, colors.primary4) : null
                     }
                 </View>
             </ButtonRipple>
@@ -213,7 +214,7 @@ export default function BubbleWrapper({
             {/* reaction */}
             {
                 msgReacts?.length > 0 ?
-                    <ButtonRipple style={styles.reaction}
+                    <ButtonRipple style={styles.reactionContainer}
                         onPress={() => {
                             dispatch(setSelectedReaction(msgReacts));
                             refReactionSheet.current?.expand()

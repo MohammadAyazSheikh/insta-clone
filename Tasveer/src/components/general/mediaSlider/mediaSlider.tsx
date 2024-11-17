@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Animated,
   View,
@@ -112,7 +112,7 @@ export const MediaSlider = ({
             key={item.id}
           >
             {
-              item.type == "video" ?
+              item.type === "video" ?
                 <VideoPlayerContent
                   source={item.uri}
                   style={[styles.videoStyle]}

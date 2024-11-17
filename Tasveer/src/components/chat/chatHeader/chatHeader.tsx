@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { TextRegular } from '../../general/text/text';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import IconAnt from 'react-native-vector-icons/AntDesign';
@@ -20,6 +17,8 @@ import { messageObjType } from '../../../constants/types/sharedTypes';
 import { updateMessages } from '../../../redux/features/chat/chatSlice';
 import { showMsgAlert } from '../../general/alerts/messageOptionsAlert';
 import UserAvatar from '../../general/avatar/avatar';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -32,10 +31,11 @@ const ChatHeader = ({
   showOptions,
   onChangeText,
 }: appHeaderProps) => {
+
+  const {styles,theme:{colors}} = useStyles(styleSheet)
+
   const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-  const { styles } = useFunctionalOrientation(responsiveStyles);
   const { theme } = useAppSelector(state => state.theme);
-  const colors = useAppThemeColors();
   const dispatch = useAppDispatch();
   const { selectedMessages } = useAppSelector(state => state.ui);
   const [showMenu, setShowMenu] = useState(false);

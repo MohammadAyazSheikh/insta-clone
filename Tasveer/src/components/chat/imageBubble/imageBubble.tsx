@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ImageStackList } from './imageStack';
-import SliderModal from '../../general/imageSliderModal/imageSliderModal';
+import SliderModal from '../../general/mediaSliderModal/mediaSliderModal';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
 

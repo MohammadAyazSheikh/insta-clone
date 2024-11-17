@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, View } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { useAppSelector } from '../../../redux/hooks';
 import IconEnt from 'react-native-vector-icons/Entypo';
@@ -19,6 +18,7 @@ import ReplyMessageFooter from '../replyFooter/replyMessageFooter';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import LocationMapSelector from '../../general/locationSelector/locationMapSelector';
 import AnimatedRecorder from '../sound/animatedRecorder';
+import { useStyles } from 'react-native-unistyles';
 
 export type conversationStatProps = {
 
@@ -40,7 +40,7 @@ export const SenderFooter = ({
 
   const { user } = useAppSelector(state => state.user);
   // const { theme } = useAppSelector(state => state.theme);
-  const { styles } = useFunctionalOrientation(responsiveStyles);
+  const { styles } = useStyles(styleSheet);
   const [text, setText] = useState<string>('');
   const [isAttachVisible, setIsAttachVisible] = useState(false);
 

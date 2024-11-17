@@ -1,11 +1,11 @@
 import React from 'react';
-import { View} from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import { View } from 'react-native';
+import styleSheet from './styles/styles';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { getDocumentIcon } from './documentIcons';
 import { TextRegular } from '../../general/text/text';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -20,18 +20,17 @@ const DocumentPickerFooter = ({
     document,
 }: documentPickerFooterProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     const arr = document.split('.')
     return (
         <View style={styles.footerContainer}>
 
 
             {getDocumentIcon(arr[arr.length - 1])}
-            <View style = {{flex:1}}>
+            <View style={{ flex: 1 }}>
                 <TextRegular style={styles.txtStyle}
-                numberOfLines={1}
-                ellipsizeMode='middle'
+                    numberOfLines={1}
+                    ellipsizeMode='middle'
                 >
                     {document}
                 </TextRegular>
@@ -41,7 +40,7 @@ const DocumentPickerFooter = ({
                 onPress={() => onClose && onClose()}
                 style={styles.btnClose}
             >
-                <IconAnt name="close" size={18} color={colors.primary1} />
+                <IconAnt name="close" size={18} color={colors.secondary1} />
             </ButtonRipple>
         </View>
     );

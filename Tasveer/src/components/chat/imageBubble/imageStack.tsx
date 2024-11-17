@@ -1,18 +1,19 @@
 import React  from 'react';
 import {View, Text, Image} from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import { getShadow } from '../../../theme/platformSpecificStyles';
 import uuid from 'react-native-uuid';
-import {TouchableRipple} from 'react-native-paper';
 import { Image as imageType } from 'react-native-image-crop-picker';
+import { useStyles } from 'react-native-unistyles';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
+
 type prop = {
     imageList:imageType[]
 }
 
 export const ImageStackList = ({imageList = []}:prop) => {
 
-    const { styles ,widthToDp:w} = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
 
   //we want to render less than 4 image box so getting length less than 4

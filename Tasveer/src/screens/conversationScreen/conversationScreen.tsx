@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createRef } from 'react';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { StackScreenProps } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
@@ -16,6 +15,7 @@ import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSh
 import { RenderReaction } from '../../components/chat/reactions/reactions';
 import ReactionSheet from '../../components/chat/reactions/reactionSheet';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
 
 
 export const chatScrollRef = createRef<FlatList>();
@@ -24,9 +24,7 @@ export const refReactionSheet = createRef<BottomSheet>();
 export default function Conversation(props: StackScreenProps<RootStackProps, 'Conversation'>) {
 
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-
-    const colors = useAppThemeColors();
+    const { styles } = useStyles(styleSheet);
 
     //messageId for scrolling to that message
     const messageId = props?.route?.params?.messageId;
@@ -64,7 +62,6 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                     index: staredIndex,
                 });
 
-            console.log(messageId, "😀")
         }
 
         scrollToMessage();

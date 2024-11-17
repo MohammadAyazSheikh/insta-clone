@@ -1,11 +1,30 @@
-import { stylesObjType } from '../../../../utils/functions/responsiveUtils';
-import landscapeStyles from './landscapeStyles';
-import portraitStyles from './portraitStyles';
+import { createStyleSheet } from "react-native-unistyles";
+import { widthToDp as w, heightToDp as h } from "../../../../utils/functions/responsiveUtils";
 
+const styleSheet = createStyleSheet((theme) => {
+    const { spacing } = theme;
+    return ({
+        videoView: {
+            width: w(70),
+            height: h(50),
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: "black",
+            marginBottom: spacing?.lg
+        },
+        videoStyles: {
+            width: "100%",
+            height: '100%',
+            backgroundColor: "black",
 
-export default function responsiveStyles({ widthToDp,heightToDp,isPortrait,colors}:stylesObjType) {
+        },
+        btnPlay: {
+            backgroundColor: 'white',
+            borderRadius: 100,
+            padding: 0.5,
+            position: 'absolute'
+        },
+    })
+});
 
-    return isPortrait ? portraitStyles(widthToDp, heightToDp, colors) : landscapeStyles(widthToDp, heightToDp, colors)
-}
-
-
+export default styleSheet;

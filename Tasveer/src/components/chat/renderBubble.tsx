@@ -16,6 +16,7 @@ import {
 import { useSlideGesture } from './hooks/slideGestureHook';
 import LocationBubble from './locationBubble/locationBubble';
 import UserAvatar from '../general/avatar/avatar';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 
 
@@ -26,6 +27,7 @@ type props = {
 }
 export const RenderBubble = (props: props) => {
 
+    const { styles } = useStyles(styleSheet);
 
     const { selectedMessages } = useAppSelector(state => state.ui);
     const { user } = useAppSelector(state => state.user);
@@ -132,26 +134,33 @@ export const RenderBubble = (props: props) => {
 };
 
 
-const styles = StyleSheet.create({
-    rootContainer: {
-        width: w(100),
-    },
-    bubbleContainer: {
-        width: w(100),
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-start',
-        paddingHorizontal: 5,
-        paddingVertical: 10,
-    },
-    bubbleContainerSender: {
-        flexDirection: 'row-reverse'
-    },
-    avatarSender: {
-        marginRight: 0,
-        marginLeft: 5
-    },
-    selected: {
-        backgroundColor: 'rgba(7, 94, 84, 0.2)'
-    }
+const styleSheet = createStyleSheet((theme) => {
+    const { spacing } = theme;
+    return (
+        {
+            rootContainer: {
+                width: w(100),
+            },
+            bubbleContainer: {
+                width: w(100),
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-start',
+                paddingHorizontal: spacing?.md,
+                paddingVertical: spacing?.lg,
+            },
+            bubbleContainerSender: {
+                flexDirection: 'row-reverse'
+            },
+            avatarSender: {
+                marginRight: 0,
+                marginLeft: spacing?.md
+            },
+            selected: {
+                backgroundColor: 'rgba(7, 94, 84, 0.2)'
+            }
+        }
+    )
 })
+
+

@@ -2,14 +2,14 @@ import React from 'react';
 import {
     View,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 // import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextRegular } from '../../general/text/text';
 import { reactionType } from '../../../constants/types/sharedTypes';
 import { useAppSelector } from '../../../redux/hooks';
 import UserAvatar from '../../general/avatar/avatar';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -20,7 +20,7 @@ const UserReaction = ({
     values,
 }: reactionType) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet)
     const { user: user_ } = useAppSelector(state => state.user);
 
 

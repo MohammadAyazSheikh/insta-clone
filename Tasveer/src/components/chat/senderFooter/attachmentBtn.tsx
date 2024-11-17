@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextRegular } from '../../general/text/text';
+import { useStyles } from 'react-native-unistyles';
 
 type attachBtnProps = {
     onPress?: () => void,
@@ -15,7 +15,8 @@ type attachBtnProps = {
 
 const AttachmentButton = ({ onPress, icon, name, backgroundColor }: attachBtnProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
+    
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <ButtonRipple

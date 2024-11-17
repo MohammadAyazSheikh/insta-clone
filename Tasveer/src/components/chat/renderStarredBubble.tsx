@@ -18,6 +18,7 @@ import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import UserAvatar from '../general/avatar/avatar';
+import { createStyleSheet, useStyles } from 'react-native-unistyles';
 
 
 
@@ -27,6 +28,8 @@ type props = {
 
 }
 export const RenderStarredBubble = (props: props) => {
+
+    const { styles } = useStyles(styleSheet);
 
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { user } = useAppSelector(state => state.user);
@@ -137,35 +140,38 @@ export const RenderStarredBubble = (props: props) => {
 };
 
 
-const styles = StyleSheet.create({
-    rootContainer: {
-        width: w(100),
-        paddingHorizontal: 5,
-    },
-    bubbleContainer: {
-        width: w(100),
-        flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-start',
-        paddingRight: 5,
-        paddingVertical: 10,
-        paddingLeft: '10%'
-    },
-    starredMsgInfoRow: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingTop: 15,
-        borderTopWidth: 0.25,
-        borderTopColor: colors.grey1
-    },
-    row: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    txtName: {
-        color: colors.grey1
-    },
+const styleSheet = createStyleSheet((theme) => {
+    const { colors, spacing } = theme;
+    return ({
+        rootContainer: {
+            width: w(100),
+            paddingHorizontal: spacing?.md,
+        },
+        bubbleContainer: {
+            width: w(100),
+            flexDirection: 'row',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-start',
+            paddingRight: spacing?.md,
+            paddingVertical: spacing?.lg,
+            paddingLeft: '10%'
+        },
+        starredMsgInfoRow: {
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingTop: spacing?.xl,
+            borderTopWidth: 0.25,
+            borderTopColor: colors.common?.grey1
+        },
+        row: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        txtName: {
+            color: colors?.common?.grey1
+        },
+    })
 })

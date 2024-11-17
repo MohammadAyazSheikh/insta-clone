@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Image, View } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import colors from '../../../theme/colors';
 import VideoPlayerModal from '../../general/videoSlider/videoPlayerModal';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
+import { useStyles } from 'react-native-unistyles';
 
 type propsType = {
     message: messageObjType,
@@ -17,7 +17,7 @@ type propsType = {
 export default function VideoBubble(props: propsType) {
 
     const [showVideo, setShowVideo] = useState(false);
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
     const {
         video,
     } = props?.message;
@@ -47,7 +47,7 @@ export default function VideoBubble(props: propsType) {
                     <IconAnt
                         name='play'
                         size={34}
-                        color={colors.primary2}
+                        color={colors.primary1}
                     />
                 </View>
                 {/* <Video

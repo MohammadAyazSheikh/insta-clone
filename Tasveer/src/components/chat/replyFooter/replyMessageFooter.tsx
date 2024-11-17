@@ -1,7 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { messageObjType } from '../../../constants/types/sharedTypes';
@@ -9,6 +8,7 @@ import { colorsList } from '../../../theme/colors';
 import { TextBold, TextRegular } from '../../general/text/text';
 import { getMessageIcon } from './messageIcon';
 import { useAppSelector } from '../../../redux/hooks';
+import { useStyles } from 'react-native-unistyles';
 
 
 
@@ -20,13 +20,14 @@ const ReplyMessageFooter = ({
     message,
     onClose,
 }: replyFooterProps) => {
+    const { styles, theme: { colors } } = useStyles(styleSheet);
+
+
     const { user } = useAppSelector(state => state.user);
-    const { theme } = useAppSelector(state => state.theme);
-    const isDark = theme == "dark";
+    // const { theme } = useAppSelector(state => state.theme);
+    // const isDark = theme == "dark";
     const { user: userInfo, type, text } = message;
     const you = user?.id == userInfo?.id;
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
 
     const stripColor = colorsList[userInfo?.firstName?.charCodeAt(0)! % colorsList.length];
     const messageIcon = getMessageIcon(type!, colors.ternary1);
@@ -35,7 +36,7 @@ const ReplyMessageFooter = ({
         <View style={[
             styles.msgContainer,
             //  {backgroundColor: isDark? colors.primary3}
-            ]}>
+        ]}>
             {/* side strip */}
             <View style={[
                 styles.leftStrip,
@@ -46,7 +47,7 @@ const ReplyMessageFooter = ({
                 <View style={styles.wrapper}>
                     <TextBold
                         numberOfLines={1}
-                        style={[styles.txtName,stripColor && { color: stripColor }]}
+                        style={[styles.txtName, stripColor && { color: stripColor }]}
                     >
                         {
                             you ?
