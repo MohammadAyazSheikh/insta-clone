@@ -1,7 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { FlatList } from 'react-native-gesture-handler';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
@@ -11,13 +8,14 @@ import ReelCard from '../../components/cards/reelCard/reelCard';
 import { remoteVideos, remoteVideosType } from '../../constants/data/remoteVideo';
 import Header from '../../components/general/screenHeaders/header';
 import ViewableFlatList from '../../components/list/ViewableFlatlist';
-import { View } from 'react-native-animatable';
-
+import {  useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+import { View } from 'react-native';
 
 
 export default function ReelsExplore() {
 
-    const { styles, } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
@@ -26,24 +24,27 @@ export default function ReelsExplore() {
     const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
+
     const [containerHeight, setContainerHeight] = useState(0);
 
+
+
     const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
-        return  (
-                <ReelCard
-                    isVisible={isVisible}
-                    data={item}
-                    containerStyles={{ height: containerHeight, width: "100%",borderWidth: 0.5, borderColor: "transparent"  }}
-                    onMenu={() => {
-                        refOption.current?.collapse()
-                    }}
-                    onComment={() => {
-                        refComment.current?.expand();
-                    }}
-                    onShare={() => {
-                        refShare?.current?.collapse();
-                    }}
-                />
+        return (
+            <ReelCard
+                isVisible={isVisible}
+                data={item}
+                containerStyles={{ height: containerHeight, width: "100%", borderWidth: 0.5, borderColor: "transparent" }}
+                onMenu={() => {
+                    refOption.current?.collapse()
+                }}
+                onComment={() => {
+                    refComment.current?.expand();
+                }}
+                onShare={() => {
+                    refShare?.current?.collapse();
+                }}
+            />
         )
     }, [containerHeight])
 
@@ -53,18 +54,26 @@ export default function ReelsExplore() {
                 {/* header */}
                 <Header title='Explore' />
                 {/* posts */}
-                <ViewableFlatList
+                <View style={{ width: "100%", flex: 1 }}
                     onLayout={(e) => {
-                        setContainerHeight(e.nativeEvent.layout.height)
+                        setContainerHeight(e.nativeEvent.layout.height);
                     }}
-                    pagingEnabled
-                    uniqueKeyName={"title"}
-                    keyExtractor={(item) => item.title}
-                    style={styles.scroll}
-                    showsVerticalScrollIndicator={false}
-                    data={remoteVideos}
-                    renderItem={renderItem}
-                />
+                >
+                    {
+                        containerHeight > 0 ?
+                            <ViewableFlatList
+                                pagingEnabled
+                                uniqueKeyName={"title"}
+                                keyExtractor={(item) => item.title}
+                                style={styles.scroll}
+                                showsVerticalScrollIndicator={false}
+                                data={remoteVideos}
+                                renderItem={renderItem}
+                            />
+                            :
+                            null
+                    }
+                </View>
                 {/*--- menu sheet ----*/}
                 <MenuSheet
                     ref={refOption}

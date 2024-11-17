@@ -2,11 +2,10 @@ import React, { useCallback, forwardRef } from 'react';
 import {
   ViewStyle, StyleSheet
 } from 'react-native';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
-import { BlurView } from 'expo-blur';
 import { useAppSelector } from '../../../redux/hooks';
 
 

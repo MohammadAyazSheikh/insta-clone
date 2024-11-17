@@ -4,17 +4,15 @@ import {
     View,
     ViewStyle,
 } from 'react-native';
-import { useFunctionalOrientation, widthToDp } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import IconIo from 'react-native-vector-icons/Ionicons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import UserAvatar from '../../general/avatar/avatar';
 import { TextBold, TextRegular } from '../../general/text/text';
 import CustomButton from '../../general/customButton/customButton';
-import VideoPlayerContent from '../../general/video/videoPlayerContent';
 import { remoteVideos } from '../../../constants/data/remoteVideo';
 import VideoPlayerReel from '../../general/video/videoPlayerReel';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 type dataProp = typeof remoteVideos[0]
@@ -42,17 +40,18 @@ const ReelCard = ({
     onSave = () => '',
 }: reelCardProps) => {
 
-    const { styles, width, height } = useFunctionalOrientation(responsiveStyles);
-    // const colors = useAppThemeColors();
+    const { styles } = useStyles(styleSheet);
+    const { screen: { width } } = UnistylesRuntime;
+
     const [numOfLine, setNumOfLine] = useState<number | undefined>(1);
     const [liked, setLiked] = useState(false);
     const [followed, setFollowed] = useState(false);
-   
+
     return (
-        <View style={[styles.container,containerStyles]}>
+        <View style={[styles.container, containerStyles]}>
             {/* video player */}
             <VideoPlayerReel
-                source={{ uri: data.uri }}
+                source={{ uri: data.uri}}
                 style={[styles.video]}
                 showVolumeIcon={false}
                 resizeMode='cover'

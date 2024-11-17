@@ -1,22 +1,26 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { heightToDp, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { FlatList } from 'react-native-gesture-handler';
+import React, { useCallback, useRef } from 'react';
+import { widthToDp } from '../../utils/functions/responsiveUtils';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import ReelCard from '../../components/cards/reelCard/reelCard';
 import { remoteVideos, remoteVideosType } from '../../constants/data/remoteVideo';
-import { View } from 'react-native';
+import { Platform, StatusBar, View } from 'react-native';
 import ViewableFlatList from '../../components/list/ViewableFlatlist';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { Dimensions } from 'react-native';
 
 
+const { height: heightWindow } = Dimensions.get("window");
 
 export default function Reels() {
 
-    const { styles, height } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
+    const { screen: { height } } = UnistylesRuntime;
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
@@ -25,15 +29,25 @@ export default function Reels() {
     const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
-    const [containerHeight, setContainerHeight] = useState(0);
+    const tabBarHeight = useBottomTabBarHeight();
+    const { top } = useSafeAreaInsets();
+
+    const containerHeight = Platform.select({
+        ios: (height - (tabBarHeight + top)),
+        android: heightWindow - (tabBarHeight + StatusBar.currentHeight! || 0),
+    });
+
+
 
     const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
-        return  (
-            <View style={{ width: widthToDp(100), height: containerHeight, borderWidth: 0.5, borderColor: "transparent" }}>
+        return (
+            <View style={{
+                width: widthToDp(100), height: containerHeight,
+            }}>
                 <ReelCard
                     isVisible={isVisible}
                     data={item}
-                    containerStyles={{ height: containerHeight, width: "100%" }}
+                    containerStyles={{ width: "100%" }}
                     onMenu={() => {
                         refOption.current?.collapse()
                     }}
@@ -46,7 +60,7 @@ export default function Reels() {
                 />
             </View>
         )
-    }, [containerHeight])
+    }, [containerHeight]);
 
     return (
         <SafeAreaProvider>
@@ -55,9 +69,6 @@ export default function Reels() {
                 {/* posts */}
                 {
                     <ViewableFlatList
-                        onLayout={(e) => {
-                            setContainerHeight(e.nativeEvent.layout.height)
-                        }}
                         style={[styles.scroll]}
                         showsVerticalScrollIndicator={false}
                         pagingEnabled
