@@ -2,14 +2,13 @@ import React from 'react';
 import {
     View,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import UserAvatar from '../../general/avatar/avatar';
 import { TextBold, TextRegular } from '../../general/text/text';
 import { Badge } from 'react-native-paper';
 import moment from 'moment';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 
 
@@ -31,9 +30,8 @@ const InboxCard = ({
     onPress,
 }: cardProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors();
 
+    const { styles, theme: { colors } } = useStyles(styleSheet);
 
     return (
         <ButtonRipple style={styles.container}

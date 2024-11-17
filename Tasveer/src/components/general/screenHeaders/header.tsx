@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, Text, TextProps, TouchableOpacity, ViewProps } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import { View, TextProps, ViewProps } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 import { TextBold } from '../text/text';
 import SearchBarAnimated from './searchBarAnimated';
-import { TouchableRipple } from 'react-native-paper';
 import ButtonRipple from '../customButton/buttonRipple';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+
 type props = {
   showSearchBar?: boolean,
   containerProps?: ViewProps;
@@ -50,10 +49,10 @@ const Header = ({
   iconLeftColor,
   iconRightColor,
 }: props) => {
+
   const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-  const { styles, isPortrait, heightToDp, widthToDp } =
-    useFunctionalOrientation(responsiveStyles);
-  const colors = useAppThemeColors();
+
+  const { styles, theme: { colors } } = useStyles(styleSheet)
 
   if (showSearchBar)
     return (
@@ -88,7 +87,7 @@ const Header = ({
           <TextBold
             numberOfLines={1}
             {...titleProps}
-            style={[styles.txtHeader,{marginLeft:10}, titleProps?.style]}>
+            style={[styles.txtHeader, { marginLeft: 10 }, titleProps?.style]}>
             {title}
           </TextBold>
         ) : null}

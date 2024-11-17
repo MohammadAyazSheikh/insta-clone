@@ -1,28 +1,26 @@
 import React, { } from 'react';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
 import { FlatList, View } from 'react-native';
 import { commonStyles } from '../../theme/common';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { formatNumber } from '../../utils/formaters/numbers';
 import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
-
-
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
+import { widthToDp as w } from '../../utils/functions/responsiveUtils';
 
 
 export default function ProfileHeader() {
 
-    const { styles, widthToDp: w } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { spacing } } = useStyles(styleSheet);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     // const { user } = useAppSelector(state => state.user);
     // const dispatch = useAppDispatch();
 
     const renderHighlights = () => (
         <FlatList
             showsHorizontalScrollIndicator={false}
-            style={{ width: w(100), paddingVertical: 10}}
+            style={{ width: w(100), paddingVertical: spacing?.lg }}
             data={heightData}
             horizontal
             keyExtractor={(item) => String(item.id)}
@@ -75,7 +73,7 @@ export default function ProfileHeader() {
                 </View>
             </View>
             {/* about and name */}
-            <View style={{ width: '100%', marginBottom: 10, }}>
+            <View style={{ width: '100%', marginBottom: spacing?.lg, }}>
                 <TextBold style={styles.txtName}>
                     John Doe
                 </TextBold>

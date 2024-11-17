@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { View, ViewProps } from 'react-native';
 import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import IconEnt from 'react-native-vector-icons/Entypo';
 import TextBox from '../textBox/textBox';
 import { TouchableRipple } from 'react-native-paper';
-import Animated, { Extrapolate, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useAppSelector } from '../../../redux/hooks';
+import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 type props = {
     containerProps?: ViewProps;
     iconLeftColor?: string,
@@ -20,16 +21,14 @@ type props = {
 
 const SearchBarAnimated = ({
     iconLeftColor,
-    iconRightColor,
     containerProps,
     onChangeText = () => '',
     onBack = () => ''
 }: props) => {
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const { styles ,width} =
-        useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
+    const { screen: { width } } = UnistylesRuntime;
     const { theme } = useAppSelector(state => state.theme);
-    const colors = useAppThemeColors();
     const isDark = theme == "dark";
 
     const [text, setText] = useState<string>();
@@ -61,8 +60,8 @@ const SearchBarAnimated = ({
         const translateX = interpolate(
             animValue.value,
             inputRange,
-            [width, width/2, 0],
-            Extrapolate.CLAMP
+            [width, width / 2, 0],
+            Extrapolation.CLAMP
         );
 
         return {
@@ -79,7 +78,7 @@ const SearchBarAnimated = ({
     }, []);
 
     const containerLight = !isDark ? { backgroundColor: colors.primary1 } : {};
-    const containerInputLight = !isDark ? { backgroundColor: colors.primary2 } : {};
+    const containerInputLight = !isDark ? { backgroundColor: colors.primary3 } : {};
     return (
         <View {...containerProps} style={[containerLight]}>
             <Animated.View style={[styles.viewSearchBar,
@@ -87,11 +86,12 @@ const SearchBarAnimated = ({
                 stylesAnim]}>
                 <TextBox
                     containerStyle={{
-                        ...styles.searchBarContainer,                    }}
+                        ...styles.searchBarContainer,
+                    }}
                     inputViewStyle={{ ...styles.inputViewStyles, ...containerInputLight }}
                     inputViewFocusStyle={{ borderWidth: 0 }}
                     style={{ color: colors.secondary1 }}
-                    placeholderTextColor={colors.grey1}
+                    placeholderTextColor={colors.common.grey1}
                     placeholder='search'
                     value={text}
                     onChangeText={(value) => {
@@ -105,7 +105,7 @@ const SearchBarAnimated = ({
                         <IconAnt
                             name="left"
                             size={26}
-                            color={iconLeftColor ?? colors.secondary1 }
+                            color={iconLeftColor ?? colors.secondary1}
                         />
                     </TouchableRipple>}
                     // clear text

@@ -9,6 +9,8 @@ import IconFa5 from 'react-native-vector-icons/FontAwesome5';
 import { discoverData } from '../../constants/data/discoverData';
 import { renderUserPosts } from './renderUserItems';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import styleSheet from './styles/styles';
 
 const getTabIcon = (name: string, color: string) => {
     return ({
@@ -32,20 +34,12 @@ const getTabIcon = (name: string, color: string) => {
 }
 export default function Profile() {
 
-    const { styles, widthToDp: w, height, width } = useFunctionalOrientation(responsiveStyles);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const colors = useAppThemeColors();
     const { user } = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
-    const tabBar = props => (
-        <MaterialTabBar
-            {...props}
-            indicatorStyle={{ backgroundColor: 'white' }}
-            style={{ backgroundColor: 'pink' }}
 
-        />
-    );
 
 
     return (
