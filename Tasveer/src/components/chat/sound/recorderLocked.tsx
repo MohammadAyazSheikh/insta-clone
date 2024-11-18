@@ -7,11 +7,13 @@ import Animated, {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 import { TouchableRipple } from "react-native-paper";
-import { useAppThemeColors, useFunctionalOrientation, widthToDp } from "../../../utils/functions/responsiveUtils";
-import responsiveStyles from "./styles/styles";
+import { widthToDp } from "../../../utils/functions/responsiveUtils";
+import styleSheet from "./styles/styles";
 import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 import { RecordTime } from "./recorderQuick";
+import { createStyleSheet, useStyles } from "react-native-unistyles";
+import colors from "../../../theme/colors";
 
 
 //-160 - slowest sound
@@ -44,9 +46,8 @@ const RecorderLocked = ({
   onPauseRecord,
 }: props) => {
 
-  const { styles } = useFunctionalOrientation(responsiveStyles);
-  const colors = useAppThemeColors();
-
+  const { styles, theme: { colors } } = useStyles(styleSheet);
+  const { styles: stylesBars } = useStyles(barStyleSheet);
 
   const stylesAnimBarContainer = useAnimatedStyle(() => ({
     transform: [{ translateX: -translateX.value }],
@@ -142,41 +143,45 @@ const RecorderLocked = ({
 export default RecorderLocked;
 
 
-
-const stylesBars = StyleSheet.create({
-
-  recorderContainer: {
-    alignSelf: "center",
-    width: BAR_CONTAINER_WIDTH - TOTAL_BAR_WIDTH * 2,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-    // backgroundColor:'red',
-  },
-  recorderBody: {
-    width: BAR_CONTAINER_WIDTH,
-    height: 100,
-    alignItems: "flex-start",
-    borderRadius: 5,
-    position: 'absolute',
-    right: 0,
-    top: 0
-  },
-  barContainer: {
-    height: "100%",
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    // gap: SPACE_WIDTH
-  },
-  bar: {
-    height: "100%",
-    width: SOUND_BAR_WIDTH,
-    marginRight: SOUND_BAR_GAP,
-    backgroundColor: "black",
-    borderRadius: SOUND_BAR_WIDTH,
-  },
+const barStyleSheet = createStyleSheet((theme) => {
+  const { colors } = theme;
+  return ({
+    recorderContainer: {
+      alignSelf: "center",
+      width: BAR_CONTAINER_WIDTH - TOTAL_BAR_WIDTH * 2,
+      height: 100,
+      justifyContent: 'center',
+      alignItems: 'center',
+      overflow: 'hidden',
+    },
+    recorderBody: {
+      width: BAR_CONTAINER_WIDTH,
+      height: 100,
+      alignItems: "flex-start",
+      borderRadius: 5,
+      position: 'absolute',
+      right: 0,
+      top: 0
+    },
+    barContainer: {
+      height: "100%",
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      // gap: SPACE_WIDTH
+    },
+    bar: {
+      height: "100%",
+      width: SOUND_BAR_WIDTH,
+      marginRight: SOUND_BAR_GAP,
+      backgroundColor: colors?.secondary1,
+      borderRadius: SOUND_BAR_WIDTH,
+    },
+  })
 })
+
+
+
+
 
 

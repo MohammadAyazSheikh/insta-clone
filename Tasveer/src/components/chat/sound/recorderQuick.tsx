@@ -7,9 +7,10 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import LottieView from 'lottie-react-native';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import moment from "moment";
+import { useStyles } from "react-native-unistyles";
 
 const AnimatedLottieView = Animated.createAnimatedComponent(LottieView);
 const TextAnimated = Animated.createAnimatedComponent(TextInput);
@@ -27,7 +28,7 @@ type recordTimeProp = {
 }
 export const RecordTime = ({ styles:style,recordTimeSharedVal }: recordTimeProp) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     //ref for animated text input for rendering recording time
     const timeTextRef = useRef<TextInput>(null);
@@ -51,7 +52,7 @@ const RecorderQuick = ({
     recordTimeSharedVal,
 }: props) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useFunctionalOrientation(styleSheet);
 
     return (
         <Animated.View style={[

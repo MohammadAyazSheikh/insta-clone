@@ -1,4 +1,5 @@
 import { Platform, PermissionsAndroid, Alert, } from 'react-native';
+import { PERMISSIONS, request } from 'react-native-permissions';
 
 
 
@@ -17,7 +18,7 @@ export const grantStoragePermission = async () => {
                 grants['android.permission.WRITE_EXTERNAL_STORAGE'] ===
                 PermissionsAndroid.RESULTS.GRANTED &&
                 grants['android.permission.READ_EXTERNAL_STORAGE'] ===
-                PermissionsAndroid.RESULTS.GRANTED 
+                PermissionsAndroid.RESULTS.GRANTED
             ) {
                 console.log('Permissions granted');
                 return grants;
@@ -91,6 +92,28 @@ export const requestLocationPermission = async () => {
         }
     } catch (err) {
         console.log(err);
-       Alert.alert("error getting location")
+        Alert.alert("error getting location")
     }
 };
+
+export const grantMicPermission = () => {
+    if (Platform.OS == "ios") {
+        request(PERMISSIONS.IOS.MICROPHONE)
+            .then((status) => {
+                console.log("IOS Microphone permission granted");
+            })
+            .catch(err => {
+                console.warn("IOS Microphone permission denied");
+            });
+
+    }
+    else {
+        request(PERMISSIONS.ANDROID.RECORD_AUDIO)
+            .then((status) => {
+                console.log("Android Microphone permission granted");
+            })
+            .catch(err => {
+                console.warn("Android Microphone permission denied");
+            });
+    }
+}

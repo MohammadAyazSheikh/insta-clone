@@ -5,7 +5,7 @@ PODS:
   - DoubleConversion (1.1.6)
   - EXConstants (17.0.3):
     - ExpoModulesCore
-  - Expo (52.0.6):
+  - Expo (52.0.7):
     - ExpoModulesCore
   - ExpoAsset (11.0.1):
     - ExpoModulesCore
@@ -19,7 +19,7 @@ PODS:
     - ExpoModulesCore
   - ExpoLinearGradient (14.0.1):
     - ExpoModulesCore
-  - ExpoModulesCore (2.0.2):
+  - ExpoModulesCore (2.0.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1794,6 +1794,8 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController (~> 2.7.4)
+  - RNPermissions (5.1.0):
+    - React-Core
   - RNReanimated (3.16.1):
     - DoubleConversion
     - glog
@@ -2029,6 +2031,7 @@ DEPENDENCIES:
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSound (from `../node_modules/react-native-sound`)
@@ -2228,6 +2231,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -2246,14 +2251,14 @@ SPEC CHECKSUMS:
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: f16ae600a246532c4020132d54af21d0ddb2a385
   EXConstants: dd2fe64c6cdb1383b694c309a63028a8e9f2be6d
-  Expo: 8a3384b1e45f23d9bed1225d76ebaa637f3b420c
+  Expo: 46cbe74ce0d0f4a4d7b726e90693eb8dfcec6de0
   ExpoAsset: 8138f2a9ec55ae1ad7c3871448379f7d97692d15
   ExpoBlur: 562b3da84d3cd79016c411671eaf71a404266415
   ExpoFileSystem: cc31b7a48031ab565f9eb5c2b61aa08d774a271a
   ExpoFont: 7522d869d84ee2ee8093ee997fef5b86f85d856b
   ExpoKeepAwake: 783e68647b969b210a786047c3daa7b753dcac1f
   ExpoLinearGradient: 7ca3b1d1625a1ab85c129abce4a3cdc78a9500a3
-  ExpoModulesCore: f76435e10b5903e50658da52d2b9ee6b9205284d
+  ExpoModulesCore: 2d1df04dc27f91d8b383c0ec7f1d121e3d9b7f68
   ExpoVideo: d419a84e8841e05443f3351cb937f55375b60650
   FBLazyVector: 7075bb12898bc3998fd60f4b7ca422496cc2cdf7
   fmt: 10c6e61f4be25dc963c36bd73fc7b1705fe975be
@@ -2336,6 +2341,7 @@ SPEC CHECKSUMS:
   RNFlashList: 115dd44377580761bff386a0caebf165424cf16f
   RNGestureHandler: 511250b190a284388f9dd0d2e56c1df76f14cfb8
   RNImageCropPicker: a536bb88eade8336e1d18fdeafa77dc893fbc42e
+  RNPermissions: e4b43a203c194f1a5b933343450e436ee442176d
   RNReanimated: 3e6072b3d49d4fc687b8f1ba3022f0fdc0b43969
   RNScreens: de948b09c9a30f3ea52f9840dd6f8ce92b4e33d3
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
@@ -2345,6 +2351,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 157bed1c62656587df4639d4dc29714898f8fb10
 
-PODFILE CHECKSUM: 24611c3591d31ee7140b869f12facf49db03cb57
+PODFILE CHECKSUM: 75bdde609d0d4a20baae19cbaa37aa21b3867ee6
 
 COCOAPODS: 1.15.2

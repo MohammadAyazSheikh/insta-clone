@@ -20,7 +20,7 @@ type hookProps = {
     width?: number,
     translateX: SharedValue<number>,
 }
-export const useGestureAnimation = ({
+export const useSliderGesture = ({
     onEnd = () => '',
     onStart,
     width = deviceWidth,

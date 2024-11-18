@@ -5,10 +5,10 @@ import { ViewStyle } from 'react-native';
 
 type videoProps = {
   source: string,
-  mute: boolean,
+  mute?: boolean,
   style: ViewStyle | ViewStyle[]
 }
-export default function VideoPlayer({ mute, source, style }: videoProps) {
+export default function VideoPlayer({ mute = true, source, style }: videoProps) {
 
 
   //for volume

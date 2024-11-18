@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { View } from "react-native";
 import Animated, {
     useSharedValue,
@@ -9,14 +9,14 @@ import Animated, {
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import IconFa from 'react-native-vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import RecorderLocked, { BAR_CONTAINER_WIDTH, TOTAL_BAR_WIDTH } from "./recorderLocked";
+import { useStyles } from "react-native-unistyles";
 
 
 export const BUTTON_SIZE = 10;
@@ -30,7 +30,7 @@ const AnimatedRecorder = ({
     onSend,
 }: props) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     /* --- Quick Recorder -- */
 
@@ -174,7 +174,7 @@ const AnimatedRecorder = ({
 
     return (
         !isLocked ?
-            <View style={[styles.container]}>
+            <View >
                 {/* lock icon */}
                 <Animated.View style={[
                     styles.iconLockContainer,

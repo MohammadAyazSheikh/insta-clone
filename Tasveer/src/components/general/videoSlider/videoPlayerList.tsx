@@ -11,6 +11,8 @@ import { SliderIndicator } from './sliderIndicator';
 import uuid from 'react-native-uuid';
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import Video from '../video/videoPlayer';
+import VideoPlayerContent from '../video/videoPlayerContent';
 
 type sliderType = {
   autoSlide?: boolean;
@@ -91,13 +93,10 @@ export const VideoPlyer = ({
           <View
             style={[styles.slideVideoView, videoContainerStyle]}
             key={String(uuid.v4())}>
-            {/* <Video
-              source={{ uri: item }}
+            <VideoPlayerContent
+              source={item}
               style={[styles.videoStyles, videoStyles]}
-              resizeMode='contain'
-              controls
-            /> */}
-            
+            />
           </View>
         ))}
       </Animated.ScrollView>

@@ -81,6 +81,17 @@
             "./assets/fonts/SF-Pro-Text-Semibold.otf"
           ]
         }
+      ],
+      [
+        "react-native-permissions",
+        {
+          "iosPermissions": [
+            "Microphone",
+            "Camera",
+            "LocationWhenInUse",
+            "PhotoLibrary"
+          ]
+        }
       ]
     ]
   }

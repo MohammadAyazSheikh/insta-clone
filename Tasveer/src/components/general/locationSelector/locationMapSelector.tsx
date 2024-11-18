@@ -1,7 +1,6 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { View, Modal, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import { useAppThemeColors, useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import styleSheet from './styles/styles';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import IconMt from 'react-native-vector-icons/MaterialIcons';
 import { getCurrentCoord, autoComplete } from '../../../utils/permissions/locationPermission';
@@ -12,6 +11,7 @@ import Header from '../screenHeaders/header';
 import CustomButton from '../customButton/customButton';
 import { TextRegular } from '../text/text';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
 
 
 const initialRegion = {
@@ -40,12 +40,11 @@ const LocationMapSelector = ({
     setCoord,
     onSend }: props) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
-    const colors = useAppThemeColors()
+    const { styles, theme: { colors } } = useStyles(styleSheet);
     const [data, setData] = useState([]);
 
 
-    const mapRef = useRef(null);
+    const mapRef = useRef<MapView>(null);
 
     useEffect(() => {
         getCurrentCoord((coord) => {

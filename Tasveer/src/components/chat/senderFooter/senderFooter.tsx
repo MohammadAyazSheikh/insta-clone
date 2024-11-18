@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextInput, View } from 'react-native';
 import styleSheet from './styles/styles';
 import ButtonRipple from '../../general/customButton/buttonRipple';
@@ -19,6 +19,7 @@ import Animated, { FadeInDown } from 'react-native-reanimated';
 import LocationMapSelector from '../../general/locationSelector/locationMapSelector';
 import AnimatedRecorder from '../sound/animatedRecorder';
 import { useStyles } from 'react-native-unistyles';
+import { grantMicPermission } from '../../../utils/permissions/permissions';
 
 export type conversationStatProps = {
 
@@ -77,8 +78,16 @@ export const SenderFooter = ({
     voice: undefined,
     imageList: undefined,
     status: 'sending',
-    replyMessage
-  }
+    replyMessage,
+    reacts: []
+  };
+
+
+  //ask mic permission
+  useEffect(() => {
+    grantMicPermission();
+  }, []);
+
   return (
     <View style={styles.containerCol}>
 
@@ -172,10 +181,9 @@ export const SenderFooter = ({
 
         </ButtonRipple>
         {/* -----------send button  and recorder-------*/}
-
         {
           //send button
-          text ?
+          text || imageList?.length > 0 ?
             <ButtonRipple
               style={styles.btnStyle}
               onPress={() => {
@@ -242,7 +250,7 @@ export const SenderFooter = ({
         setImageList={setImageList}
         setDocument={setDocument}
         show={isAttachVisible}
-        onBtnSound={() => setIsVoiceVisible(true)}
+        // onBtnSound={() => setIsVoiceVisible(true)}
         onClose={() => setIsAttachVisible(false)}
         onBtnCamera={() => {
           openCamera({ mediaType: 'photo' })
@@ -250,7 +258,7 @@ export const SenderFooter = ({
               onSend && onSend({
                 ...defaultMsg,
                 type: "image",
-                imageList: [{ path: data.path }]
+                imageList: [data]
               });
               setText('');
               setReplyMessage && setReplyMessage(undefined);
@@ -271,8 +279,8 @@ export const SenderFooter = ({
           setIsAttachVisible(false)
         }}
       />
-     
-      
+
+
       {/* ----------Video modal----- */}
       <VideoPlayerModal
         videoList={[video]}

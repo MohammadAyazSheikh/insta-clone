@@ -9,16 +9,14 @@ import IconEnt from 'react-native-vector-icons/Entypo';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
-import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
+import { useSliderGesture } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../../general/text/text";
 import { timeProp, useSoundPlayer } from "./hooks/soundPlayerHooks";
 import moment from "moment";
-import responsiveStyles from "./styles/styles";
-import { useFunctionalOrientation } from "../../../utils/functions/responsiveUtils";
+import styleSheet from "./styles/styles";
 import { THUMB_WIDTH } from "./styles/portraitStyles";
+import { useStyles } from "react-native-unistyles";
 
-// import colors from "../../../theme/colors";
-// const { width: deviceWidth } = Dimensions.get("window");
 
 type sliderProps = {
     // width?: number,
@@ -40,7 +38,7 @@ const SoundPlayer = ({
     timeStyles,
 }: sliderProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     //holds width of the view of progress line view
     const [progressViewWidth, setProgressViewWidth] = useState<number>(0);
@@ -66,7 +64,7 @@ const SoundPlayer = ({
 
 
     // gesture animation hook
-    const { animatedGestureStyle, panGestureEvent } = useGestureAnimation({
+    const { animatedGestureStyle, panGestureEvent } = useSliderGesture({
         translateX,
         width: progressViewWidth,
         onStart: () => {

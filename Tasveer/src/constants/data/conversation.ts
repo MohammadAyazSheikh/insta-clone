@@ -49,7 +49,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 id: uuid.v4().toString(),
                 text: 'this is the vid i was talking about 😀',
                 type: 'video',
-                video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                 createdAt: new Date(),
                 status: 'seen',
                 starred: true,

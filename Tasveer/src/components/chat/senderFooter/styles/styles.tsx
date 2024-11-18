@@ -1,5 +1,5 @@
 import { createStyleSheet } from "react-native-unistyles";
-import { widthToDp as w, heightToDp as h } from "../../../../utils/functions/responsiveUtils";
+import { widthToDp as w, heightToDp as h, widthToDp } from "../../../../utils/functions/responsiveUtils";
 import { BUTTON_SIZE } from '../../sound/animatedRecorder';
 import { StyleSheet } from "react-native";
 

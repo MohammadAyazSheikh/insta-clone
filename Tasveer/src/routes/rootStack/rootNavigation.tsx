@@ -73,11 +73,11 @@ function RootNav() {
           // animationEnabled: false
         }}>
         {
-          user ?
+          // user ?
+            // protectedRoutes()
+            // :
+            // authRoutes()
             protectedRoutes()
-            :
-            authRoutes()
-          // authRoutes()
         }
       </Stack.Navigator>
     </NavigationContainer>
