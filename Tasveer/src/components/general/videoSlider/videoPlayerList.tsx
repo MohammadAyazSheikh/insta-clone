@@ -6,13 +6,12 @@ import {
   ViewStyle,
   ImageStyle,
 } from 'react-native';
-
 import { SliderIndicator } from './sliderIndicator';
 import uuid from 'react-native-uuid';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import Video from '../video/videoPlayer';
+import styleSheet from './styles/styles';
 import VideoPlayerContent from '../video/videoPlayerContent';
+import { useStyles } from 'react-native-unistyles';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
 type sliderType = {
   autoSlide?: boolean;
@@ -47,7 +46,7 @@ export const VideoPlyer = ({
 }: sliderType) => {
 
 
-  const { styles, widthToDp: w } = useFunctionalOrientation(responsiveStyles);
+  const { styles } = useStyles(styleSheet);
 
   const scrollX = useRef(new Animated.Value(1)).current;
   const scrollRef = useRef<ScrollView>(null);
@@ -89,10 +88,10 @@ export const VideoPlyer = ({
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
           { useNativeDriver: true },
         )}>
-        {videoList.map(item => (
+        {videoList.map((item, index) => (
           <View
             style={[styles.slideVideoView, videoContainerStyle]}
-            key={String(uuid.v4())}>
+            key={String(item + index)}>
             <VideoPlayerContent
               source={item}
               style={[styles.videoStyles, videoStyles]}

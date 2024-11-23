@@ -47,7 +47,7 @@ export default function VideoBubble(props: propsType) {
                     <IconAnt
                         name='play'
                         size={34}
-                        color={colors.primary1}
+                        color={colors.secondary1}
                     />
                 </View>
                 {/* <Video

@@ -6,6 +6,7 @@ const styleSheet = createStyleSheet((theme) => {
     return ({
         container: {
             width: "95%",
+            alignSelf:'center',
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: colors.primary1,

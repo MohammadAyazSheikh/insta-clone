@@ -1,7 +1,7 @@
 import { createStyleSheet } from "react-native-unistyles";
-import { widthToDp as w, heightToDp as h, widthToDp } from "../../../../utils/functions/responsiveUtils";
+import { widthToDp as w, heightToDp as h } from "../../../../utils/functions/responsiveUtils";
 import { BUTTON_SIZE } from '../../sound/animatedRecorder';
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 const styleSheet = createStyleSheet((theme) => {
     const { colors, spacing, fontSize } = theme;
@@ -24,10 +24,13 @@ const styleSheet = createStyleSheet((theme) => {
             borderRadius: 20,
             borderWidth: 1,
             borderColor: 'gray',
-            paddingHorizontal: spacing?.lg,
-            paddingTop: spacing?.lg,
-            paddingBottom: spacing?.lg,
-            color: colors.secondary1,
+            color: colors?.secondary1,
+            paddingHorizontal: spacing?.sm,
+            height: w(BUTTON_SIZE),
+            paddingVertical: Platform.select({
+                ios: spacing?.lg,
+                android: spacing?.md
+            }),
         },
         btnStyle: {
             width: w(BUTTON_SIZE),

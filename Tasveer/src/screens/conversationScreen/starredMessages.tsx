@@ -3,13 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import { FlatList, SafeAreaView } from 'react-native';
 import { getConversationData } from '../../constants/data/conversation';
 import { getMessages } from '../../redux/features/chat/chatSlice';
 import Header from '../../components/general/screenHeaders/header';
 import { RenderStarredBubble } from '../../components/chat/renderStarredBubble';
 import styleSheet from './styles/styles';
 import { useStyles } from 'react-native-unistyles';
+import { FlashList } from 'react-native-collapsible-tab-view';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -30,24 +31,26 @@ export default function StarredMessages() {
 
 
     return (
-        <SafeAreaView style={styles.container}>
-            {/* ---Header--- */}
-            <Header
-                title='Starred messages'
-            />
-            {/* ---List--- */}
-            <FlatList
-                style={styles.scrollContainer}
-                inverted
-                data={messages}
-                keyExtractor={(item => item.id.toString())}
-                renderItem={({ item, index }) => (
-                    <RenderStarredBubble
-                        message={item}
-                    />
-                )}
-            />
-        </SafeAreaView >
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
+                {/* ---Header--- */}
+                <Header
+                    title='Starred messages'
+                />
+                {/* ---List--- */}
+                <FlashList
+                    style={styles.scrollContainer}
+                    inverted
+                    data={messages}
+                    keyExtractor={(item => item.id.toString())}
+                    renderItem={({ item, index }) => (
+                        <RenderStarredBubble
+                            message={item}
+                        />
+                    )}
+                />
+            </SafeAreaView >
+        </SafeAreaProvider>
     );
 }
 

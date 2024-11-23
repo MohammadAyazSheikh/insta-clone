@@ -15,14 +15,13 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Dimensions } from 'react-native';
 
 
-const { height: heightWindow } = Dimensions.get("window");
+// const { height: heightWindow } = Dimensions.get("window");
 
 export default function Reels() {
 
     const { styles } = useStyles(styleSheet);
     const { screen: { height } } = UnistylesRuntime;
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
 
@@ -34,10 +33,8 @@ export default function Reels() {
 
     const containerHeight = Platform.select({
         ios: (height - (tabBarHeight + top)),
-        android: heightWindow - (tabBarHeight + StatusBar.currentHeight! || 0),
+        android: height - (tabBarHeight + StatusBar.currentHeight!),
     });
-
-
 
     const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
         return (

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
+import VisibilitySensor from "@svanboxel/visibility-sensor-react-native";
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { ViewStyle } from 'react-native';
 

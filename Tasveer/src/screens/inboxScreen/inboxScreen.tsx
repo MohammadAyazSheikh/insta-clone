@@ -10,6 +10,7 @@ import InboxCard from '../../components/cards/inboxCard/inboxCard';
 import inboxData from '../../constants/data/inboxData';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import { FlashList } from '@shopify/flash-list';
 
 
 export default function Inbox() {
@@ -28,12 +29,13 @@ export default function Inbox() {
                 <Header title='Inbox' />
                 {/* search bar */}
                 <SearchBar
-                    containerStyles={{ width: '95%' }}
+                    containerStyles={{ width: '95%',alignSelf:"center" }}
                 />
                 {/* list */}
-                <FlatList
+                <FlashList
                     contentContainerStyle={styles.scroll}
                     data={inboxData}
+                    estimatedItemSize={200}
                     renderItem={({ item }) => (<InboxCard
                         title={item.sender}
                         subTitle={item.subject}

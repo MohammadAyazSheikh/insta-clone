@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import VisibilitySensor from '@svanboxel/visibility-sensor-react-native';
+import VisibilitySensor from "@svanboxel/visibility-sensor-react-native";
 import IconIo from 'react-native-vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
@@ -16,7 +16,7 @@ type vidProps = {
     paused?: boolean,
 }
 
-export default function VideoPlayerContent({
+function VideoPlayerContent({
     showVolumeIcon = true,
     mute = true,
     source,
@@ -135,3 +135,5 @@ export default function VideoPlayerContent({
     )
 }
 
+
+export default React.memo(VideoPlayerContent)

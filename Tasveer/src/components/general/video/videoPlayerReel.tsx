@@ -16,7 +16,7 @@ type vidProps = {
     style: ViewStyle | ViewStyle[]
 }
 
-export default function VideoPlayerReel({
+function VideoPlayerReel({
     showVolumeIcon = true,
     isVisible,
 
@@ -110,3 +110,4 @@ export default function VideoPlayerReel({
     )
 }
 
+export default React.memo(VideoPlayerReel);

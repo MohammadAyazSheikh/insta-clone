@@ -1,11 +1,10 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect, createRef, useCallback } from 'react';
 import styleSheet from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import type { StackScreenProps } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { RenderBubble } from '../../components/chat/renderBubble';
 import { messageObjType } from '../../constants/types/sharedTypes';
-import { FlatList, SafeAreaView, View } from 'react-native';
 import { SenderFooter } from '../../components/chat/senderFooter/senderFooter';
 import { getConversationData } from '../../constants/data/conversation';
 import { appendMessage, getMessages } from '../../redux/features/chat/chatSlice';
@@ -14,11 +13,13 @@ import { RenderMsgAlert } from '../../components/general/alerts/messageOptionsAl
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import { RenderReaction } from '../../components/chat/reactions/reactions';
 import ReactionSheet from '../../components/chat/reactions/reactionSheet';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
+import { FlashList } from '@shopify/flash-list';
 
 
-export const chatScrollRef = createRef<FlatList>();
+
+export const chatScrollRef = createRef<FlashList<messageObjType>>();
 export const refReactionSheet = createRef<BottomSheet>();
 
 export default function Conversation(props: StackScreenProps<RootStackProps, 'Conversation'>) {
@@ -98,31 +99,32 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
             })
     }
 
+    //function to render message
+    const renderBubble = useCallback(({ item }: { item: messageObjType }) => (
+        <RenderBubble
+            message={item}
+            setReplyMessage={setReplyMessage}
+        />
+    ), [setReplyMessage]);
+
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView
+                style={styles.container}
+            >
                 {/* header */}
-                <ChatHeader
+                {/* <ChatHeader
                     showOptions={selectedMessages.length > 0}
-                />
+                /> */}
                 {/* list messages */}
-                <View style={styles.container}>
-                    <FlatList
-                        ref={chatScrollRef}
-                        style={styles.scrollContainer}
-                        inverted
-                        data={messages}
-                        keyExtractor={(item => item.id.toString())}
-                        renderItem={({ item, index }) => (
-                            <RenderBubble
-                                message={item}
-                                setReplyMessage={setReplyMessage}
-                            />
-                        )}
-
-                    />
-
-                </View>
+                <FlashList
+                    ref={chatScrollRef}
+                    style={styles.scrollContainer}
+                    inverted
+                    data={messages}
+                    keyExtractor={(item => item.id.toString())}
+                    renderItem={renderBubble}
+                />
                 {/* Footer */}
                 <SenderFooter
                     {

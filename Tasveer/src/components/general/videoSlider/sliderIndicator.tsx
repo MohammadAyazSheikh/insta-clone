@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated, Image, TouchableOpacity, ScrollView } from 'react-native';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
 
 type IndicatorPropType = {
@@ -28,7 +27,7 @@ export const SliderIndicator = ({
   containerWidth = (size + spacing) * 4,
 }: IndicatorPropType) => {
 
-  const { styles, widthToDp: w } = useFunctionalOrientation(responsiveStyles);
+
 
   const data = imageList.length > 0 ? imageList : new Array(length).fill(1);
   const IndicatorScrollRef = useRef<ScrollView>(null);

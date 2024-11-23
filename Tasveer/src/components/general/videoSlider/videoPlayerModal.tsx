@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Modal, Pressable, TextInput, SafeAreaView } from 'react-native';
+import { View, StyleSheet, Modal, Pressable, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import colors from '../../../theme/colors';
-import responsiveStyles from './styles/styles';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
+import styleSheet from './styles/styles';
 import { VideoPlyer } from './videoPlayerList';
 import ButtonRipple from '../customButton/buttonRipple';
 import IconFe from 'react-native-vector-icons/Feather';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
 
 type sliderProps = {
     isOpen: boolean,
@@ -27,7 +27,7 @@ const VideoPlayerModal = ({
     hideFooter = false,
 }: sliderProps) => {
 
-    const { styles } = useFunctionalOrientation(responsiveStyles);
+    const { styles } = useStyles(styleSheet);
 
     const [text, setText] = useState<string>();
 

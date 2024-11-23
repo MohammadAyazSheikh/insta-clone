@@ -146,6 +146,7 @@ export const SenderFooter = ({
         {/* -----Input------- */}
         <TextInput
           style={styles.txtInput}
+          placeholderTextColor={"grey"}
           placeholder="Type a message..."
           multiline
           value={text}
