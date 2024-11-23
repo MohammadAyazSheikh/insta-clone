@@ -6,12 +6,14 @@ import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
 import { View, ViewStyle } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useStyles } from 'react-native-unistyles';
-
+import * as VideoThumbnails from 'expo-video-thumbnails';
+import { Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 type vidProps = {
     showVolumeIcon?: boolean,
     mute?: boolean,
-    source: string,
+    source: string | any,
     style: ViewStyle | ViewStyle[],
     paused?: boolean,
 }
@@ -25,10 +27,14 @@ function VideoPlayerContent({
 }: vidProps) {
 
     const { theme: { colors } } = useStyles({});
+    //for thumbnail
+    const [thumbnail, setThumbnail] = useState<null | string>(null);
+
     //for volume
     const [muted, setMuted] = useState(mute);
     const [isOnScreen, setIsOnScreen] = useState(false);
     const [status, setStatus] = useState<'error' | 'idle' | 'loading' | 'readyToPlay'>('loading');
+    const [playing, setIsPlaying] = useState(false);
 
     const error = status == 'error' ? "could'nt play video" : null;
 
@@ -60,22 +66,30 @@ function VideoPlayerContent({
         player.muted = muted;
     }, [muted]);
 
+    //initializing video
     useEffect(() => {
-        // const subscription = player.addListener('playingChange', isPlaying => {
-        //     setIsPlaying(isPlaying);
-        // });
+        const subscription = player.addListener('playingChange', (isPlaying) => {
+            setIsPlaying(isPlaying.isPlaying);
+        });
 
         paused && player.pause();
         const statusSubscription = player.addListener('statusChange', status => {
-            setStatus(status);
+            setStatus(status.status);
         });
 
         return () => {
-            // subscription.remove();
             statusSubscription.remove();
+            subscription.remove();
         };
     }, [player]);
 
+    //getting thumbnail on mount
+    useEffect(() => {
+        const url = source?.uri || source
+        generateThumbnail(url, setThumbnail);
+    }, []);
+
+    //function to render video
     const RenderVideo = useCallback(() =>
         isOnScreen ? (
             <VideoView
@@ -85,20 +99,29 @@ function VideoPlayerContent({
                 allowsFullscreen
                 allowsPictureInPicture
             />
-        ) : null, [isOnScreen])
+        ) : null, [isOnScreen]);
 
 
 
     return (
         <View style={style}>
             {
+                //video thumbnail
+                thumbnail && (!playing || status === "loading") ?
+                    <View style={{ ...StyleSheet.absoluteFillObject }}>
+                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'yellow' }} />
+                    </View>
+                    :
+                    null
+            }
+            {
+                // rendering
                 <VisibilitySensor
                     onChange={onChange}>
                     <View style={[style]}>
                         {<RenderVideo />}
                     </View>
                 </VisibilitySensor>
-
             }
             {/* volume icon */}
             {
@@ -130,10 +153,28 @@ function VideoPlayerContent({
                     : null
             }
             {/* video status */}
-            <ApiStatusIndicator isLoading={status == 'loading'} errorText={error} style={{ backgroundColor: "transparent" }} />
+            <ApiStatusIndicator
+                isLoading={status === 'loading' || !thumbnail && !playing}
+                errorText={error}
+                style={{ backgroundColor: "transparent" }} />
         </View>
     )
 }
 
 
-export default React.memo(VideoPlayerContent)
+export default React.memo(VideoPlayerContent);
+
+
+export const generateThumbnail = async (url: string, setUrl: React.Dispatch<React.SetStateAction<string | null>>) => {
+    try {
+        const { uri } = await VideoThumbnails.getThumbnailAsync(
+            url,
+            {
+                time: 15000,
+            }
+        );
+        setUrl(uri);
+    } catch (e) {
+        console.warn(e);
+    }
+};

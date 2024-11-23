@@ -3,34 +3,35 @@ import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import IconIo from 'react-native-vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ViewStyle } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
+import { Image } from 'react-native';
+import { generateThumbnail } from './videoPlayerContent';
 
 type vidProps = {
     showVolumeIcon?: boolean,
     isVisible: boolean,
-
     mute?: boolean,
-    source: string,
+    source: string | any,
     style: ViewStyle | ViewStyle[]
 }
 
 function VideoPlayerReel({
     showVolumeIcon = true,
     isVisible,
-
     mute = true,
     source,
     style
 }: vidProps) {
 
     const colors = useAppThemeColors();
+    //for thumbnail
+    const [thumbnail, setThumbnail] = useState<null | string>(null);
     //for volume
     const [muted, setMuted] = useState(mute);
-
     const [status, setStatus] = useState<'error' | 'idle' | 'loading' | 'readyToPlay'>('loading');
-
+    const [playing, setIsPlaying] = useState(false);
     const error = status == 'error' ? "could'nt play video" : null;
 
     const ref = useRef(null);
@@ -41,7 +42,6 @@ function VideoPlayerReel({
     });
 
 
-
     useEffect(() => {
         player.muted = muted;
     }, [muted]);
@@ -50,16 +50,28 @@ function VideoPlayerReel({
         isVisible ? player.play() : player.pause();
     }, [isVisible]);
 
+    //getting thumbnail on mount
     useEffect(() => {
+        const url = source?.uri || source
+        generateThumbnail(url, setThumbnail);
+    }, []);
+
+    //initializing video
+    useEffect(() => {
+        const subscription = player.addListener('playingChange', (isPlaying) => {
+            setIsPlaying(isPlaying.isPlaying);
+        });
         const statusSubscription = player.addListener('statusChange', status => {
-            setStatus(status);
+            setStatus(status.status);
         });
 
         return () => {
             statusSubscription.remove();
+            subscription.remove();
         };
     }, [player]);
 
+    //function to render video
     const RenderVideo = useCallback(() =>
         isVisible ? (
             <VideoView
@@ -70,11 +82,20 @@ function VideoPlayerReel({
                 allowsPictureInPicture
             />
         ) : null, [isVisible])
-
+  
     return (
         <View
             style={style}
         >
+            {
+                //video thumbnail
+                thumbnail && (!playing || status === "loading") ?
+                    <View style={{ ...StyleSheet.absoluteFillObject }}>
+                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'yellow' }} />
+                    </View>
+                    :
+                    null
+            }
             {/* video */}
             <RenderVideo />
             {/* volume icon */}
