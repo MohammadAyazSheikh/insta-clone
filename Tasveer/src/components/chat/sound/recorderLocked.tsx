@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Platform } from "react-native";
 import Animated, {
   interpolate,
   Extrapolation,
@@ -13,7 +13,11 @@ import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 import { RecordTime } from "./recorderQuick";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
-import colors from "../../../theme/colors";
+
+const inputRange = Platform.select({
+  ios: [-10, -5, 0],
+  android: [-20, -10, 0]
+})
 
 
 //-160 - slowest sound
@@ -74,7 +78,7 @@ const RecorderLocked = ({
                   <Animated.View style={[stylesBars.barContainer, stylesAnimBarContainer]}>
                     {
                       meteringList.map((b, index) => {
-                        const height = interpolate(b.metering, [-10, -5, 0], [SOUND_BAR_WIDTH, 15, 35], Extrapolation.CLAMP)
+                        const height = interpolate(b.metering, inputRange!, [SOUND_BAR_WIDTH, 15, 35], Extrapolation.CLAMP)
                         return (
                           <Animated.View
                             // entering={StretchInY.duration(200).delay(50)}

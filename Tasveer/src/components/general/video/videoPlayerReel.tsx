@@ -7,7 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import { ViewStyle } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { Image } from 'react-native';
-import { generateThumbnail } from './videoPlayerContent';
+import { generateThumbnail } from './videoThumbnail';
 
 type vidProps = {
     showVolumeIcon?: boolean,
@@ -82,7 +82,7 @@ function VideoPlayerReel({
                 allowsPictureInPicture
             />
         ) : null, [isVisible])
-  
+
     return (
         <View
             style={style}
@@ -91,7 +91,7 @@ function VideoPlayerReel({
                 //video thumbnail
                 thumbnail && (!playing || status === "loading") ?
                     <View style={{ ...StyleSheet.absoluteFillObject }}>
-                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'yellow' }} />
+                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject }} />
                     </View>
                     :
                     null

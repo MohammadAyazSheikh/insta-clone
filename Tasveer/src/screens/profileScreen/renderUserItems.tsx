@@ -14,10 +14,11 @@ export function renderUserPosts({ item, index }: userPostProp) {
 
     return (
         <ContentItemCard
+            onlyShowThumbnail
             data={item}
             pauseAll
             isAllSquare
-            containerStyles={{ flex:1}}
+            containerStyles={{ flex: 1 }}
         // onPress={() =>
         //     // navigation.navigate(item.type == "reel" ? "ExploreReel" : 'ExplorePost')
         // }

@@ -8,6 +8,7 @@ import { discoverDataType } from '../../../constants/data/discoverData';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import VideoThumbnail from '../../general/video/videoThumbnail';
 
 
 
@@ -17,6 +18,7 @@ type contentCardProps = {
     pauseAll: boolean,
     containerStyles?: ViewStyle,
     onPress?: () => void,
+    onlyShowThumbnail?: boolean,
 }
 
 const ContentItemCard = ({
@@ -25,6 +27,7 @@ const ContentItemCard = ({
     pauseAll,
     containerStyles,
     onPress,
+    onlyShowThumbnail
 }: contentCardProps) => {
 
     const { styles, theme: { colors } } = useStyles(styleSheet);
@@ -52,13 +55,18 @@ const ContentItemCard = ({
                         style={[styles.imgStyles]}
                     />
                     :
-                    <VideoPlayerContent
-                        mute
-                        showVolumeIcon={false}
-                        source={media}
-                        style={[styles.imgStyles]}
-                        paused={pauseAll}
-                    />
+                    onlyShowThumbnail ?
+                        <VideoThumbnail
+                            source={media}
+                            style={styles.imgStyles} />
+                        :
+                        <VideoPlayerContent
+                            mute
+                            showVolumeIcon={false}
+                            source={media}
+                            style={[styles.imgStyles]}
+                            paused={pauseAll}
+                        />
             }
             {
                 (isMany || isVideo || isReel) ?

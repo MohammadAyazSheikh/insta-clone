@@ -34,6 +34,7 @@ export default function Discover() {
                         estimatedItemSize={50}
                         renderItem={({ item }) =>
                             <ContentItemCard
+                                onlyShowThumbnail
                                 data={item}
                                 pauseAll
                                 onPress={() =>

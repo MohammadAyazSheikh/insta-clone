@@ -6,9 +6,9 @@ import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
 import { View, ViewStyle } from 'react-native';
 import { useVideoPlayer, VideoView } from 'expo-video';
 import { useStyles } from 'react-native-unistyles';
-import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Image } from 'react-native';
 import { StyleSheet } from 'react-native';
+import { generateThumbnail } from './videoThumbnail';
 
 type vidProps = {
     showVolumeIcon?: boolean,
@@ -109,7 +109,7 @@ function VideoPlayerContent({
                 //video thumbnail
                 thumbnail && (!playing || status === "loading") ?
                     <View style={{ ...StyleSheet.absoluteFillObject }}>
-                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'yellow' }} />
+                        <Image source={{ uri: thumbnail! }} style={{ ...StyleSheet.absoluteFillObject }} />
                     </View>
                     :
                     null
@@ -164,17 +164,3 @@ function VideoPlayerContent({
 
 export default React.memo(VideoPlayerContent);
 
-
-export const generateThumbnail = async (url: string, setUrl: React.Dispatch<React.SetStateAction<string | null>>) => {
-    try {
-        const { uri } = await VideoThumbnails.getThumbnailAsync(
-            url,
-            {
-                time: 15000,
-            }
-        );
-        setUrl(uri);
-    } catch (e) {
-        console.warn(e);
-    }
-};
