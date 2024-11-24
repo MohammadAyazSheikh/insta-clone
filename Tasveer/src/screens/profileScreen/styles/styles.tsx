@@ -1,5 +1,5 @@
 import { createStyleSheet } from 'react-native-unistyles';
-import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
+import { heightToDp, widthToDp as w } from '../../../utils/functions/responsiveUtils';
 import { commonStyles } from '../../../theme/common';
 
 const styleSheet = createStyleSheet((theme, runTime) => {
@@ -10,7 +10,6 @@ const styleSheet = createStyleSheet((theme, runTime) => {
             width: w(100),
             backgroundColor: colors.primary1,
             justifyContent: 'flex-start',
-            alignItems: 'center',
         },
         topView: {
             justifyContent: 'center',

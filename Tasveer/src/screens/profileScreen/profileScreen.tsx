@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppThemeColors, useFunctionalOrientation } from '../../utils/functions/responsiveUtils';
+import { useAppThemeColors, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
@@ -11,6 +11,9 @@ import { renderUserPosts } from './renderUserItems';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import { View } from 'react-native';
+const postSize = widthToDp(100) / 3
+const reelSize = widthToDp(100) / 2
 
 const getTabIcon = (name: string, color: string) => {
     return ({
@@ -44,7 +47,9 @@ export default function Profile() {
 
     return (
         <SafeAreaProvider >
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView
+                style={styles.container}
+            >
                 <Tabs.Container
                     revealHeaderOnScroll
                     renderHeader={ProfileHeader}
@@ -59,26 +64,30 @@ export default function Profile() {
                     <Tabs.Tab name="POSTS"
                         label={(prop) => getTabIcon(prop.name, colors.secondary1)}
                     >
-                        <Tabs.FlatList
-                            numColumns={3}
-                            data={discoverData}
-                            renderItem={renderUserPosts}
-                            keyExtractor={(_item: any, index: any) => _item?.id + 1}
-                        // estimatedItemSize={300}
-                        // estimatedListSize={{ height: 120, width }}
-                        />
+                        {
+                            <View style={{ width: "100%", height: "100%" }}>
+                                <Tabs.FlashList
+                                    numColumns={3}
+                                    data={discoverData}
+                                    renderItem={renderUserPosts}
+                                    keyExtractor={(_item: any, index: any) => _item?.id + 1}
+                                    estimatedItemSize={postSize}
+                                />
+                            </View>
+                        }
                     </Tabs.Tab>
                     <Tabs.Tab name="VIDEOS"
                         label={(prop) => getTabIcon(prop.name, colors.secondary1)}
                     >
-                        <Tabs.FlatList
-                            numColumns={3}
-                            data={discoverData.filter(item => item.type != "image")}
-                            renderItem={renderUserPosts}
-                            keyExtractor={(_item: any, index: any) => _item?.id + 1}
-                        // estimatedItemSize={300}
-                        // estimatedListSize={{ height: 120, width }}
-                        />
+                        <View style={{ width: "100%", height: "100%" }}>
+                            <Tabs.FlashList
+                                numColumns={2}
+                                data={discoverData.filter(item => item.type != "image")}
+                                renderItem={renderUserPosts}
+                                keyExtractor={(_item: any, index: any) => _item?.id + 1}
+                                estimatedItemSize={reelSize}
+                            />
+                        </View>
                     </Tabs.Tab>
                 </Tabs.Container>
             </SafeAreaView>
