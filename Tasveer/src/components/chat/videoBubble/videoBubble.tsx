@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, View } from 'react-native';
 import styleSheet from './styles/styles';
 import { messageObjType } from '../../../constants/types/sharedTypes';
@@ -7,6 +7,7 @@ import colors from '../../../theme/colors';
 import VideoPlayerModal from '../../general/videoSlider/videoPlayerModal';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';
 import { useStyles } from 'react-native-unistyles';
+import { generateThumbnail } from '../../general/video/videoThumbnail';
 
 type propsType = {
     message: messageObjType,
@@ -16,6 +17,8 @@ type propsType = {
 
 export default function VideoBubble(props: propsType) {
 
+    const [thumbnail, setThumbnail] = useState<null | string>(null);
+
     const [showVideo, setShowVideo] = useState(false);
     const { styles } = useStyles(styleSheet);
     const {
@@ -23,7 +26,10 @@ export default function VideoBubble(props: propsType) {
     } = props?.message;
 
 
-
+    //getting thumbnail on mount
+    useEffect(() => {
+        generateThumbnail(video!, setThumbnail);
+    }, []);
 
     return (
         <BubbleWrapper {...props?.message}
@@ -37,7 +43,7 @@ export default function VideoBubble(props: propsType) {
             <View
                 style={[styles.videoView]}>
                 <Image
-                    source={{ uri: video }}
+                    source={{ uri: thumbnail! }}
                     style={[styles.videoStyles]}
                     resizeMode='contain'
                 />
@@ -50,13 +56,6 @@ export default function VideoBubble(props: propsType) {
                         color={colors.secondary1}
                     />
                 </View>
-                {/* <Video
-                        source={{ uri: video }}
-                        style={[styles.videoStyles]}
-                        resizeMode='contain'
-                        controls={true}
-                        paused
-                    /> */}
             </View>
             {/* ----------Video modal----- */}
             <VideoPlayerModal

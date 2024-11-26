@@ -87,7 +87,7 @@ export default function UserAvatar({
             rotation.value = 0
     }, [isLoading])
     return (
-        <View style={[styles.containerStyle, size && { width: size }, containerStyle]}>
+        <View style={[styles.containerStyle, size ? { width: size } : null, containerStyle]}>
             <View
                 style={[styles.avatarView, avatarSize, avatarContainerStyle]}
             >

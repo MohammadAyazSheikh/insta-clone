@@ -94,7 +94,7 @@ export const VideoPlyer = ({
             key={String(item + index)}>
             <VideoPlayerContent
               source={item}
-              style={[styles.videoStyles, videoStyles]}
+              style={[styles.videoStyles, videoStyles!]}
             />
           </View>
         ))}

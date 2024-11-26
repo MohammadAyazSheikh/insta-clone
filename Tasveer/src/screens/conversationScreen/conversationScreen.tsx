@@ -113,9 +113,9 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                 style={styles.container}
             >
                 {/* header */}
-                {/* <ChatHeader
+                <ChatHeader
                     showOptions={selectedMessages.length > 0}
-                /> */}
+                />
                 {/* list messages */}
                 <FlashList
                     ref={chatScrollRef}

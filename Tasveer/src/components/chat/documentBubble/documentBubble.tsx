@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import uniStyles from './styles/styles';
 import { TextItalic } from '../../../components/general/text/text';
@@ -27,9 +27,10 @@ export default function DocumentBubble(props: propsType) {
     const {
         user: sender
     } = message;
+    
     const you = sender?.id == user?.id;
 
-    const ext = message?.document?.split('.');
+    const ext = useMemo(() => message?.document?.split('.'), [message]);
 
     return (
 

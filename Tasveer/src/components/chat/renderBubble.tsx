@@ -1,6 +1,6 @@
 
 import React, { useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { useAppSelector } from '../../redux/hooks';
 import TextBubble from './textBubble/textBubble';
 import ImageBubble from './imageBubble/imageBubble';
@@ -60,7 +60,6 @@ export const RenderBubble = (props: props) => {
                     animatedStyle
                 ]}
                 >
-
                     {/* user avatar */}
                     <UserAvatar
                         size={40}
@@ -79,7 +78,6 @@ export const RenderBubble = (props: props) => {
                     }
                     {/* if image */}
                     {
-
                         type == "image" ?
                             <ImageBubble
                                 message={message}
@@ -99,7 +97,6 @@ export const RenderBubble = (props: props) => {
                     }
                     {/* if document */}
                     {
-
                         type == "document" ?
                             <DocumentBubble
                                 message={message}
@@ -109,7 +106,6 @@ export const RenderBubble = (props: props) => {
                     }
                     {/* if video */}
                     {
-
                         type == "video" ?
                             <VideoBubble
                                 message={message}
@@ -119,7 +115,6 @@ export const RenderBubble = (props: props) => {
                     }
                     {/* if video */}
                     {
-
                         type == "location" ?
                             <LocationBubble
                                 message={message}
