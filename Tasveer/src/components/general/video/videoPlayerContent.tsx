@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import VisibilitySensor from "@svanboxel/visibility-sensor-react-native";
-import IconIo from 'react-native-vector-icons/Ionicons'
+import IconIo from '@expo/vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
 import { View, ViewStyle } from 'react-native';

@@ -5,7 +5,7 @@ import Animated, {
     useAnimatedStyle,
 } from 'react-native-reanimated';
 import { ActivityIndicator, TouchableRipple } from "react-native-paper";
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconEnt from '@expo/vector-icons/Entypo';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';

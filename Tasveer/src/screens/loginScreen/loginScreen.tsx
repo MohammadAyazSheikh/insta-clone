@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import TextBox from '../../components/general/textBox/textBox';
-import IconFe from 'react-native-vector-icons/Feather'
+import IconFe from '@expo/vector-icons/Feather'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import { authSuccess } from '../../redux/features/user/userSlice';

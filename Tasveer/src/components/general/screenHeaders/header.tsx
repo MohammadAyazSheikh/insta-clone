@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextProps, ViewProps } from 'react-native';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';

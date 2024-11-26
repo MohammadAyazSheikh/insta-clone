@@ -10,8 +10,8 @@ import responsiveStyles from './styles/styles';
 import { TouchableRipple } from 'react-native-paper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import IconEnt from 'react-native-vector-icons/Entypo';
-import IconFn from 'react-native-vector-icons/Fontisto';
+import IconEnt from '@expo/vector-icons/Entypo';
+import IconFn from '@expo/vector-icons/Fontisto';
 import { TextRegular } from '../text/text';
 type btnProps = TouchableOpacityProps;
 

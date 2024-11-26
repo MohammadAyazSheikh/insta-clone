@@ -9,7 +9,7 @@ import DocumentBubble from './documentBubble/documentBubble';
 import { messageObjType } from '../../constants/types/sharedTypes';
 import { widthToDp as w } from '../../utils/functions/responsiveUtils';
 import VideoBubble from './videoBubble/videoBubble';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import LocationBubble from './locationBubble/locationBubble';
 import { TextBold } from '../general/text/text';
 import colors from '../../theme/colors';

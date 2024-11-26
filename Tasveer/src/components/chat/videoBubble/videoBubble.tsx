@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, View } from 'react-native';
 import styleSheet from './styles/styles';
 import { messageObjType } from '../../../constants/types/sharedTypes';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import colors from '../../../theme/colors';
 import VideoPlayerModal from '../../general/videoSlider/videoPlayerModal';
 import BubbleWrapper from '../bubbleWrapper/bubbleWrapper';

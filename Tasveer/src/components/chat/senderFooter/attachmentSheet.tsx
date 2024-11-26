@@ -5,9 +5,9 @@ import {
 import styleSheet from './styles/styles';
 import Animated, { Extrapolation, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import AttachmentButton from './attachmentBtn';
-import IconFe from 'react-native-vector-icons/Feather';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconFe from '@expo/vector-icons/Feather';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconEnt from '@expo/vector-icons/Entypo';
 import { pickMultipleImage } from '../../../utils/functions/imagePicker';
 import { pickSingleDocument } from '../../../utils/functions/documentPicker';
 import { Image as ImageType } from 'react-native-image-crop-picker';

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { View, Pressable } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from '@expo/vector-icons/AntDesign';
 import colors from '../../../theme/colors';
 import styleSheet from './styles/styles';
 import { Image } from 'react-native-image-crop-picker'

@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from 'react';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconEnt from '@expo/vector-icons/Entypo';
 import colors from '../../../theme/colors';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
 import { TextInput, View } from 'react-native';

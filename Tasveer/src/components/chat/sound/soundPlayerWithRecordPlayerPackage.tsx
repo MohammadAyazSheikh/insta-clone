@@ -7,7 +7,7 @@ import Animated, {
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
 import { PlayBackType, RecordBackType } from "react-native-audio-recorder-player";
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconEnt from '@expo/vector-icons/Entypo';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import { TextRegular } from '../../general/text/text';
-import IconEnt from 'react-native-vector-icons/Entypo';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconMt from 'react-native-vector-icons/MaterialIcons';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconEnt from '@expo/vector-icons/Entypo';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconMt from '@expo/vector-icons/MaterialIcons';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import SearchBarAnimated from '../../general/screenHeaders/searchBarAnimated';

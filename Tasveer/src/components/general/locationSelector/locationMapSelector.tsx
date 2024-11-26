@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback } from 'react';
 import { View, Modal, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import styleSheet from './styles/styles';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import IconMt from 'react-native-vector-icons/MaterialIcons';
+import IconMt from '@expo/vector-icons/MaterialIcons';
 import { getCurrentCoord, autoComplete } from '../../../utils/permissions/locationPermission';
 import { useEffect } from 'react';
 import { Divider } from 'react-native-paper';

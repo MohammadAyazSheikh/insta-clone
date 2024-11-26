@@ -2,7 +2,7 @@ import React from 'react';
 import {
     Image, StyleSheet, View, ViewStyle
 } from 'react-native';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { discoverDataType } from '../../../constants/data/discoverData';
 import VideoPlayerContent from '../../general/video/videoPlayerContent';

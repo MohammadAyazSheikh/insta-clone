@@ -4,8 +4,8 @@ import responsiveStyles from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import ProfileHeader from './header';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconFa5 from 'react-native-vector-icons/FontAwesome5';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
+import IconFa5 from '@expo/vector-icons/FontAwesome5';
 import { discoverData } from '../../constants/data/discoverData';
 import { renderUserPosts } from './renderUserItems';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import styleSheet from './styles/styles';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { messageObjType } from '../../../constants/types/sharedTypes';
 import { colorsList } from '../../../theme/colors';

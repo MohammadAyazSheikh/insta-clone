@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from './styles/styles';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
+import IconEnt from '@expo/vector-icons/Entypo';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextBold, TextRegular } from '../../general/text/text';

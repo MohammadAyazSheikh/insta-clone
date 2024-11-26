@@ -9,7 +9,7 @@ import Animated, {
 import { TouchableRipple } from "react-native-paper";
 import { widthToDp } from "../../../utils/functions/responsiveUtils";
 import styleSheet from "./styles/styles";
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 import { RecordTime } from "./recorderQuick";
 import { createStyleSheet, useStyles } from "react-native-unistyles";

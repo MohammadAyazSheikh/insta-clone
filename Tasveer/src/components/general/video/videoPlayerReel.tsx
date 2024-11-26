@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
-import IconIo from 'react-native-vector-icons/Ionicons'
+import IconIo from '@expo/vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
 import { StyleSheet, View } from 'react-native';

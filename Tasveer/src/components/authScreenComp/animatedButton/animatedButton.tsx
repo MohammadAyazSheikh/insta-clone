@@ -4,7 +4,7 @@ import { Animated ,TouchableOpacity, } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
 import responsiveStyles from '../startupModal/styles/styles';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 

@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback, useState } from 'react';
 import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconFn from 'react-native-vector-icons/Fontisto';
-import IconOct from 'react-native-vector-icons/Octicons';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconFn from '@expo/vector-icons/Fontisto';
+import IconOct from '@expo/vector-icons/Octicons';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
 import { TextInput, View } from 'react-native';
 import UserAvatar from '../../general/avatar/avatar';

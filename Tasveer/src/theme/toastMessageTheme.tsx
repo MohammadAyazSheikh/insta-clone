@@ -1,9 +1,9 @@
 import Toast, { ToastConfig, ToastConfigParams } from 'react-native-toast-message';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import IconOct from 'react-native-vector-icons/Octicons';
-import IconEnt from 'react-native-vector-icons/Entypo';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconOct from '@expo/vector-icons/Octicons';
+import IconEnt from '@expo/vector-icons/Entypo';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import { fontFamily } from './fonts';
 import { heightToDp, useAppThemeColors } from '../utils/functions/responsiveUtils';
 import { TextBold, TextRegular } from '../components/general/text/text';

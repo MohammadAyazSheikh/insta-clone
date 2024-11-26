@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextRegular, TextSemiBold } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
-import IconIo from 'react-native-vector-icons/Ionicons';
+import IconIo from '@expo/vector-icons/Ionicons';
 import { commentType } from '../../../constants/types/sharedTypes';
 import moment from 'moment';
 import { useStyles } from 'react-native-unistyles';

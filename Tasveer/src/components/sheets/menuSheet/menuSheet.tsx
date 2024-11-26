@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Menu from './menu';
-import IconFe from 'react-native-vector-icons/Feather';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconFe from '@expo/vector-icons/Feather';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 

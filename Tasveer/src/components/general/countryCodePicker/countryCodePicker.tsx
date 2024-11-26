@@ -6,7 +6,7 @@ import {
 import { TouchableRipple } from 'react-native-paper';
 import { TextBold, TextRegular } from '../text/text';
 import TextBox from '../textBox/textBox';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import { countiesInfo, countiesInfoType } from '../../../constants/data/countriesInfo';
 import { SvgUri } from 'react-native-svg';
 import { onEnd, paginateData } from '../../../utils/functions/pagination';

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Modal, Pressable, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import Icon from '@expo/vector-icons/AntDesign';
 import colors from '../../../theme/colors';
 import styleSheet from './styles/styles';
 import { VideoPlyer } from './videoPlayerList';
 import ButtonRipple from '../customButton/buttonRipple';
-import IconFe from 'react-native-vector-icons/Feather';
+import IconFe from '@expo/vector-icons/Feather';
 import { SafeAreaProvider,SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
 

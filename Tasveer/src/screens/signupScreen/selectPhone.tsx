@@ -7,7 +7,7 @@ import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import TextBox from '../../components/general/textBox/textBox';
 import { childScreenProps } from './signupScreen';
-import IconAnt from 'react-native-vector-icons/AntDesign'
+import IconAnt from '@expo/vector-icons/AntDesign'
 import { TextBold } from '../../components/general/text/text';
 import { TouchableRipple } from 'react-native-paper';
 import CountryCodePicker from '../../components/general/countryCodePicker/countryCodePicker';

@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import IconIon from 'react-native-vector-icons/Ionicons';
-import IconMtc from 'react-native-vector-icons/MaterialCommunityIcons';
-import IconFa5 from 'react-native-vector-icons/FontAwesome5';
+import IconIon from '@expo/vector-icons/Ionicons';
+import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
+import IconFa5 from '@expo/vector-icons/FontAwesome5';
 import { heightToDp, useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { AddContentButton } from './addContentButton';
 import Home from '../../screens/homeScreen/homeScreen';

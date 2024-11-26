@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from 'react-native';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import { useAppThemeColors } from "../../utils/functions/responsiveUtils";
 import { TouchableRipple } from "react-native-paper";
 import { showDismissAlert } from "../../components/general/alerts/dismissAlert";

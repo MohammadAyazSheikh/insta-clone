@@ -9,7 +9,7 @@ import TextBox from '../../components/general/textBox/textBox';
 import { TextRegular } from '../../components/general/text/text';
 import { childScreenProps } from './signupScreen';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
-import IconFe from 'react-native-vector-icons/Feather'
+import IconFe from '@expo/vector-icons/Feather'
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';

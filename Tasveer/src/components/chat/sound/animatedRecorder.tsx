@@ -10,7 +10,7 @@ import {
     GestureDetector
 } from 'react-native-gesture-handler';
 import styleSheet from './styles/styles';
-import IconFa from 'react-native-vector-icons/FontAwesome';
+import IconFa from '@expo/vector-icons/FontAwesome';
 import LottieView from 'lottie-react-native';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";

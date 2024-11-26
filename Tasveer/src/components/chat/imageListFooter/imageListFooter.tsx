@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, ScrollView, } from 'react-native';
 import styleSheet from './styles/styles';
 import uuid from 'react-native-uuid';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import {Image as ImageType} from 'react-native-image-crop-picker';
 import { useStyles } from 'react-native-unistyles';

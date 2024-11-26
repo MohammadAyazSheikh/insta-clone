@@ -3,7 +3,7 @@ import {
     View,
 } from 'react-native';
 import styleSheet from './styles/styles';
-import IconIo from 'react-native-vector-icons/Ionicons';
+import IconIo from '@expo/vector-icons/Ionicons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import ContentHeader from '../contentHeader/contentHeader';
 import { homeDataType } from '../../../constants/data/homeData';

@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, ViewStyle, TextStyle } from 'react-native';
 import responsiveStyles from './styles/styles';
 import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import IconAnt from 'react-native-vector-icons/AntDesign';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import Slider from '@react-native-community/slider';
 import moment from 'moment';
 import Sound from 'react-native-sound';

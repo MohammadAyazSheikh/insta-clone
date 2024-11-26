@@ -1,7 +1,7 @@
 import React from 'react';
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconFe from 'react-native-vector-icons/Feather';
-import IconEn from 'react-native-vector-icons/Entypo';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconFe from '@expo/vector-icons/Feather';
+import IconEn from '@expo/vector-icons/Entypo';
 import { messageType } from '../../../constants/types/sharedTypes';
 
 export const getMessageIcon = (name: messageType, color: string = "black") => {

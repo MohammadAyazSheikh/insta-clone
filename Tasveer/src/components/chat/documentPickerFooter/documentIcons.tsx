@@ -1,6 +1,6 @@
 
-import IconAnt from 'react-native-vector-icons/AntDesign';
-import IconFa from 'react-native-vector-icons/FontAwesome';
+import IconAnt from '@expo/vector-icons/AntDesign';
+import IconFa from '@expo/vector-icons/FontAwesome';
 
 
 export const documentIcon = {

@@ -2,7 +2,7 @@ import React from 'react';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch } from '../../redux/hooks';
 import TextBox from '../../components/general/textBox/textBox';
-import IconAnt from 'react-native-vector-icons/AntDesign'
+import IconAnt from '@expo/vector-icons/AntDesign'
 import { TextRegular } from '../../components/general/text/text';
 import { childScreenProps } from './signupScreen';
 import { isValidUsername } from '../../utils/functions/validations';

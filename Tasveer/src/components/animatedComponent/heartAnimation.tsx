@@ -6,17 +6,14 @@ import {
     GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import Animated, {
-    interpolateColor,
     runOnJS,
     useAnimatedStyle,
     useSharedValue,
     withDelay,
     withSpring,
-    withTiming,
 
 } from 'react-native-reanimated';
-
-import IconAnt from "react-native-vector-icons/AntDesign";
+import IconAnt from "@expo/vector-icons/AntDesign";
 import { widthToDp } from '../../utils/functions/responsiveUtils';
 
 const Icon = Animated.createAnimatedComponent(IconAnt);

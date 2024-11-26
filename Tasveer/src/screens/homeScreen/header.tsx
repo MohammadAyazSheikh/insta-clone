@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { useNavigation } from '@react-navigation/core'
 import type { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
-import IconIo from 'react-native-vector-icons/Ionicons'
+import IconIo from '@expo/vector-icons/Ionicons'
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';

@@ -6,8 +6,8 @@ import {
     TextInputProps,
     ViewStyle
 } from 'react-native';
-import IconIo from 'react-native-vector-icons/Ionicons';
-import IconEnt from 'react-native-vector-icons/Entypo';
+import IconIo from '@expo/vector-icons/Ionicons';
+import IconEnt from '@expo/vector-icons/Entypo';
 import ButtonRipple from '../customButton/buttonRipple';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
