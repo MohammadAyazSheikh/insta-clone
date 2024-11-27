@@ -1,6 +1,5 @@
-import React from 'react';
-import { useAppThemeColors, useFunctionalOrientation, widthToDp } from '../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
+import React, { useCallback, useMemo } from 'react';
+import { widthToDp } from '../../utils/functions/responsiveUtils';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
 import ProfileHeader from './header';
@@ -12,6 +11,13 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { View } from 'react-native';
+import Header from '../../components/general/screenHeaders/header';
+import IconIo from "@expo/vector-icons/Ionicons";
+import ButtonRipple from '../../components/general/customButton/buttonRipple';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
 const postSize = widthToDp(100) / 3
 const reelSize = widthToDp(100) / 2
 
@@ -38,11 +44,17 @@ const getTabIcon = (name: string, color: string) => {
 export default function Profile() {
 
     const { styles, theme: { colors } } = useStyles(styleSheet);
-    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { user } = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
 
+    //menu button
+    const MenuIcon = useCallback(() => (
+        <ButtonRipple onPress={() => navigation.navigate("Setting")}>
+            <IconIo name="menu" color={colors.secondary1} size={30} />
+        </ButtonRipple>
+    ), [])
 
 
     return (
@@ -50,6 +62,14 @@ export default function Profile() {
             <SafeAreaView
                 style={styles.container}
             >
+                {/* header */}
+                <Header
+                    title={`${user?.firstName} ${user?.lastName}`}
+                    showLeftIcon={false}
+                    showRightIcon
+                    rightIcon={MenuIcon}
+                />
+                {/* tabs */}
                 <Tabs.Container
                     revealHeaderOnScroll
                     renderHeader={ProfileHeader}

@@ -7,6 +7,7 @@ import Conversation from '../../screens/conversationScreen/conversationScreen';
 import Inbox from '../../screens/inboxScreen/inboxScreen';
 import Explore from '../../screens/exploreScreen/exploreScreen';
 import ReelsExplore from '../../screens/reelsScreen/reelsScreenExplore';
+import Settings from '../../screens/menuScreen/settingScreen';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -58,6 +59,13 @@ export const protectedRoutes = () => {
             <Stack.Screen
                 name="ExploreReel"
                 component={ReelsExplore}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Setting"
+                component={Settings}
                 options={{
                     headerShown: false,
                 }}

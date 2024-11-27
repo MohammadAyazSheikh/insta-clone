@@ -13,13 +13,14 @@ import { authRoutes } from './authRoutes';
 
 
 export type RootStackProps = {
-  RootTab: undefined;
-  Login: undefined;
-  Signup: undefined;
+  RootTab: undefined,
+  Login: undefined,
+  Signup: undefined,
   Inbox:undefined,
   ExplorePost:undefined,
   ExploreReel:undefined,
   Reels:undefined,
+  Setting:undefined,
   Conversation: {
     messageId?: string | number
   };
