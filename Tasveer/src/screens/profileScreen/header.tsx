@@ -16,9 +16,13 @@ import { useAppSelector } from '../../redux/hooks';
 
 export default function ProfileHeader() {
 
-    const { styles, theme: { spacing } } = useStyles(styleSheet);
+
+
+    const { styles, theme: { spacing, colors } } = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { user } = useAppSelector(state => state.user);
+
+    const userId = user?.id;
     // const dispatch = useAppDispatch();
 
     const renderHighlights = () => (
@@ -43,7 +47,8 @@ export default function ProfileHeader() {
             <View style={styles.userInfoRow}>
                 {/* avatar */}
                 <StoryAvatar
-                    image={{ uri: user?.profileImage }}
+                    name={user?.firstName}
+                    image={user?.profileImage ? { uri: user?.profileImage } : null}
                     numberOfArch={1}
                     showNumberOfArch={0}
                     radius={w(12)}
@@ -86,30 +91,34 @@ export default function ProfileHeader() {
                     Do more things that make you forget to check your phone.
                 </TextRegular>
             </View>
-            {/* follow and message button */}
-            {/* <View style={commonStyles.rowCenter}>
-                <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}>
-                    <TextBold style={[styles.txtName, { color: 'white' }]}>
-                        Follow
-                    </TextBold>
-                </ButtonRipple>
-                <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}>
-                    <TextBold style={[styles.txtName]}>
-                        Message
-                    </TextBold>
-                </ButtonRipple>
-            </View> */}
-            {/* edit button */}
-            <ButtonRipple
-                style={styles.btnEdit}
-                onPress={() => {
-                    navigation.navigate("EditProfile");
-                }}
-            >
-                <TextBold style={styles.txtName}>
-                    Edit Profile
-                </TextBold>
-            </ButtonRipple>
+            {
+                // follow and message button
+                userId !== user?.id ?
+                    <View style={commonStyles.rowCenter}>
+                        <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}>
+                            <TextBold style={[styles.txtName, { color: 'white' }]}>
+                                Follow
+                            </TextBold>
+                        </ButtonRipple>
+                        <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}>
+                            <TextBold style={[styles.txtName]}>
+                                Message
+                            </TextBold>
+                        </ButtonRipple>
+                    </View>
+                    :
+                    // edit button 
+                    <ButtonRipple
+                        style={styles.btnEdit}
+                        onPress={() => {
+                            navigation.navigate("EditProfile");
+                        }}
+                    >
+                        <TextBold style={styles.txtName}>
+                            Edit Profile
+                        </TextBold>
+                    </ButtonRipple>
+            }
             {/* ----Highlight---- */}
             {renderHighlights()}
         </View>
