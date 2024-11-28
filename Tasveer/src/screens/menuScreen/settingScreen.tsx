@@ -66,7 +66,8 @@ const Setting = () => {
                                     }
 
                                     const filteredSection = menuList.map(data => {
-                                        const filteredList = data.data.filter(item => item.title.includes(value));
+                                        const filteredList = data.data.filter(item => 
+                                            item.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()));
                                         return {
                                             ...data,
                                             data: filteredList,

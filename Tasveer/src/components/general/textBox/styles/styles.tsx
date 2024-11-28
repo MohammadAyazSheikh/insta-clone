@@ -44,7 +44,7 @@ const styleSheet = createStyleSheet((theme) => {
             fontSize: fontSize.sm
         },
         txtLabel: {
-            color: colors.primary1,
+            color: colors.secondary1,
             fontFamily: fontFamily.regular,
             fontSize: fontSize.lg,
             alignSelf: "flex-start"

@@ -132,4 +132,5 @@ export default userSlice.reducer
 export const {
     logoutSuccess,
     authSuccess,
+    updateUserSuccess,
 } = userSlice.actions

@@ -21,6 +21,7 @@ export type RootStackProps = {
   ExploreReel:undefined,
   Reels:undefined,
   Setting:undefined,
+  EditProfile:undefined,
   Conversation: {
     messageId?: string | number
   };

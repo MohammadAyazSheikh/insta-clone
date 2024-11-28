@@ -9,7 +9,8 @@ export type userType = {
     phone?: string,
     gender?: 'male' | 'female',
     dob?: Date,
-    profileImage?:string
+    profileImage?:string,
+    bio?:string,
 }
 
 

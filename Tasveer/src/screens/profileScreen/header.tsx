@@ -8,13 +8,17 @@ import StoryAvatar from '../../components/story/storyAvatar/storyAvatar';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { widthToDp as w } from '../../utils/functions/responsiveUtils';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
+import { useAppSelector } from '../../redux/hooks';
 
 
 export default function ProfileHeader() {
 
     const { styles, theme: { spacing } } = useStyles(styleSheet);
-    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    // const { user } = useAppSelector(state => state.user);
+    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    const { user } = useAppSelector(state => state.user);
     // const dispatch = useAppDispatch();
 
     const renderHighlights = () => (
@@ -39,6 +43,7 @@ export default function ProfileHeader() {
             <View style={styles.userInfoRow}>
                 {/* avatar */}
                 <StoryAvatar
+                    image={{ uri: user?.profileImage }}
                     numberOfArch={1}
                     showNumberOfArch={0}
                     radius={w(12)}
@@ -95,7 +100,12 @@ export default function ProfileHeader() {
                 </ButtonRipple>
             </View> */}
             {/* edit button */}
-            <ButtonRipple style={styles.btnEdit}>
+            <ButtonRipple
+                style={styles.btnEdit}
+                onPress={() => {
+                    navigation.navigate("EditProfile");
+                }}
+            >
                 <TextBold style={styles.txtName}>
                     Edit Profile
                 </TextBold>

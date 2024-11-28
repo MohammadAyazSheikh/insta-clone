@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TextInputProps, ViewStyle, Text } from 'react-native';
+import { View, TextInput, TextInputProps, ViewStyle, Text, TextStyle } from 'react-native';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
@@ -7,11 +7,12 @@ import styleSheet from './styles/styles';
 
 type inputProps = TextInputProps;
 
-type textBoxProp = {
-  inputViewStyle?: ViewStyle;
-  inputViewFocusStyle?: ViewStyle;
-  inputViewErrStyle?: ViewStyle;
-  containerStyle?: ViewStyle;
+export type textBoxProp = {
+  inputViewStyle?: ViewStyle | ViewStyle[];
+  inputViewFocusStyle?: ViewStyle | ViewStyle[];
+  inputViewErrStyle?: ViewStyle | ViewStyle[];
+  containerStyle?: ViewStyle | ViewStyle[];
+  labelStyle?: TextStyle | TextStyle[];
   iconLeft?: React.ReactNode;
   iconRight?: React.ReactNode //React.ComponentType;
   error?: string | null;
@@ -25,6 +26,7 @@ const TextBox = ({
   inputViewFocusStyle = {},
   inputViewErrStyle = {},
   containerStyle = {},
+  labelStyle,
   label,
   error,
   ...inputProps
@@ -36,7 +38,7 @@ const TextBox = ({
   return (
     <View style={[styles.container, containerStyle]}>
       {label && (
-        <Text allowFontScaling={false} style={styles.txtLabel}>
+        <Text allowFontScaling={false} style={[styles.txtLabel, labelStyle]}>
           {label}
         </Text>
       )}
