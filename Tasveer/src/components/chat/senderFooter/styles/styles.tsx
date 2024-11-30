@@ -88,7 +88,7 @@ const styleSheet = createStyleSheet((theme) => {
         replyFooter: {
             width: '100%',
             paddingVertical: 10,
-            backgroundColor: colors.secondary1,
+            backgroundColor: colors.primary3,
             paddingHorizontal: 10,
             flexDirection: 'column',
             justifyContent: 'center',

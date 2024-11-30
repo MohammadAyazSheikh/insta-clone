@@ -92,7 +92,8 @@
             "PhotoLibrary"
           ]
         }
-      ]
+      ],
+      "expo-audio"
     ]
   }
 }

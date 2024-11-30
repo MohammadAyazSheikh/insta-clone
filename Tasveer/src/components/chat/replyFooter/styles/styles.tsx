@@ -11,7 +11,7 @@ const styleSheet = createStyleSheet((theme) => {
             justifyContent: 'flex-start',
             alignItems: "center",
             overflow: 'hidden',
-            backgroundColor: colors.primary3,
+            backgroundColor: colors.primary1,
             borderRadius: spacing?.lg,
             marginVertical: spacing?.md,
         },

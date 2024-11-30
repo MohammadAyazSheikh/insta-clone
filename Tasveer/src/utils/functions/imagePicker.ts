@@ -1,7 +1,7 @@
 import ImagePickerMultiple, { Image, Video } from 'react-native-image-crop-picker';
 import { grantStoragePermission } from '../permissions/permissions';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
-// import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 ///-----for multiple image selection---------
 export const pickMultipleImage = (callback: (images: Image[]) => void) => {
@@ -51,20 +51,20 @@ export const pickImage = (callback: (image: Image) => void) => {
 
 };
 
-// ///-----for single video selection---------
-// export const pickSingleVideo = () => {
-//     return grantStoragePermission().then(() => {
-//         return launchImageLibrary({
-//             mediaType: 'video'
-//         })
-//             .catch(err => {
-//                 console.error("Error Video Picker: ", err)
-//             })
+///-----for single video selection---------
+export const pickSingleVideo = () => {
+    return grantStoragePermission().then(() => {
+        return launchImageLibrary({
+            mediaType: 'video'
+        })
+            .catch(err => {
+                console.error("Error Video Picker: ", err)
+            })
 
 
-//     })
+    })
 
-// };
+};
 
 // export const captureImage = () => {
 //     return launchCamera({ mediaType: 'image' })

@@ -19,7 +19,6 @@ import { useStyles } from "react-native-unistyles";
 
 
 type sliderProps = {
-    // width?: number,
     url: string,
     containerStyles?: ViewStyle,
     progressStyles?: ViewStyle,
@@ -29,7 +28,6 @@ type sliderProps = {
 }
 
 const SoundPlayer = ({
-    // width = deviceWidth,
     url,
     thumbStyles,
     progressStyles,
@@ -37,6 +35,7 @@ const SoundPlayer = ({
     iconColor,
     timeStyles,
 }: sliderProps) => {
+
 
     const { styles } = useStyles(styleSheet);
 
@@ -51,7 +50,6 @@ const SoundPlayer = ({
 
     //sound hook
     const { play, pause, seek, setTime, time, isLoaded, error } = useSoundPlayer(url);
-
 
     // animated value to move thumb towards right side when sound is playing
     const translateX = useSharedValue(0);
@@ -109,6 +107,17 @@ const SoundPlayer = ({
     //when sound ends it will be called
     const onSoundEnd = () => {
         setIsPlaying(false);
+        setTime({
+            ...time,
+            currentPosition: 0,
+            isPlaying: false,
+        });
+        onPlayHandler({
+            ...time,
+            currentPosition: 0,
+            isPlaying: false,
+        })
+
     }
 
     // play/pause button handler
@@ -130,9 +139,6 @@ const SoundPlayer = ({
         <View style={[
             styles.playerContainer,
             containerStyles,
-            // {
-            //     width: width
-            // },
         ]}>
             {/* play button */}
             <TouchableRipple
@@ -151,7 +157,7 @@ const SoundPlayer = ({
                     //set progress width =  minus thumb width to progress width
                     //because when we translating thumb ac/ to width of progressbar
                     //when it reaches to 100% (at end of progress) thumb is going out from progress 
-                    setProgressViewWidth(e.nativeEvent.layout.width-THUMB_WIDTH);
+                    setProgressViewWidth(e.nativeEvent.layout.width - THUMB_WIDTH);
                 }}
             >
                 {/* thumb */}
@@ -169,17 +175,33 @@ const SoundPlayer = ({
             {
                 <View style={{ flex: 1, alignItems: 'flex-end' }}>
                     {
-                        isLoaded ?
+                        isLoaded && !error ?
                             <TextRegular
                                 adjustsFontSizeToFit
                                 style={[styles.txtQuickTime, timeStyles]}>
                                 {formateTime(time.currentPosition, time.duration, isPlaying)}
                             </TextRegular>
                             :
+                            null
+                    }
+                    {
+                        !isLoaded && !error ?
                             <ActivityIndicator
                                 size={"small"}
                                 color={'white'}
                             />
+                            :
+                            null
+                    }
+                    {
+                        error ?
+                            <TextRegular
+                                adjustsFontSizeToFit
+                                style={[styles.txtQuickTime, timeStyles]}
+                            >
+                                {error?.message}
+                            </TextRegular>
+                            : null
                     }
                 </View>
             }
@@ -192,9 +214,6 @@ const SoundPlayer = ({
 export default SoundPlayer;
 
 
-// const styles = StyleSheet.create({
-
-// })
 
 
 

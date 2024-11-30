@@ -75,6 +75,20 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 id: uuid.v4().toString(),
                 text: '',
                 type: 'voice',
+                voice: "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
+                createdAt: new Date(),
+                status: 'seen',
+                user: {
+                    id: 2,
+                    firstName: 'John',
+                },
+                reacts: []
+            },
+            {
+                id: uuid.v4().toString(),
+                text: '',
+                type: 'voice',
+                voice: "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
                 createdAt: new Date(),
                 status: 'seen',
                 user: {

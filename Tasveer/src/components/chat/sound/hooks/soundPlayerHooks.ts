@@ -10,11 +10,11 @@ export type timeProp = {
 // Enable playback in silence mode
 Sound.setCategory('Playback');
 
-const path_ = '';
 
-export const useSoundPlayer = (uri: string = path_) => {
+export const useSoundPlayer = (uri: string) => {
 
-    const [error, setError] = useState<string | null>(null);
+
+    const [error, setError] = useState<null | { message: string }>(null);
 
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -30,6 +30,7 @@ export const useSoundPlayer = (uri: string = path_) => {
 
     //creating sound
     const sound = useMemo(() => {
+
         return new Sound(uri, undefined, (error) => {
             if (error) {
                 setError(error);
@@ -62,6 +63,7 @@ export const useSoundPlayer = (uri: string = path_) => {
 
             sound.play((success => {
                 onEnd && onEnd(success);
+                clearInterval(intervalId.current)
             }));
 
             //clearing interval if any old handler is attached
@@ -71,11 +73,6 @@ export const useSoundPlayer = (uri: string = path_) => {
             intervalId.current = setInterval(() => {
                 sound.getCurrentTime((seconds, isPlaying) => {
                     setTime(prev => {
-                        onPlay && onPlay({
-                            ...prev,
-                            isPlaying,
-                            currentPosition: seconds
-                        });
                         return ({
                             ...prev,
                             currentPosition: seconds,
@@ -83,8 +80,14 @@ export const useSoundPlayer = (uri: string = path_) => {
                         })
                     });
 
+                    onPlay && onPlay({
+                        ...time,
+                        isPlaying,
+                        currentPosition: seconds
+                    });
+
                 })
-            }, 50);
+            }, 500);
         }
     }
 

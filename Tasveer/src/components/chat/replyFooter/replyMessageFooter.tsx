@@ -34,8 +34,7 @@ const ReplyMessageFooter = ({
     return (
 
         <View style={[
-            styles.msgContainer,
-            //  {backgroundColor: isDark? colors.primary3}
+            styles.msgContainer
         ]}>
             {/* side strip */}
             <View style={[
