@@ -48,8 +48,14 @@ const SearchBar = ({
                 placeholder='Search'
                 placeholderTextColor={colors.common.grey1}
                 style={[styles.txtInput, inputProps?.style]}
-                onBlur={() => setFocused(false)}
-                onFocus={() => setFocused(true)}
+                onBlur={(e) => {
+                    setFocused(false);
+                    inputProps?.onBlur && inputProps.onBlur(e)
+                }}
+                onFocus={(e) => {
+                    setFocused(true),
+                        inputProps?.onFocus && inputProps.onFocus(e);
+                }}
                 onChangeText={
                     (val) => {
                         setText(val);

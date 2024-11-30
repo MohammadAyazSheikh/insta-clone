@@ -24,7 +24,7 @@ export const useAppExit = (onBack?: () => void, stopGoBack = true) => (
             showConfirmAlert({
                 title: "We'll miss you 😥",
                 description: 'Are your sure want to exit?',
-                confirmText: 'Fuck you!',
+                confirmText: 'Exit',
                 onConfirm: () => {
                     BackHandler.exitApp()
                 }

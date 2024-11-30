@@ -8,7 +8,6 @@ import store, { persistor } from './src/redux/store';
 import Toast from 'react-native-toast-message';
 import toastConfig from './src/theme/toastMessageTheme';
 import { PersistGate } from 'redux-persist/integration/react';
-import { useEffect } from 'react';
 import { MD3LightTheme as DefaultTheme, PaperProvider } from 'react-native-paper';
 import colors from './src/theme/colors';
 import { useAppExit } from './src/hooks/backHandlerHooks';
@@ -16,7 +15,7 @@ import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/theme/unistyles/unistyles'
-import TestAnim from './testAnimation';
+
 
 const theme = {
   ...DefaultTheme,
@@ -30,13 +29,9 @@ const theme = {
 
 const App = () => {
 
+
   //exit listener
   useAppExit();
-
-  //hiding native splash
-  useEffect(() => {
-
-  }, []);
 
   return (
     <PaperProvider theme={theme}>

@@ -25,7 +25,10 @@ export default function Discover() {
                 {/* added this view because of flashList */}
                 <View style={{ width, height }}>
                     {/* search bar */}
-                    <SearchBar containerStyles={{ width: '95%', alignSelf: 'center' }} />
+                    <SearchBar
+                        containerStyles={{ width: '95%', alignSelf: 'center' }}
+                        onFocus={() => navigation.navigate("Search")}
+                    />
                     {/* list */}
                     <MasonryFlashList
                         contentContainerStyle={styles.scroll}

@@ -8,6 +8,8 @@ import { changeTheme } from '../../redux/features/theme/themeSlice';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { protectedRoutes } from './protectedRoutes';
 import { authRoutes } from './authRoutes';
+import { generateRandomUser } from '../../constants/data/generateUsers';
+import { getUsersSuccess } from '../../redux/features/users/users';
 
 
 
@@ -16,12 +18,13 @@ export type RootStackProps = {
   RootTab: undefined,
   Login: undefined,
   Signup: undefined,
-  Inbox:undefined,
-  ExplorePost:undefined,
-  ExploreReel:undefined,
-  Reels:undefined,
-  Setting:undefined,
-  EditProfile:undefined,
+  Inbox: undefined,
+  ExplorePost: undefined,
+  ExploreReel: undefined,
+  Reels: undefined,
+  Setting: undefined,
+  EditProfile: undefined,
+  Search: undefined,
   Conversation: {
     messageId?: string | number
   };
@@ -42,11 +45,18 @@ function RootNav() {
   const { theme, isDefault } = useAppSelector(state => state.theme);
   const dispatch = useAppDispatch();
 
+  //setting theme
   useEffect(() => {
     isDefault && dispatch(changeTheme({
       theme: scheme!,
     }))
   }, [scheme]);
+
+  //generating data
+  useEffect(() => {
+    const users = generateRandomUser(20);
+    dispatch(getUsersSuccess(users));
+  }, []);
 
   return (
     <NavigationContainer
@@ -79,7 +89,7 @@ function RootNav() {
             protectedRoutes()
             :
             authRoutes()
-            // protectedRoutes()
+          // protectedRoutes()
         }
       </Stack.Navigator>
     </NavigationContainer>

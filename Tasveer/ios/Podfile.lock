@@ -1359,7 +1359,7 @@ PODS:
     - Google-Maps-iOS-Utils (= 4.2.2)
     - GoogleMaps (= 7.4.0)
     - React-Core
-  - react-native-image-picker (7.1.2):
+  - react-native-image-picker (7.2.2):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1426,7 +1426,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-unistyles (2.12.0):
+  - react-native-unistyles (2.20.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1806,18 +1806,18 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNImageCropPicker (0.41.5):
+  - RNImageCropPicker (0.41.6):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.41.5)
+    - RNImageCropPicker/QBImagePickerController (= 0.41.6)
     - TOCropViewController (~> 2.7.4)
-  - RNImageCropPicker/QBImagePickerController (0.41.5):
+  - RNImageCropPicker/QBImagePickerController (0.41.6):
     - React-Core
     - React-RCTImage
     - TOCropViewController (~> 2.7.4)
-  - RNPermissions (5.1.0):
+  - RNPermissions (5.2.1):
     - React-Core
-  - RNReanimated (3.16.1):
+  - RNReanimated (3.16.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1837,10 +1837,10 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated (= 3.16.1)
-    - RNReanimated/worklets (= 3.16.1)
+    - RNReanimated/reanimated (= 3.16.3)
+    - RNReanimated/worklets (= 3.16.3)
     - Yoga
-  - RNReanimated/reanimated (3.16.1):
+  - RNReanimated/reanimated (3.16.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1860,9 +1860,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNReanimated/reanimated/apple (= 3.16.1)
+    - RNReanimated/reanimated/apple (= 3.16.3)
     - Yoga
-  - RNReanimated/reanimated/apple (3.16.1):
+  - RNReanimated/reanimated/apple (3.16.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1883,7 +1883,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNReanimated/worklets (3.16.1):
+  - RNReanimated/worklets (3.16.3):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2300,12 +2300,12 @@ SPEC CHECKSUMS:
   React-microtasksnativemodule: 36e3a415c6a3a5c4784b5c6bad38013b8ca35be4
   react-native-document-picker: 7343222102ece8aec51390717f47ad7119c7921f
   react-native-google-maps: ee48410bb3f1390abfa20592a44db5d6ada83e4d
-  react-native-image-picker: 2fbbafdae7a7c6db9d25df2f2b1db4442d2ca2ad
+  react-native-image-picker: b2ec13528a7a0eb0ab180ca828ea4d3bfa19e28c
   react-native-maps: 2e6e9896195781327ee15b33e3e84bf73c08207a
   react-native-pager-view: 12284823fff3b85b4dd16456b04def6ba9422677
   react-native-safe-area-context: 142fade490cbebbe428640b8cbdb09daf17e8191
   react-native-slider: 4a0f3386a38fc3d2d955efc515aef7096f7d1ee4
-  react-native-unistyles: 73ea92e9c3711ea187ff2786f9728bc0a720eaa3
+  react-native-unistyles: 40fc8f390af70df1c19f6090cd95eab3f3a05034
   react-native-webview: 7aaf4bb5b2ec08901c821aceb4b55908ad012b04
   React-nativeconfig: aeed6e2a8ac02b2df54476afcc7c663416c12bf7
   React-NativeModulesApple: c5b7813da94136f50ef084fa1ac077332dcfc658
@@ -2341,9 +2341,9 @@ SPEC CHECKSUMS:
   RNCMaskedView: e07a0b5e9e8d6962826def06e6ff2ecdb815433f
   RNFlashList: 115dd44377580761bff386a0caebf165424cf16f
   RNGestureHandler: 511250b190a284388f9dd0d2e56c1df76f14cfb8
-  RNImageCropPicker: a536bb88eade8336e1d18fdeafa77dc893fbc42e
-  RNPermissions: e4b43a203c194f1a5b933343450e436ee442176d
-  RNReanimated: 3e6072b3d49d4fc687b8f1ba3022f0fdc0b43969
+  RNImageCropPicker: 8e39c01f205e00d739c31e682f068aac315587bf
+  RNPermissions: 59fb1934f141b898c1a4d2a6da8357a1d3bdded8
+  RNReanimated: 365e7d6c1ed443cf8e1b7ba4f0b15dd9f82f052a
   RNScreens: e6f9bc3a41be76af2ba0a815ea299a0000b1c838
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: 8b1a777d54096b8c2a0fd38fc9d5a454332bbb4d
