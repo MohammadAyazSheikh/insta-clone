@@ -40,6 +40,7 @@ const InboxCard = ({
             {/* avatar */}
             <UserAvatar
                 name={title}
+                image={avatar ? { uri: avatar } : null}
             />
             {/* center view */}
             <View style={styles.centerView}>
@@ -47,7 +48,7 @@ const InboxCard = ({
                     {title}
                 </TextBold>
                 {
-                    <TextRegular style={styles.txtSubTitle}>
+                    <TextRegular style={styles.txtSubTitle} numberOfLines={2}>
                         {subTitle}
                     </TextRegular>
                 }
@@ -64,7 +65,7 @@ const InboxCard = ({
                 {
                     badge ?
                         <Badge style={{ backgroundColor: colors.ternary1 }}>
-                            2
+                            {badge}
                         </Badge>
                         :
                         null

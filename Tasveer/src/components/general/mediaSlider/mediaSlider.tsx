@@ -93,6 +93,7 @@ export const MediaSlider = ({
     };
   }, []);
 
+
   return (
     <View style={[styles.sliderContainer, containerStyle]}>
       {/* ----- media list ------ */}
@@ -114,12 +115,12 @@ export const MediaSlider = ({
             {
               item.type === "video" ?
                 <VideoPlayerContent
-                  source={item.uri}
+                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
                   style={[styles.videoStyle]}
                 />
                 :
                 <Image
-                  source={item.uri}
+                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
                   style={[styles.sliderImage, imageStyle]}
                 />
             }

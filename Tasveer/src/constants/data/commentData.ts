@@ -1,6 +1,6 @@
 import uuid from 'react-native-uuid';
 import { commentType } from '../types/sharedTypes';
-import { users } from './usersData';
+import { users } from './generateUsers';
 
 
 export const comments: commentType[] = [

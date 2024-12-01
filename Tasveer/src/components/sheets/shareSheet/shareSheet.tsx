@@ -10,7 +10,7 @@ import UserAvatar from '../../general/avatar/avatar';
 import { useAppSelector } from '../../../redux/hooks';
 import { userType } from '../../../constants/types/sharedTypes';
 import SearchBar from '../../general/searchbars/searchbar';
-import { users } from '../../../constants/data/usersData';
+import { users } from '../../../constants/data/generateUsers';
 import CustomButton from '../../general/customButton/customButton';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';

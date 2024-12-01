@@ -4,12 +4,12 @@ import Animated, {
     useSharedValue,
 } from 'react-native-reanimated';
 import { StoryContent } from './storyContent';
-import { storyData, storyDataType } from '../../../constants/data/storyData';
+import { stories, storyDataType } from '../../../constants/data/storyData';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import ModalWrapper from '../../modals/modalWrapper';
-import { ScrollView } from 'react-native';
+
 
 type storyModalProps = {
     show: boolean,
@@ -26,7 +26,7 @@ const StoryModal = ({
     const { styles } = useStyles(styleSheet);
     const { screen: { width } } = UnistylesRuntime;
 
-    const [data, setData] = useState<storyDataType[]>(storyData);
+    const [data, setData] = useState<storyDataType[]>(stories);
 
     //this ref is for making sure that story does'nt scrolls 
     //to next user's story when modal is closed 
@@ -91,7 +91,7 @@ const StoryModal = ({
                                         scrollRef={scrollRef}
                                         scrollIndex={index}
                                         contentData={item}
-                                        numberOfUsers={storyData.length}
+                                        numberOfUsers={stories.length}
                                         onClose={onClose}
                                         onNextStory={(barIndex, userStoryIdex) => {
                                             const userStroy = data[userStoryIdex];

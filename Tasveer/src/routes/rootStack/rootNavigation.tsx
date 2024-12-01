@@ -8,8 +8,8 @@ import { changeTheme } from '../../redux/features/theme/themeSlice';
 import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 import { protectedRoutes } from './protectedRoutes';
 import { authRoutes } from './authRoutes';
-import { generateRandomUser } from '../../constants/data/generateUsers';
 import { getUsersSuccess } from '../../redux/features/users/users';
+import { users } from '../../constants/data/generateUsers';
 
 
 
@@ -54,7 +54,7 @@ function RootNav() {
 
   //generating data
   useEffect(() => {
-    const users = generateRandomUser(20);
+
     dispatch(getUsersSuccess(users));
   }, []);
 

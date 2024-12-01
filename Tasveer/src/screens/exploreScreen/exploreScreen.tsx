@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { useAppDispatch } from '../../redux/hooks';
+// import { useAppDispatch } from '../../redux/hooks';
 import Header from '../../components/general/screenHeaders/header';
 import ContentCard from '../../components/cards/contentCard/contentCard';
-import { homeData } from '../../constants/data/homeData';
+import { posts } from '../../constants/data/homeData';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
@@ -22,7 +22,7 @@ export default function Explore() {
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const colors = useAppThemeColors();
     // const { theme } = useAppSelector(state => state.theme);
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
@@ -40,8 +40,8 @@ export default function Explore() {
                     estimatedItemSize={height / 1.5}
                     //commenting this because flashList only support padding related styles and bg color
                     // contentContainerStyle={styles.scroll}
-                    data={homeData}
-                    keyExtractor={(item) => item.userId}
+                    data={posts}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ index, item }) => (
                         <ContentCard
                             data={item}

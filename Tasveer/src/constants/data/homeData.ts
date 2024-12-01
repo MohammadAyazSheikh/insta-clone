@@ -1,4 +1,8 @@
+import { faker } from '@faker-js/faker/.';
 import uuid from 'react-native-uuid';
+import { users } from './generateUsers';
+import { userType } from '../types/sharedTypes';
+import { remoteVideos } from './remoteVideo';
 
 export type homeDataType = {
     uri: any,
@@ -7,154 +11,45 @@ export type homeDataType = {
     timeStamp: string,
     content: { id: string, uri: any, type: "image" | 'video' }[]
 }
-export const homeData: homeDataType[] = [
-    {
-        userId: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/karachi1.jpg'),
-        userName: 'Karachi',
-        timeStamp: '1h',
-        content: [
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/karachi1.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'video',
-                uri: {uri:'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' 
+
+export type postType = {
+    id: string,
+    user: userType,
+    timestamp: Date,
+    media: { id: string, uri: string, type: "image" | 'video' }[]
 }
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/karachi3.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/karachi4.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/karachi5.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore1.jpg'),
-        userName: 'Lahore',
-        timeStamp: '2h',
-        content: [
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/lahore1.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/lahore2.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/lahore3.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/lahore4.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/lahore5.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/islamabad1.jpg'),
-        userName: 'Islamabad',
-        timeStamp: '4h',
-        content: [
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad1.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad2.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad3.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'video',
-                uri: {uri:'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' 
+
+
+export const generatePosts = (numberOfPosts: number) => {
+
+    const posts: postType[] = [];
+
+    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
+
+
+    for (let i = 0; i < numberOfPosts; i++) {
+        const category = faker.helpers.arrayElement(categories);
+        posts.push({
+            id: faker.string.uuid(),
+            user: faker.helpers.arrayElement(users),
+            timestamp: faker.date.recent(),
+            media: Array.from({ length: faker.number.int({ min: 1, max: 5 }) })
+                .map(() => {
+                    const type = faker.helpers.arrayElement(["image", "image", "image", 'video']);
+                    const uri = type == "video" ?
+                        remoteVideos[faker.number.int({ min: 0, max: remoteVideos.length - 1 })].uri
+                        :
+                        faker.image.urlLoremFlickr({ category,width:400,height:400 })
+                    return ({
+                        id: faker.string.uuid(),
+                        uri,
+                        type
+                    })
+                }),
+        })
+    }
+    return posts;
 }
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad4.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad5.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad6.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/islamabad7.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu1.jpg'),
-        userName: 'Skardu',
-        timeStamp: '9h',
-        content: [
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/skardu1.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/skardu2.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/skardu3.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/skardu4.jpg')
-            },
-            {
-                id: uuid.v4().toString(),
-                type: 'image',
-                uri: require('../../../assets/images/cities/skardu5.jpg')
-            },
-        ]
-    },
-]
+
+export const posts = generatePosts(10);
+

@@ -6,14 +6,15 @@ import styleSheet from './styles/styles';
 import IconIo from '@expo/vector-icons/Ionicons';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import ContentHeader from '../contentHeader/contentHeader';
-import { homeDataType } from '../../../constants/data/homeData';
+import { postType } from '../../../constants/data/homeData';
 import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
 import { useStyles } from 'react-native-unistyles';
+import moment from 'moment';
 
 
 
 type contentCardProps = {
-    data: homeDataType,
+    data: postType,
     subtitleIcon?: React.ReactNode,
     onMenu?: () => void,
     onTitle?: () => void,
@@ -108,18 +109,18 @@ const ContentCard = ({
         <View style={styles.container}>
             {/* header */}
             <ContentHeader
-                time={data?.timeStamp}
-                title={data.userName}
+                time={moment(data?.timestamp.toString()).fromNow()}
+                title={data.user.userName}
                 // subtile={data.}
                 onMenuPress={onMenu}
                 onTitlePress={onTitle}
                 subtitleIcon={subtitleIcon}
-                image={data.uri}
+                image={{ uri: data.user.profileImage }}
                 subtile=''
             />
             {/* ---- body---- */}
             <MediaSlider
-                mediaList={data.content}
+                mediaList={data.media}
                 indicatorSize={5}
                 indicatorSpacing={3}
                 indicatorColor={colors.ternary1}

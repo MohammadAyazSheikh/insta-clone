@@ -20,6 +20,7 @@ import { storyDataType } from '../../../constants/data/storyData';
 import { View } from 'react-native-animatable';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import moment from 'moment';
 
 const { width } = Dimensions.get('window');
 
@@ -153,15 +154,15 @@ const StoryContent = ({
                     <RenderStoryBars animatedValuesBar={animValuesBar} />
                     {/* header */}
                     <ContentHeader
-                        image={contentData.image}
-                        title={contentData.userName}
-                        time={contentData.timeStamp}
+                        image={contentData.user.profileImage}
+                        title={contentData.user.userName}
+                        time={moment(contentData.timeStamp).fromNow()}
                         subtile=''
                     />
                 </Animated.View>
                 {/* content */}
                 <StoryMedia
-                    mediaSource={contentData.content[currentBarIndex.current].image}
+                    mediaSource={{ uri: contentData.content[currentBarIndex.current].uri }}
                     onPause={() => {
                         pauseStory();
                         hide();

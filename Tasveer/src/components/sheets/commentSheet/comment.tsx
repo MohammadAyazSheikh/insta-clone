@@ -41,6 +41,7 @@ const Comment = ({
                     size={30}
                     name={comment?.user?.firstName}
                     showRing={comment && comment?.comment?.length % 2 == 0}
+                    image={{uri:comment?.user.profileImage}}
                 />
             </View>
             <View style={styles.rowComment}>

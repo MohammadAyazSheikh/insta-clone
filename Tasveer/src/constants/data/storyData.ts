@@ -1,114 +1,48 @@
-import uuid from 'react-native-uuid';
+import { faker } from '@faker-js/faker/.';
+import { userType } from '../types/sharedTypes';
+import { users } from './generateUsers';
+import { heightToDp, widthToDp } from '../../utils/functions/responsiveUtils';
+
+const width = widthToDp(100);
+const height = heightToDp(100);
 
 export type storyDataType = {
-    image: any,
-    userId: string,
-    userName: string,
-    timeStamp: string,
-    totalUnseen:number
-    content: { image: any }[]
+    id: string,
+    user: userType,
+    timeStamp: Date,
+    totalUnseen: number
+    content: { uri: any, id: string }[]
 }
-export const storyData: storyDataType[] = [
-    {
-        userId: uuid.v4().toString(),
-        image: require('../../../assets/images/cities/karachi1.jpg'),
-        userName: 'Karachi',
-        timeStamp: '1h',
-        totalUnseen:5,
-        content: [
-            {
-                image: require('../../../assets/images/cities/karachi1.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/karachi2.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/karachi3.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/karachi4.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/karachi5.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        image: require('../../../assets/images/cities/lahore1.jpg'),
-        userName: 'Lahore',
-        timeStamp: '2h',
-        totalUnseen:5,
-        content: [
-            {
-                image: require('../../../assets/images/cities/lahore1.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/lahore2.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/lahore3.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/lahore4.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/lahore5.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        image: require('../../../assets/images/cities/islamabad1.jpg'),
-        userName: 'Islamabad',
-        timeStamp: '4h',
-        totalUnseen:7,
-        content: [
-            {
-                image: require('../../../assets/images/cities/islamabad1.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad2.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad3.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad4.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad5.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad6.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/islamabad7.jpg')
-            },
-        ]
-    },
-    {
-        userId: uuid.v4().toString(),
-        image: require('../../../assets/images/cities/skardu1.jpg'),
-        userName: 'Skardu',
-        timeStamp: '9h',
-        totalUnseen:5,
-        content: [
-            {
-                image: require('../../../assets/images/cities/skardu1.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/skardu2.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/skardu3.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/skardu4.jpg')
-            },
-            {
-                image: require('../../../assets/images/cities/skardu5.jpg')
-            },
-        ]
-    },
-]
+
+
+const generateStories = (n: number) => {
+
+
+    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
+    const category = faker.helpers.arrayElement(categories);
+
+    const stories: storyDataType[] = [];
+
+    for (let i = 0; i < n; i++) {
+        const content = Array.from({ length: faker.number.int({ min: 1, max: 5 }) })
+            .map(item => ({
+                id: faker.string.uuid(),
+                uri: faker.image.urlLoremFlickr({ category, width, height })
+            }));
+        stories.push({
+            id: faker.string.uuid(),
+            user: users[i],
+            timeStamp: faker.date.recent(),
+            totalUnseen: content.length,
+            content
+        })
+        stories
+    }
+
+    return stories
+
+}
+
+export const stories = generateStories(5);
+
+

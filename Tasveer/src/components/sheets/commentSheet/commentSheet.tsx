@@ -95,6 +95,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
           <UserAvatar
             size={30}
             name={user?.userName}
+            image={user?.profileImage ? { uri: user.profileImage } : null}
           />
           {/* text input */}
           <TextInput

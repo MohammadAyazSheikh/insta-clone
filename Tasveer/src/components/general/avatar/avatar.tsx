@@ -55,7 +55,6 @@ export default function UserAvatar({
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
 
-
     const avatarSize = size ? {
         width: size,
         height: size,

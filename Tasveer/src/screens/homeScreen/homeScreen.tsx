@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import HomeHeader from './header';
 import RenderStory from '../../components/story/renderStory';
 import ContentCard from '../../components/cards/contentCard/contentCard';
-import { homeData } from '../../constants/data/homeData';
+import { posts } from '../../constants/data/homeData';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
@@ -40,8 +40,8 @@ export default function Home() {
                     // estimatedItemSize={height / 2}
                     //commenting this because flashList only support padding related styles and bg color
                     contentContainerStyle={[styles.scroll]}
-                    data={homeData}
-                    keyExtractor={(item) => item.userId}
+                    data={posts}
+                    keyExtractor={(item) => item.id}
                     renderItem={({ index, item }) => (
                         <ContentCard
                             data={item}

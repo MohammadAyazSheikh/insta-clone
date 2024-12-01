@@ -15,6 +15,7 @@ import { TextBold, TextRegular } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import moment from 'moment';
 
 
 

@@ -7,10 +7,11 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/general/screenHeaders/header';
 import SearchBar from '../../components/general/searchbars/searchbar';
 import InboxCard from '../../components/cards/inboxCard/inboxCard';
-import inboxData from '../../constants/data/inboxData';
+import { inboxData } from '../../constants/data/inboxData';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { FlashList } from '@shopify/flash-list';
+import moment from 'moment';
 
 
 export default function Inbox() {
@@ -29,7 +30,7 @@ export default function Inbox() {
                 <Header title='Inbox' />
                 {/* search bar */}
                 <SearchBar
-                    containerStyles={{ width: '95%',alignSelf:"center" }}
+                    containerStyles={{ width: '95%', alignSelf: "center" }}
                 />
                 {/* list */}
                 <FlashList
@@ -37,9 +38,10 @@ export default function Inbox() {
                     data={inboxData}
                     estimatedItemSize={200}
                     renderItem={({ item }) => (<InboxCard
-                        title={item.sender}
-                        subTitle={item.subject}
-                        time={item.timestamp}
+                        avatar={item.sender.profileImage}
+                        title={`${item.sender.firstName} ${item.sender.lastName}`}
+                        subTitle={item.message}
+                        time={item.timestamp.toString()}
                         badge={item.badge!}
                         onPress={() => navigation.navigate("Conversation", { messageId: 1 })}
                     />)}

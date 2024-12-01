@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, FlatList } from 'react-native';
-import { storyData } from '../../constants/data/storyData';
+import { stories } from '../../constants/data/storyData';
 import StoryModal from './storyModal/storyModal';
 import StoryAvatar from './storyAvatar/storyAvatar';
 
@@ -21,8 +21,8 @@ export default function RenderStory() {
             <FlatList
                 showsHorizontalScrollIndicator={false}
                 horizontal
-                data={storyData}
-                keyExtractor={(item => item.userId)}
+                data={stories}
+                keyExtractor={(item => item.id)}
                 // logged in user's story
                 ListHeaderComponent={() => (
                     <StoryAvatar
@@ -38,10 +38,10 @@ export default function RenderStory() {
                 //other user's stories
                 renderItem={({ item, index }) => (
                     <StoryAvatar
-                        image={item.image}
+                        image={{ uri: item.user.profileImage }}
                         numberOfArch={item.content.length}
                         showNumberOfArch={item.totalUnseen}
-                        name={item?.userName}
+                        name={item?.user.firstName}
                         onPress={() => {
                             setScrollIndex(index);
                             setShowStory(true);

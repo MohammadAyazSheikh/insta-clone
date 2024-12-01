@@ -1,203 +1,39 @@
-import uuid from 'react-native-uuid';
 import { userType } from '../types/sharedTypes';
 import { remoteVideos } from './remoteVideo';
+import { faker } from '@faker-js/faker/.';
+import { users } from './generateUsers';
+
 export type discoverDataType = {
     id: string,
     user?: userType,
     uri: any,
-    timeStamp: string,
+    timeStamp: Date,
     type: 'image' | 'reel' | 'video',
-    numberOfItems: number,
 }
-export const discoverData: discoverDataType[] = [
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu2.jpg'),
-        type: 'image',
-        timeStamp: '1h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[12].uri,
-        type: 'video',
-        timeStamp: '2h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore3.jpg'),
-        type: 'image',
-        timeStamp: '3h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[1].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/islamabad4.jpg'),
-        type: 'image',
-        timeStamp: '6h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu3.jpg'),
-        type: 'image',
-        timeStamp: '7h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore4.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 3,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu5.jpg'),
-        type: 'image',
-        timeStamp: '6h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[6].uri,
-        type: 'video',
-        timeStamp: '7h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore5.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[1].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/karachi4.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/islamabad4.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[2].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
 
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/karachi1.jpg'),
-        type: 'image',
-        timeStamp: '1h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/karachi4.jpg'),
-        type: 'image',
-        timeStamp: '2h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/islamabad1.jpg'),
-        type: 'image',
-        timeStamp: '3h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[3].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu4.jpg'),
-        type: 'image',
-        timeStamp: '6h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu2.jpg'),
-        type: 'image',
-        timeStamp: '7h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore1.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 3,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu1.jpg'),
-        type: 'image',
-        timeStamp: '6h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu3.jpg'),
-        type: 'video',
-        timeStamp: '7h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/lahore3.jpg'),
-        type: 'image',
-        timeStamp: '8h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[5].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: require('../../../assets/images/cities/skardu1.jpg'),
-        type: 'image',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-    {
-        id: uuid.v4().toString(),
-        uri: remoteVideos[1].uri,
-        type: 'reel',
-        timeStamp: '5h',
-        numberOfItems: 0,
-    },
-]
+export const generateDiscoverdPosts = (numberOfPosts: number) => {
+
+    const posts: discoverDataType[] = [];
+
+    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
+
+
+    for (let i = 0; i < numberOfPosts; i++) {
+        const category = faker.helpers.arrayElement(categories);
+        const type = faker.helpers.arrayElement(['image', 'reel', 'video']);
+        const uri = type === "image" ?
+            faker.image.urlLoremFlickr({ category, width: 400, height: 400 })
+            :
+            remoteVideos[faker.number.int({ min: 0, max: remoteVideos.length - 1 })].uri
+        posts.push({
+            id: faker.string.uuid(),
+            user: faker.helpers.arrayElement(users),
+            type,
+            timeStamp: faker.date.recent(),
+            uri,
+        })
+    }
+    return posts;
+}
+
+export const discoverData = generateDiscoverdPosts(20);
