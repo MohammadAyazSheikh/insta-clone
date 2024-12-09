@@ -67,8 +67,8 @@ export default function Home() {
                     keyExtractor={(item) => item.id}
                     renderItem={renderItem}
                     stickyHeaderHiddenOnScroll
-                    // stickyHeaderIndices={[0]}
-                    // ListHeaderComponent={renderStories}
+                    stickyHeaderIndices={[0]}
+                    ListHeaderComponent={renderStories}
                 />
                 {/*--- menu sheet ----*/}
                 <MenuSheet

@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
   // Animated,
   View,
   Image,
-  ScrollView,
   ViewStyle,
   ImageStyle,
   FlatList,
@@ -14,11 +13,9 @@ import VideoPlayerContent from '../video/videoPlayerContent';
 import HeartAnimation from '../../animatedComponent/heartAnimation';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
-import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
-  useAnimatedStyle,
 } from 'react-native-reanimated';
 
 export type imageListType =
@@ -107,6 +104,28 @@ export const MediaSlider = ({
   // }, []);
 
 
+  //function to render media item
+  const renderItem = useCallback(({ item }: { item: imageListType }) => (
+    <ZoomAbleView
+      containerStyle={{ ...styles.mediaView, ...mediaContainer }}
+    >
+      {
+        item.type === "video" ?
+          <VideoPlayerContent
+            source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
+            style={[styles.videoStyle]}
+          />
+          :
+          <Image
+            source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
+            style={[styles.sliderImage, imageStyle]}
+          />
+      }
+      {/* heart animation */}
+      <HeartAnimation onDoubleTab={onDoubleTab} />
+    </ZoomAbleView>
+  ), [])
+
   return (
     <View style={[styles.sliderContainer, containerStyle]}>
       <Animated.FlatList
@@ -118,60 +137,8 @@ export const MediaSlider = ({
         onScroll={scrollHandler}
         data={mediaList}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ZoomAbleView
-            containerStyle={{ ...styles.mediaView, ...mediaContainer }}
-          >
-            {
-              item.type === "video" ?
-                <VideoPlayerContent
-                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
-                  style={[styles.videoStyle]}
-                />
-                :
-                <Image
-                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
-                  style={[styles.sliderImage, imageStyle]}
-                />
-            }
-            {/* heart animation */}
-            <HeartAnimation onDoubleTab={onDoubleTab} />
-          </ZoomAbleView>
-        )}
+        renderItem={renderItem}
       />
-
-      {/* ----- media list ------ */}
-      {/* <Animated.ScrollView
-        horizontal
-        pagingEnabled
-        ref={scrollRef}
-        nestedScrollEnabled
-        showsHorizontalScrollIndicator={false}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: true },
-        )}>
-        {mediaList.map((item, index) => (
-          <ZoomAbleView
-            containerStyle={{ ...styles.mediaView, ...mediaContainer }}
-            key={item.id}
-          >
-            {
-              item.type === "video" ?
-                <VideoPlayerContent
-                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
-                  style={[styles.videoStyle]}
-                />
-                :
-                <Image
-                  source={typeof item.uri === "string" ? { uri: item.uri } : item.uri}
-                  style={[styles.sliderImage, imageStyle]}
-                />
-            }
-            <HeartAnimation onDoubleTab={onDoubleTab} />
-          </ZoomAbleView>
-        ))}
-      </Animated.ScrollView> */}
       {/*  -------- indicator ------*/}
       {mediaList.length > 1 ? (
         <View style={[styles.row, indicatorRowContainerStyle]}>

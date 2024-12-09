@@ -2,9 +2,9 @@ import React, { useRef, useCallback } from 'react';
 import { Image, TouchableOpacity, FlatList } from 'react-native';
 import { imageListType } from './mediaSlider';
 import Animated, { Extrapolation, interpolate, runOnJS, SharedValue, useAnimatedStyle, useDerivedValue, } from 'react-native-reanimated';
-
 import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 const width = w(100);
+
 type IndicatorPropType = {
   scrollX: SharedValue<number>;
   length?: number;
@@ -63,7 +63,8 @@ export const SliderIndicator = ({
         item={item}
       />
     )
-  }, [])
+  }, []);
+  
   return (
 
     <FlatList
