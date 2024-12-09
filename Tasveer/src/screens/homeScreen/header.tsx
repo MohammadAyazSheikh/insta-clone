@@ -16,7 +16,7 @@ export default function HomeHeader() {
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { theme } = useAppSelector(state => state.theme);
     const isDark = theme == "dark";
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
 
 

@@ -56,7 +56,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
 
 
   // render user list function
-  const renderUsers = ({ item }: any) => {
+  const renderUsers = useCallback(({ item }: { item: userType }) => {
 
     const user = selectedUsers.find(u_ => u_.id == item.id);
 
@@ -77,7 +77,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
           }}
         />
       </View>)
-  }
+  }, [])
   return (
     <SheetWrapper {...rest} ref={ref}>
       {/*---------------------- searchBar --------------*/}

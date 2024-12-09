@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, FlatList } from 'react-native';
-import { stories } from '../../constants/data/storyData';
+import { stories, storyDataType } from '../../constants/data/storyData';
 import StoryModal from './storyModal/storyModal';
 import StoryAvatar from './storyAvatar/storyAvatar';
 
@@ -14,6 +14,33 @@ export default function RenderStory() {
 
     const [scrollIndex, setScrollIndex] = useState(0);
 
+    //function to render logged in user story
+    const renderUserStory = () => (
+        <StoryAvatar
+            numberOfArch={1}
+            showNumberOfArch={1}
+            name={"Your Story"}
+            showAddIcon={true}
+            onPress={() => {
+
+            }}
+        />
+    )
+
+    //function to render stories
+    const renderItems = useCallback(({ item, index }:
+        { item: storyDataType, index: number }) => (
+        <StoryAvatar
+            image={{ uri: item.user.profileImage }}
+            numberOfArch={item.content.length}
+            showNumberOfArch={item.totalUnseen}
+            name={item?.user.firstName}
+            onPress={() => {
+                setScrollIndex(index);
+                setShowStory(true);
+            }}
+        />
+    ), [stories])
 
     return (
         <View style={{ width: '100%', paddingVertical: 5 }}>
@@ -24,30 +51,9 @@ export default function RenderStory() {
                 data={stories}
                 keyExtractor={(item => item.id)}
                 // logged in user's story
-                ListHeaderComponent={() => (
-                    <StoryAvatar
-                        numberOfArch={1}
-                        showNumberOfArch={1}
-                        name={"Your Story"}
-                        showAddIcon={true}
-                        onPress={() => {
-
-                        }}
-                    />
-                )}
+                ListHeaderComponent={renderUserStory}
                 //other user's stories
-                renderItem={({ item, index }) => (
-                    <StoryAvatar
-                        image={{ uri: item.user.profileImage }}
-                        numberOfArch={item.content.length}
-                        showNumberOfArch={item.totalUnseen}
-                        name={item?.user.firstName}
-                        onPress={() => {
-                            setScrollIndex(index);
-                            setShowStory(true);
-                        }}
-                    />
-                )}
+                renderItem={renderItems}
             />
             {/* story content modal */}
             <StoryModal

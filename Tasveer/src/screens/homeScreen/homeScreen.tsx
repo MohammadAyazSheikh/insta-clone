@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 // import { useAppDispatch } from '../../redux/hooks';
 import HomeHeader from './header';
 import RenderStory from '../../components/story/renderStory';
@@ -13,6 +13,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { View } from 'react-native';
 import styleSheet from './styles/styles';
 import { useStyles } from 'react-native-unistyles';
+import { postType } from '../../constants/data/homeData';
 
 
 
@@ -29,6 +30,28 @@ export default function Home() {
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
 
+    //function to render stories
+    const renderStories = useCallback(() => (
+        <View style={{ backgroundColor: colors.primary1 }}>
+            <RenderStory />
+        </View>), []
+    );
+
+    //function to render posts
+    const renderItem = useCallback(({ item }: { item: postType }) => (
+        <ContentCard
+            data={item}
+            onMenu={() => {
+                refOption.current?.collapse()
+            }}
+            onComment={() => {
+                refComment.current?.expand();
+            }}
+            onShare={() => {
+                refShare?.current?.collapse();
+            }}
+        />
+    ), [])
 
     return (
         <SafeAreaProvider>
@@ -42,27 +65,10 @@ export default function Home() {
                     contentContainerStyle={[styles.scroll]}
                     data={posts}
                     keyExtractor={(item) => item.id}
-                    renderItem={({ index, item }) => (
-                        <ContentCard
-                            data={item}
-                            onMenu={() => {
-                                refOption.current?.collapse()
-                            }}
-                            onComment={() => {
-                                refComment.current?.expand();
-                            }}
-                            onShare={() => {
-                                refShare?.current?.collapse();
-                            }}
-                        />
-                    )}
-
+                    renderItem={renderItem}
                     stickyHeaderHiddenOnScroll
                     stickyHeaderIndices={[0]}
-                    ListHeaderComponent={() => (<View style={{ backgroundColor: colors.primary1 }}>
-                        {/* stories */}
-                        <RenderStory />
-                    </View>)}
+                    ListHeaderComponent={renderStories}
                 />
                 {/*--- menu sheet ----*/}
                 <MenuSheet

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, ScrollView, TextInput, } from 'react-native';
+import { Dimensions, ScrollView, TextInput,View } from 'react-native';
 import Animated, {
     Extrapolation,
     interpolate,
@@ -17,7 +17,6 @@ import IconAnt from '@expo/vector-icons/AntDesign';
 import IconFe from '@expo/vector-icons/Feather';
 import { StoryMedia } from './storyMedia';
 import { storyDataType } from '../../../constants/data/storyData';
-import { View } from 'react-native-animatable';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import moment from 'moment';

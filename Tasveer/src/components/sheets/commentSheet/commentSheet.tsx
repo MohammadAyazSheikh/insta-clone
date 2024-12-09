@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import IconAnt from '@expo/vector-icons/AntDesign';
 import IconEnt from '@expo/vector-icons/Entypo';
@@ -31,6 +31,25 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
   const [text, setText] = useState<string>()
   const [replyTo, setReplyTo] = useState<commentType | null>();
 
+  const renderComment = useCallback(({ item }: { item: commentType }) => (
+    <Comment
+      comment={item}
+      totalReplies={item?.replies?.length}
+      onReply={() => {
+        setReplyTo(item);
+      }}
+      renderReplies={
+        item?.replies?.length! > 0 ?
+          <Replies
+            comments={item?.replies!}
+            onReply={(replyComment) => setReplyTo(replyComment)}
+          />
+          :
+          null
+      }
+    />
+  ), [setReplyTo])
+
   return (
     <SheetWrapper {...rest} ref={ref}>
       <View style={styles.headerView}>
@@ -41,25 +60,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
       {/* ----comment list---- */}
       <BottomSheetFlatList
         data={comments}
-
-        renderItem={({ item }) => (
-          <Comment
-            comment={item}
-            totalReplies={item?.replies?.length}
-            onReply={() => {
-              setReplyTo(item);
-            }}
-            renderReplies={
-              item?.replies?.length! > 0 ?
-                <Replies
-                  comments={item?.replies!}
-                  onReply={(replyComment) => setReplyTo(replyComment)}
-                />
-                :
-                null
-            }
-          />
-        )}
+        renderItem={renderComment}
       />
       {/* ---footer----- */}
       <View style={styles?.footerView}>
