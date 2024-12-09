@@ -35,7 +35,7 @@ export const usePlayStory = (
     const currentBarIndex = useRef(0);
     //flag for paused auto play
     const paused = useRef(false);
-    //we  toggles this flag when story visible or shown when user scrolls
+    //we toggle this flag when story visible or shown whenever user scrolls
     const isPlaying = useRef(false);
 
 
@@ -66,12 +66,13 @@ export const usePlayStory = (
 
     const playStory = (index?: number) => {
         const i = index || currentBarIndex.current;
-        onNextStory(i, storyIndex)
+        onNextStory(i, storyIndex);
         animateBar(
             {
                 toValue: 100,
                 animatedValue: animValuesBar[i]
             },
+            //on animation end callback
             () => {
                 //if modal is not opened
                 if (!isModalOpen.current) {
@@ -93,6 +94,7 @@ export const usePlayStory = (
                 //if last bar switch to next user's story
                 if (currentBarIndex.current == animValuesBar.length - 1) {
                     scrollToNextUserStory();
+                    return;
                 }
 
 
@@ -101,6 +103,7 @@ export const usePlayStory = (
                     playStory(currentBarIndex.current + 1);
                     currentBarIndex.current += 1;
                     setRerender(prev => !prev);
+                    return;
                 }
             }
         );
@@ -117,6 +120,7 @@ export const usePlayStory = (
             setRerender(prev => !prev);
             //again auto play from next index
             playStory(currentBarIndex.current);
+            return;
         }
         //if last bar switch to next user's story
         if ((currentBarIndex.current == animValuesBar.length - 1) &&
@@ -138,6 +142,7 @@ export const usePlayStory = (
             setRerender(prev => !prev);
             //again auto play from prev index
             playStory(currentBarIndex.current);
+            return;
         }
         //if 1st bar switch to prev user's story
         if (currentBarIndex.current == 0 &&
