@@ -75,3 +75,8 @@ export const darkTheme = {
   spacing,
   fontSize
 } as const
+
+export const themes = {
+  dark: darkTheme,
+  light: lightTheme,
+}

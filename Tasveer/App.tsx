@@ -15,6 +15,10 @@ import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/theme/unistyles/unistyles';
+import { Text } from 'react-native';
+import { View } from 'react-native';
+import InboxCard from './src/components/cards/inboxCard/inboxCard';
+import Inbox from './src/screens/inboxScreen/inboxScreen';
 
 
 const theme = {
@@ -31,22 +35,24 @@ const App = () => {
 
 
   //exit listener
-  useAppExit();
+  // useAppExit();
 
   return (
-    <PaperProvider theme={theme}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <GestureHandlerRootView>
-            <RootNavigation />
-          </GestureHandlerRootView>
-          <Toast config={toastConfig} />
-          {/* alerts */}
-          <RenderConfirmAlert />
-          <RenderDismissAlert />
-        </PersistGate>
-      </Provider>
-    </PaperProvider>
+
+    <Inbox/>
+    // <PaperProvider theme={theme}>
+    //   <Provider store={store}>
+    //     <PersistGate loading={null} persistor={persistor}>
+    //       <GestureHandlerRootView>
+    //         <RootNavigation />
+    //       </GestureHandlerRootView>
+    //       <Toast config={toastConfig} />
+    //       {/* alerts */}
+    //       <RenderConfirmAlert />
+    //       <RenderDismissAlert />
+    //     </PersistGate>
+    //   </Provider>
+    // </PaperProvider>
   )
 }
 
