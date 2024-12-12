@@ -1,6 +1,5 @@
 import React, { useCallback, useRef } from 'react';
 import {
-  // Animated,
   View,
   Image,
   ViewStyle,
@@ -140,31 +139,34 @@ export const MediaSlider = ({
         renderItem={renderItem}
       />
       {/*  -------- indicator ------*/}
-      {mediaList.length > 1 ? (
         <View style={[styles.row, indicatorRowContainerStyle]}>
           {
             // left icon
             IndLeftIcon ? <IndLeftIcon /> : null
           }
           <View>
-            <SliderIndicator
-              color={indicatorColor}
-              radius={indicatorRadius}
-              size={indicatorSize}
-              spacing={indicatorSpacing}
-              containerWidth={indicatorContainerWidth}
-              length={mediaList.length}
-              imageList={indicatorType == 'image' ? mediaList : []}
-              scrollX={scrollX}
-              scrollRef={scrollRef}
-            />
+            {
+              mediaList.length > 1 ? 
+                <SliderIndicator
+                  color={indicatorColor}
+                  radius={indicatorRadius}
+                  size={indicatorSize}
+                  spacing={indicatorSpacing}
+                  containerWidth={indicatorContainerWidth}
+                  length={mediaList.length}
+                  imageList={indicatorType == 'image' ? mediaList : []}
+                  scrollX={scrollX}
+                  scrollRef={scrollRef}
+                />
+                :
+                null
+            }
           </View>
           {
             // right icon
             IndRightIcon ? <IndRightIcon /> : null
           }
         </View >
-      ) : null}
     </View>
   );
 };

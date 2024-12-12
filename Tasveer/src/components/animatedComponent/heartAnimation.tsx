@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import {
     Gesture,
     GestureDetector,
-    GestureHandlerRootView,
 } from 'react-native-gesture-handler';
 import Animated, {
     runOnJS,
@@ -16,7 +15,7 @@ import Animated, {
 import IconAnt from "@expo/vector-icons/AntDesign";
 import { widthToDp } from '../../utils/functions/responsiveUtils';
 
-const Icon = Animated.createAnimatedComponent(IconAnt);
+
 
 type prop = {
     onDoubleTab?: () => void
@@ -28,7 +27,7 @@ export default function HeartAnimation({ onDoubleTab }: prop) {
 
     const rStyles = useAnimatedStyle(() => ({
         transform: [{ scale: Math.max(scale.value, 0) }]
-    }), []);
+    }), [scale]);
 
     const tap = Gesture.Tap().numberOfTaps(2).onEnd(() => {
         onDoubleTab && runOnJS(onDoubleTab)();
@@ -42,7 +41,9 @@ export default function HeartAnimation({ onDoubleTab }: prop) {
     return (
         <GestureDetector gesture={tap}>
             <Animated.View style={[styles.container]}>
-                <Icon name={"heart"} size={widthToDp(60)} color={"red"} style={rStyles} />
+                <Animated.View style={rStyles} >
+                    <IconAnt name={"heart"} size={widthToDp(30)} color={"red"} />
+                </Animated.View>
             </Animated.View>
         </GestureDetector>
     );
