@@ -12,8 +12,8 @@ import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import IconFe from '@expo/vector-icons/Feather'
 import { useBackHandler } from '../../hooks/backHandlerHooks';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 
 
@@ -25,10 +25,10 @@ export default function SelectPassword({
     setActiveScreen,
 }: childScreenProps) {
 
-    const { styles, theme: { colors } } = useStyles(styleSheet);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    const colors = useAppThemeColors();
+    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const [hidePass, setHidePass] = useState(true);
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
 
     useBackHandler(() => {
         setActiveScreen && setActiveScreen("username");

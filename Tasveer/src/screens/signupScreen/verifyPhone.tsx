@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
-import { useAppDispatch, } from '../../redux/hooks';
-import { useNavigation } from '@react-navigation/core'
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import TextBox from '../../components/general/textBox/textBox';
 import { TextBold, TextRegular } from '../../components/general/text/text';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
@@ -13,8 +9,8 @@ import { phoneEmailTabsProps } from './selectPhoneEmail';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { signUpProps } from './signupScreen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 type VerifyScreenProps = { data: signUpProps } & phoneEmailTabsProps;
 
@@ -23,10 +19,10 @@ export default function VerifyPassword({
     setActiveTopTab
 }: VerifyScreenProps) {
 
-    const { styles, theme: { colors } } = useStyles(styleSheet);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+
+    const colors = useAppThemeColors();
     const [otp, setOtp] = useState('');
-    const dispatch = useAppDispatch();
+
 
     useBackHandler(() => {
         setActiveTopTab && setActiveTopTab("phone");

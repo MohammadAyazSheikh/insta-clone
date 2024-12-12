@@ -1,11 +1,12 @@
 import React, { useState, useEffect, } from 'react';
-import { Dimensions, PixelRatio, ScaledSize, useWindowDimensions ,
+import {
+    Dimensions, PixelRatio, ScaledSize, useWindowDimensions,
     // LayoutAnimation,Platform,UIManager
 } from 'react-native';
 let { width, height } = Dimensions.get('window');
 
 import { useAppSelector } from '../../redux/hooks';
-import colors_, { colorObjectType, darkColors, lightColors } from '../../theme/colors';
+import colors_, { colorObjectType, commonColors, darkColors, lightColors } from '../../theme/colors';
 
 // if (
 //     Platform.OS === 'android' &&
@@ -28,13 +29,13 @@ export const useAppThemeColors = () => {
     const theme = useAppSelector(state => state.theme);
     const colors = theme.theme == "dark" ?
         {
-            ...colors_,
             ...darkColors,
+            common: commonColors
         }
         :
         {
-            ...colors_,
             ...lightColors,
+            common: commonColors
         }
     return colors;
 }

@@ -1,4 +1,4 @@
-import React, {  } from 'react';
+import React, { } from 'react';
 import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
 import { useAppDispatch, } from '../../redux/hooks';
@@ -10,8 +10,9 @@ import { childScreenProps } from './signupScreen';
 import IconAnt from '@expo/vector-icons/AntDesign'
 import { phoneEmailTabsProps } from './selectPhoneEmail';
 import { validEmail } from '../../utils/functions/validations';
-import styleSheet from './styles';
-import { useStyles } from 'react-native-unistyles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+
 
 
 export default function SelectEmail({
@@ -22,9 +23,9 @@ export default function SelectEmail({
     setActiveTopTab
 }: childScreenProps & phoneEmailTabsProps) {
 
-    const {styles,theme:{colors}} = useStyles(styleSheet);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const dispatch = useAppDispatch();
+    const colors = useAppThemeColors();
+    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    // const dispatch = useAppDispatch();
 
 
 

@@ -1,7 +1,7 @@
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { widthToDp as w } from '../../utils/functions/responsiveUtils';
 
-const styleSheet = createStyleSheet((theme, runTime) => {
+const styles = StyleSheet.create((theme, runTime) => {
     const { colors, fontSize } = theme;
 
     return ({
@@ -70,4 +70,4 @@ const styleSheet = createStyleSheet((theme, runTime) => {
     });
 });
 
-export default styleSheet;
+export default styles;

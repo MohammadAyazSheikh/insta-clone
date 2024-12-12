@@ -10,9 +10,9 @@ import IconAnt from '@expo/vector-icons/AntDesign';
 import { countiesInfo, countiesInfoType } from '../../../constants/data/countriesInfo';
 import { SvgUri } from 'react-native-svg';
 import { onEnd, paginateData } from '../../../utils/functions/pagination';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles/styles';
+import styles from './styles/styles';
 import ModalWrapper from '../../modals/modalWrapper';
+import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 
 
 type loaderType = {
@@ -34,7 +34,7 @@ const CountryCodePicker = ({
 
 }: loaderType) => {
 
-    const { styles, theme: { colors } } = useStyles(styleSheet)
+    const colors = useAppThemeColors();
     const [filteredCountries, setFilteredCountries] = useState<countiesInfoType[]>(countiesInfo);
 
     const [paginatedCountries, setPaginatedCountries] = useState<countiesInfoType[]>(countiesInfo);
@@ -55,7 +55,6 @@ const CountryCodePicker = ({
             countryInfo: countiesInfoType,
             showFlag?: boolean, onPress: () => void
         }) => {
-        const { styles, theme: { colors } } = useStyles(styleSheet)
         return (
             <TouchableRipple
                 onPress={onPress}

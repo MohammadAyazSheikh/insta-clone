@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useAppDispatch, } from '../../redux/hooks';
 import { TextRegular } from '../../components/general/text/text';
 import { childScreenProps } from './signupScreen';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
@@ -11,8 +10,9 @@ import SelectPhone from './selectPhone';
 import VerifyPassword from './verifyPhone';
 import VerifyEmail from './verifyEmail';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import styleSheet from './styles';
-import { useStyles } from 'react-native-unistyles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+
 
 
 export type phoneEmailScreenType = 'phone' | 'email' | 'verifyPhone' | 'verifyEmail';
@@ -30,16 +30,17 @@ export default function SelectPhoneEmail({
     setActiveScreen,
 }: childScreenProps) {
 
-    const { styles } = useStyles(styleSheet);
 
-    const dispatch = useAppDispatch();
+
+    // const dispatch = useAppDispatch();
 
     const [activeTopTab, setActiveTopTab] = useState<phoneEmailScreenType>('phone');
 
     useBackHandler(() => {
         setActiveScreen && setActiveScreen("password");
         return true;
-    })
+    });
+    
     // --------------------------if user selecting phone or email-------------------
     if (activeTopTab == 'email' || activeTopTab == 'phone')
         return (
@@ -102,7 +103,8 @@ export default function SelectPhoneEmail({
 
 
 const Tabs = ({ setActiveTopTab, activeTopTab }: phoneEmailTabsProps) => {
-    const { styles,theme:{colors} } = useStyles(styleSheet);
+
+    const colors = useAppThemeColors();
     
     return (
         <View style={[styles.row, {

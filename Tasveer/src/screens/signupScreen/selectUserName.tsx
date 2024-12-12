@@ -1,6 +1,5 @@
 import React from 'react';
 import CustomButton from '../../components/general/customButton/customButton';
-import { useAppDispatch } from '../../redux/hooks';
 import TextBox from '../../components/general/textBox/textBox';
 import IconAnt from '@expo/vector-icons/AntDesign'
 import { TextRegular } from '../../components/general/text/text';
@@ -8,8 +7,9 @@ import { childScreenProps } from './signupScreen';
 import { isValidUsername } from '../../utils/functions/validations';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import styleSheet from './styles';
-import { useStyles } from 'react-native-unistyles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
+
 
 
 
@@ -20,10 +20,6 @@ export default function SelectUserName({
     err,
     setActiveScreen,
 }: childScreenProps) {
-
-    const dispatch = useAppDispatch();
-    const {styles} = useStyles(styleSheet);
-
 
     return (
         <SafeAreaProvider>
@@ -88,7 +84,7 @@ export default function SelectUserName({
 
 
 const RenderIcon = ({ err, data, setData, setErr }: childScreenProps) => {
-    const {theme:{colors}} = useStyles(styleSheet);
+    const colors = useAppThemeColors();
     if (!data.username) {
         return null;
     }

@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native';
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { widthToDp as w } from '../../../../utils/functions/responsiveUtils';
 
 
-const styleSheet = createStyleSheet((theme) => {
+const styleSheet = StyleSheet.create((theme) => {
     const { colors, spacing } = theme;
     return ({
         container: {

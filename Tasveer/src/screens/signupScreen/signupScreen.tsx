@@ -5,6 +5,7 @@ import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import SelectUserName from './selectUserName';
 import SelectPassword from './selectPassword';
 import SelectPhoneEmail from './selectPhoneEmail';
+import { View } from 'react-native';
 
 
 
@@ -42,6 +43,7 @@ export default function Signup() {
     const [err, setErr] = useState<signUpPropsErr>({});
     const [activeScreen, setActiveScreen] = useState<signUpTabProps>('username');
 
+
     if (activeScreen == 'username')
         return (
             <SelectUserName
@@ -54,7 +56,7 @@ export default function Signup() {
             />
         );
 
-   else if (activeScreen == 'password')
+    else if (activeScreen == 'password')
         return (
             <SelectPassword
                 setData={setData}
@@ -65,8 +67,8 @@ export default function Signup() {
                 activeScreen={activeScreen}
             />
         );
-   else 
-   //(activeScreen == 'phoneEmail')
+    else
+        //(activeScreen == 'phoneEmail')
         return (
             <SelectPhoneEmail
                 setData={setData}

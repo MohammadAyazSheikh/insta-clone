@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import CustomButton from '../../components/general/customButton/customButton';
-import { useAppDispatch, } from '../../redux/hooks';
-import { useNavigation } from '@react-navigation/core'
-import type { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import TextBox from '../../components/general/textBox/textBox';
 import { childScreenProps } from './signupScreen';
 import IconAnt from '@expo/vector-icons/AntDesign'
@@ -14,8 +10,8 @@ import CountryCodePicker from '../../components/general/countryCodePicker/countr
 import { countiesInfo, countiesInfoType } from '../../constants/data/countriesInfo';
 import { isValidPhoneNo } from '../../utils/functions/validations';
 import { phoneEmailTabsProps } from './selectPhoneEmail';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles';
+import styles from './styles';
+import { useAppThemeColors } from '../../utils/functions/responsiveUtils';
 
 export default function SelectPhone({
     setData,
@@ -25,19 +21,19 @@ export default function SelectPhone({
     setActiveTopTab
 }: childScreenProps & phoneEmailTabsProps) {
 
-    const {styles,theme:{colors}} = useStyles(styleSheet);
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    const colors = useAppThemeColors();
+    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
 
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
     const [code, setCode] = useState<countiesInfoType>(countiesInfo[0]);
     const [showCounties, setShowCounties] = useState(false);
 
-    useEffect(()=>{
+    useEffect(() => {
         setData({
             ...data,
-            countryCode: "+"+countiesInfo[0].callingCode
+            countryCode: "+" + countiesInfo[0].callingCode
         })
-    },[])
+    }, [])
 
     const CodeButton = useCallback(({ code }: { code: string }) => (
         <TouchableRipple
@@ -121,7 +117,7 @@ export default function SelectPhone({
                     setCode(code);
                     setData({
                         ...data,
-                        countryCode: "+"+code.callingCode
+                        countryCode: "+" + code.callingCode
                     })
                     setShowCounties(false);
                 }}
