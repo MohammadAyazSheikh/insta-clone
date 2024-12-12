@@ -13,8 +13,7 @@ import { TextBold, TextRegular } from '../../components/general/text/text';
 import { authSuccess } from '../../redux/features/user/userSlice';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles';
+import styles from './styles';
 
 type loginProps = {
     username?: string,
@@ -28,7 +27,7 @@ type loginPropsErr = {
 
 export default function Login() {
 
-    const { styles } = useStyles(styleSheet);
+
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const colors = useAppThemeColors();
     const { theme } = useAppSelector(state => state.theme);

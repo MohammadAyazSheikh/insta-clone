@@ -7,8 +7,8 @@ import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 import { TextBold } from '../text/text';
 import SearchBarAnimated from './searchBarAnimated';
 import ButtonRipple from '../customButton/buttonRipple';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles/styles';
+import styles from './styles/styles';
+import colors from '../../../theme/colors';
 
 type props = {
   showSearchBar?: boolean,
@@ -50,17 +50,17 @@ const Header = ({
   iconRightColor,
 }: props) => {
 
-  const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+  // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
 
-  const { styles, theme: { colors } } = useStyles(styleSheet)
 
-  if (showSearchBar)
-    return (
-      <SearchBarAnimated
-        onBack={onSearchClose}
-        onChangeText={onChangeText}
-      />
-    );
+
+  // if (showSearchBar)
+  //   return (
+  //     <SearchBarAnimated
+  //       onBack={onSearchClose}
+  //       onChangeText={onChangeText}
+  //     />
+  //   );
 
   return (
 
@@ -68,7 +68,8 @@ const Header = ({
       <View style={styles.btnLeftContainer}>
         {/* left icon */}
         <ButtonRipple
-          onPress={onPressLeft ? onPressLeft : () => navigation.goBack()}>
+          // onPress={onPressLeft ? onPressLeft : () => navigation.goBack()}
+          >
           {showLeftIcon ? (
             LeftIcon ? (
               <LeftIcon />

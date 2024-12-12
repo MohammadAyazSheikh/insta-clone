@@ -1,7 +1,7 @@
 
-
-import React, { } from 'react';
 import 'react-native-gesture-handler';
+import './src/theme/unistyles/unistyles';
+import React, { } from 'react';
 import RootNavigation from './src/routes/rootStack/rootNavigation';
 import { Provider } from 'react-redux';
 import store, { persistor } from './src/redux/store';
@@ -14,7 +14,7 @@ import { useAppExit } from './src/hooks/backHandlerHooks';
 import { RenderConfirmAlert } from './src/components/general/alerts/confirmAlert';
 import { RenderDismissAlert } from './src/components/general/alerts/dismissAlert';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import './src/theme/unistyles/unistyles';
+
 import { Text } from 'react-native';
 import { View } from 'react-native';
 import InboxCard from './src/components/cards/inboxCard/inboxCard';
@@ -35,24 +35,22 @@ const App = () => {
 
 
   //exit listener
-  // useAppExit();
+  useAppExit();
 
   return (
-
-    <Inbox/>
-    // <PaperProvider theme={theme}>
-    //   <Provider store={store}>
-    //     <PersistGate loading={null} persistor={persistor}>
-    //       <GestureHandlerRootView>
-    //         <RootNavigation />
-    //       </GestureHandlerRootView>
-    //       <Toast config={toastConfig} />
-    //       {/* alerts */}
-    //       <RenderConfirmAlert />
-    //       <RenderDismissAlert />
-    //     </PersistGate>
-    //   </Provider>
-    // </PaperProvider>
+    <PaperProvider theme={theme}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <GestureHandlerRootView>
+            <RootNavigation />
+          </GestureHandlerRootView>
+          <Toast config={toastConfig} />
+          {/* alerts */}
+          <RenderConfirmAlert />
+          <RenderDismissAlert />
+        </PersistGate>
+      </Provider>
+    </PaperProvider>
   )
 }
 

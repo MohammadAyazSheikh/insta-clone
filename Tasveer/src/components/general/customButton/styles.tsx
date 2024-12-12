@@ -1,11 +1,11 @@
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { fontFamily } from '../../../theme/fonts';
 
-const styleSheet = createStyleSheet((theme) => {
-    const { colors,fontSize } = theme;
+const styles = StyleSheet.create((theme) => {
+    const { colors } = theme;
 
     return ({
-      
+
         btnView: {
             flexDirection: 'row',
             justifyContent: 'center',
@@ -17,7 +17,7 @@ const styleSheet = createStyleSheet((theme) => {
             paddingHorizontal: 5,
             marginVertical: 5,
         },
-        disableStyle:{
+        disableStyle: {
             backgroundColor: colors.ternary2,
         },
         txtBtn: {
@@ -28,7 +28,7 @@ const styleSheet = createStyleSheet((theme) => {
     })
 });
 
-export default styleSheet;
+export default styles;
 
 
 

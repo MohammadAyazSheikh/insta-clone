@@ -1,7 +1,8 @@
 import React from "react";
-import { Text, TextProps, StyleSheet } from "react-native";
+import { Text, TextProps } from "react-native";
 import { fontConfig, fontFamily } from "../../../theme/fonts";
-import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { StyleSheet } from "react-native-unistyles";
+
 
 type textProps = {
     children?: React.ReactNode
@@ -12,7 +13,7 @@ export const TextRegular = ({
     children,
     ...rest
 }: textProps) => {
-    const { styles } = useStyles(styleSheet);
+
     return (
         <Text
             allowFontScaling={fontConfig.allowScaling}
@@ -28,7 +29,7 @@ export const TextBold = ({
     children,
     ...rest
 }: textProps) => {
-    const { styles } = useStyles(styleSheet);
+
     return (
         <Text
             allowFontScaling={fontConfig.allowScaling}
@@ -44,7 +45,7 @@ export const TextSemiBold = ({
     children,
     ...rest
 }: textProps) => {
-    const { styles } = useStyles(styleSheet);
+
     return (
         <Text
             allowFontScaling={fontConfig.allowScaling}
@@ -60,7 +61,7 @@ export const TextItalic = ({
     children,
     ...rest
 }: textProps) => {
-    const { styles } = useStyles(styleSheet);
+
     return (
         <Text
             allowFontScaling={fontConfig.allowScaling}
@@ -76,7 +77,6 @@ export const TextBoldItalic = ({
     children,
     ...rest
 }: textProps) => {
-    const { styles } = useStyles(styleSheet);
     return (
         <Text
             allowFontScaling={fontConfig.allowScaling}
@@ -90,7 +90,7 @@ export const TextBoldItalic = ({
 
 
 
-const styleSheet = createStyleSheet((theme, runTime) => {
+const styles = StyleSheet.create((theme) => {
     const { colors, fontSize } = theme;
     return ({
         regular: {

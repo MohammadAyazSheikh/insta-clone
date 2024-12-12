@@ -1,6 +1,6 @@
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
-const styleSheet = createStyleSheet((theme, runTime) => {
+const styleSheet = StyleSheet.create((theme, runTime) => {
     const { colors, fontSize } = theme;
     const { width } = runTime.screen;
     return ({

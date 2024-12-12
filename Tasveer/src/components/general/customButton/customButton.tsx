@@ -8,9 +8,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
-import styleSheet from './styles';
-import { useStyles } from 'react-native-unistyles';
+import styles from './styles';
 import { UnistylesRuntime } from 'react-native-unistyles'
+import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
 
 type btnProps = TouchableOpacityProps;
 
@@ -35,10 +35,10 @@ const CustomButton = ({
   ...touchProps
 }: buttonProps) => {
 
-  const { styles, theme: { colors } } = useStyles(styleSheet);
+  const colors = useAppThemeColors();
 
   const isDark = UnistylesRuntime.themeName == "dark";
- 
+
 
   return (
     <TouchableRipple

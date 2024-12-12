@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native-unistyles';
-import { heightToDp, widthToDp as w } from '../../../utils/functions/responsiveUtils';
+import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
-const styleSheet = StyleSheet.create((theme) => {
+const styles = StyleSheet.create((theme) => {
     const { colors, spacing, } = theme;
 
     return ({
@@ -17,4 +17,4 @@ const styleSheet = StyleSheet.create((theme) => {
         },
     });
 });
-export default styleSheet;
+export default styles;

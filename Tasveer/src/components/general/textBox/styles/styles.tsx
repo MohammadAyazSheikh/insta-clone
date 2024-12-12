@@ -1,8 +1,9 @@
 import { fontFamily, } from '../../../../theme/fonts';
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 
 
-const styleSheet = createStyleSheet((theme) => {
+const styleSheet = StyleSheet.create((theme) => {
+    
     const { colors, fontSize,spacing } = theme;
 
     return ({

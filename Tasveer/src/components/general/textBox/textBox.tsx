@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, TextInputProps, ViewStyle, Text, TextStyle } from 'react-native';
 import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
-import { useStyles } from 'react-native-unistyles';
-import styleSheet from './styles/styles';
+import styles from './styles/styles';
 
 
 type inputProps = TextInputProps;
@@ -31,7 +30,7 @@ const TextBox = ({
   error,
   ...inputProps
 }: textBoxProp) => {
-  const { styles } = useStyles(styleSheet);
+
   const colors = useAppThemeColors();
   const [isFocused, setFocus] = useState(false);
 

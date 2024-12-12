@@ -1,8 +1,8 @@
-import { createStyleSheet } from 'react-native-unistyles';
+import { StyleSheet } from 'react-native-unistyles';
 import { heightToDp as h } from '../../../../utils/functions/responsiveUtils';
 import { fontFamily } from '../../../../theme/fonts';
 
-const styleSheet = createStyleSheet((theme) => {
+const styles = StyleSheet.create((theme) => {
     const { colors, spacing,fontSize } = theme;
     
     return ({
@@ -63,4 +63,4 @@ const styleSheet = createStyleSheet((theme) => {
         },
     });
 });
-export default styleSheet;
+export default styles;
