@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { widthToDp } from '../../utils/functions/responsiveUtils';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { MaterialTabBar, Tabs } from 'react-native-collapsible-tab-view'
@@ -16,37 +16,21 @@ import IconIo from "@expo/vector-icons/Ionicons";
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { getTabIcon, postSize, reelSize } from './profileScreen';
 
-export const postSize = widthToDp(100) / 3
-export const reelSize = widthToDp(100) / 2
 
-export const getTabIcon = (name: string, color: string) => {
-    return ({
-        VIDEOS: <IconMtc
-            name={"movie-play"}
-            color={color}
-            size={25}
-        />,
-        POSTS: <IconMtc
-            name={"grid"}
-            color={color}
-            size={25}
-        />,
-        tagged: <IconFa5
-            name={"user-tag"}
-            color={color}
-            size={25}
-        />
-    }[name]);
 
-}
-export default function Profile() {
+
+export default function UserProfile() {
 
     const { styles, theme: { colors } } = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const { user } = useAppSelector(state => state.user);
+    // const { user } = useAppSelector(state => state.user);
+
     const dispatch = useAppDispatch();
+    const { params } = useRoute<RouteProp<RootStackProps, 'UserProfile'>>();
+    const user = params?.user || {}
 
 
     //menu button
@@ -65,7 +49,6 @@ export default function Profile() {
                 {/* header */}
                 <Header
                     title={`${user?.firstName} ${user?.lastName}`}
-                    showLeftIcon={false}
                     showRightIcon
                     rightIcon={MenuIcon}
                 />

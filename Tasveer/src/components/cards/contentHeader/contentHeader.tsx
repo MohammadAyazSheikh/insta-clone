@@ -66,7 +66,11 @@ const ContentHeader = ({
         name={title}
       />
       {/* -----center view ---- */}
-      <View style={styles.centerView}>
+      <TouchableOpacity
+        style={styles.centerView}
+        onPress={onTitlePress}
+        activeOpacity={0.7}
+      >
         <View style={styles.row}>
           <View style={{ flex: 1 }}>
             <TextBold style={styles.txtTitle} numberOfLines={1}>
@@ -79,9 +83,7 @@ const ContentHeader = ({
         </View>
         {
           subtile ?
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={onTitlePress}
+            <View
               style={styles.row}
             >
               {
@@ -93,11 +95,11 @@ const ContentHeader = ({
               <TextRegular style={styles.txtSubtitle}>
                 {subtile}
               </TextRegular>
-            </TouchableOpacity>
+            </View>
             :
             null
         }
-      </View>
+      </TouchableOpacity>
       {/* ---- Menu button ---- */}
       <ButtonRipple
         onPress={onMenuPress}
@@ -109,7 +111,6 @@ const ContentHeader = ({
           size={14}
         />
       </ButtonRipple>
-
     </View>
   );
 };

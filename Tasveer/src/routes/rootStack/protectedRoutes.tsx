@@ -10,6 +10,7 @@ import ReelsExplore from '../../screens/reelsScreen/reelsScreenExplore';
 import Settings from '../../screens/menuScreen/settingScreen';
 import EditProfile from '../../screens/editProfileScreen/editProfileScreen';
 import Search from '../../screens/searchScreen/searchScreen';
+import UserProfile from '../../screens/profileScreen/userProfileScreen';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -82,6 +83,13 @@ export const protectedRoutes = () => {
             <Stack.Screen
                 name="Search"
                 component={Search}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="UserProfile"
+                component={UserProfile}
                 options={{
                     headerShown: false,
                 }}

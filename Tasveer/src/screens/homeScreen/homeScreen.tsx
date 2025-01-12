@@ -10,10 +10,13 @@ import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import styleSheet from './styles/styles';
 import { useStyles } from 'react-native-unistyles';
 import { postType } from '../../constants/data/homeData';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 
 
 
@@ -22,7 +25,7 @@ import { postType } from '../../constants/data/homeData';
 export default function Home() {
 
     const { styles, theme: { colors } } = useStyles(styleSheet);
-    // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
+    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
 
@@ -49,6 +52,9 @@ export default function Home() {
             }}
             onShare={() => {
                 refShare?.current?.collapse();
+            }}
+            onTitle={() => {
+                navigation.navigate("UserProfile", { user: item.user })
             }}
         />
     ), [])

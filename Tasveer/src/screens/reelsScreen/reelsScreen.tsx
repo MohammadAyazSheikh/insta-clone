@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { widthToDp } from '../../utils/functions/responsiveUtils';
 import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
@@ -13,6 +13,8 @@ import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { Dimensions } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import ApiStatusIndicator from '../../components/general/apiStatusIndicator/ApiStatusIndicator';
 
 
 // const { height: heightWindow } = Dimensions.get("window");
@@ -21,6 +23,7 @@ export default function Reels() {
 
     const { styles } = useStyles(styleSheet);
     const { screen: { height } } = UnistylesRuntime;
+    const [isFocused, setIsFocused] = useState(false);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
@@ -35,6 +38,18 @@ export default function Reels() {
         ios: (height - (tabBarHeight + top)),
         android: height - (tabBarHeight + StatusBar.currentHeight!),
     });
+
+
+
+
+
+
+    useFocusEffect(
+        useCallback(() => {
+            setIsFocused(true);
+            return () => setIsFocused(false);
+        }, [])
+    );
 
     const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
         return (
@@ -59,22 +74,24 @@ export default function Reels() {
         )
     }, [containerHeight]);
 
+    if (!isFocused)
+        return <ApiStatusIndicator isLoading />;
+
     return (
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}
             >
                 {/* posts */}
-                {
-                    <ViewableFlatList
-                        style={[styles.scroll]}
-                        showsVerticalScrollIndicator={false}
-                        pagingEnabled
-                        data={remoteVideos}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.title}
-                        uniqueKeyName={"title"}
-                    />
-                }
+
+                <ViewableFlatList
+                    style={[styles.scroll]}
+                    showsVerticalScrollIndicator={false}
+                    pagingEnabled
+                    data={remoteVideos}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.title}
+                    uniqueKeyName={"title"}
+                />
                 {/*--- menu sheet ----*/}
                 <MenuSheet
                     ref={refOption}
@@ -95,12 +112,12 @@ export default function Reels() {
                 {/*--- menu sheet ----*/}
                 <CommentSheet
                     ref={refComment}
-                    snapPoints={["100%"]}
+                    snapPoints={["90%"]}
                 />
                 {/*--- menu sheet ----*/}
                 <ShareSheet
                     ref={refShare}
-                    snapPoints={["60%", "100%"]}
+                    snapPoints={["60%", "90%"]}
                 />
             </SafeAreaView >
         </SafeAreaProvider >

@@ -57,9 +57,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
 
   // render user list function
   const renderUsers = useCallback(({ item }: { item: userType }) => {
-
     const user = selectedUsers.find(u_ => u_.id == item.id);
-
     return (
       <View style={styles?.container}>
         <UserAvatar
@@ -77,7 +75,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
           }}
         />
       </View>)
-  }, [])
+  }, [selectedUsers])
   return (
     <SheetWrapper {...rest} ref={ref}>
       {/*---------------------- searchBar --------------*/}
@@ -212,7 +210,6 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
                 onPress={() => { }}
               />
             </BottomSheetScrollView>
-
           </View>
       }
     </SheetWrapper>

@@ -10,6 +10,7 @@ import { protectedRoutes } from './protectedRoutes';
 import { authRoutes } from './authRoutes';
 import { getUsersSuccess } from '../../redux/features/users/users';
 import { users } from '../../constants/data/generateUsers';
+import { userType } from '../../constants/types/sharedTypes';
 
 
 
@@ -25,6 +26,9 @@ export type RootStackProps = {
   Setting: undefined,
   EditProfile: undefined,
   Search: undefined,
+  UserProfile: {
+    user: userType
+  },
   Conversation: {
     messageId?: string | number
   };

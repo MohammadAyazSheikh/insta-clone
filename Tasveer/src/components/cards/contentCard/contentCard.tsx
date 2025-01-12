@@ -13,7 +13,6 @@ import moment from 'moment';
 import { TextRegular } from '../../general/text/text';
 
 
-
 type contentCardProps = {
     data: postType,
     subtitleIcon?: React.ReactNode,
