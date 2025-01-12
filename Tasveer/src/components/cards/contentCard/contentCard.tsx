@@ -10,6 +10,7 @@ import { postType } from '../../../constants/data/homeData';
 import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
 import { useStyles } from 'react-native-unistyles';
 import moment from 'moment';
+import { TextRegular } from '../../general/text/text';
 
 
 
@@ -41,11 +42,10 @@ const ContentCard = ({
     const [isFav, setIsFav] = useState(false);
     const [saved, setSaved] = useState(false);
 
-    // left icons
-    const IconsLeft = useCallback(() => {
+    // engagements 
+    const BottomIcons = useCallback(() => {
         return (
             <View style={styles.row}>
-
                 {/* like */}
                 <ButtonRipple
                     onPress={() => {
@@ -59,6 +59,9 @@ const ContentCard = ({
                         color={isFav ? "red" : colors.secondary1}
                         size={25}
                     />
+                    <TextRegular style={styles.txtEngagement}>
+                        7k
+                    </TextRegular>
                 </ButtonRipple>
                 {/* comment */}
                 <ButtonRipple
@@ -70,6 +73,9 @@ const ContentCard = ({
                         color={colors.secondary1}
                         size={25}
                     />
+                    <TextRegular style={styles.txtEngagement}>
+                        2.7k
+                    </TextRegular>
                 </ButtonRipple>
                 {/* share */}
                 <ButtonRipple
@@ -81,29 +87,29 @@ const ContentCard = ({
                         color={colors.secondary1}
                         size={25}
                     />
+                    <TextRegular style={styles.txtEngagement}>
+                        1.3k
+                    </TextRegular>
+                </ButtonRipple>
+                <View style={{ flex: 1 }} />
+                <ButtonRipple
+                    onPress={() => {
+                        setSaved(prev => !prev);
+                        onSave && onSave();
+                    }}
+                    style={styles.btnStyle}
+                >
+                    <IconIo
+                        name={saved ? 'bookmark' : 'bookmark-outline'}
+                        color={colors.secondary1}
+                        size={25}
+                    />
                 </ButtonRipple>
             </View>
         )
-    }, [isFav]);
+    }, [isFav, saved]);
 
 
-    // save post icon
-    const SaveIcon = useCallback(() => (<View style={[styles.row,
-    { justifyContent: 'flex-end' }]}>
-        <ButtonRipple
-            onPress={() => {
-                setSaved(prev => !prev);
-                onSave && onSave();
-            }}
-            style={styles.btnStyle}
-        >
-            <IconIo
-                name={saved ? 'bookmark' : 'bookmark-outline'}
-                color={colors.secondary1}
-                size={25}
-            />
-        </ButtonRipple>
-    </View>), [saved]);
 
     return (
         <View style={styles.container}>
@@ -127,13 +133,9 @@ const ContentCard = ({
                 indicatorContainerWidth={50}
                 indicatorRowContainerStyle={{ paddingVertical: 5 }}
                 onDoubleTab={() => setIsFav(true)}
-                indicatorLeftIcon={() => (
-                    <IconsLeft />
-                )}
-                indicatorRightIcon={() => (
-                    <SaveIcon />
-                )}
             />
+            {/* engagement */}
+            <BottomIcons />
         </View>
     );
 };

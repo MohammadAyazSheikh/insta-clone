@@ -31,7 +31,7 @@ const styleSheet = createStyleSheet((theme, runTime) => {
         row: {
             flexDirection: 'row',
             width: '100%',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             alignItems: 'center',
             paddingHorizontal: spacing?.lg
         }

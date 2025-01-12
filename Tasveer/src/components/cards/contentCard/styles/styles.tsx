@@ -14,10 +14,18 @@ const styleSheet = createStyleSheet((theme) => {
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            alignSelf: 'flex-start'
+            alignSelf: 'flex-start',
+            paddingHorizontal: theme.spacing.md
         },
         btnStyle: {
-            marginHorizontal: 5
+            marginHorizontal: 5,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        txtEngagement: {
+            color: theme.colors.secondary1,
+            fontSize: theme.fontSize.lg
         }
     })
 });

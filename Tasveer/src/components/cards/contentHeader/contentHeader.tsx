@@ -68,9 +68,11 @@ const ContentHeader = ({
       {/* -----center view ---- */}
       <View style={styles.centerView}>
         <View style={styles.row}>
-          <TextBold style={styles.txtTitle}>
-            {title}
-          </TextBold>
+          <View style={{ flex: 1 }}>
+            <TextBold style={styles.txtTitle} numberOfLines={1}>
+              {title}
+            </TextBold>
+          </View>
           <TextRegular style={styles.txtSubtitle}>
             {time}
           </TextRegular>
