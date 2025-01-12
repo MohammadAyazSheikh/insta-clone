@@ -87,15 +87,15 @@ export default function Home() {
                         refOption.current?.close();
                     }}
                 />
-                {/*--- menu sheet ----*/}
+                {/*--- comment sheet ----*/}
                 <CommentSheet
                     ref={refComment}
-                    snapPoints={["100%"]}
+                    snapPoints={['90%']}
                 />
                 {/*--- menu sheet ----*/}
                 <ShareSheet
                     ref={refShare}
-                    snapPoints={["60%", "100%"]}
+                    snapPoints={["60%", "90%"]}
                 />
             </SafeAreaView >
         </SafeAreaProvider>

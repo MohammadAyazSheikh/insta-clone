@@ -22,7 +22,6 @@ type sheetProps = {
 } & Omit<sheetWrapperProps, 'children'>
 
 const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
-
   ...rest
 }, ref) => {
 

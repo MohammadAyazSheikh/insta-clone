@@ -82,7 +82,8 @@ function RootNav() {
           headerTitleStyle: {
             fontFamily: fontFamily.bold,
           },
-          // animationEnabled: false
+          // animationEnabled: false,
+          detachPreviousScreen: true,
         }}>
         {
           user ?

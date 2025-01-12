@@ -19,7 +19,7 @@ export type sheetWrapperProps = {
 const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
   children,
   sheetBgStyle,
-  snapPoints = ['40%', '70%', '100%']
+  snapPoints = ['90%']
 },
   ref) => {
 
@@ -64,6 +64,7 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
       backgroundStyle={[styles.bgSheet, sheetBgStyle]}
       handleIndicatorStyle={styles.handleIndStyle}
       enablePanDownToClose
+      enableDynamicSizing = {false}
       index={-1}
     >
       <SafeAreaProvider>
