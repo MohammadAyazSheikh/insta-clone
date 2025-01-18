@@ -27,7 +27,11 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
 
     const { styles } = useStyles(styleSheet);
 
-    //messageId for scrolling to that message
+    //for feting conversation from server
+    // const conversationId = props?.route?.params?.conversationId;
+    //user who with we are chatting
+    const recipient = props?.route?.params?.recipient;
+    //messageId for scrolling to that message from star msg screen
     const messageId = props?.route?.params?.messageId;
 
     const { user } = useAppSelector(state => state.user);
@@ -115,6 +119,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                 {/* header */}
                 <ChatHeader
                     showOptions={selectedMessages.length > 0}
+                    recipient={recipient}
                 />
                 {/* list messages */}
                 <FlashList

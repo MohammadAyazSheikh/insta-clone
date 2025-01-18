@@ -72,7 +72,9 @@ export default function Profile() {
                 {/* tabs */}
                 <Tabs.Container
                     revealHeaderOnScroll
-                    renderHeader={ProfileHeader}
+                    renderHeader={() => <ProfileHeader
+                        user={user!}  
+                    />}
                     renderTabBar={props => (
                         <MaterialTabBar
                             {...props}

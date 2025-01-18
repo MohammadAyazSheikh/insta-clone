@@ -43,7 +43,7 @@ export default function Inbox() {
                         subTitle={item.message}
                         time={item.timestamp.toString()}
                         badge={item.badge!}
-                        onPress={() => navigation.navigate("Conversation", { messageId: 1 })}
+                        onPress={() => navigation.navigate("Conversation", { messageId: 1, recipient: item.sender })}
                     />)}
                 />
             </SafeAreaView>

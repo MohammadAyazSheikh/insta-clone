@@ -13,7 +13,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import ChatHeaderMenu from './chatHeaderMenu';
 import { removeAllSelectedMsgs } from '../../../redux/features/ui/uiSlice';
-import { messageObjType } from '../../../constants/types/sharedTypes';
+import { messageObjType, userType } from '../../../constants/types/sharedTypes';
 import { updateMessages } from '../../../redux/features/chat/chatSlice';
 import { showMsgAlert } from '../../general/alerts/messageOptionsAlert';
 import UserAvatar from '../../general/avatar/avatar';
@@ -25,14 +25,18 @@ import styleSheet from './styles/styles';
 type appHeaderProps = {
   onChangeText?: (text: string) => void;
   showOptions?: boolean,
+  recipient: userType,
+  subTitle?: string
 }
 
 const ChatHeader = ({
   showOptions,
   onChangeText,
+  recipient,
+  subTitle,
 }: appHeaderProps) => {
 
-  const {styles,theme:{colors}} = useStyles(styleSheet)
+  const { styles, theme: { colors } } = useStyles(styleSheet)
 
   const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
   const { theme } = useAppSelector(state => state.theme);
@@ -142,17 +146,24 @@ const ChatHeader = ({
         {/* user details */}
         <UserAvatar
           size={40}
-          name='G'
+          name={recipient?.userName}
+          image={recipient?.profileImage && { uri: recipient?.profileImage }}
         />
-        {/* conversation name */}
-        <View style={{ marginLeft: 5 }}>
-          <TextRegular style={styles.txtName}>
-            My group
-          </TextRegular>
-          <TextRegular style={styles.txtSub}>
-            3 online
-          </TextRegular>
-        </View>
+      </View>
+      {/* conversation name */}
+      <View style={{ marginLeft: 5, flex: 1 }}>
+        <TextRegular style={styles.txtName} numberOfLines={2}>
+          {recipient?.userName}
+        </TextRegular>
+        {
+
+          subTitle ?
+            <TextRegular style={styles.txtSub}>
+              {subTitle}
+            </TextRegular>
+            :
+            null
+        }
       </View>
       <View style={styles.row}>
         {/* video */}

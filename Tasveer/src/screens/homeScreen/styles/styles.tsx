@@ -3,7 +3,7 @@ import { widthToDp as w } from '../../../utils/functions/responsiveUtils';
 
 const styleSheet = createStyleSheet((theme, runTime) => {
     const { colors, fontSize } = theme;
-    
+
     return ({
         container: {
             flex: 1,
@@ -30,6 +30,7 @@ const styleSheet = createStyleSheet((theme, runTime) => {
         },
         logoStyles: {
             width: w(35),
+            height: w(15),
             resizeMode: 'contain',
         },
     });

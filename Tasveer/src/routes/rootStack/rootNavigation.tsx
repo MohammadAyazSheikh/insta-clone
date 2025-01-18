@@ -30,7 +30,9 @@ export type RootStackProps = {
     user: userType
   },
   Conversation: {
-    messageId?: string | number
+    conversationId?: string | number,
+    messageId?: string | number,
+    recipient: userType,
   };
 };
 

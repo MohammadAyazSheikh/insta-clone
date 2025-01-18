@@ -47,6 +47,7 @@ export type avatarProps = {
     edgeIcon?: ReactNode,
     selected?: boolean,
     showAddIcon?: boolean,
+    hideName?: boolean,
     onPress?: () => void
 }
 
@@ -66,6 +67,7 @@ export default function StoryAvatar({
     edgeIcon,
     selected,
     showAddIcon,
+    hideName,
     onPress
 }: avatarProps) {
 
@@ -98,6 +100,7 @@ export default function StoryAvatar({
         alignItems: 'center',
         padding: 0
     }), []);
+    
     return (
         <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', width: halfCircle * 2, height: name ? "auto" : halfCircle * 2 }}>
@@ -153,7 +156,7 @@ export default function StoryAvatar({
             </View >
             {/*-------- name -------*/}
             {
-                name ? <TextRegular
+                name && !hideName ? <TextRegular
                     numberOfLines={2}
                     style={{
                         fontSize: 14,

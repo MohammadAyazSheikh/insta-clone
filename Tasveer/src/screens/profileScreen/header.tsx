@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
 import { FlatList, View } from 'react-native';
 import { commonStyles } from '../../theme/common';
@@ -12,18 +12,33 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
 import { useAppSelector } from '../../redux/hooks';
+import { userType } from '../../constants/types/sharedTypes';
 
+type props = {
+    user: userType,
+    totalPosts?: number,
+    totalFollowers?: number,
+    totalFollowing?: number,
+}
 
-export default function ProfileHeader() {
+export default function ProfileHeader({
+    user,
+    totalFollowers = 7213,
+    totalFollowing = 3228,
+    totalPosts = 123
+}: props) {
 
 
 
     const { styles, theme: { spacing, colors } } = useStyles(styleSheet);
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
-    const { user } = useAppSelector(state => state.user);
+    const { user: loggedInUser } = useAppSelector(state => state.user);
 
-    const userId = user?.id;
-    // const dispatch = useAppDispatch();
+
+    const isLoggedInUser = loggedInUser?.id === user.id;
+
+    const [followed, setFollowed] = useState(false);
+
 
     const renderHighlights = () => (
         <FlatList
@@ -47,18 +62,19 @@ export default function ProfileHeader() {
             <View style={styles.userInfoRow}>
                 {/* avatar */}
                 <StoryAvatar
+                    hideName
                     name={user?.firstName}
                     image={user?.profileImage ? { uri: user?.profileImage } : null}
                     numberOfArch={1}
                     showNumberOfArch={0}
                     radius={w(12)}
-                    showAddIcon
+                    showAddIcon={isLoggedInUser}
                 />
                 {/* info */}
                 <View style={styles.userInfoTextRow}>
                     <ButtonRipple onPress={() => ""} style={commonStyles.colCenter}>
                         <TextBold style={styles.txtInfoVal}>
-                            {formatNumber(78)}
+                            {formatNumber(totalPosts)}
                         </TextBold>
                         <TextRegular style={styles.txtInfoLabel}>
                             Posts
@@ -66,7 +82,7 @@ export default function ProfileHeader() {
                     </ButtonRipple>
                     <ButtonRipple onPress={() => ""} style={commonStyles.colCenter}>
                         <TextBold style={styles.txtInfoVal}>
-                            {formatNumber(5764608)}
+                            {formatNumber(totalFollowers)}
                         </TextBold>
                         <TextRegular style={styles.txtInfoLabel}>
                             Followers
@@ -74,7 +90,7 @@ export default function ProfileHeader() {
                     </ButtonRipple>
                     <ButtonRipple onPress={() => ""} style={commonStyles.colCenter}>
                         <TextBold style={styles.txtInfoVal}>
-                            {formatNumber(2376)}
+                            {formatNumber(totalFollowing)}
                         </TextBold>
                         <TextRegular style={styles.txtInfoLabel}>
                             Following
@@ -85,22 +101,30 @@ export default function ProfileHeader() {
             {/* about and name */}
             <View style={{ width: '100%', marginBottom: spacing?.lg, }}>
                 <TextBold style={styles.txtName}>
-                    John Doe
+                    {user.userName}
                 </TextBold>
-                <TextRegular style={styles.txtName}>
-                    Do more things that make you forget to check your phone.
-                </TextRegular>
+                {
+                    user?.bio ? <TextRegular style={styles.txtName}>
+                        {user?.bio}
+                    </TextRegular>
+                        :
+                        null
+                }
             </View>
             {
                 // follow and message button
-                userId !== user?.id ?
+                !isLoggedInUser ?
                     <View style={commonStyles.rowCenter}>
-                        <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}>
+                        <ButtonRipple style={[styles.btnEdit, { backgroundColor: colors.ternary1, width: 'auto', flex: 1 }]}
+                            onPress={() => setFollowed(!followed)}
+                        >
                             <TextBold style={[styles.txtName, { color: 'white' }]}>
-                                Follow
+                                {followed ? "Unfollow" : "Follow"}
                             </TextBold>
                         </ButtonRipple>
-                        <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}>
+                        <ButtonRipple style={[styles.btnEdit, { marginLeft: 10, width: 'auto', flex: 1 }]}
+                            onPress={() => navigation.navigate("Conversation", { recipient: user })}
+                        >
                             <TextBold style={[styles.txtName]}>
                                 Message
                             </TextBold>

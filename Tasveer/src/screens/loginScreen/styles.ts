@@ -15,10 +15,11 @@ const styleSheet = createStyleSheet((theme, runTime) => {
             alignItems: 'center',
         },
         logoStyles: {
-            width: "55%",
+            width: "85%",
+            height:"20%",
             resizeMode: 'contain',
             marginTop: '40%',
-            marginBottom: '10%'
+            marginBottom: '10%',
         },
         txtForgetPss: {
             fontSize: fontSize.sm,
