@@ -145,6 +145,7 @@ const ChatHeader = ({
         </ButtonRipple>
         {/* user details */}
         <UserAvatar
+          onPress={() => navigation.navigate("UserProfile", { user: recipient })}
           size={40}
           name={recipient?.userName}
           image={recipient?.profileImage && { uri: recipient?.profileImage }}
