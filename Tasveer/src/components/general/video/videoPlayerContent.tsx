@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import VisibilitySensor from "@svanboxel/visibility-sensor-react-native";
 import IconIo from '@expo/vector-icons/Ionicons'
 import ButtonRipple from '../customButton/buttonRipple';
 import ApiStatusIndicator from '../apiStatusIndicator/ApiStatusIndicator';
@@ -9,6 +8,7 @@ import { useStyles } from 'react-native-unistyles';
 import { Image } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { generateThumbnail } from './videoThumbnail';
+import VisibilitySensor from '../visibilitySensor/dist';
 
 type vidProps = {
     showVolumeIcon?: boolean,
