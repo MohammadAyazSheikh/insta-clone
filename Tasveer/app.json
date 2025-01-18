@@ -1,16 +1,16 @@
 {
   "expo": {
-    "newArchEnabled": "false",
     "name": "Tasveer",
     "slug": "Tasveer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-dark.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/app-icon-dark.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
@@ -30,6 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "package": "com.tasveer",
       "config": {
         "googleMaps": {
           "apiKey": "AIzaSyB7Haog03RkW-Jw_gjxDBt5reynjLGw4-c"
@@ -45,8 +46,7 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
-      ],
-      "package": "com.tasveer"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -93,8 +93,7 @@
             "PhotoLibrary"
           ]
         }
-      ],
-      "expo-audio"
+      ]
     ]
   }
 }
