@@ -60,7 +60,6 @@ function RootNav() {
 
   //generating data
   useEffect(() => {
-
     dispatch(getUsersSuccess(users));
   }, []);
 

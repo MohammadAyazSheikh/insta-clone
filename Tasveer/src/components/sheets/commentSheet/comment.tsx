@@ -48,7 +48,7 @@ const Comment = ({
                 <View style={styles.colComment} >
                     {/* name and time */}
                     <View style={styles.row}>
-                        <View style={{ paddingRight: 5 }}>
+                        <View style={{ paddingRight: 5,flex:1 }}>
                             <TextSemiBold
                                 style={styles.txtName}
                                 numberOfLines={1}
@@ -63,13 +63,13 @@ const Comment = ({
                             numberOfLines={1}
                         >
                             {
-                                moment(comment?.createdAt).fromNow()
+                                moment(comment?.createdAt).fromNow() 
                             }
                         </TextRegular>
                     </View>
                     {/* comment */}
                     <TextRegular
-                        // selectable
+                        selectable
                         selectionColor={colors.ternary1}
                         style={styles.txtComment}
                         numberOfLines={numOfLine}

@@ -1,5 +1,4 @@
 import React, { useCallback, useRef } from 'react';
-// import { useAppDispatch } from '../../redux/hooks';
 import HomeHeader from './header';
 import RenderStory from '../../components/story/renderStory';
 import ContentCard from '../../components/cards/contentCard/contentCard';
@@ -10,7 +9,7 @@ import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList } from 'react-native-gesture-handler';
-import { Alert, View } from 'react-native';
+import { View } from 'react-native';
 import styleSheet from './styles/styles';
 import { useStyles } from 'react-native-unistyles';
 import { postType } from '../../constants/data/homeData';

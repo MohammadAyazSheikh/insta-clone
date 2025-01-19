@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { userType } from '../types/sharedTypes';
 
-const gender = faker.person.sexType();
+
 
 export function generateRandomUser(numberFfUsers: number): userType[] {
 

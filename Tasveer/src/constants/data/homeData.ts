@@ -1,5 +1,4 @@
 import { faker } from '@faker-js/faker/.';
-import uuid from 'react-native-uuid';
 import { users } from './generateUsers';
 import { userType } from '../types/sharedTypes';
 import { remoteVideos } from './remoteVideo';
