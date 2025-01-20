@@ -25,8 +25,18 @@ const styleSheet = createStyleSheet((theme) => {
         },
         txtEngagement: {
             color: theme.colors.secondary1,
-            fontSize: theme.fontSize.lg
-        }
+            fontSize: theme.fontSize.lg,
+        },
+        captionView: {
+            alignSelf: 'flex-start',
+            alignItems: 'flex-start',
+            marginHorizontal: theme.spacing.lg,
+            paddingVertical: theme.spacing.md
+        },
+        txtTime: {
+            color: theme.colors.common.grey1,
+            fontSize: theme.fontSize.sm,
+        },
     })
 });
 

@@ -36,7 +36,7 @@ const ContentHeader = ({
   title = 'Title',
   subtile = 'Hey You',
   subtitleIcon,
-  time = '12h',
+  time,
   containerStyles,
   onMenuPress = () => '',
   onTitlePress = () => '',
@@ -77,9 +77,13 @@ const ContentHeader = ({
               {title}
             </TextBold>
           </View>
-          <TextRegular style={styles.txtSubtitle}>
-            {time}
-          </TextRegular>
+          {time ?
+            <TextRegular style={styles.txtSubtitle}>
+              {time}
+            </TextRegular>
+            :
+            null
+          }
         </View>
         {
           subtile ?

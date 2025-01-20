@@ -11,6 +11,8 @@ import { MediaSlider } from '../../general/mediaSlider/mediaSlider';
 import { useStyles } from 'react-native-unistyles';
 import moment from 'moment';
 import { TextRegular } from '../../general/text/text';
+import { Text } from 'react-native';
+import Caption from './caption';
 
 
 type contentCardProps = {
@@ -40,6 +42,7 @@ const ContentCard = ({
 
     const [isFav, setIsFav] = useState(false);
     const [saved, setSaved] = useState(false);
+
 
     // engagements 
     const BottomIcons = useCallback(() => {
@@ -114,7 +117,6 @@ const ContentCard = ({
         <View style={styles.container}>
             {/* header */}
             <ContentHeader
-                time={moment(data?.timestamp.toString()).fromNow()}
                 title={data.user.userName}
                 // subtile={data.}
                 onMenuPress={onMenu}
@@ -135,7 +137,19 @@ const ContentCard = ({
             />
             {/* engagement */}
             <BottomIcons />
-        </View>
+            {/* caption */}
+            <View style={styles.captionView}>
+                {
+                    data.caption ?
+                        <Caption text={data.caption} />
+                        :
+                        null
+                }
+                <TextRegular style={styles.txtTime}>
+                    {moment(data?.timestamp.toString()).fromNow()}
+                </TextRegular>
+            </View>
+        </View >
     );
 };
 

@@ -86,8 +86,7 @@ const styleSheet = createStyleSheet((theme) => {
             paddingVertical: spacing?.md,
         },
         txtDescription: {
-            color: 'white',
-            // color: colors.secondary1,
+            color: colors.primary1,
             fontSize: fontSize?.md
         },
     });
