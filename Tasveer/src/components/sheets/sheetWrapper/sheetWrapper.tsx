@@ -1,6 +1,6 @@
 import React, { useCallback, forwardRef } from 'react';
 import {
-  ViewStyle, StyleSheet
+  ViewStyle
 } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';

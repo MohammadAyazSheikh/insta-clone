@@ -1,20 +1,21 @@
 import React, { forwardRef, useCallback, useState } from 'react';
-import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetTextInput } from '@gorhom/bottom-sheet';
 import IconAnt from '@expo/vector-icons/AntDesign';
 import IconEnt from '@expo/vector-icons/Entypo';
 import colors from '../../../theme/colors';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
-import { TextInput, View } from 'react-native';
+import { TextInput, View, KeyboardAvoidingView } from 'react-native';
 import { TextBold, TextRegular } from '../../general/text/text';
 import Comment, { Replies } from './comment';
 import { comments } from '../../../constants/data/commentData';
 import UserAvatar from '../../general/avatar/avatar';
 import { useAppSelector } from '../../../redux/hooks';
-import Animated, { FadeIn, FadeOut, ZoomIn, ZoomOut } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeOutDown, ZoomIn, ZoomOut } from 'react-native-reanimated';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { commentType } from '../../../constants/types/sharedTypes';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+
 
 
 type sheetProps = {
@@ -67,8 +68,8 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
         {
           replyTo ?
             <Animated.View
-              entering={FadeIn.duration(100)}
-              exiting={FadeOut.duration(100)}
+              entering={FadeInDown.duration(150)}
+              exiting={FadeOutDown.duration(150)}
               style={[styles.replyRow]}
             >
               <TextRegular style={styles?.txtName}>
@@ -98,7 +99,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
             image={user?.profileImage ? { uri: user.profileImage } : null}
           />
           {/* text input */}
-          <TextInput
+          <BottomSheetTextInput
             placeholderTextColor={colors.grey1}
             placeholder='Add comment'
             style={styles.txtInput}
