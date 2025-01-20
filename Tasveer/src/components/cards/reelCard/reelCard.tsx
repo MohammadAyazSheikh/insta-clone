@@ -53,7 +53,7 @@ const ReelCard = ({
             <VideoPlayerReel
                 source={{ uri: data.uri}}
                 style={[styles.video]}
-                showVolumeIcon={false}
+                showVolumeIcon={true}
                 resizeMode='cover'
                 paused={false}
                 isVisible={isVisible}

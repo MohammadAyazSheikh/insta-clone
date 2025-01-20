@@ -1,11 +1,11 @@
 import React, { forwardRef, useCallback, useState } from 'react';
-import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetFlatList, BottomSheetScrollView, BottomSheetTextInput, BottomSheetView } from '@gorhom/bottom-sheet';
 import IconAnt from '@expo/vector-icons/AntDesign';
 import IconFn from '@expo/vector-icons/Fontisto';
 import IconOct from '@expo/vector-icons/Octicons';
 import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import SheetWrapper, { sheetWrapperProps } from '../sheetWrapper/sheetWrapper';
-import { TextInput, View } from 'react-native';
+import { View } from 'react-native';
 import UserAvatar from '../../general/avatar/avatar';
 import { useAppSelector } from '../../../redux/hooks';
 import { userType } from '../../../constants/types/sharedTypes';
@@ -110,7 +110,7 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
         // ----- send button and input -----
         selectedUsers?.length > 0 ?
           <View style={styles.col}>
-            <TextInput
+            <BottomSheetTextInput
               placeholder='Write a message'
               placeholderTextColor={colors.common.grey1}
               style={styles.inputStyle}

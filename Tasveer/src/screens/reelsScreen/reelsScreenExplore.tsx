@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
@@ -8,9 +7,11 @@ import ReelCard from '../../components/cards/reelCard/reelCard';
 import { remoteVideos, remoteVideosType } from '../../constants/data/remoteVideo';
 import Header from '../../components/general/screenHeaders/header';
 import ViewableFlatList from '../../components/list/ViewableFlatlist';
-import {  useStyles } from 'react-native-unistyles';
+import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { View } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import ApiStatusIndicator from '../../components/general/apiStatusIndicator/ApiStatusIndicator';
 
 
 export default function ReelsExplore() {
@@ -21,13 +22,21 @@ export default function ReelsExplore() {
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
 
-    const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
+    const [isFocused, setIsFocused] = useState(false);
 
     const [containerHeight, setContainerHeight] = useState(0);
 
 
+
+    //checking id screen focused
+    useFocusEffect(
+        useCallback(() => {
+            setIsFocused(true);
+            return () => setIsFocused(false);
+        }, [])
+    );
 
     const renderItem = useCallback(({ isVisible, item }: { isVisible: boolean, item: remoteVideosType }) => {
         return (
@@ -35,9 +44,6 @@ export default function ReelsExplore() {
                 isVisible={isVisible}
                 data={item}
                 containerStyles={{ height: containerHeight, width: "100%", borderWidth: 0.5, borderColor: "transparent" }}
-                onMenu={() => {
-                    refOption.current?.collapse()
-                }}
                 onComment={() => {
                     refComment.current?.expand();
                 }}
@@ -47,6 +53,9 @@ export default function ReelsExplore() {
             />
         )
     }, [containerHeight])
+
+    if (!isFocused)
+        return <ApiStatusIndicator isLoading />;
 
     return (
         <SafeAreaProvider>
@@ -74,23 +83,6 @@ export default function ReelsExplore() {
                             null
                     }
                 </View>
-                {/*--- menu sheet ----*/}
-                <MenuSheet
-                    ref={refOption}
-                    snapPoints={['35%', '35%', '40%']}
-                    onFollow={() => {
-                        refOption.current?.close();
-                    }}
-                    onReport={() => {
-                        refOption.current?.close();
-                    }}
-                    onHide={() => {
-                        refOption.current?.close();
-                    }}
-                    onStar={() => {
-                        refOption.current?.close();
-                    }}
-                />
                 {/*--- menu sheet ----*/}
                 <CommentSheet
                     ref={refComment}

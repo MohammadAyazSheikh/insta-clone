@@ -20,7 +20,7 @@ type vidProps = {
 function VideoPlayerReel({
     showVolumeIcon = true,
     isVisible,
-    mute = true,
+    mute = false,
     source,
     style
 }: vidProps) {
@@ -78,8 +78,9 @@ function VideoPlayerReel({
                 ref={ref}
                 style={style}
                 player={player}
-                allowsFullscreen
-                allowsPictureInPicture
+                // allowsFullscreen
+                // allowsPictureInPicture
+                nativeControls={false}
             />
         ) : null, [isVisible])
 
@@ -105,8 +106,8 @@ function VideoPlayerReel({
                         onPress={() => setMuted(prev => !prev)}
                         style={{
                             position: 'absolute',
-                            bottom: 10,
-                            right: 10
+                            top: 10,
+                            left: 10,
                         }}
                     >
                         {
@@ -114,13 +115,13 @@ function VideoPlayerReel({
                                 <IconIo
                                     name='volume-mute'
                                     size={25}
-                                    color={colors.secondary1}
+                                    color={colors.primary1}
                                 />
                                 :
                                 <IconIo
                                     name='volume-high'
                                     size={25}
-                                    color={colors.secondary1}
+                                    color={colors.primary1}
                                 />
                         }
                     </ButtonRipple>

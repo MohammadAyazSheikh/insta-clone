@@ -1,6 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { widthToDp } from '../../utils/functions/responsiveUtils';
-import MenuSheet from '../../components/sheets/menuSheet/menuSheet';
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import CommentSheet from '../../components/sheets/commentSheet/commentSheet';
 import ShareSheet from '../../components/sheets/shareSheet/shareSheet';
@@ -12,7 +11,6 @@ import ViewableFlatList from '../../components/list/ViewableFlatlist';
 import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { Dimensions } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import ApiStatusIndicator from '../../components/general/apiStatusIndicator/ApiStatusIndicator';
 
@@ -23,14 +21,13 @@ export default function Reels() {
 
     const { styles } = useStyles(styleSheet);
     const { screen: { height } } = UnistylesRuntime;
-    const [isFocused, setIsFocused] = useState(false);
     // const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     // const { theme } = useAppSelector(state => state.theme);
     // const dispatch = useAppDispatch();
 
-    const refOption = useRef<BottomSheet>(null);
     const refComment = useRef<BottomSheet>(null);
     const refShare = useRef<BottomSheet>(null);
+    const [isFocused, setIsFocused] = useState(false);
     const tabBarHeight = useBottomTabBarHeight();
     const { top } = useSafeAreaInsets();
 
@@ -40,10 +37,7 @@ export default function Reels() {
     });
 
 
-
-
-
-
+    //checking id screen focused
     useFocusEffect(
         useCallback(() => {
             setIsFocused(true);
@@ -60,9 +54,6 @@ export default function Reels() {
                     isVisible={isVisible}
                     data={item}
                     containerStyles={{ width: "100%" }}
-                    onMenu={() => {
-                        refOption.current?.collapse()
-                    }}
                     onComment={() => {
                         refComment.current?.expand();
                     }}
@@ -91,23 +82,6 @@ export default function Reels() {
                     renderItem={renderItem}
                     keyExtractor={(item) => item.title}
                     uniqueKeyName={"title"}
-                />
-                {/*--- menu sheet ----*/}
-                <MenuSheet
-                    ref={refOption}
-                    snapPoints={['35%', '35%', '40%']}
-                    onFollow={() => {
-                        refOption.current?.close();
-                    }}
-                    onReport={() => {
-                        refOption.current?.close();
-                    }}
-                    onHide={() => {
-                        refOption.current?.close();
-                    }}
-                    onStar={() => {
-                        refOption.current?.close();
-                    }}
                 />
                 {/*--- menu sheet ----*/}
                 <CommentSheet
