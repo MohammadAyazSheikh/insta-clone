@@ -11,6 +11,7 @@ import Settings from '../../screens/menuScreen/settingScreen';
 import EditProfile from '../../screens/editProfileScreen/editProfileScreen';
 import Search from '../../screens/searchScreen/searchScreen';
 import UserProfile from '../../screens/profileScreen/userProfileScreen';
+import StarredMessages from '../../screens/conversationScreen/starredMessages';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -48,6 +49,13 @@ export const protectedRoutes = () => {
             <Stack.Screen
                 name="Conversation"
                 component={Conversation}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="StarredMessages"
+                component={StarredMessages}
                 options={{
                     headerShown: false,
                 }}

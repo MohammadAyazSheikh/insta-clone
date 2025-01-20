@@ -11,12 +11,15 @@ import styleSheet from './styles/styles';
 import { useStyles } from 'react-native-unistyles';
 import { FlashList } from 'react-native-collapsible-tab-view';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useKeyboardVisibility } from '../../hooks/keyboardHooks';
 
 
 
 export default function StarredMessages() {
 
     const { styles } = useStyles(styleSheet);
+    // keyboard style
+    const { style } = useKeyboardVisibility();
     const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { user } = useAppSelector(state => state.user);
     const { messages } = useAppSelector(state => state.chat);

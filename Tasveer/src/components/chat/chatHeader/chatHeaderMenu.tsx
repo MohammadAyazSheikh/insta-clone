@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {
   Modal, View, Pressable
 } from 'react-native';
-import Animated, {  Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
+import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withTiming, } from 'react-native-reanimated';
 import CustomButton from '../../general/customButton/customButton';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
@@ -82,17 +82,17 @@ const ChatHeaderMenu = ({ showMenu, onClose, onSearch }: attachSheetProps) => {
               <CustomButton
                 textProps={{ style: styles.txtBtnMenu }}
                 style={styles.btnMenu}
-                buttonText='View contact'
-                onPress={() => {
-                  navigation.navigate('Profile')
-                  onClose();
-                }}
+                buttonText='Media, links and docs'
+                onPress={() => onClose()}
               />
               <CustomButton
                 textProps={{ style: styles.txtBtnMenu }}
                 style={styles.btnMenu}
-                buttonText='Media, links and docs'
-                onPress={() => onClose()}
+                buttonText='Starred Messages'
+                onPress={() => {
+                  onClose();
+                  navigation.navigate("StarredMessages")
+                }}
               />
               <CustomButton
                 textProps={{ style: styles.txtBtnMenu }}

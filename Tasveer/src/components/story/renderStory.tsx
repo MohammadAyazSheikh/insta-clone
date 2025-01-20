@@ -3,6 +3,7 @@ import { View, FlatList } from 'react-native';
 import { stories, storyDataType } from '../../constants/data/storyData';
 import StoryModal from './storyModal/storyModal';
 import StoryAvatar from './storyAvatar/storyAvatar';
+import { useAppSelector } from '../../redux/hooks';
 
 
 export const RADIUS_STORY_AVATAR = 40;
@@ -14,12 +15,14 @@ export default function RenderStory() {
 
     const [scrollIndex, setScrollIndex] = useState(0);
 
+    const { user } = useAppSelector(state => state.user)
+
     //function to render logged in user story
     const renderUserStory = () => (
         <StoryAvatar
             numberOfArch={1}
             showNumberOfArch={1}
-            name={"Your Story"}
+            name={user?.userName}
             showAddIcon={true}
             onPress={() => {
 

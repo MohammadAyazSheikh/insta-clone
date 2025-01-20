@@ -16,16 +16,22 @@ import ReactionSheet from '../../components/chat/reactions/reactionSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useStyles } from 'react-native-unistyles';
 import { FlashList } from '@shopify/flash-list';
+import { useKeyboardVisibility } from '../../hooks/keyboardHooks';
+import Animated from 'react-native-reanimated';
 
 
 
 export const chatScrollRef = createRef<FlashList<messageObjType>>();
 export const refReactionSheet = createRef<BottomSheet>();
+const SafeAreaAnim = Animated.createAnimatedComponent(SafeAreaView);
 
 export default function Conversation(props: StackScreenProps<RootStackProps, 'Conversation'>) {
 
 
     const { styles } = useStyles(styleSheet);
+    const { user } = useAppSelector(state => state.user);
+    const { messages } = useAppSelector(state => state.chat);
+    const dispatch = useAppDispatch();
 
     //for feting conversation from server
     // const conversationId = props?.route?.params?.conversationId;
@@ -33,15 +39,14 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
     const recipient = props?.route?.params?.recipient;
     //messageId for scrolling to that message from star msg screen
     const messageId = props?.route?.params?.messageId;
-
-    const { user } = useAppSelector(state => state.user);
-    const { messages } = useAppSelector(state => state.chat);
-    const dispatch = useAppDispatch();
+    // keyboard style
+    const { style } = useKeyboardVisibility();
 
     // reply message
     const [replyMessage, setReplyMessage] = useState<messageObjType>();
     // selected messages state
     const { selectedMessages } = useAppSelector(state => state.ui);
+
 
     useEffect(() => {
         dispatch(getMessages(getConversationData(user!)));
@@ -53,7 +58,6 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
 
         if (!messageId)
             return;
-
         //scroll to message
         const scrollToMessage = () => {
             const staredIndex = messages.findIndex(msg => msg.id == messageId);
@@ -68,9 +72,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                 });
 
         }
-
         scrollToMessage();
-
     }, [messageId])
 
 
@@ -113,8 +115,8 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView
-                style={styles.container}
+            <SafeAreaAnim
+                style={[styles.container, style]}
             >
                 {/* header */}
                 <ChatHeader
@@ -149,7 +151,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
                     ref={refReactionSheet}
                     snapPoints={["50%"]}
                 />
-            </SafeAreaView >
+            </SafeAreaAnim >
         </SafeAreaProvider>
     );
 

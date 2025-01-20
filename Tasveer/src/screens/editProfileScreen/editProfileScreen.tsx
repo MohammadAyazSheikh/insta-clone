@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Alert, KeyboardAvoidingView, Platform, View, } from "react-native";
+import React from "react";
+import { Platform, View, } from "react-native";
 import { useStyles } from "react-native-unistyles";
 import styleSheet from "./styles/styleSheet";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -10,13 +10,14 @@ import ButtonRipple from "../../components/general/customButton/buttonRipple";
 import { TextBold } from "../../components/general/text/text";
 import { pickImage } from "../../utils/functions/imagePicker";
 import { widthToDp } from "../../utils/functions/responsiveUtils";
-import TextBox from "../../components/general/textBox/textBox";
 import CustomButton from "../../components/general/customButton/customButton";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod';
 import { Controller, useForm } from "react-hook-form";
 import TextBoxHookForm from "../../components/general/textBox/textBoxFormHook";
 import { updateUserSuccess } from "../../redux/features/user/userSlice";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 
 // Validation Schema
 const formSchema = z.object({
@@ -70,9 +71,8 @@ const EditProfile = () => {
         <SafeAreaProvider>
             <SafeAreaView style={styles.container}>
                 <Header title="Edit Profile" />
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    style={styles.scroll}
+                <KeyboardAwareScrollView
+                    contentContainerStyle={styles.scroll}
                 >
                     {/* Profile Picture */}
                     <Controller
@@ -132,7 +132,7 @@ const EditProfile = () => {
                         onPress={handleSubmit(onSubmit)}
                         disabled={!isValid || !isDirty}
                     />
-                </KeyboardAvoidingView>
+                </KeyboardAwareScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
     );

@@ -2,7 +2,7 @@ import { createStyleSheet } from "react-native-unistyles";
 import { widthToDp as w } from "../../../utils/functions/responsiveUtils";
 
 const styleSheet = createStyleSheet((theme) => {
-    const { colors,spacing } = theme;
+    const { colors, spacing } = theme;
     return ({
         container: {
             flex: 1,
@@ -13,7 +13,7 @@ const styleSheet = createStyleSheet((theme) => {
         scroll: {
             flex: 1,
             alignItems: "center",
-            paddingVertical:20
+            paddingVertical: 20
         },
         textBoxContainer: {
             marginTop: spacing.xxl,

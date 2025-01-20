@@ -34,6 +34,7 @@ export type RootStackProps = {
     messageId?: string | number,
     recipient: userType,
   };
+  StarredMessages: undefined
 };
 
 const Stack = createStackNavigator<RootStackProps>();
