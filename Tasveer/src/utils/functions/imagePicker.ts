@@ -1,4 +1,4 @@
-import ImagePickerMultiple, { Image, Video } from 'react-native-image-crop-picker';
+import ImagePickerMultiple, { Image, Video, Options } from 'react-native-image-crop-picker';
 import { grantStoragePermission } from '../permissions/permissions';
 import { showDismissAlert } from '../../components/general/alerts/dismissAlert';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
@@ -29,7 +29,7 @@ export const pickMultipleImage = (callback: (images: Image[]) => void) => {
 
 
 ///-----for single image selection---------
-export const pickImage = (callback: (image: Image) => void) => {
+export const pickImage = (callback: (image: Image) => void, options: Options = {}) => {
     return grantStoragePermission().then(() => {
         return ImagePickerMultiple.openPicker({
             multiple: false,
@@ -37,16 +37,19 @@ export const pickImage = (callback: (image: Image) => void) => {
             cropping: true,
             compressImageQuality: 1,
             includeBase64: false,
+            ...options
         })
             .then(image => {
-                callback && callback(image);
+                return callback && callback(image);
             })
             .catch(err => {
                 console.log(err);
+                return err;
             })
     })
         .catch(err => {
             showDismissAlert({ title: "You denied permission" });
+            return err;
         })
 
 };

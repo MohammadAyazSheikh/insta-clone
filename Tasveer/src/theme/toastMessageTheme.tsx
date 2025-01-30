@@ -5,11 +5,44 @@ import IconOct from '@expo/vector-icons/Octicons';
 import IconEnt from '@expo/vector-icons/Entypo';
 import IconAnt from '@expo/vector-icons/AntDesign';
 import { fontFamily } from './fonts';
-import { heightToDp, useAppThemeColors } from '../utils/functions/responsiveUtils';
-import { TextBold, TextRegular } from '../components/general/text/text';
-import { useAppSelector } from '../redux/hooks';
+import { heightToDp } from '../utils/functions/responsiveUtils';
 import { getShadow } from './platformSpecificStyles';
 
+type props = {
+  title: string,
+  description: string,
+  bgColor: string,
+  textColor: string,
+  type: "error" | "success" | "warning" | "info"
+}
+
+const icon = {
+  "error": <IconEnt color={'#EC4E2C'} name="warning" size={34} />,
+  "success": <IconOct color={'#3BB75C'} name="check-circle-fill" size={34} />,
+  "warning": <IconEnt color={'#EF9400'} name="warning" size={34} />,
+  "info": <IconAnt color={'#006DE5'} name="infocirlce" size={34} />
+}
+
+const ToastComp = ({ title, description, bgColor, textColor, type }: props) => {
+
+  return (
+    <View style={[styles.container, { backgroundColor: bgColor, borderColor: textColor }]}>
+      {icon[type]}
+      <View style={styles.txtView}>
+        <Text style={[styles.txtHeading]} numberOfLines={1} allowFontScaling={false}>
+          {title}
+        </Text>
+        {
+          description ? <Text style={[styles.txtDesc, { color: textColor }]} numberOfLines={2} allowFontScaling={false}>
+            {description}
+          </Text>
+            :
+            null
+        }
+      </View>
+    </View>
+  )
+}
 
 interface ToastConfigProps {
   // MyText:string,
@@ -18,62 +51,46 @@ interface ToastConfigProps {
 const toastConfig: ToastConfig = {
   // success
   successMsg: ({ text1, text2, props }: ToastConfigParams<ToastConfigProps>) => (
-    <View style={[styles.container, { backgroundColor: '#EBF7EE', borderColor: '#3BB75C' }]}>
-      <IconOct color={'#3BB75C'} name="check-circle-fill" size={34} />
-      <View style={styles.txtView}>
-        <Text style={[styles.txtHeading]} numberOfLines={1} allowFontScaling={false}>
-          {text1}
-        </Text>
-        <Text style={[styles.txtDesc, { color: '#3BB75C' }]} numberOfLines={2} allowFontScaling={false}>
-          {text2}
-        </Text>
-      </View>
-    </View>
+    <ToastComp
+      type="success"
+      title={text1!}
+      description={text2!}
+      bgColor={'#EBF7EE'}
+      textColor={'#3BB75C'}
+    />
   ),
 
   // error
   errorMsg: ({ text1, text2, props }: ToastConfigParams<ToastConfigProps>) => (
-    <View style={[styles.container, { backgroundColor: '#FCEDEA', borderColor: '#EC4E2C' }]}>
-      <IconEnt color={'#EC4E2C'} name="warning" size={34} />
-      <View style={styles.txtView}>
-        <Text style={[styles.txtHeading]} numberOfLines={1} allowFontScaling={false}>
-          {text1}
-        </Text>
-        <Text style={[styles.txtDesc, { color: '#EC4E2C' }]} numberOfLines={2} allowFontScaling={false}>
-          {text2}
-        </Text>
-      </View>
-    </View>
+    <ToastComp
+      type="error"
+      title={text1!}
+      description={text2!}
+      bgColor={'#FCEDEA'}
+      textColor={'#EC4E2C'}
+    />
   ),
 
   // warning
   warningMsg: ({ text1, text2, props }: ToastConfigParams<ToastConfigProps>) => (
-    <View style={[styles.container, { backgroundColor: '#FEF7EA', borderColor: '#EF9400' }]}>
-      <IconEnt color={'#EF9400'} name="warning" size={34} />
-      <View style={styles.txtView}>
-        <Text style={[styles.txtHeading]} numberOfLines={1} allowFontScaling={false}>
-          {text1}
-        </Text>
-        <Text style={[styles.txtDesc, { color: '#EF9400' }]} numberOfLines={2} allowFontScaling={false}>
-          {text2}
-        </Text>
-      </View>
-    </View>
+    <ToastComp
+      type="warning"
+      title={text1!}
+      description={text2!}
+      bgColor={'#FEF7EA'}
+      textColor={'#EF9400'}
+    />
   ),
 
   // info
   infoMsg: ({ text1, text2, props }: ToastConfigParams<ToastConfigProps>) => (
-    <View style={[styles.container, { backgroundColor: '#FEFFFF', borderColor: '#006DE5' }]}>
-      <IconAnt color={'#006DE5'} name="infocirlce" size={34} />
-      <View style={styles.txtView}>
-        <Text style={[styles.txtHeading]} numberOfLines={1} allowFontScaling={false}>
-          {text1}
-        </Text>
-        <Text style={[styles.txtDesc, { color: '#006DE5' }]} numberOfLines={2} allowFontScaling={false}>
-          {text2}
-        </Text>
-      </View>
-    </View>
+    <ToastComp
+      type="info"
+      title={text1!}
+      description={text2!}
+      bgColor={'#FEFFFF'}
+      textColor={'#006DE5'}
+    />
   ),
 
 };

@@ -1,22 +1,18 @@
 import React from "react";
-import { View } from 'react-native';
 import IconAnt from '@expo/vector-icons/AntDesign';
 import { useAppThemeColors } from "../../utils/functions/responsiveUtils";
-import { TouchableRipple } from "react-native-paper";
-import { showDismissAlert } from "../../components/general/alerts/dismissAlert";
 import ButtonRipple from "../../components/general/customButton/buttonRipple";
-import { showConfirmAlert } from "../../components/general/alerts/confirmAlert";
+import openEditor from "../../components/imageEditor/imageEditor";
+
 
 export const AddContentButton = () => {
     const colors = useAppThemeColors();
     return (
         <ButtonRipple
-            onPress={() => {
-                showDismissAlert({
-                    title: 'Inprogress!',
-                    description:'We are working on it\nIt will be develop soon'
-                })
-            }} 
+            onPress={async () => {
+                const uri = await openEditor();
+                console.log("Edited Image Uri: ", uri)
+            }}
             style={{
                 flex: 1,
                 justifyContent: 'center',

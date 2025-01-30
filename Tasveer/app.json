@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-dark.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/images/app-icon-dark.png",
       "resizeMode": "contain",
@@ -26,6 +26,7 @@
       }
     },
     "android": {
+      "allowBackup": false,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-icon-dark.png",
         "backgroundColor": "#ffffff"
@@ -92,6 +93,14 @@
             "LocationWhenInUse",
             "PhotoLibrary"
           ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
         }
       ]
     ]

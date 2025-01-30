@@ -17,6 +17,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import './src/theme/unistyles/unistyles';
 
 
+
+
 const theme = {
   ...DefaultTheme,
   colors: {
@@ -28,7 +30,6 @@ const theme = {
 };
 
 const App = () => {
-
 
   //exit listener
   useAppExit();
