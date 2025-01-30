@@ -24,11 +24,7 @@ export const generatePosts = (numberOfPosts: number) => {
 
     const posts: postType[] = [];
 
-    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
-
-
     for (let i = 0; i < numberOfPosts; i++) {
-        const category = faker.helpers.arrayElement(categories);
         posts.push({
             id: faker.string.uuid(),
             user: faker.helpers.arrayElement(users),
@@ -40,7 +36,7 @@ export const generatePosts = (numberOfPosts: number) => {
                     const uri = type == "video" ?
                         remoteVideos[faker.number.int({ min: 0, max: remoteVideos.length - 1 })].uri
                         :
-                        faker.image.urlLoremFlickr({ category, width: 400, height: 400 })
+                        faker.image.urlPicsumPhotos({ width: 400, height: 400, blur: 0 })  //urlLoremFlickr({ category:"", width: 400, height: 400 })
                     return ({
                         id: faker.string.uuid(),
                         uri,

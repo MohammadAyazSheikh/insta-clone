@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Keyboard, Platform } from "react-native";
-import { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 const isAndroid = Platform.OS == "android";
 export const useKeyboardVisibility = () => {
     const [visible, setVisible] = useState(false);
@@ -8,7 +8,7 @@ export const useKeyboardVisibility = () => {
     const animatedHeight = useSharedValue<number>(0);
     const style = useAnimatedStyle(() => (
         {
-            paddingBottom: animatedHeight.value
+            paddingBottom: withTiming(animatedHeight.value-20)
         }
     ), [animatedHeight])
 

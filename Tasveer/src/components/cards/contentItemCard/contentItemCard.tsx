@@ -9,6 +9,9 @@ import VideoPlayerContent from '../../general/video/videoPlayerContent';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import VideoThumbnail from '../../general/video/videoThumbnail';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackProps } from '../../../routes/rootStack/rootNavigation';
 
 
 
@@ -31,6 +34,7 @@ const ContentItemCard = ({
 }: contentCardProps) => {
 
     const { styles, theme: { colors } } = useStyles(styleSheet);
+    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
 
 
     const media = typeof data?.uri == 'string' ? { uri: data.uri } : data.uri;
@@ -39,9 +43,16 @@ const ContentItemCard = ({
     const isVideo = data.type == 'video';
     const isMany = data.numberOfItems > 0;
 
+
     return (
         <ButtonRipple
-            onPress={onPress}
+            onPress={() => {
+                if (onPress) {
+                    onPress();
+                    return;
+                }
+                navigation.navigate(media.type == "reel" ? "ExploreReel" : 'ExplorePost')
+            }}
             style={[styles.container,
             isReel && !isAllSquare ? styles.reelContainer : {},
                 containerStyles

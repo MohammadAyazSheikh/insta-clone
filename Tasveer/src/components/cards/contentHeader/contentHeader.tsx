@@ -1,21 +1,18 @@
 import React from 'react';
 import {
-  Image,
   ViewStyle,
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useFunctionalOrientation } from '../../../utils/functions/responsiveUtils';
-import responsiveStyles from './styles/styles';
 import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import IconEnt from '@expo/vector-icons/Entypo';
-import { useAppThemeColors } from '../../../utils/functions/responsiveUtils';
+import IconAnt from '@expo/vector-icons/AntDesign';
 import ButtonRipple from '../../general/customButton/buttonRipple';
 import { TextBold, TextRegular } from '../../general/text/text';
 import UserAvatar from '../../general/avatar/avatar';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
-import moment from 'moment';
+
 
 
 
@@ -29,6 +26,7 @@ type bannerProps = {
   containerStyles?: ViewStyle
   onMenuPress?: () => void,
   onTitlePress?: () => void,
+  onCancel?: () => void
 }
 
 const ContentHeader = ({
@@ -40,6 +38,7 @@ const ContentHeader = ({
   containerStyles,
   onMenuPress = () => '',
   onTitlePress = () => '',
+  onCancel
 }: bannerProps) => {
 
   const { styles, theme: { colors } } = useStyles(styleSheet);
@@ -115,6 +114,16 @@ const ContentHeader = ({
           size={14}
         />
       </ButtonRipple>
+      {onCancel && <ButtonRipple
+        onPress={onCancel}
+        style={styles.btnMenu}
+      >
+        <IconAnt
+          name={"close"}
+          color={colors.secondary1}
+          size={14}
+        />
+      </ButtonRipple>}
     </View>
   );
 };

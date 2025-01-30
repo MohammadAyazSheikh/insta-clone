@@ -1,5 +1,5 @@
-import React from 'react';
-import { Dimensions, ScrollView, TextInput,View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Dimensions, ScrollView, TextInput, View } from 'react-native';
 import Animated, {
     Extrapolation,
     interpolate,
@@ -20,6 +20,7 @@ import { storyDataType } from '../../../constants/data/storyData';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
 import moment from 'moment';
+import { useKeyboardVisibility } from '../../../hooks/keyboardHooks';
 
 const { width } = Dimensions.get('window');
 
@@ -50,9 +51,7 @@ const StoryContent = ({
 
     const { styles } = useStyles(styleSheet);
 
-
-    //holds value if visible story in screen or not
-    // const [isVisible, setIsVisible] = useState(false);
+    const { visible: isKeyBoard, style: animatedKeyboardStyle } = useKeyboardVisibility();
 
     //opacity animation for header and footer
     const opacity = useSharedValue(1);
@@ -80,7 +79,6 @@ const StoryContent = ({
                 onClose && onClose()
             },
             onNextStory,
-            // isVisible
         );
 
 
@@ -126,7 +124,12 @@ const StoryContent = ({
         };
     });
 
-
+    // pause story when keyboard is visible
+    useEffect(() => {
+        if (isModalOpen?.current) {
+            isKeyBoard ? pauseStory() : playStory()
+        }
+    }, [isKeyBoard])
 
 
     return (
@@ -134,12 +137,10 @@ const StoryContent = ({
         <Animated.View
             style={[
                 styles.container,
-                containerStyle
+                containerStyle,
             ]}
         >
             <View
-                // <VisibilitySensor
-                // onChange={(isVisible) => setIsVisible(isVisible)}
                 style={[
                     styles.container,
                 ]}
@@ -157,6 +158,7 @@ const StoryContent = ({
                         title={contentData.user.userName}
                         time={moment(contentData.timeStamp).fromNow()}
                         subtile=''
+                        onCancel={onClose}
                     />
                 </Animated.View>
                 {/* content */}
@@ -178,7 +180,8 @@ const StoryContent = ({
                 {/* Input and Send button */}
                 <Animated.View style={[
                     styles.row,
-                    { opacity }
+                    { opacity, marginTop: 10 },
+                    animatedKeyboardStyle
                 ]}>
                     <TextInput
                         placeholderTextColor={colors.grey1}
@@ -206,8 +209,8 @@ const StoryContent = ({
                         />
                     </ButtonRipple>
                 </Animated.View>
-            </View>
-        </Animated.View>
+            </View >
+        </Animated.View >
 
     );
 };

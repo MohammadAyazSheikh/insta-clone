@@ -17,17 +17,13 @@ export type storyDataType = {
 
 const generateStories = (n: number) => {
 
-
-    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
-    const category = faker.helpers.arrayElement(categories);
-
     const stories: storyDataType[] = [];
 
     for (let i = 0; i < n; i++) {
         const content = Array.from({ length: faker.number.int({ min: 1, max: 5 }) })
             .map(item => ({
                 id: faker.string.uuid(),
-                uri: faker.image.urlLoremFlickr({ category, width, height })
+                uri: faker.image.urlPicsumPhotos({ width, height, blur: 0 })
             }));
         stories.push({
             id: faker.string.uuid(),

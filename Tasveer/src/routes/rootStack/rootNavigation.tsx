@@ -72,6 +72,12 @@ function RootNav() {
           ...DefaultTheme.colors,
           background: colors.primary1,
         },
+        fonts: {
+          regular: { fontWeight: "normal", fontFamily: fontFamily.regular },
+          medium: { fontWeight: "normal", fontFamily: fontFamily.medium },
+          bold: { fontWeight: "normal", fontFamily: fontFamily.semiBold },
+          heavy: { fontWeight: "normal", fontFamily: fontFamily.bold },
+        }
       }}>
       <StatusBar
         backgroundColor={colors.primary1}
