@@ -1,59 +1,92 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, createRef, useCallback } from 'react';
+import styleSheet from './styles/styles';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import { useNavigation } from '@react-navigation/core'
-import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StackScreenProps } from '@react-navigation/stack';
 import { RootStackProps } from '../../routes/rootStack/rootNavigation';
+import { RenderBubble } from '../../components/chat/renderBubble';
+import { messageObjType } from '../../constants/types/sharedTypes';
 import { getConversationData } from '../../constants/data/conversation';
 import { getMessages } from '../../redux/features/chat/chatSlice';
-import Header from '../../components/general/screenHeaders/header';
-import { RenderStarredBubble } from '../../components/chat/renderStarredBubble';
-import styleSheet from './styles/styles';
-import { useStyles } from 'react-native-unistyles';
-import { FlashList } from 'react-native-collapsible-tab-view';
+import { RenderMsgAlert } from '../../components/general/alerts/messageOptionsAlert';
+import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
+import { RenderReaction } from '../../components/chat/reactions/reactions';
+import ReactionSheet from '../../components/chat/reactions/reactionSheet';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { useStyles } from 'react-native-unistyles';
+import { FlashList } from '@shopify/flash-list';
 import { useKeyboardVisibility } from '../../hooks/keyboardHooks';
+import Animated from 'react-native-reanimated';
+import Header from '../../components/general/screenHeaders/header';
 
 
 
-export default function StarredMessages() {
+export const chatScrollRef = createRef<FlashList<messageObjType>>();
+export const refReactionSheet = createRef<BottomSheet>();
+const SafeAreaAnim = Animated.createAnimatedComponent(SafeAreaView);
+
+export default function StarrMessage(props: StackScreenProps<RootStackProps, 'StarredMessages'>) {
+
 
     const { styles } = useStyles(styleSheet);
-    // keyboard style
-    const { style } = useKeyboardVisibility();
-    const navigation = useNavigation<StackNavigationProp<RootStackProps>>();
     const { user } = useAppSelector(state => state.user);
     const { messages } = useAppSelector(state => state.chat);
+    const starredMsg = messages.filter(m => m.starred)
     const dispatch = useAppDispatch();
+
+    //for feting conversation from server
+    // const conversationId = props?.route?.params?.conversationId;
+
+
+
+
+    // keyboard style
+    const { style } = useKeyboardVisibility();
 
 
     useEffect(() => {
-        dispatch(getMessages(getConversationData(user!)))
-    }, [])
+        dispatch(getMessages(getConversationData(user!)));
+    }, []);
 
 
 
+
+
+    //function to render message
+    const renderBubble = useCallback(({ item }: { item: messageObjType }) => (
+        <RenderBubble
+            message={item}
+            setReplyMessage={() => ""}
+        />
+    ), []);
 
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={styles.container}>
-                {/* ---Header--- */}
-                <Header
-                    title='Starred messages'
-                />
-                {/* ---List--- */}
+            <SafeAreaAnim
+                style={[styles.container, style]}
+            >
+                {/* header */}
+                <Header title='Starred Messages' />
+                {/* list messages */}
                 <FlashList
+                    ref={chatScrollRef}
                     style={styles.scrollContainer}
                     inverted
-                    data={messages}
+                    data={starredMsg}
                     keyExtractor={(item => item.id.toString())}
-                    renderItem={({ item, index }) => (
-                        <RenderStarredBubble
-                            message={item}
-                        />
-                    )}
+                    renderItem={renderBubble}
                 />
-            </SafeAreaView >
+                {/* message option for delete */}
+                <RenderMsgAlert />
+                {/* modal for reacting in messages */}
+                <RenderReaction />
+                {/* sheet for showing reaction in a message */}
+                <ReactionSheet
+                    ref={refReactionSheet}
+                    snapPoints={["50%"]}
+                />
+            </SafeAreaAnim >
         </SafeAreaProvider>
     );
+
 }
 
