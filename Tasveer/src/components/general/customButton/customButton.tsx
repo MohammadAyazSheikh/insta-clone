@@ -21,6 +21,7 @@ type buttonProps = {
   isLoading?: boolean;
   loaderPops?: ActivityIndicatorProps;
   disableStyles?: ViewStyle,
+  outlined?: Boolean,
   icon?: React.ComponentType;
 } & btnProps; // merging touchableOpacity props with my own props using &  operator
 
@@ -32,20 +33,24 @@ const CustomButton = ({
   isLoading = false,
   loaderPops,
   disableStyles = {},
+  outlined,
   ...touchProps
 }: buttonProps) => {
 
   const { styles, theme: { colors } } = useStyles(styleSheet);
 
   const isDark = UnistylesRuntime.themeName == "dark";
- 
+
 
   return (
     <TouchableRipple
       onPress={() => ''}
       {...touchProps}
-      style={[styles.btnView, touchProps.style,
-      touchProps.disabled ? { ...styles.disableStyle, ...disableStyles } : {}
+      style={[
+        styles.btnView,
+        outlined && styles.btnOutlinedView,
+        touchProps.style,
+        touchProps.disabled ? { ...styles.disableStyle, ...disableStyles } : {}
       ]}
       rippleColor={isDark ? 'rgba(255,255,255,0.2)' : 'rgba(000,000,000,0.2)'}
       borderless
@@ -55,7 +60,11 @@ const CustomButton = ({
         <Text
           numberOfLines={1}
           {...textProps}
-          style={[styles.txtBtn, textProps?.style]}>
+          style={[
+            styles.txtBtn,
+            outlined && styles.txtOutlinedBtn,
+            textProps?.style
+          ]}>
           {buttonText}
         </Text>
         {Icon && iconPosition == 'right' && <Icon />}

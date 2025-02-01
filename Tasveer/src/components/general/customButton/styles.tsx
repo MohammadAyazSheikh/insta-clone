@@ -2,10 +2,10 @@ import { createStyleSheet } from 'react-native-unistyles';
 import { fontFamily } from '../../../theme/fonts';
 
 const styleSheet = createStyleSheet((theme) => {
-    const { colors,fontSize } = theme;
+    const { colors, fontSize } = theme;
 
     return ({
-      
+
         btnView: {
             flexDirection: 'row',
             justifyContent: 'center',
@@ -17,13 +17,21 @@ const styleSheet = createStyleSheet((theme) => {
             paddingHorizontal: 5,
             marginVertical: 5,
         },
-        disableStyle:{
+        btnOutlinedView: {
+            borderWidth: 1,
+            borderColor: colors.secondary1,
+            backgroundColor: colors.primary1
+        },
+        disableStyle: {
             backgroundColor: colors.ternary2,
         },
         txtBtn: {
-            color: "#fff",
+            color: colors.primary1,
             fontFamily: fontFamily.bold,
-            fontSize: 14
+            fontSize: fontSize.md
+        },
+        txtOutlinedBtn: {
+          color:colors.secondary1
         }
     })
 });

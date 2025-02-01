@@ -15,14 +15,10 @@ export const generateDiscoverdPosts = (numberOfPosts: number) => {
 
     const posts: discoverDataType[] = [];
 
-    const categories = ['nature', 'sports', 'food', 'travel', 'animals', 'fashion', 'technology', "city"];
-
-
     for (let i = 0; i < numberOfPosts; i++) {
-        const category = faker.helpers.arrayElement(categories);
         const type = faker.helpers.arrayElement(['image', 'reel', 'video']);
         const uri = type === "image" ?
-            faker.image.urlLoremFlickr({ category, width: 400, height: 400 })
+            faker.image.url({  width: 400, height: 400 })
             :
             remoteVideos[faker.number.int({ min: 0, max: remoteVideos.length - 1 })].uri
         posts.push({

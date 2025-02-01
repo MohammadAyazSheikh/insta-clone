@@ -9,8 +9,8 @@ export type userType = {
     phone?: string,
     gender?: 'male' | 'female',
     dob?: Date,
-    profileImage?:string,
-    bio?:string,
+    profileImage?: string,
+    bio?: string,
 }
 
 
@@ -85,4 +85,14 @@ export type starredMessageType = {
     //with each starred message,
     //if it has only 2 users it will be null
     conversationInfo?: conversationType,
+}
+
+export type notificationTypes = "FollowRequest" | "FriendSuggestion" | "AcceptRequest" | "Like" | "Comment"
+export type notificationObjectType = {
+    id: string,
+    title: string,
+    subTitle?: string,
+    time: Date,
+    type: notificationTypes,
+    users: userType[]
 }

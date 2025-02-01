@@ -12,6 +12,7 @@ import EditProfile from '../../screens/editProfileScreen/editProfileScreen';
 import Search from '../../screens/searchScreen/searchScreen';
 import UserProfile from '../../screens/profileScreen/userProfileScreen';
 import StarredMessages from '../../screens/conversationScreen/starredMessages';
+import Notifications from '../../screens/notificationsScreen/norifications';
 
 
 const Stack = createStackNavigator<RootStackProps>();
@@ -98,6 +99,13 @@ export const protectedRoutes = () => {
             <Stack.Screen
                 name="UserProfile"
                 component={UserProfile}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <Stack.Screen
+                name="Notifications"
+                component={Notifications}
                 options={{
                     headerShown: false,
                 }}

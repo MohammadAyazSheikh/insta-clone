@@ -33,8 +33,8 @@ export default function HomeHeader() {
             />
             <View style={styles.row}>
                 <ButtonRipple
-                    onPress={() => ''}
                     style={{ marginRight: 10, borderRadius: 100, }}
+                    onPress={() => navigation.navigate('Notifications')}
                 >
                     <IconIo
                         name='heart-outline'

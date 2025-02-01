@@ -10,7 +10,6 @@ import IconAnt from "@expo/vector-icons/AntDesign";
 import { UnistylesRuntime, useStyles } from 'react-native-unistyles';
 import styleSheet from './styles';
 import colors from '../../theme/colors';
-import CustomButton from '../../components/general/customButton/customButton';
 import ButtonRipple from '../../components/general/customButton/buttonRipple';
 import { useAppSelector } from '../../redux/hooks';
 import UserCard from '../../components/cards/userCard/userCard';
