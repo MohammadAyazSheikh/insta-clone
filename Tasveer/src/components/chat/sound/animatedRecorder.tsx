@@ -15,7 +15,7 @@ import LottieView from 'lottie-react-native';
 import { useSoundBtnGesture } from "./hooks/soundBtnGestureHook";
 import RecorderQuick from "./recorderQuick";
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
-import RecorderLocked, { BAR_CONTAINER_WIDTH, TOTAL_BAR_WIDTH } from "./recorderLocked";
+import RecorderLocked, { BAR_CONTAINER_WIDTH, inputRangeMeter, TOTAL_BAR_WIDTH } from "./recorderLocked";
 import { useStyles } from "react-native-unistyles";
 
 
@@ -91,7 +91,7 @@ const AnimatedRecorder = ({
             metering.value = withTiming(
                 interpolate(
                     e.currentMetering!,
-                    [-15, -7.5, 0],
+                    inputRangeMeter!,
                     [0, 0, 1]
                 ),
                 { duration: 200 }

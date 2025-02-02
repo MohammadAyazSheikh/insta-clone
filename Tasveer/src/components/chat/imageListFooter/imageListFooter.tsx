@@ -36,7 +36,7 @@ const ImageListFooter = ({
                             onPress={() => onImageRemove && onImageRemove(item)}
                             style={styles.btnRemoveSingleImg}
                         >
-                            <IconAnt name="close" size={12} color={'white'} />
+                            <IconAnt name="close" size={12} color={colors.primary1} />
                         </ButtonRipple>
                     </View>
                 ))}

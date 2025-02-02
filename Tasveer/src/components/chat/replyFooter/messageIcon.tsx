@@ -14,7 +14,7 @@ export const getMessageIcon = (name: messageType, color: string = "black") => {
                 size={20}
                 color={color}
             />,
-            text: 'Voice'
+            text: 'Image'
         },
         video: {
             icon: <IconEn

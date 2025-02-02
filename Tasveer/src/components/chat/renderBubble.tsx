@@ -63,6 +63,7 @@ export const RenderBubble = (props: props) => {
                     {/* user avatar */}
                     <UserAvatar
                         size={40}
+                        image={sender.profileImage && { uri: sender.profileImage }}
                         name={sender?.firstName || sender?.lastName || sender?.userName}
                         containerStyle={you ? styles.avatarSender : {}}
                     />

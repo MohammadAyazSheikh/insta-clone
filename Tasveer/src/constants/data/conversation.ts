@@ -1,6 +1,6 @@
 import { messageObjType, userType } from '../types/sharedTypes';
 import uuid from 'react-native-uuid';
-export const getConversationData = (user: userType): messageObjType[] => {
+export const getConversationData = (user: userType, receiver: userType): messageObjType[] => {
 
     return (
         [
@@ -9,10 +9,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 type: 'location',
                 createdAt: new Date(),
                 status: 'sent',
-                user: {
-                    id: 98032,
-                    firstName: "Harry",
-                },
+                user: receiver,
                 location: {
                     latitude: 24.8607,
                     longitude: 67.0011,
@@ -53,10 +50,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 createdAt: new Date(),
                 status: 'seen',
                 starred: true,
-                user: {
-                    id: 2,
-                    firstName: 'John',
-                },
+                user: receiver,
                 reacts: []
             },
             {
@@ -78,10 +72,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 voice: "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
                 createdAt: new Date(),
                 status: 'seen',
-                user: {
-                    id: 2,
-                    firstName: 'John',
-                },
+                user: receiver,
                 reacts: []
             },
             {
@@ -91,10 +82,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 voice: "https://samplelib.com/lib/preview/mp3/sample-3s.mp3",
                 createdAt: new Date(),
                 status: 'seen',
-                user: {
-                    id: 2,
-                    firstName: 'John',
-                },
+                user: receiver,
                 reacts: []
             },
             {
@@ -104,10 +92,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 document: 'insights.xls',
                 createdAt: new Date(),
                 status: 'seen',
-                user: {
-                    id: 2,
-                    firstName: 'John',
-                },
+                user: receiver,
                 reacts: []
             },
             {
@@ -116,10 +101,7 @@ export const getConversationData = (user: userType): messageObjType[] => {
                 type: 'text',
                 createdAt: new Date(),
                 status: 'seen',
-                user: {
-                    id: 1,
-                    firstName: 'Ahmed',
-                },
+                user: receiver,
                 reacts: []
             },
         ]

@@ -16,6 +16,7 @@ import { showReaction } from '../reactions/reactions';
 import { Text } from 'react-native';
 import { useStyles } from 'react-native-unistyles';
 import styleSheet from './styles/styles';
+import moment from 'moment';
 
 const getMsgStatusIcon = (name: 'sent' | 'delivered' | 'seen' | 'sending',
     color?: number | ColorValue | undefined) => {
@@ -61,7 +62,7 @@ export default function BubbleWrapper({
     const { styles } = useStyles(styleSheet);
 
     const dispatch = useAppDispatch();
-    const { user: sender, text, replyMessage, starred } = props;
+    const { user: sender, text, replyMessage, starred, createdAt } = props;
     const { messages } = useAppSelector(state => state.chat);
     const { selectedMessages } = useAppSelector(state => state.ui);
     const { user } = useAppSelector(state => state.user);
@@ -202,7 +203,7 @@ export default function BubbleWrapper({
                         styles.txtTime,
                         (you && !isDark) && styles.msgTextSenderLight,
                     ]}>
-                        1h ago
+                        {moment(createdAt).fromNow()}
                     </TextRegular>
                     {/* status icon */}
                     {

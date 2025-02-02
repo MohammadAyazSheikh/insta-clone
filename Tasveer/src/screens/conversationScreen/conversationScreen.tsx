@@ -49,7 +49,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
 
 
     useEffect(() => {
-        dispatch(getMessages(getConversationData(user!)));
+        dispatch(getMessages(getConversationData(user!, recipient)));
     }, []);
 
     useEffect(() => {

@@ -15,8 +15,8 @@ import { RecordTime } from "./recorderQuick";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
 import { useAppSelector } from "../../../redux/hooks";
 
-const inputRange = Platform.select({
-  ios: [-10, -5, 0],
+export const inputRangeMeter = Platform.select({
+  ios: [-40, -20, -0],
   android: [-20, -10, 0]
 })
 
@@ -81,7 +81,7 @@ const RecorderLocked = ({
                   <Animated.View style={[stylesBars.barContainer, stylesAnimBarContainer]}>
                     {
                       meteringList.map((b, index) => {
-                        const height = interpolate(b.metering, inputRange!, [SOUND_BAR_WIDTH, 15, 35], Extrapolation.CLAMP)
+                        const height = interpolate(b.metering, inputRangeMeter!, [SOUND_BAR_WIDTH, 15, 35], Extrapolation.CLAMP)
                         return (
                           <Animated.View
                             // entering={StretchInY.duration(200).delay(50)}

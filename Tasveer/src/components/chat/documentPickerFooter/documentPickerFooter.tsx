@@ -40,7 +40,7 @@ const DocumentPickerFooter = ({
                 onPress={() => onClose && onClose()}
                 style={styles.btnClose}
             >
-                <IconAnt name="close" size={18} color={colors.secondary1} />
+                <IconAnt name="close" size={18} color={colors.primary1} />
             </ButtonRipple>
         </View>
     );

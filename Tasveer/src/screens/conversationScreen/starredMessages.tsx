@@ -17,6 +17,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useKeyboardVisibility } from '../../hooks/keyboardHooks';
 import Animated from 'react-native-reanimated';
 import Header from '../../components/general/screenHeaders/header';
+import { users } from '../../constants/data/generateUsers';
 
 
 
@@ -44,7 +45,7 @@ export default function StarrMessage(props: StackScreenProps<RootStackProps, 'St
 
 
     useEffect(() => {
-        dispatch(getMessages(getConversationData(user!)));
+        dispatch(getMessages(getConversationData(user!, users[0])));
     }, []);
 
 

@@ -21,7 +21,7 @@ const styleSheet = createStyleSheet((theme) => {
             justifyContent: 'center',
             alignItems: 'center',
             borderRadius: 100,
-            backgroundColor: 'white',
+            backgroundColor: colors.common.orange,
         },
     })
 });

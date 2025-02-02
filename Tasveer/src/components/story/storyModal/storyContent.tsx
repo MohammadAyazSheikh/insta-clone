@@ -154,7 +154,7 @@ const StoryContent = ({
                     <RenderStoryBars animatedValuesBar={animValuesBar} />
                     {/* header */}
                     <ContentHeader
-                        image={contentData.user.profileImage}
+                        image={contentData.user.profileImage && { uri: contentData.user.profileImage }}
                         title={contentData.user.userName}
                         time={moment(contentData.timeStamp).fromNow()}
                         subtile=''
