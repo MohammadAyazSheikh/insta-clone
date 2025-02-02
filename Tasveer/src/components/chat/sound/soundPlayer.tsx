@@ -37,7 +37,7 @@ const SoundPlayer = ({
 }: sliderProps) => {
 
 
-    const { styles } = useStyles(styleSheet);
+    const { styles,theme:{colors} } = useStyles(styleSheet);
 
     //holds width of the view of progress line view
     const [progressViewWidth, setProgressViewWidth] = useState<number>(0);
@@ -146,7 +146,7 @@ const SoundPlayer = ({
                 disabled={!isLoaded}
             >
                 <IconEnt
-                    color={iconColor || "white"}
+                    color={iconColor || colors.primary1}
                     size={30}
                     name={isPlaying ? 'controller-paus' : 'controller-play'}
                 />

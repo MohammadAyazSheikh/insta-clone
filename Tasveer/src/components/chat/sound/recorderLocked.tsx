@@ -100,6 +100,8 @@ const RecorderLocked = ({
             :
             // player
             <SoundPlayer
+              iconColor={colors.ternary2}
+              thumbStyles={{backgroundColor:colors.ternary2}}
               url={uri!}
             />
         }

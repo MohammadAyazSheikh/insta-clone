@@ -67,7 +67,6 @@ const AnimatedRecorder = ({
     //function to stop recording
     const stopRecording = useCallback(async () => {
         const uri = await onStopRecord();
-        setUri(uri);
         setIsRecording(false);
         isRecordingSharedValue.value = false;
         //locked recorder
@@ -226,8 +225,6 @@ const AnimatedRecorder = ({
                 onPauseRecord={() => {
                     if (isRecording) {
                         stopRecording();
-                        isRecordingSharedValue.value = false;
-                        setIsRecording(false);
                     }
                     else {
                         isRecordingSharedValue.value = true;

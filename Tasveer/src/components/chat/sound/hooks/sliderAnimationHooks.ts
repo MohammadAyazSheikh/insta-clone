@@ -7,7 +7,6 @@ import {
 } from 'react-native-reanimated';
 import { Dimensions } from 'react-native';
 import { Gesture } from 'react-native-gesture-handler';
-import { THUMB_WIDTH } from '../styles/portraitStyles';
 const { width: deviceWidth } = Dimensions.get("window");
 
 

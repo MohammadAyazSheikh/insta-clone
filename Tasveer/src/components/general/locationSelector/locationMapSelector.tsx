@@ -116,7 +116,7 @@ const LocationMapSelector = ({
                                     <TextInput
                                         style={styles.txtInput}
                                         placeholder='Search location'
-                                        placeholderTextColor={colors.grey1}
+                                        placeholderTextColor={colors.common.grey1}
                                         onChangeText={(value => {
                                             searchHandler(value);
                                             if (!value) {
@@ -133,7 +133,7 @@ const LocationMapSelector = ({
                                         <IconMt
                                             name='my-location'
                                             size={20}
-                                            color={"white"}
+                                            color={colors.secondary1}
                                         />
                                     </TouchableOpacity>
                                     {/* --------------suggestionView-------------- */}

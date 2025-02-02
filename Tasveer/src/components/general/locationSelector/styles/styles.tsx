@@ -45,13 +45,13 @@ const styleSheet = createStyleSheet((theme) => {
             paddingHorizontal: spacing?.lg,
             borderRadius: spacing?.lg,
             backgroundColor: "#EFEFEF",
-            ...getShadow({ elevation: 10, shadowRadius: 10 }),
+            ...getShadow({  }),
             position: 'relative'
         },
         txtInput: {
             flex: 1,
             marginRight: 5,
-            color: colors.primary1,
+            color: colors.secondary1,
             height: 45
         },
         suggestionView: {

@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, Dimensions, Easing } from "react-native";
+import React, { useRef, useState } from "react";
+import { View, StyleSheet, Dimensions } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
 } from 'react-native-reanimated';
 import useSoundRecorderHooks from "./hooks/soundRecorderhooks";
 import { TouchableRipple } from "react-native-paper";
-import { PlayBackType, RecordBackType } from "react-native-audio-recorder-player";
+import { PlayBackType } from "react-native-audio-recorder-player";
 import IconEnt from '@expo/vector-icons/Entypo';
 import {
     GestureDetector
 } from 'react-native-gesture-handler';
-import { useGestureAnimation } from "./hooks/sliderAnimationHooks";
+import { useSliderGesture } from "./hooks/sliderAnimationHooks";
 import { TextRegular } from "../../general/text/text";
 const { width: deviceWidth } = Dimensions.get("window");
 
@@ -28,6 +28,8 @@ const Slider = ({
     //stats for sound info and progress
     const [isPlaying, setIsPlaying] = useState(false);
     const [time, setTime] = useState<PlayBackType>({
+        isMuted: false,
+        isFinished: true,
         duration: 0,
         currentPosition: 0,
     });
@@ -35,21 +37,20 @@ const Slider = ({
     const isThumbPressed = useRef(false);
 
     //sound hook
-    const { onStartPlay, onPausePlay, onSeek, onResumePlay, onStopPlay } = useSoundRecorderHooks();
+    const { onStartPlay, onPausePlay, onSeek, onResumePlay } = useSoundRecorderHooks();
 
 
     // animated value to move thumb towards right side when sound is playing
     const translateX = useSharedValue(0);
 
     const playingStyleAnimated = useAnimatedStyle(() => ({
-        // left: `${translate.value}%`
         transform: [{
             translateX: translateX.value
         }]
     }));
 
     // gesture animation hook
-    const { animatedGestureStyle, panGestureEvent } = useGestureAnimation({
+    const { animatedGestureStyle, panGestureEvent } = useSliderGesture({
         translateX,
         width: progressViewWidth,
         onStart: () => {
@@ -61,10 +62,10 @@ const Slider = ({
 
             const millis = (time.duration / 100) * percentage;
 
-             onSeek(millis, () => {
+            onSeek(millis, () => {
                 onStartPlay(onPlayHandler);
             })
-        
+
         }
     });
 
@@ -77,14 +78,16 @@ const Slider = ({
         if (progress < 100 && isThumbPressed.current == false) {
             translateX.value = position// withTiming(position, { duration: 50 });
         }
-        else if (progress > 99 && isThumbPressed.current == false ) {
+        else if (progress > 99 && isThumbPressed.current == false) {
             setIsPlaying(false);
             translateX.value = 0;
             setTime({
+                isFinished: true,
+                isMuted: false,
                 duration: 0,
                 currentPosition: 0,
             });
-        } 
+        }
     }
 
 

@@ -184,7 +184,7 @@ export const SenderFooter = ({
         {/* -----------send button  and recorder-------*/}
         {
           //send button
-          text || imageList?.length > 0 ?
+          text || imageList?.length > 0 || document ?
             <ButtonRipple
               style={styles.btnStyle}
               onPress={() => {
@@ -208,7 +208,7 @@ export const SenderFooter = ({
                     document: document.name!,
                   });
                   setText('');
-
+                  setDocument(undefined)
                   return;
                 }
 
@@ -243,8 +243,6 @@ export const SenderFooter = ({
             />
         }
       </View>
-
-
       {/*------ Attachment sheet ------*/}
       <AttachmentSheet
         imageList={imageList}
@@ -268,7 +266,7 @@ export const SenderFooter = ({
         onBtnVideo={() => {
           pickSingleVideo()
             .then(vid => {
-              const name = vid.assets[0].fileName;
+              // const name = vid.assets[0].fileName;
               const uri = vid.assets[0].uri
               setVideo(uri);
               setShowVideo(true);
@@ -277,7 +275,6 @@ export const SenderFooter = ({
         }}
         onBtnLocation={() => {
           setOpenLocation(true);
-          setIsAttachVisible(false)
         }}
       />
 
@@ -303,7 +300,10 @@ export const SenderFooter = ({
       <LocationMapSelector
         isOpen={openLocation}
         coord={coord!}
-        onClose={() => setOpenLocation(false)}
+        onClose={() => {
+          setOpenLocation(false);
+          setIsAttachVisible(false)
+        }}
         setCoord={(coord) => setCoord(coord)}
         onSend={() => {
           onSend && onSend({
@@ -312,6 +312,7 @@ export const SenderFooter = ({
             location: coord,
           })
           setOpenLocation(false);
+          setIsAttachVisible(false)
         }}
       />
     </View>

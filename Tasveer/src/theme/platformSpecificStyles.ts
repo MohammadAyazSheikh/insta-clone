@@ -5,7 +5,7 @@ export const getShadow = ({
     yOffset = 1,
     shadowColor = "#000",
     shadowOpacity = 1,
-    shadowRadius = 5,
+    shadowRadius = 2,
     elevation = 10,
 }) => {
     if (Platform.OS === 'ios') {
