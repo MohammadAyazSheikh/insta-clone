@@ -26,12 +26,12 @@ const styleSheet = createStyleSheet((theme) => {
             backgroundColor: colors.ternary2,
         },
         txtBtn: {
-            color: colors.primary1,
+            color: "#fff",
             fontFamily: fontFamily.bold,
             fontSize: fontSize.md
         },
         txtOutlinedBtn: {
-          color:colors.secondary1
+            color: "#fff",
         }
     })
 });

@@ -13,6 +13,7 @@ import IconMtc from '@expo/vector-icons/MaterialCommunityIcons';
 import SoundPlayer from "./soundPlayer";
 import { RecordTime } from "./recorderQuick";
 import { createStyleSheet, useStyles } from "react-native-unistyles";
+import { useAppSelector } from "../../../redux/hooks";
 
 const inputRange = Platform.select({
   ios: [-10, -5, 0],
@@ -50,6 +51,8 @@ const RecorderLocked = ({
   onPauseRecord,
 }: props) => {
 
+  const { theme } = useAppSelector(state => state.theme);
+  const isDark = theme == "dark";
   const { styles, theme: { colors } } = useStyles(styleSheet);
   const { styles: stylesBars } = useStyles(barStyleSheet);
 
@@ -100,8 +103,8 @@ const RecorderLocked = ({
             :
             // player
             <SoundPlayer
-              iconColor={colors.ternary2}
-              thumbStyles={{backgroundColor:colors.ternary2}}
+              iconColor={isDark ? "white" : colors.ternary1}
+              thumbStyles={{ backgroundColor: isDark ? "white" : colors.ternary1 }}
               url={uri!}
             />
         }

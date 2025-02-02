@@ -38,7 +38,7 @@ export default function Search() {
                             <IconAnt
                                 name="left"
                                 size={26}
-                                color={colors.secondary1}
+                                color={colors.primary1}
                             />
                         </ButtonRipple>
                         {/* search bar */}

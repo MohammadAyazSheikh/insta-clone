@@ -18,7 +18,7 @@ export default function SoundBubble(props: propsType) {
         message,
     } = props;
 
-    const { theme:{colors}} = useStyles({});
+    const { theme: { colors } } = useStyles({});
 
     const { user: sender, voice } = message;
 
@@ -36,17 +36,10 @@ export default function SoundBubble(props: propsType) {
             onPress={props?.onPress}
             onLongPress={props?.onLongPress}
         >
-            {/* <SoundSlider
-                containerStyle={{ width: '100%' }}
-                iconColor={colorBtn}
-                thumbTintColor={colorBtn}
-                maximumTrackTintColor={colors.grey1}
-                minimumTrackTintColor={maxTrackColor}
-                textStyle={{ color: maxTrackColor, fontSize: 10 }}
-                path={voice}
-            /> */}
             <SoundPlayer
                 url={voice!}
+                thumbStyles={{ backgroundColor: !you && isDark ? "white" : !you && !isDark ? colors.ternary1 : "white" }}
+                iconColor={!you && isDark ? "white" : !you && !isDark ? colors.ternary1 : "white"}
                 containerStyles={{ backgroundColor: 'transparent', width: widthToDp(80) }}
             />
         </BubbleWrapper>

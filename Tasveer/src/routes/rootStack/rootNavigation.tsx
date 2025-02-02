@@ -53,12 +53,12 @@ function RootNav() {
   const { theme, isDefault } = useAppSelector(state => state.theme);
   const dispatch = useAppDispatch();
 
-  //setting theme
-  useEffect(() => {
-    isDefault && dispatch(changeTheme({
-      theme: scheme!,
-    }))
-  }, [scheme]);
+  // //setting theme
+  // useEffect(() => {
+  //   isDefault && dispatch(changeTheme({
+  //     theme: scheme!,
+  //   }))
+  // }, [scheme]);
 
   //generating data
   useEffect(() => {

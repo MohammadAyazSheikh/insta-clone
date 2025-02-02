@@ -18,6 +18,7 @@ import { THUMB_WIDTH } from "./styles/portraitStyles";
 import { useStyles } from "react-native-unistyles";
 
 
+
 type sliderProps = {
     url: string,
     containerStyles?: ViewStyle,
@@ -36,8 +37,7 @@ const SoundPlayer = ({
     timeStyles,
 }: sliderProps) => {
 
-
-    const { styles,theme:{colors} } = useStyles(styleSheet);
+    const { styles, theme: { colors } } = useStyles(styleSheet);
 
     //holds width of the view of progress line view
     const [progressViewWidth, setProgressViewWidth] = useState<number>(0);
