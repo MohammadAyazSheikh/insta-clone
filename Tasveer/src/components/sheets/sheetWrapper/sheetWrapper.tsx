@@ -78,4 +78,5 @@ const SheetWrapper = forwardRef<BottomSheet, sheetWrapperProps>(({
   );
 });
 
-export default SheetWrapper;
+export default React.memo(SheetWrapper);
+ 

@@ -17,7 +17,7 @@ type IndicatorPropType = {
   scrollRef?: React.RefObject<FlatList>;
 };
 
-export const SliderIndicator = ({
+export const SliderIndicator = React.memo(({
   scrollX,
   length = 3,
   size = 30,
@@ -84,14 +84,14 @@ export const SliderIndicator = ({
       renderItem={renderItems}
     />
   );
-};
+});
 
 type circleType = {
   item: imageListType,
   index: number
 } & IndicatorPropType
 
-const Circle = ({ index, scrollX, size, radius, spacing, color, scrollRef, item, imageList }: circleType) => {
+const Circle = React.memo(({ index, scrollX, size, radius, spacing, color, scrollRef, item, imageList }: circleType) => {
 
 
   //animated styles
@@ -180,4 +180,4 @@ const Circle = ({ index, scrollX, size, radius, spacing, color, scrollRef, item,
       }
     </Animated.View>
   );
-}
+})

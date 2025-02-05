@@ -39,8 +39,7 @@ type mediaType = {
   indicatorRightIcon?: React.ComponentType;
   onDoubleTab?: () => void,
 };
-
-export const MediaSlider = ({
+export const MediaSlider = React.memo(({
   autoSlide = false,
   mediaList = [],
   indicatorType = 'dot',
@@ -139,34 +138,35 @@ export const MediaSlider = ({
         renderItem={renderItem}
       />
       {/*  -------- indicator ------*/}
-        <View style={[styles.row, indicatorRowContainerStyle]}>
+      <View style={[styles.row, indicatorRowContainerStyle]}>
+        {
+          // left icon
+          IndLeftIcon ? <IndLeftIcon /> : null
+        }
+        <View>
           {
-            // left icon
-            IndLeftIcon ? <IndLeftIcon /> : null
+            mediaList.length > 1 ?
+              <SliderIndicator
+                color={indicatorColor}
+                radius={indicatorRadius}
+                size={indicatorSize}
+                spacing={indicatorSpacing}
+                containerWidth={indicatorContainerWidth}
+                length={mediaList.length}
+                imageList={indicatorType == 'image' ? mediaList : []}
+                scrollX={scrollX}
+                scrollRef={scrollRef}
+              />
+              :
+              null
           }
-          <View>
-            {
-              mediaList.length > 1 ? 
-                <SliderIndicator
-                  color={indicatorColor}
-                  radius={indicatorRadius}
-                  size={indicatorSize}
-                  spacing={indicatorSpacing}
-                  containerWidth={indicatorContainerWidth}
-                  length={mediaList.length}
-                  imageList={indicatorType == 'image' ? mediaList : []}
-                  scrollX={scrollX}
-                  scrollRef={scrollRef}
-                />
-                :
-                null
-            }
-          </View>
-          {
-            // right icon
-            IndRightIcon ? <IndRightIcon /> : null
-          }
-        </View >
+        </View>
+        {
+          // right icon
+          IndRightIcon ? <IndRightIcon /> : null
+        }
+      </View >
     </View>
   );
-};
+});
+

@@ -132,4 +132,4 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
   );
 });
 
-export default CommentSheet;
+export default React.memo(CommentSheet);

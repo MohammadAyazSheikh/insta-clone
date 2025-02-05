@@ -73,6 +73,7 @@ export default function Search() {
                                 title={`${item.firstName} ${item.lastName}`}
                                 subTitle={item.userName}
                                 avatar={item.profileImage}
+                                onPress={() => navigation.navigate("UserProfile", { user: item })}
                             />
                         )}
                     />

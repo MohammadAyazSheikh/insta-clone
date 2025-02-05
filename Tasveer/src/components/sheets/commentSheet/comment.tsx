@@ -41,14 +41,14 @@ const Comment = ({
                     size={30}
                     name={comment?.user?.firstName}
                     showRing={comment && comment?.comment?.length % 2 == 0}
-                    image={{uri:comment?.user.profileImage}}
+                    image={{ uri: comment?.user.profileImage }}
                 />
             </View>
             <View style={styles.rowComment}>
                 <View style={styles.colComment} >
                     {/* name and time */}
                     <View style={styles.row}>
-                        <View style={{ paddingRight: 5,flex:1 }}>
+                        <View style={{ paddingRight: 5, flex: 1 }}>
                             <TextSemiBold
                                 style={styles.txtName}
                                 numberOfLines={1}
@@ -63,7 +63,7 @@ const Comment = ({
                             numberOfLines={1}
                         >
                             {
-                                moment(comment?.createdAt).fromNow() 
+                                moment(comment?.createdAt).fromNow()
                             }
                         </TextRegular>
                     </View>
@@ -149,11 +149,17 @@ const Comment = ({
 }
 
 
+
+
+
+export default React.memo(Comment);
+
+
 type replyProp = {
     comments: commentType[],
     onReply?: (comment: commentType) => void,
 }
-export const Replies = ({ comments, onReply }: replyProp) => (
+export const Replies = React.memo(({ comments, onReply }: replyProp) => (
     comments?.map(comment => (
         <Comment
             key={comment.id}
@@ -164,9 +170,6 @@ export const Replies = ({ comments, onReply }: replyProp) => (
             }}
         />
     ))
-);
-
-
-export default Comment;
+));
 
 

@@ -26,7 +26,7 @@ type sheetProps = {
 
 } & Omit<sheetWrapperProps, 'children'>
 
-const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
+const ShareSheet = forwardRef<BottomSheet, sheetProps>(({
 
   ...rest
 }, ref) => {
@@ -216,4 +216,4 @@ const CommentSheet = forwardRef<BottomSheet, sheetProps>(({
   );
 });
 
-export default CommentSheet;
+export default React.memo(ShareSheet);

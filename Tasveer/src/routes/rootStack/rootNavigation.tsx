@@ -54,11 +54,11 @@ function RootNav() {
   const dispatch = useAppDispatch();
 
   // //setting theme
-  // useEffect(() => {
-  //   isDefault && dispatch(changeTheme({
-  //     theme: scheme!,
-  //   }))
-  // }, [scheme]);
+  useEffect(() => {
+    isDefault && dispatch(changeTheme({
+      theme: scheme!,
+    }))
+  }, [scheme]);
 
   //generating data
   useEffect(() => {

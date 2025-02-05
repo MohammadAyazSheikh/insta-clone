@@ -8,7 +8,7 @@ type themeType = {
     isDefault: boolean,
 }
 const initialState: themeType = {
-    theme: "dark",
+    theme: "light",
     isDefault: true,
 }
 

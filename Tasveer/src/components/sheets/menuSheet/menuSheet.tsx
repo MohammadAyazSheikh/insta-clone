@@ -98,4 +98,4 @@ const OptionSheet = forwardRef<BottomSheet, sheetProps>(({
   );
 });
 
-export default OptionSheet;
+export default React.memo(OptionSheet);

@@ -129,4 +129,4 @@ const ApiStatusIndicator = ({
   );
 };
 
-export default ApiStatusIndicator;
+export default React.memo(ApiStatusIndicator);

@@ -14,7 +14,7 @@ type zoomAbleViewType = {
     children?: React.ReactNode,
     containerStyle?: StyleProp<AnimatedStyle<StyleProp<ViewStyle>>>
 }
-export default function ZoomAbleView({
+function ZoomAbleView({
     containerStyle,
     children,
 }: zoomAbleViewType) {
@@ -64,7 +64,7 @@ export default function ZoomAbleView({
                 { translateY: height / 2 },
             ],
         };
-    });
+    }, [focalX, focalY,scale]);
 
 
 
@@ -89,3 +89,5 @@ export default function ZoomAbleView({
     );
 }
 
+
+export default React.memo(ZoomAbleView)

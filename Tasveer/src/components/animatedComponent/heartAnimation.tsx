@@ -20,7 +20,7 @@ import { widthToDp } from '../../utils/functions/responsiveUtils';
 type prop = {
     onDoubleTab?: () => void
 }
-export default function HeartAnimation({ onDoubleTab }: prop) {
+ function HeartAnimation({ onDoubleTab }: prop) {
 
 
     const scale = useSharedValue(0);
@@ -49,6 +49,7 @@ export default function HeartAnimation({ onDoubleTab }: prop) {
     );
 }
 
+export default React.memo(HeartAnimation);
 const styles = StyleSheet.create({
     container: {
         ...StyleSheet.absoluteFillObject,
