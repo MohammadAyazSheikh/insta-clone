@@ -116,7 +116,7 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
     return (
         <SafeAreaProvider>
             <SafeAreaAnim
-                style={[styles.container, style]}
+                style={[styles.container]}
             >
                 {/* header */}
                 <ChatHeader

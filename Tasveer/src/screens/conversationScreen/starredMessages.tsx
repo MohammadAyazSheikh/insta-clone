@@ -63,7 +63,7 @@ export default function StarrMessage(props: StackScreenProps<RootStackProps, 'St
     return (
         <SafeAreaProvider>
             <SafeAreaAnim
-                style={[styles.container, style]}
+                style={[styles.container]}
             >
                 {/* header */}
                 <Header title='Starred Messages' />
