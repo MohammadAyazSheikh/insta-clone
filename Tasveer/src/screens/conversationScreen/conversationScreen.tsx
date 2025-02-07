@@ -18,6 +18,7 @@ import { useStyles } from 'react-native-unistyles';
 import { FlashList } from '@shopify/flash-list';
 import { useKeyboardVisibility } from '../../hooks/keyboardHooks';
 import Animated from 'react-native-reanimated';
+import { Platform } from 'react-native';
 
 
 
@@ -116,7 +117,12 @@ export default function Conversation(props: StackScreenProps<RootStackProps, 'Co
     return (
         <SafeAreaProvider>
             <SafeAreaAnim
-                style={[styles.container]}
+                style={[styles.container,
+                Platform.select({
+                    ios: style,
+                    android: null
+                })
+            ]}
             >
                 {/* header */}
                 <ChatHeader
