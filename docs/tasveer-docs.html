@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasveer Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-white text-gray-900">
+    <div class="flex min-h-screen">
+        <aside class="w-72 p-8 border-r border-gray-200 fixed h-screen overflow-y-auto">
+            <div class="flex items-center gap-2 text-2xl font-bold text-blue-600 mb-8">
+            <img src="logo-dark.png" alt="Tasveer Logo" />
+            </div>
+            <nav>
+            <a href="#features" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">✨ Features</a>
+            <a href="#prerequisites" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">📋 Prerequisites</a>
+            <a href="#quick-start" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">🚀 Quick Start</a>
+            <a href="#project-structure" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">📁 Project Structure</a>
+            <a href="#theme-modification" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">🎨 Theme Modification</a>
+            <a href="#support" class="block px-4 py-2 mb-2 text-gray-600 hover:bg-gray-100 rounded-md">💬 Support</a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-8 ml-72 max-w-4xl">
+            <h1 class="text-4xl font-bold mb-4">Documentation</h1>
+            <p class="text-gray-600 mb-6">A comprehensive React Native social media template built with Expo</p>
+            
+            <!-- Features Section -->
+            <section id="features" class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b border-gray-200">Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-2">Stories</h3>
+                        <p class="text-gray-600">Create and share ephemeral content with your followers</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-2">Chat</h3>
+                        <p class="text-gray-600">Real-time messaging with voice, media, and document sharing</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-2">Posts</h3>
+                        <p class="text-gray-600">Share photos and videos with custom filters and effects</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-2">Reels</h3>
+                        <p class="text-gray-600">Create and browse short-form vertical videos</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Prerequisites Section -->
+            <section id="prerequisites" class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">📋 Prerequisites</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h3 class="text-lg font-semibold mb-4">Required Software</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                Node.js (v18 or newer)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                npm or yarn
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                Git
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border border-gray-200">
+                        <h3 class="text-lg font-semibold mb-4">Development Tools</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Visual Studio Code
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Xcode (for iOS)
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Android Studio (for Android)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Start Section -->
+            <section id="quick-start" class="bg-blue-50 border border-blue-100 rounded-xl p-6 mb-12">
+                <h2 class="text-xl font-semibold text-blue-800 mb-4">🚀 Quick Start</h2>
+                <div class="space-y-4">
+                    <p class="text-blue-700">Run these commands to get started quickly:</p>
+                    <div class="bg-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">
+                        <div class="mb-2"><span class="text-green-400">$</span> cd tasveer</div>
+                        <div class="mb-2"><span class="text-green-400">$</span> npm install</div>
+                        <div class="mb-2"><span class="text-green-400">$</span> npx expo run:ios</div>
+                        <div class="mb-2"><span class="text-green-400">$</span> npx expo run:android</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Structure Section -->
+            <section id="project-structure" class="mb-12">
+                <h2 class="text-2xl font-bold mb-6">📁 Project Structure</h2>
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <div class="mb-4">
+                        <p class="text-gray-600 mb-4">Here's how our project is organized:</p>
+                    </div>
+                    <div class="bg-gray-700 rounded-lg p-4 font-mono text-sm text-gray-200">
+                        <pre class="whitespace-pre-wrap">
+<span class="text-green-400">tasveer/</span><br />
+<span class="text-blue-400">├── src/</span><br />
+<span class="text-blue-400">│   ├── assets/</span> <span class="text-gray-400"># Images, fonts, and other static files</span><br />
+<span class="text-blue-400">│   ├── components/</span> <span class="text-gray-400"># Reusable UI components</span><br />
+<span class="text-blue-400">│   │   ├── common/</span> <span class="text-gray-400"># Shared components like buttons, inputs</span><br />
+<span class="text-blue-400">│   │   ├── features/</span> <span class="text-gray-400"># Feature-specific components</span><br />
+<span class="text-blue-400">│   │   └── layouts/</span> <span class="text-gray-400"># Layout components</span><br />
+<span class="text-blue-400">│   ├── screens/</span> <span class="text-gray-400"># Application screens/pages</span><br />
+<span class="text-blue-400">│   │   ├── auth/</span> <span class="text-gray-400"># Authentication screens</span><br />
+<span class="text-blue-400">│   │   ├── home/</span> <span class="text-gray-400"># Home and feed screens</span><br />
+<span class="text-blue-400">│   │   ├── profile/</span> <span class="text-gray-400"># Profile related screens</span><br />
+<span class="text-blue-400">│   │   └── settings/</span> <span class="text-gray-400"># Settings screens</span><br />
+<span class="text-blue-400">│   ├── navigation/</span> <span class="text-gray-400"># Navigation configuration</span><br />
+<span class="text-blue-400">│   ├── services/</span> <span class="text-gray-400"># API and third-party services</span><br />
+<span class="text-blue-400">│   ├── store/</span> <span class="text-gray-400"># State management (Redux)</span><br />
+<span class="text-blue-400">│   ├── hooks/</span> <span class="text-gray-400"># Custom React hooks</span><br />
+<span class="text-blue-400">│   ├── utils/</span> <span class="text-gray-400"># Helper functions</span><br />
+<span class="text-blue-400">│   └── constants/</span> <span class="text-gray-400"># App constants and config</span><br />
+<span class="text-green-400">├── .env</span> <span class="text-gray-400"># Environment variables</span><br />
+<span class="text-green-400">├── App.tsx</span> <span class="text-gray-400"># Root component</span><br />
+<span class="text-green-400">└── package.json</span> <span class="text-gray-400"># Dependencies and scripts</span>
+                        </pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Theme Modification Section -->
+            <section id="theme-modification" class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b border-gray-200">🎨 Theme Modification</h2>
+                <div class="space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-semibold text-blue-600 mb-4">Theme Structure</h3>
+                        <p class="text-gray-600 mb-4">The theme system is organized into several TypeScript files for better maintainability:</p>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <code class="bg-gray-200 px-2 py-1 rounded">theme.ts</code>: Main theme configuration
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <code class="bg-gray-200 px-2 py-1 rounded">colors.ts</code>: Color palette definitions
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                <code class="bg-gray-200 px-2 py-1 rounded">fonts.ts</code>: Typography settings
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-4">Customizing Colors</h3>
+                        <p class="text-gray-600 mb-4">To modify the color scheme, edit the <code class="bg-gray-200 px-2 py-1 rounded">colors.ts</code> file:</p>
+                        <div class="bg-gray-700 rounded-lg p-4 overflow-x-auto">
+                            <pre class="text-gray-200">
+<code>
+// src/theme/colors.ts
+const commonColors = {
+  lightYellow: '#feda75',
+  yellow: '#fccc63',
+  orange: '#fa7e1e',
+  pink: '#d62976',
+  purple: '#962fbf',
+  blue: '#4f5bd5',
+  grey1: '#999999',
+};
+
+export const darkColors = {
+  primary1: '#000000',
+  primary3: '#363636',
+  primary4: '#282828',
+  secondary1: '#ffffff',
+  ternary1: '#3797ef',
+  ternary2: '#1b4b77',
+  ternary3: '#B1BEC8',
+};
+
+export const lightColors = {
+  primary1: '#ffffff',
+  primary3: '#f5f5f5',
+  primary4: '#EBEBEB',
+  secondary1: '#000000',
+  ternary1: '#3797ef',
+  ternary2: '#9bcbf7',
+  ternary3: '#063F6E',
+};
+</code>
+                            </pre>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold mb-4">Typography Customization</h3>
+                        <p class="text-gray-600 mb-4">Modify typography settings in <code class="bg-gray-200 px-2 py-1 rounded">fonts.ts</code>:</p>
+                        <div class="bg-gray-700 rounded-lg p-4 overflow-x-auto">
+                            <pre class="text-gray-200">
+<code>
+// src/theme/fonts.ts
+const fontSize = {
+  xsm: 10,
+  sm: 12,
+  md: 14,
+  lg: 16,
+  xl: 18,
+  xl2: 20,
+  xl3: 22,
+  xl4: 24,
+  xl6: 26,
+  xl7: 28,
+  xl8: 30,
+};
+</code>
+                            </pre>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">Best Practices</h3>
+                        <ul class="space-y-3 text-blue-700">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Always use theme constants instead of hardcoded values
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Test changes across both iOS and Android platforms
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Keep the theme structure modular for easier maintenance
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                                Document any custom theme additions for team reference
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support" class="mb-12">
+                <h2 class="text-2xl font-semibold mb-4 pb-2 border-b border-gray-200">💬 Support</h2>
+                <p class="text-gray-600 mb-4">For support and inquiries:</p>
+                <ul class="space-y-2 text-gray-600">
+                    <li>📧 Email: mohammadayazdev@gmail.com</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+</body>
+
+</html>
